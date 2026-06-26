@@ -18,6 +18,14 @@
   (guarded against the personal `...\JonBeatz` tree).
 - **Original untouched:** this was a COPY — the personal profile + gold jon-beatz.com
   still work exactly as before.
-- **Next:** `npm install`, verify `npm run dev` (red) + `npm run site:build:static`; then
-  decide on a GitHub remote + first deploy of jonbeatz.dev from this project. Tier 2/3
-  redesign work (DevHome split, more 3D, scroll choreography) now happens here freely.
+- **Verified:** `npm install` (--legacy-peer-deps, React 19/Next 14), `npm run dev` serves
+  the red site (data-variant=dev, JONBEATZ.DEV header, portal beam) on :3001 (port 3000 was
+  the personal Playground), and `npm run site:build:static` exports clean.
+- **GitHub (2026-06-25):** repo **`jonbeatz/JonBeatz-Dev`** created **private**, `main`
+  pushed, tag **`v1.0.0`** + release **JONBEATZ.DEV v1.0.0** (marked Latest). Badges wired
+  to `jonbeatz/JonBeatz-Dev` (version/release/repo). Homepage + topics set.
+  > NOTE: repo is PRIVATE — the shields.io `release` badge only renders on a PUBLIC repo.
+  > Flip with `gh repo edit jonbeatz/JonBeatz-Dev --visibility public` if you want it live.
+- **Next:** first deploy of jonbeatz.dev from THIS project (currently still served by the
+  Tier-1 variant in the personal profile). Tier 2/3 redesign (DevHome split, more 3D,
+  scroll choreography) now happens here freely.

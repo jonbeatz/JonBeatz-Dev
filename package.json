@@ -1,0 +1,50 @@
+{
+  "name": "jonbeatz-dev-site",
+  "version": "1.0.0",
+  "private": true,
+  "description": "JONBEATZ.DEV — standalone red command-center site (glow-beam hero). Split out of the JonBeatz personal profile; self-contained Next.js + Three.js portfolio.",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start -p ${PORT:-3000}",
+    "lint": "next lint",
+    "site:build:static": "node scripts/build-static-site.mjs",
+    "site:preview": "npx --yes serve out -l 5057",
+    "site:package": "node scripts/package-site.mjs",
+    "session:start": "powershell -File scripts/session-start.ps1",
+    "session:stop": "powershell -File scripts/session-stop.ps1",
+    "mem0:preflight": "powershell -File scripts/mem0-preflight.ps1",
+    "mem0:add": "powershell -File scripts/mem0-chat.ps1 -Action add -Text",
+    "mem0:add:infer": "powershell -File scripts/mem0-chat.ps1 -Action add -Infer -Text",
+    "mem0:search": "powershell -File scripts/mem0-chat.ps1 -Action search -Query",
+    "mem0:list": "powershell -File scripts/mem0-chat.ps1 -Action list",
+    "docs:sync": "powershell -File scripts/docs-update.ps1",
+    "version:sync": "python scripts/sync-version.py",
+    "encoding:check": "python scripts/encoding-check.py",
+    "backup": "node scripts/jonbeatz-dev-backup.mjs",
+    "backup:project": "node scripts/jonbeatz-dev-backup.mjs",
+    "backup:standard": "node scripts/jonbeatz-dev-backup.mjs --standard",
+    "backup:full": "node scripts/jonbeatz-dev-backup.mjs --full",
+    "backup:quick": "node scripts/jonbeatz-dev-backup.mjs --standard --yes",
+    "backup:quick:full": "node scripts/jonbeatz-dev-backup.mjs --full --yes",
+    "backup:clean": "powershell -File scripts/clean-old-backups.ps1",
+    "release": "powershell -File scripts/github-release.ps1"
+  },
+  "author": "Jon Beatz",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "next": "14.2.3",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "motion": "^11.11.0",
+    "three": "^0.163.0",
+    "@react-three/fiber": "^8.16.0",
+    "@react-three/drei": "^9.105.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "typescript": "^5"
+  }
+}

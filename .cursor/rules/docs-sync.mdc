@@ -1,0 +1,25 @@
+---
+description: Docs sync + commit discipline for JONBEATZ.DEV
+alwaysApply: true
+---
+
+# Docs Sync — JONBEATZ.DEV
+
+## Version tracking
+
+- Sync version across `package.json`, `TRUTH.md`, `.cursor/docs/MASTER-COMMANDS.md`, README badge.
+- Use `npm run version:sync` (Python, UTF-8 safe) — never rewrite README badges from raw PowerShell.
+- Run `npm run encoding:check` before doc commits; `npm run docs:sync` runs it automatically.
+- `ReCall.md` captures significant session outcomes; `Restore-Points.md` at milestones.
+
+## Backup ritual
+
+- Default destination `G:\Hermes_Project_BackUpz\JonBeatz.dev` (override via `JBD_BACKUP_ROOT`).
+- Quick path: `npm run backup:quick` → `jonbeatz-dev-project-v{N}-{a-z}`.
+- The backup script refuses to write into the personal `...\JonBeatz` tree (allows `...\JonBeatz.dev`).
+
+## Commit discipline
+
+- Do **not** auto-commit unless Jon asks. Doc-only changes use a `docs:` prefix.
+- Update docs when behavior changes (scripts, rituals, deploy).
+- No contradictory rules across `.mdc` files.

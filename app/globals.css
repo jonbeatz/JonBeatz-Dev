@@ -1,0 +1,122 @@
+:root {
+  --bg-void: #070708;
+  --bg-surface: #0b0b0e;
+  --bg-card: #0d0d11;
+  --bg-card-hover: #141418;
+  
+  /* Accent ramp — Studio Gold by default. The site "variant" flips this whole
+     ramp by overriding the tokens below (see [data-variant="dev"]). All gold
+     usages reference these vars or --accent-rgb, so theming is single-source. */
+  --accent-rgb: 245, 184, 65;    /* core accent as RGB triplet for rgba() */
+  --accent-gold: #f5b841;        /* Studio Gold core token */
+  --accent-gold-bright: #ffcb6b; /* Hover / active gold */
+  --accent-gold-dim: #c8922e;    /* Dim gold / borders */
+  --accent-gold-glow: rgba(var(--accent-rgb), 0.15);
+  
+  --accent-red: #f85149;         /* Danger / alert */
+  --accent-green: #3fb950;       /* Online / success */
+  --accent-amber: #f5b841;       /* Pending / warning */
+  
+  --text-primary: #fbfbfb;
+  --text-secondary: #9f9fa9;
+  --text-dim: #6b6b73;
+  --border: rgba(255, 255, 255, 0.04);
+  --border-accent: rgba(var(--accent-rgb), 0.10);
+  
+  --font-mono: var(--font-mono), 'Courier New', monospace;
+  --font-display: var(--font-display), sans-serif;
+  
+  --glass-bg: rgba(13, 13, 17, 0.45);
+  --glass-border: rgba(255, 255, 255, 0.04);
+}
+
+/* jonbeatz.dev variant — flip the gold ramp to VaderLabz red. Only applied
+   when NEXT_PUBLIC_JB_VARIANT=dev (data-variant set on <html> in layout.tsx).
+   jon-beatz.com (no attribute) keeps the gold ramp above, untouched. */
+[data-variant="dev"] {
+  --accent-rgb: 255, 42, 54;
+  --accent-gold: #ff2a36;
+  --accent-gold-bright: #ff5a64;
+  --accent-gold-dim: #c01e28;
+  --accent-amber: #ff2a36;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; background-color: var(--bg-void); }
+
+body {
+  background: var(--bg-void);
+  color: var(--text-primary);
+  font-family: var(--font-display);
+  min-height: 100vh;
+  overflow-x: hidden;
+  overflow-y: auto; /* Allow scrolling */
+}
+
+::selection {
+  background: var(--accent-gold);
+  color: #070708;
+}
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-void); }
+::-webkit-scrollbar-thumb { background: var(--accent-gold-dim); border-radius: 3px; }
+
+@keyframes flicker {
+  0%, 100% { opacity: 1; }
+  92% { opacity: 1; }
+  93% { opacity: 0.8; }
+  94% { opacity: 1; }
+  96% { opacity: 0.9; }
+  97% { opacity: 1; }
+}
+
+@keyframes scanline {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100vh); }
+}
+
+@keyframes pulse-gold {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(var(--accent-rgb), 0); }
+  50% { box-shadow: 0 0 12px 2px rgba(var(--accent-rgb), 0.3); }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* NovaMira Premium UI Utility Classes */
+.glow-accent {
+  box-shadow: 0 0 20px rgba(var(--accent-rgb), 0.15);
+  transition: box-shadow 0.3s ease;
+}
+
+.glow-accent-hover {
+  transition: box-shadow 0.4s ease, transform 0.3s ease, border-color 0.3s ease;
+  box-shadow: 0 0 20px rgba(var(--accent-rgb), 0);
+  border-color: rgba(255, 255, 255, 0.05);
+}
+
+.glow-accent-hover:hover {
+  box-shadow: 0 0 40px rgba(var(--accent-rgb), 0.12);
+  transform: translateY(-2px) !important;
+  border-color: rgba(var(--accent-rgb), 0.15) !important;
+}
+
+/* Stagger children */
+.stagger-children > * {
+  opacity: 0;
+  animation: fadeUp 0.6s ease forwards;
+}
+
+.stagger-children > *:nth-child(1) { animation-delay: 0.1s; }
+.stagger-children > *:nth-child(2) { animation-delay: 0.2s; }
+.stagger-children > *:nth-child(3) { animation-delay: 0.3s; }
+.stagger-children > *:nth-child(4) { animation-delay: 0.4s; }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}

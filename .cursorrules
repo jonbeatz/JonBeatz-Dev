@@ -1,0 +1,44 @@
+---
+description: JONBEATZ.DEV standalone site — core operating rules
+alwaysApply: true
+---
+
+# JONBEATZ.DEV — Core Rules
+
+Standalone red command-center site (`jonbeatz.dev`). Self-contained Next.js + Three.js
+project split out of the JonBeatz personal profile. Detailed rules live in `.cursor/rules/`.
+
+## Source of truth order
+
+1. `TRUTH.md`
+2. `.cursor/docs/START-HERE.md`
+3. `.cursor/docs/MASTER-COMMANDS.md`
+4. `.cursor/docs/JONBEATZ-DEV-DEPLOY.md`
+5. `.cursor/docs/ReCall.md`
+
+## Hard boundaries
+
+- **No personal services** (JARVIS voice, Telegram, DeepSeek/LiteLLM, ComfyUI, Google,
+  image-gen). Those belong to `D:\Hermes\projects\JonBeatz`.
+- **No gold `jon-beatz.com`** here — this repo ships only the red `jonbeatz.dev`.
+- **Mem0 scope = `jonbeatz_dev`** only.
+
+## Safety defaults
+
+- Windows PowerShell. No bash heredocs. Never commit `.env*`.
+- UTF-8: use `npm run version:sync` for badges; `npm run encoding:check` before doc commits.
+
+## Skills (read before relevant work)
+
+UI: NovaMira-Design → MSC-UI-Taste → Premium-UI → DesignMD. Code: Nova.
+3D/WebGL: 3D-Modeling, 3D-Scroll, Three.js-Ops, WebGL-UI. Git: GitHub-Ops. Deploy: Hostinger-Ops.
+
+## Session rituals
+
+| Jon says | Action |
+|----------|--------|
+| Start Project / Start Session / Cold Start | `.cursor/prompts/Start-Project.md` + `npm run session:start` |
+| End Project / End Session | `.cursor/prompts/End-Project.md` + `npm run session:stop` |
+| update docs | `npm run docs:sync` |
+| branch cut | `.cursor/prompts/Branch-Cut.md` |
+| release version | `.cursor/prompts/Release-Version.md` |

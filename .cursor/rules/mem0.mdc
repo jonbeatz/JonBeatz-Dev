@@ -1,0 +1,33 @@
+---
+description: Mem0 + LM Studio rules for the JONBEATZ.DEV site project
+alwaysApply: true
+---
+
+# Mem0 + LM Studio — JONBEATZ.DEV
+
+## Scope (hard rule)
+
+- **user_id:** `jonbeatz_dev`
+- **collection:** `jonbeatz_dev_memories`
+- **store:** `%USERPROFILE%\.mem0\qdrant_jonbeatz_dev`
+- **Never** read/write `jonbeatz_personal`, `kristina_irwin`, or any MSC memory scope.
+
+## Before search or infer-add
+
+1. Run `npm run mem0:preflight` (or confirm LM Studio :1234 has any LLM loaded — default
+   `qwen3-4b-instruct-2507`, shared with Hermes, no swap).
+
+`mem0:add` (default infer=False), `list`, and `delete` skip preflight — no LLM required.
+
+## Commands
+
+```powershell
+npm run mem0:search -- "query"
+npm run mem0:add -- "text"
+npm run mem0:list
+```
+
+## On failure
+
+- Report LM Studio status once; fall back to `.cursor/docs/ReCall.md`. Run the preflight
+  yourself — don't just tell Jon to run it.

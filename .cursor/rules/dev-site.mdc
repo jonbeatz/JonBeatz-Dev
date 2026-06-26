@@ -1,0 +1,67 @@
+---
+description: Core operating rules for the standalone JONBEATZ.DEV site project
+alwaysApply: true
+---
+
+# JONBEATZ.DEV — Core Rules
+
+This is the **standalone** red command-center site (`jonbeatz.dev`), split out of the
+JonBeatz personal profile. It is its own self-contained Next.js + Three.js project.
+
+## What this project IS
+
+- A single-page, dark, cinematic portfolio/command-center site with a **red theme**
+  and a **glow-beam hero portal** (the `dev` variant is the baked-in default).
+- Self-contained: website code, UI/3D design skills, docs, and dev/build/deploy/backup
+  scripts all live here.
+
+## What this project is NOT
+
+- **Not** the personal JonBeatz profile. Do **not** add JARVIS voice, Telegram,
+  DeepSeek/LiteLLM, ComfyUI, Google Workspace, or image-gen wiring here — those belong
+  to `D:\Hermes\projects\JonBeatz`.
+- **Not** the gold `jon-beatz.com` site. That stays in the personal profile. This repo
+  only ships `jonbeatz.dev` (red).
+
+## Safety defaults
+
+- **Environment:** Windows 10/11 **PowerShell**. No bash heredocs (`<<`).
+- **Mem0:** scope is **`jonbeatz_dev`** (`qdrant_jonbeatz_dev`) only. Never write into
+  `jonbeatz_personal` or any MSC store.
+- **Secrets:** never commit `.env*`. Config template = `.env.local.example`.
+- **UTF-8 / docs:** never bulk-rewrite `.md`/`.mdc` from PowerShell without `-Encoding UTF8`.
+  Use `npm run version:sync` (Python) for README badges; run `npm run encoding:check`
+  before doc commits.
+
+## Variant mechanism
+
+- Red is the **default** — `npm run dev` and `npm run build` produce the red site with
+  the glow beam, no flags needed.
+- Driven by `NEXT_PUBLIC_JB_VARIANT` (defaults to dev; set `"default"` for the legacy
+  gold theme) + `JB_STATIC=1` for the static export. See `app/layout.tsx`,
+  `app/page.tsx`, `components/ThreeBackground.tsx`.
+
+## Source-of-truth order
+
+1. `TRUTH.md`
+2. `.cursor/docs/START-HERE.md`
+3. `.cursor/docs/MASTER-COMMANDS.md`
+4. `.cursor/docs/JONBEATZ-DEV-DEPLOY.md`
+5. `.cursor/docs/ReCall.md`
+
+## Skills (read before relevant work)
+
+UI/visual work — read in order: **NovaMira-Design** → **MSC-UI-Taste** → **Premium-UI**
+→ **DesignMD**. Code conventions: **Nova**. 3D/WebGL: **3D-Modeling**, **3D-Scroll**,
+**Three.js-Ops**, **WebGL-UI**. Git: **GitHub-Ops**. Deploy: **Hostinger-Ops**.
+On-deck (vendored, reference): `.cursor/skills-external/` (gsap, awesome-design-md).
+
+## Session rituals
+
+| Jon says | Agent action |
+|----------|--------------|
+| **Start Project**, **Start Session**, **Cold Start** | `.cursor/prompts/Start-Project.md` + `npm run session:start` |
+| **End Project**, **End Session** | `.cursor/prompts/End-Project.md` + `npm run session:stop` |
+| **update docs** | `npm run docs:sync` + align TRUTH / START-HERE / ReCall |
+| **branch cut** | `.cursor/prompts/Branch-Cut.md` |
+| **release version** | `.cursor/prompts/Release-Version.md` |

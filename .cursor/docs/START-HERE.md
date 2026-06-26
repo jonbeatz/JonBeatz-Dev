@@ -13,7 +13,8 @@ Standalone red command-center site. If you're new to this project, read this fir
 2. **`START-HERE.md`** (this file)
 3. **`MASTER-COMMANDS.md`** — command reference
 4. **`JONBEATZ-DEV-DEPLOY.md`** — Hostinger static deploy + CDN flush
-5. **`ReCall.md`** / **`Restore-Points.md`** — focus + milestones
+5. **`HOSTINGER-REFERENCE.md`** — MCP quartet, account SSH, SSL, pitfalls
+6. **`ReCall.md`** / **`Restore-Points.md`** — focus + milestones
 
 ---
 
@@ -51,7 +52,8 @@ npm run site:package   # build + zip -> .deploy/jonbeatz-dev-site_*.zip
 
 Then agent: `hosting_deployStaticWebsite { domain: "jonbeatz.dev", archivePath: "<zip>" }`
 → **flush CDN** (hPanel → jonbeatz.dev → Performance → CDN → Flush cache).
-Full runbook: **`JONBEATZ-DEV-DEPLOY.md`**.
+Full runbook: **`JONBEATZ-DEV-DEPLOY.md`**; MCP/SSH/pitfalls: **`HOSTINGER-REFERENCE.md`**.
+First-time MCP: fill `HOSTINGER_API_TOKEN` in `.env.local` → `npm run sync:mcp-env`.
 
 ---
 

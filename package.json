@@ -11,6 +11,7 @@
     "site:build:static": "node scripts/build-static-site.mjs",
     "site:preview": "npx --yes serve out -l 5057",
     "site:package": "node scripts/package-site.mjs",
+    "site:ssh": "node scripts/hostinger-ssh.mjs",
     "session:start": "powershell -File scripts/session-start.ps1",
     "session:start:full": "powershell -File scripts/session-start.ps1 -Full",
     "session:stop": "powershell -File scripts/session-stop.ps1",
@@ -51,5 +52,8 @@
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
     "typescript": "^5"
+  },
+  "optionalDependencies": {
+    "ssh2": "^1.15.0"
   }
 }

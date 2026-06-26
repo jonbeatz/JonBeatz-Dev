@@ -1,5 +1,22 @@
 # JONBEATZ.DEV — ReCall Log
 
+## [2026-06-25] — Hostinger deploy layer completed (static-focused)
+- Added a self-contained Hostinger setup for the **static** jonbeatz.dev (NOT the MSC Node
+  FTPS pipeline — that's a different repo). New: `.cursor/docs/HOSTINGER-REFERENCE.md`
+  (MCP quartet, account SSH, SSL, CDN, pitfalls), rewrote `.cursor/skills/Hostinger-Ops/
+  SKILL.md` to be jonbeatz.dev-only (dropped MSC/FTPS + broken doc refs), added
+  `.cursor/rules/hostinger-reference.mdc`.
+- **Account SSH:** brought `scripts/hostinger-ssh.mjs` (self-contained, reads this project's
+  `.env.local`, dropped MSC fallback) + `npm run site:ssh` + `ssh2` as an **optionalDependency**
+  (installed; graceful "missing creds" exit when `HOSTINGER_SSH_*` unset).
+- **Env:** added `HOSTINGER_API_TOKEN` + `HOSTINGER_SSH_*` to `.env.local.example` and
+  `.env.local` (commented). Token → global MCP quartet via `npm run sync:mcp-env`.
+- **Deploy workflow stays 3-step:** `npm run site:package` → `hosting_deployStaticWebsite`
+  → flush CDN in hPanel. Cross-linked from START-HERE / MASTER-COMMANDS / deploy doc /
+  source-of-truth lists.
+- **Verified:** ssh script graceful w/o creds, package.json valid, docs:sync green,
+  secrets still gitignored.
+
 ## [2026-06-25] — Public repo + full workflow/voice/MCP parity
 - **Repo is now PUBLIC:** `jonbeatz/JonBeatz-Dev`. README screenshots (hero, pipelines,
   stack) + release badge now render. Earlier private-repo caveat resolved.

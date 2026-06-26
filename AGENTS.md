@@ -5,7 +5,8 @@
 1. Read **`TRUTH.md`** — what this project is and its boundaries.
 2. Read **`.cursor/docs/START-HERE.md`** — daily ritual + doc order.
 3. Read **`.cursor/docs/JONBEATZ-DEV-DEPLOY.md`** — Hostinger static deploy + CDN flush.
-4. Read **`.cursor/docs/ReCall.md`** — current focus.
+4. Read **`.cursor/docs/HOSTINGER-REFERENCE.md`** — MCP quartet, account SSH, SSL, pitfalls.
+5. Read **`.cursor/docs/ReCall.md`** — current focus.
 
 ## What this project is
 

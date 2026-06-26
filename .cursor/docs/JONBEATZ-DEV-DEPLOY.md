@@ -112,3 +112,6 @@ hPanel → Security → SSL Manager and confirm HTTPS Enforce is ON.
 
 **Hostinger MCP tools:** `hosting_deployStaticWebsite`, `hosting_listWebsitesV1`.
 **No MCP/API tool for CDN flush** — hPanel UI (or agent in logged-in Cursor browser).
+
+**See also:** `.cursor/docs/HOSTINGER-REFERENCE.md` (MCP quartet setup, account SSH,
+pitfalls) and `.cursor/skills/Hostinger-Ops/SKILL.md`.

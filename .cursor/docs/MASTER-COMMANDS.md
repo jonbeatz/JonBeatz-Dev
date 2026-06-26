@@ -13,6 +13,7 @@ All commands run from `D:\Hermes\projects\JonBeatz.dev` (Windows PowerShell).
 | `npm run site:build:static` | Static export → `out/` (red, API routes stashed) |
 | `npm run site:preview` | Serve `out/` @ http://localhost:5057 |
 | `npm run site:package` | Build + zip → `.deploy/jonbeatz-dev-site_*.zip` for Hostinger MCP |
+| `npm run site:ssh -- "<cmd>"` | Account-wide Hostinger SSH (inspect/clean `public_html`; needs `HOSTINGER_SSH_*`) |
 
 ## Session
 
@@ -77,3 +78,6 @@ Global (shared): github, tavily, hostinger-*, fal-ai. Copy `.cursor/mcp.json.exa
 hosting_deployStaticWebsite { domain: "jonbeatz.dev", archivePath: "<.deploy\jonbeatz-dev-site_*.zip>" }
 ```
 Then flush CDN: hPanel → jonbeatz.dev → Performance → CDN → Flush cache.
+
+Full reference: `.cursor/docs/HOSTINGER-REFERENCE.md` (MCP quartet, SSH, SSL, pitfalls) +
+`.cursor/docs/JONBEATZ-DEV-DEPLOY.md` (runbook). MCP token: `npm run sync:mcp-env`.

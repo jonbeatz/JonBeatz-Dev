@@ -1,0 +1,43 @@
+---
+description: Hostinger deploy knowledge for jonbeatz.dev (static export → MCP → CDN flush)
+alwaysApply: false
+globs:
+  - .cursor/docs/HOSTINGER-REFERENCE.md
+  - .cursor/docs/JONBEATZ-DEV-DEPLOY.md
+  - .cursor/skills/Hostinger-Ops/SKILL.md
+  - scripts/hostinger-ssh.mjs
+  - scripts/jonbeatz-hostinger-mcp.mjs
+  - .env.local.example
+---
+
+# Hostinger reference (JONBEATZ.DEV)
+
+## What this project is on Hostinger
+
+- **Static export** of the red `jonbeatz.dev` site — NOT a Node.js app. No FTPS/Node
+  two-folder pipeline here (that's the MyStudioChannel Node app in a different repo).
+
+## When Jon mentions Hostinger / deploy / push live / CDN / SSL
+
+1. Read `.cursor/docs/JONBEATZ-DEV-DEPLOY.md` (runbook) +
+   `.cursor/docs/HOSTINGER-REFERENCE.md` (MCP/SSH/pitfalls).
+2. Follow the **3-step** deploy: `npm run site:package` → `hosting_deployStaticWebsite`
+   → **flush CDN** in hPanel.
+
+## Deploy safety
+
+1. **Local:** build + zip (`npm run site:package`).
+2. **Agent (MCP):** `hosting_deployStaticWebsite { domain: "jonbeatz.dev", archivePath }`.
+3. **Live (hPanel):** CDN flush every update — server-side, a private window won't help.
+4. **SSL:** `NET::ERR_CERT_DATE_INVALID` = re-issue Let's Encrypt + confirm HTTPS Enforce.
+5. Account SSH (`npm run site:ssh`) is account-wide — only touch the `jonbeatz.dev` folder.
+
+## MCP
+
+`HOSTINGER_API_TOKEN` in `.env.local` → `npm run sync:mcp-env` → global `hostinger-*`
+quartet. Scoped launcher `scripts/jonbeatz-hostinger-mcp.mjs` (not the 129-tool default).
+
+## Boundary
+
+Only deploy `jonbeatz.dev` from here. `jon-beatz.com` (personal) and `mystudiochannel.com`
+(MSC Node app) live in other repos on the same account — don't run their pipelines here.

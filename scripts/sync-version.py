@@ -13,7 +13,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent / "lib"))
 from utf8_file import read_utf8, write_utf8  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
-REPO = "jonbeatz/JonBeatz.dev"
+REPO = "jonbeatz/JonBeatz-Dev"
 REPO_URL = f"https://github.com/{REPO}"
 RELEASES_URL = f"{REPO_URL}/releases"
 
@@ -55,7 +55,7 @@ def main() -> int:
                 )
             elif "img.shields.io/badge/GitHub-" in line:
                 out.append(
-                    f"[![Repo](https://img.shields.io/badge/GitHub-jonbeatz%2FJonBeatz.dev-181717?logo=github)]({REPO_URL})"
+                    f"[![Repo](https://img.shields.io/badge/GitHub-jonbeatz%2FJonBeatz--Dev-181717?logo=github)]({REPO_URL})"
                 )
             elif "img.shields.io/badge/Platform-" in line:
                 out.append(

@@ -1,6 +1,8 @@
 # JONBEATZ.DEV
 
-[![Version](https://img.shields.io/badge/version-1.0.0-red)](https://github.com/jonbeatz/JonBeatz.dev/releases)
+[![Version](https://img.shields.io/badge/version-1.0.0-blue)](https://github.com/jonbeatz/JonBeatz-Dev/releases)
+[![Release](https://img.shields.io/github/v/release/jonbeatz/JonBeatz-Dev?label=release&sort=semver)](https://github.com/jonbeatz/JonBeatz-Dev/releases)
+[![Repo](https://img.shields.io/badge/GitHub-jonbeatz%2FJonBeatz--Dev-181717?logo=github)](https://github.com/jonbeatz/JonBeatz-Dev)
 [![Next.js](https://img.shields.io/badge/Next.js-14-black?logo=next.js)](https://nextjs.org)
 [![React](https://img.shields.io/badge/React-19-149eca?logo=react)](https://react.dev)
 [![Three.js](https://img.shields.io/badge/Three.js-r163-000?logo=three.js)](https://threejs.org)

@@ -1,6 +1,6 @@
 # JONBEATZ.DEV
 
-[![Version](https://img.shields.io/badge/version-1.0.0-blue)](https://github.com/jonbeatz/JonBeatz-Dev/releases)
+[![Version](https://img.shields.io/badge/version-1.0.0-red)](https://github.com/jonbeatz/JonBeatz-Dev/releases)
 [![Release](https://img.shields.io/github/v/release/jonbeatz/JonBeatz-Dev?label=release&sort=semver)](https://github.com/jonbeatz/JonBeatz-Dev/releases)
 [![Repo](https://img.shields.io/badge/GitHub-jonbeatz%2FJonBeatz--Dev-181717?logo=github)](https://github.com/jonbeatz/JonBeatz-Dev)
 [![Next.js](https://img.shields.io/badge/Next.js-14-black?logo=next.js)](https://nextjs.org)
@@ -15,6 +15,14 @@
 This project was split out of the JonBeatz personal AI profile (where it lived as the
 `dev` theme variant) into its own self-contained repo. **Red is the baked default** —
 `npm run dev` shows the red theme + glow beam with no flags.
+
+![JONBEATZ.DEV hero — glow-beam portal](docs/screenshots/01-hero.png)
+
+## Screenshots
+
+| Active Pipelines | Workstation Stack |
+|------------------|-------------------|
+| ![Active pipelines bento grid](docs/screenshots/02-pipelines.png) | ![Workstation docs + tech stack](docs/screenshots/03-stack.png) |
 
 ## Quick start
 

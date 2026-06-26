@@ -47,7 +47,7 @@ def main() -> int:
         for line in lines:
             if "img.shields.io/badge/version-" in line:
                 out.append(
-                    f"[![Version](https://img.shields.io/badge/version-{version}-blue)]({RELEASES_URL})"
+                    f"[![Version](https://img.shields.io/badge/version-{version}-red)]({RELEASES_URL})"
                 )
             elif "img.shields.io/github/v/release/" in line:
                 out.append(

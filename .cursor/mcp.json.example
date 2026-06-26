@@ -1,0 +1,40 @@
+{
+  "_README": "Copy to .cursor/mcp.json (gitignored), fill keys in .env.local, then run: npm run sync:mcp-env. Global MCPs (github, tavily, hostinger-*, fal-ai) live in ~/.cursor/mcp.json and are shared across projects.",
+  "mcpServers": {
+    "21st-dev-magic": {
+      "command": "cmd",
+      "args": ["/c", "npx", "-y", "@21st-dev/magic@latest"],
+      "env": {
+        "API_KEY": "REPLACE_WITH_21ST_DEV_MAGIC_API_KEY"
+      },
+      "_comment": "21st.dev UI components — key synced from .env.local via npm run sync:mcp-env"
+    },
+    "markdownify": {
+      "command": "cmd",
+      "args": ["/c", "npx", "-y", "mcp-markdownify-server"],
+      "_comment": "Web/PDF/images → Markdown for docs, research, Mem0 seeds (no key)"
+    },
+    "browserbase": {
+      "command": "cmd",
+      "args": ["/c", "npx", "-y", "@browserbasehq/mcp"],
+      "env": {
+        "BROWSERBASE_API_KEY": "REPLACE_WITH_BROWSERBASE_API_KEY",
+        "BROWSERBASE_PROJECT_ID": "REPLACE_WITH_BROWSERBASE_PROJECT_ID"
+      },
+      "_comment": "Cloud browser — keys synced from .env.local"
+    },
+    "pencil": {
+      "command": "cmd",
+      "args": ["/c", "npx", "-y", "@pencil/mcp-server"],
+      "_comment": "Pencil.dev design canvas — desktop app must be running (no key)"
+    },
+    "composio": {
+      "command": "cmd",
+      "args": ["/c", "npx", "-y", "@composio/mcp@latest"],
+      "env": {
+        "COMPOSIO_API_KEY": "REPLACE_WITH_COMPOSIO_API_KEY"
+      },
+      "_comment": "Optional automation — disable in Cursor Settings if unused"
+    }
+  }
+}

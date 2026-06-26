@@ -1,6 +1,6 @@
 # MASTER COMMANDS — JONBEATZ.DEV
 
-**Last updated:** 2026-06-25 · **Version:** 1.0.0
+**Last updated:** 2026-06-25 (voice + MCP + workflow) · **Version:** 1.0.0
 
 All commands run from `D:\Hermes\projects\JonBeatz.dev` (Windows PowerShell).
 
@@ -19,7 +19,26 @@ All commands run from `D:\Hermes\projects\JonBeatz.dev` (Windows PowerShell).
 | Command | Does |
 |---------|------|
 | `npm run session:start` | Mem0 preflight + port probes (lightweight) |
-| `npm run session:stop` | Closeout reminder |
+| `npm run session:start:full` | Same + pre-warms the OmniVoice daemon |
+| `npm run session:stop` | Closeout reminder + stops OmniVoice daemon (frees RAM) |
+
+## Voice (OmniVoice / JARVIS — ritual-only)
+
+| Command | Does |
+|---------|------|
+| `npm run jarvis:speak -- "text"` | Speak via OmniVoice (Edge Ryan fallback) |
+| `npm run jarvis:voice-test` | One-line smoke test |
+| `npm run jarvis:omni-daemon` | Pre-warm the daemon (`-- -Stop` to free RAM) |
+
+## MCP
+
+| Command | Does |
+|---------|------|
+| `npm run sync:mcp-env` | Inject keys from `.env.local` into `.cursor/mcp.json` (gitignored) + global `~/.cursor/mcp.json` |
+
+Project MCPs: 21st-dev-magic, markdownify, browserbase, pencil, composio.
+Global (shared): github, tavily, hostinger-*, fal-ai. Copy `.cursor/mcp.json.example` →
+`.cursor/mcp.json`, fill `.env.local`, run `npm run sync:mcp-env`, then refresh in Cursor Settings → MCP.
 
 ## Mem0 (scope: jonbeatz_dev)
 

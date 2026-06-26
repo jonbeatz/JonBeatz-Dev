@@ -1,5 +1,27 @@
 # JONBEATZ.DEV — ReCall Log
 
+## [2026-06-25] — Public repo + full workflow/voice/MCP parity
+- **Repo is now PUBLIC:** `jonbeatz/JonBeatz-Dev`. README screenshots (hero, pipelines,
+  stack) + release badge now render. Earlier private-repo caveat resolved.
+- **OmniVoice (JARVIS) added + verified.** Copied `jarvis-speak/voice/omni-daemon/voice-gate`
+  scripts (portable — point at shared `_core-scripts\voice-engine` + `OmniVoice\.venv`;
+  daemon now reads THIS project's `.env.local`). `npm run jarvis:voice-test` → "Voice active
+  (omnivoice)". Ritual-only via `.cursor/rules/voice-policy.mdc`. `session:stop` stops the
+  daemon; `session:start:full` pre-warms it.
+- **Project MCPs added.** `.cursor/mcp.json` (21st-dev-magic, markdownify, browserbase,
+  pencil, composio) is **gitignored** (public repo) — committed `.cursor/mcp.json.example`
+  + `npm run sync:mcp-env` (injects keys from gitignored `.env.local`). Global MCPs
+  (github/tavily/hostinger-*/fal) remain shared in `~/.cursor/mcp.json`.
+- **Workflow rituals completed:** added `workflow.mdc` (Start/End/Update Docs/Backup/Release/
+  Branch Cut/Deploy triggers), `interactive-workflows.mdc` (AskQuestion backup gates),
+  `voice-policy.mdc`, and the `Update-Docs.md` prompt. Added npm scripts: `jarvis:speak`,
+  `jarvis:voice-test`, `jarvis:omni-daemon`, `sync:mcp-env`, `session:start:full`.
+- **Boundary corrected everywhere:** voice + MCPs ARE in-scope now; only Telegram /
+  DeepSeek / ComfyUI / Google / image-gen stay personal. Updated TRUTH, AGENTS, .cursorrules,
+  dev-site.mdc, START-HERE, MASTER-COMMANDS, README.
+- **Verified:** JSON valid; secrets gitignored (mcp.json + .env.local), examples tracked;
+  encoding clean; `sync:mcp-env` OK; voice test OK.
+
 ## [SETUP 2026-06-25] — Project split out of the personal profile (Tier 3)
 - **Created** `D:\Hermes\projects\JonBeatz.dev` as a standalone project for the red
   `jonbeatz.dev` site — the `NEXT_PUBLIC_JB_VARIANT=dev` variant that previously lived

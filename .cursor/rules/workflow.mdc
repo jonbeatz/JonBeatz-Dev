@@ -1,0 +1,73 @@
+---
+description: Session workflow triggers for the standalone JONBEATZ.DEV site project
+alwaysApply: true
+---
+
+# Workflow Session Rules — JONBEATZ.DEV
+
+All commands run from `D:\Hermes\projects\JonBeatz.dev` (PowerShell). This is the
+standalone red site project — keep the personal JonBeatz profile's DeepSeek / Telegram /
+ComfyUI / image-gen / Google services out of here. OmniVoice and the project MCPs ARE
+available here.
+
+## Start Project
+
+When Jon says **Start Project**, **Begin Project**, **Start Session**, or **Cold Start**:
+
+- Execute [`.cursor/prompts/Start-Project.md`](../prompts/Start-Project.md)
+- Run **`npm run session:start`** (add **`:full`** to also pre-warm OmniVoice)
+- Read `TRUTH.md`, `.cursor/docs/START-HERE.md`, `.cursor/docs/ReCall.md`
+- Speak the greeting once via **`npm run jarvis:speak -- "..."`** (ritual-only)
+- Handshake: **"Ok Jon — JONBEATZ.DEV site loaded, ready."**
+
+## End Project
+
+When Jon says **End Project**, **End Session**, or **Close Session**:
+
+- Execute [`.cursor/prompts/End-Project.md`](../prompts/End-Project.md)
+- Update `.cursor/docs/ReCall.md` and `.cursor/docs/project-log.md`
+- Short farewell via **`npm run jarvis:speak -- "..."`** (ritual-only)
+- Run **`npm run session:stop`** (also stops the OmniVoice daemon)
+
+## Update Docs
+
+When Jon says **update docs** or **update docs and mem0**:
+
+- Execute [`.cursor/prompts/Update-Docs.md`](../prompts/Update-Docs.md)
+- Run **`npm run docs:sync`**, then **`npm run version:sync`** if the version changed
+- Align version across `package.json`, `TRUTH.md`, `.cursor/docs/MASTER-COMMANDS.md`, `README.md`
+- `update docs and mem0` → also `npm run mem0:add -- "..."` (scope `jonbeatz_dev`)
+
+## Backup
+
+Follow [`.cursor/rules/interactive-workflows.mdc`](interactive-workflows.mdc) for gates.
+
+| Jon says | Action |
+|----------|--------|
+| **backup**, **backup quick**, **backup profile** | **`npm run backup:quick`** (non-interactive, standard) |
+| **backup full** | **`npm run backup:quick:full`** (non-interactive, includes node_modules-free full set) |
+| **backup project**, **restore point**, **milestone backup** | Interactive — `AskQuestion` gates, then `npm run backup:project` |
+
+## Release Version
+
+When Jon says **release version** or **publish release**:
+
+- Execute [`.cursor/prompts/Release-Version.md`](../prompts/Release-Version.md)
+- **`npm run version:sync`** → commit → **`npm run release`** (tag + GitHub release `--latest`)
+
+## Branch Cut
+
+When Jon says **branch cut** or **cut new development branch**:
+
+- Execute [`.cursor/prompts/Branch-Cut.md`](../prompts/Branch-Cut.md)
+- Ritual: `npm run backup:quick` → freeze previous branch → `git checkout -b JonBeatz-dev-v{N}`
+  → bump `N.0.0` → `version:sync` → update governance docs → `npm run release`
+- Leave **`main`** untouched unless Jon explicitly asks for a merge
+
+## Deploy
+
+When Jon says **deploy** / **push live** / **go live**:
+
+- Build + package: **`npm run site:package`** → zip in `.deploy/`
+- Deploy via Hostinger MCP to `jonbeatz.dev`, then flush CDN. Runbook:
+  [`.cursor/docs/JONBEATZ-DEV-DEPLOY.md`](../docs/JONBEATZ-DEV-DEPLOY.md)

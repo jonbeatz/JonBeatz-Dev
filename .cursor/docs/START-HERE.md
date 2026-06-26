@@ -21,12 +21,14 @@ Standalone red command-center site. If you're new to this project, read this fir
 
 Say **Start Project**, **Start Session**, or **Cold Start**. Agent must:
 
-1. `npm run session:start` from the project root (Mem0 preflight + port probes).
+1. `npm run session:start` (add `:full` to pre-warm OmniVoice) — Mem0 preflight + port probes.
 2. Follow `.cursor/prompts/Start-Project.md`.
 3. Read `TRUTH.md`, this file, and `ReCall.md`.
-4. Handshake: **"Ok Jon — JONBEATZ.DEV site loaded, ready."**
+4. Speak the greeting once: `npm run jarvis:speak -- "..."` (ritual-only).
+5. Handshake: **"Ok Jon — JONBEATZ.DEV site loaded, ready."**
 
-This project has **no** DeepSeek/Telegram/voice/ComfyUI — those are the personal profile.
+This project HAS OmniVoice + project MCPs. It does **not** include DeepSeek/Telegram/
+ComfyUI/image-gen/Google — those stay in the personal JonBeatz profile.
 
 ---
 
@@ -62,6 +64,31 @@ npm run mem0:add -- "Remember: ..."
 ```
 
 Scope: **`jonbeatz_dev`** (isolated from the personal profile).
+
+---
+
+## Voice (OmniVoice / JARVIS)
+
+Ritual-only (Start/End Project, or when Jon says "speak/say"). Shared Hermes install.
+
+```powershell
+npm run jarvis:speak -- "text"   # OmniVoice (Edge Ryan fallback)
+npm run jarvis:voice-test        # smoke test
+```
+
+See `.cursor/rules/voice-policy.mdc`.
+
+---
+
+## MCP setup (first run)
+
+```powershell
+Copy-Item .cursor/mcp.json.example .cursor/mcp.json   # gitignored
+# fill MCP keys in .env.local, then:
+npm run sync:mcp-env                                  # Cursor Settings → MCP → refresh
+```
+
+Project MCPs: 21st-dev-magic, markdownify, browserbase, pencil, composio.
 
 ---
 

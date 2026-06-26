@@ -18,14 +18,17 @@ project split out of the JonBeatz personal profile. Detailed rules live in `.cur
 
 ## Hard boundaries
 
-- **No personal services** (JARVIS voice, Telegram, DeepSeek/LiteLLM, ComfyUI, Google,
-  image-gen). Those belong to `D:\Hermes\projects\JonBeatz`.
+- **Included:** OmniVoice (JARVIS, ritual-only — see `.cursor/rules/voice-policy.mdc`) +
+  project MCPs (21st-dev, markdownify, browserbase, pencil, composio).
+- **Stay personal** (`D:\Hermes\projects\JonBeatz`): Telegram, DeepSeek/LiteLLM, ComfyUI,
+  Google, image-gen.
 - **No gold `jon-beatz.com`** here — this repo ships only the red `jonbeatz.dev`.
 - **Mem0 scope = `jonbeatz_dev`** only.
 
 ## Safety defaults
 
-- Windows PowerShell. No bash heredocs. Never commit `.env*`.
+- Windows PowerShell. No bash heredocs. Never commit `.env*` or `.cursor/mcp.json`
+  (gitignored — repo is public; commit only `*.example`).
 - UTF-8: use `npm run version:sync` for badges; `npm run encoding:check` before doc commits.
 
 ## Skills (read before relevant work)
@@ -39,6 +42,9 @@ UI: NovaMira-Design → MSC-UI-Taste → Premium-UI → DesignMD. Code: Nova.
 |----------|--------|
 | Start Project / Start Session / Cold Start | `.cursor/prompts/Start-Project.md` + `npm run session:start` |
 | End Project / End Session | `.cursor/prompts/End-Project.md` + `npm run session:stop` |
-| update docs | `npm run docs:sync` |
+| update docs | `.cursor/prompts/Update-Docs.md` + `npm run docs:sync` |
+| backup / backup full | `npm run backup:quick` / `backup:quick:full` (interactive for backup project) |
 | branch cut | `.cursor/prompts/Branch-Cut.md` |
 | release version | `.cursor/prompts/Release-Version.md` |
+
+See `.cursor/rules/workflow.mdc` for the full trigger map.

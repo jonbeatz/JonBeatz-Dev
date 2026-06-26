@@ -14,11 +14,15 @@
 
 ## Boundaries (hard rules)
 
-- **Personal services stay in the personal profile.** No JARVIS voice, Telegram,
-  DeepSeek/LiteLLM, ComfyUI, Google Workspace, or image-gen wiring here.
+- **Included here:** OmniVoice (JARVIS, ritual-only) + project MCPs (21st-dev, markdownify,
+  browserbase, pencil, composio).
+- **Stay in the personal profile:** Telegram, DeepSeek/LiteLLM, ComfyUI, Google Workspace,
+  image-gen.
 - **Gold `jon-beatz.com` stays in the personal profile.** This repo ships only the red site.
 - **Mem0 scope = `jonbeatz_dev`** (`qdrant_jonbeatz_dev`). Never `jonbeatz_personal`,
   `kristina_irwin`, or any MSC store.
+- **Secrets:** `.cursor/mcp.json` and `.env.local` are gitignored (repo is public). Commit
+  only `*.example`.
 
 ## Core technical facts
 

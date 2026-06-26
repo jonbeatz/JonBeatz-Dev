@@ -2,6 +2,7 @@
 # No DeepSeek/Telegram/voice/ComfyUI (those are JonBeatz personal-profile only).
 param(
     [switch]$SkipMem0,
+    [switch]$Full,
     [switch]$Quiet
 )
 
@@ -40,6 +41,17 @@ $devUp = Test-Port -Port 3000
 Write-Host ("  {0,-18} :{1,-5} {2}" -f 'Dev site', 3000, $(if ($devUp) { 'online' } else { 'offline (npm run dev)' })) -ForegroundColor $(if ($devUp) { 'Green' } else { 'DarkGray' })
 $lmsUp = Test-Port -Port 1234
 Write-Host ("  {0,-18} :{1,-5} {2}" -f 'LM Studio', 1234, $(if ($lmsUp) { 'online' } else { 'offline' })) -ForegroundColor $(if ($lmsUp) { 'Green' } else { 'DarkGray' })
+
+if ($Full) {
+    $omni = Join-Path $PSScriptRoot 'jarvis-omni-daemon.ps1'
+    if (Test-Path $omni) {
+        Write-Host ''
+        Write-Host "$Tag Pre-warming OmniVoice daemon (-Full)..." -ForegroundColor Gray
+        $omniArgs = @('-NoProfile', '-ExecutionPolicy', 'Bypass', '-File', $omni)
+        if ($Quiet) { $omniArgs += '-Quiet' }
+        & powershell @omniArgs
+    }
+}
 
 Write-Host ''
 Write-Host "$Tag Project root: $Root" -ForegroundColor DarkGray

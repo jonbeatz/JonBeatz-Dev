@@ -1,0 +1,45 @@
+---
+description: JARVIS voice — when to speak aloud (OmniVoice ritual-only) for JONBEATZ.DEV
+alwaysApply: true
+---
+
+# JARVIS voice policy (JONBEATZ.DEV)
+
+OmniVoice is shared from the Hermes core install (`D:\Hermes\apps\OmniVoice` +
+`_core-scripts\voice-engine`). It works here exactly like the personal profile —
+ritual-only, never chatty.
+
+## Default voices
+
+| Priority | Engine | When |
+|----------|--------|------|
+| **Primary** | **OmniVoice** (British male, CPU) | Every allowed speak |
+| **Backup** | Edge `en-GB-RyanNeural` | Only if OmniVoice fails |
+
+## When to speak (allowed)
+
+| Trigger | Action |
+|---------|--------|
+| **Start Project** ritual | `npm run jarvis:speak -- "..."` once (greeting) |
+| **End Project** ritual | `npm run jarvis:speak -- "..."` once (short farewell) |
+| Jon says **speak**, **say**, **talk this**, **read aloud** | `npm run jarvis:speak -- "<exact text>"` |
+| Critical **Mem0 / build / deploy errors** | Only if `JARVIS_VOICE_ERRORS=1` (default on) |
+
+## When NOT to speak
+
+- **Never** read ordinary chat replies or summaries aloud.
+- **Never** speak after `mem0:add`, `mem0:search`, or successful Mem0 recall.
+- **Never** start the OmniVoice daemon at PC boot — lazy start on first ritual speak;
+  `npm run session:stop` stops it to free RAM.
+
+## Commands
+
+```powershell
+npm run jarvis:speak -- "text"        # OmniVoice (Ryan fallback on failure)
+npm run jarvis:voice-test             # one-line smoke test
+npm run jarvis:omni-daemon            # optional pre-warm before Start Project
+npm run jarvis:omni-daemon -- -Stop   # free RAM (also runs on session:stop)
+```
+
+Optional `.env.local` overrides: `JARVIS_VOICE_POLICY` (`ritual`/`off`),
+`JARVIS_VOICE_ERRORS` (`1`/`0`), `OMNIVOICE_PYTHON`, `JARVIS_OMNI_PORT`.

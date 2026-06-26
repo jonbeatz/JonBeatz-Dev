@@ -27,6 +27,10 @@ yarn-error.log*
 .env
 .env*.local
 
+# MCP config holds API keys — commit only .cursor/mcp.json.example
+/.cursor/mcp.json
+/.cursor/mcp.json.sync-bak
+
 # logs
 /logs
 

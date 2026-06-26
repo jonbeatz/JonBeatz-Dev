@@ -15,19 +15,23 @@ Three.js. Split out of the JonBeatz personal profile. **Red is the baked default
 
 ## Hard boundaries
 
-- Do **not** add personal services (JARVIS voice, Telegram, DeepSeek/LiteLLM, ComfyUI,
-  Google, image-gen) — they belong to `D:\Hermes\projects\JonBeatz`.
+- **Included:** OmniVoice (JARVIS, ritual-only) + project MCPs (21st-dev, markdownify,
+  browserbase, pencil, composio).
+- Do **not** add Telegram, DeepSeek/LiteLLM, ComfyUI, Google, or image-gen — they belong
+  to `D:\Hermes\projects\JonBeatz`.
 - Do **not** bring the gold `jon-beatz.com` here.
 - Mem0 = **`jonbeatz_dev`** scope only.
-- Windows PowerShell only (no bash heredocs). Never commit `.env*`.
+- Windows PowerShell only (no bash heredocs). Never commit `.env*` or `.cursor/mcp.json`
+  (gitignored — repo is public).
 
 ## Start Project ritual
 
 When Jon says **Start Project** / **Start Session** / **Cold Start**:
 
-1. `npm run session:start` from `D:\Hermes\projects\JonBeatz.dev`
+1. `npm run session:start` from `D:\Hermes\projects\JonBeatz.dev` (`:full` pre-warms voice)
 2. Read `TRUTH.md`, `.cursor/docs/START-HERE.md`, `.cursor/docs/ReCall.md`
-3. Handshake: **"Ok Jon — JONBEATZ.DEV site loaded, ready."**
+3. Speak greeting once: `npm run jarvis:speak -- "..."` (ritual-only)
+4. Handshake: **"Ok Jon — JONBEATZ.DEV site loaded, ready."**
 
 ## Key commands
 
@@ -37,7 +41,9 @@ npm run site:build:static   # static export -> out/
 npm run site:preview        # serve out/ @ :5057
 npm run site:package        # build + zip -> .deploy/ (for Hostinger MCP)
 npm run mem0:search -- "q"  # jonbeatz_dev memory
-npm run backup:quick        # versioned backup
+npm run jarvis:speak -- ".."# OmniVoice (ritual-only)
+npm run sync:mcp-env        # inject MCP keys from .env.local
+npm run backup:quick        # versioned backup (backup:quick:full for full)
 ```
 
 ## Key paths

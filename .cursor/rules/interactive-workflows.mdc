@@ -1,0 +1,41 @@
+---
+description: Interactive (clickable) workflow UI for JONBEATZ.DEV multi-step rituals
+alwaysApply: true
+---
+
+# Interactive workflow UI (Composer) — JONBEATZ.DEV
+
+When running **multi-step rituals** (backup project, restore points, branch cut, go-live):
+
+## Required
+
+1. **Use the `AskQuestion` tool** — present **clickable options** (buttons) per step.
+2. **One step per `AskQuestion` call** — wait for the selection before the next step.
+3. **Label options clearly** — e.g. "Standard backup", not "1".
+4. **Default path first** — recommended choice first (Standard backup; default root
+   `G:\Hermes_Project_BackUpz\JonBeatz.dev`; suggested folder name; Confirm Yes).
+
+## Avoid
+
+- Text-only prompts like "Reply 1 or 2".
+- Numbered-only choices without descriptive labels.
+- Batching multiple ritual steps into one message without interactive selection.
+
+## Applies to
+
+| Trigger | Behavior |
+|---------|----------|
+| **backup project** | Interactive — `npm run backup:project` with `AskQuestion` gates |
+| **backup quick**, **backup full**, **backup profile** | **Non-interactive** — run `backup:quick` / `backup:quick:full` immediately |
+| **restore point** / milestone backup | `AskQuestion` for note + confirm before `backup:quick` |
+| **branch cut**, go-live gates | Prefer `AskQuestion` when offering structured choices |
+
+## Free-text steps
+
+When a step needs custom input (backup note, custom folder name), use `AskQuestion`
+with **"Skip"** / **"I'll type it next"** — then accept the operator's follow-up message.
+
+## After selection
+
+Proceed automatically to the next `AskQuestion` step; only run terminal commands after
+final confirmation.

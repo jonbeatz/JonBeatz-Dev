@@ -12,14 +12,14 @@ JonBeatz personal profile. It is its own self-contained Next.js + Three.js proje
 
 - A single-page, dark, cinematic portfolio/command-center site with a **red theme**
   and a **glow-beam hero portal** (the `dev` variant is the baked-in default).
-- Self-contained: website code, UI/3D design skills, docs, and dev/build/deploy/backup
-  scripts all live here.
+- Self-contained: website code, UI/3D design skills, docs, dev/build/deploy/backup
+  scripts, **OmniVoice (JARVIS) ritual voice**, and **project MCPs** all live here.
 
 ## What this project is NOT
 
-- **Not** the personal JonBeatz profile. Do **not** add JARVIS voice, Telegram,
-  DeepSeek/LiteLLM, ComfyUI, Google Workspace, or image-gen wiring here — those belong
-  to `D:\Hermes\projects\JonBeatz`.
+- **Not** the personal JonBeatz profile. Do **not** add Telegram, DeepSeek/LiteLLM,
+  ComfyUI, Google Workspace, or image-gen wiring here — those belong to
+  `D:\Hermes\projects\JonBeatz`. (OmniVoice + MCPs ARE welcome here.)
 - **Not** the gold `jon-beatz.com` site. That stays in the personal profile. This repo
   only ships `jonbeatz.dev` (red).
 
@@ -56,12 +56,22 @@ UI/visual work — read in order: **NovaMira-Design** → **MSC-UI-Taste** → *
 **Three.js-Ops**, **WebGL-UI**. Git: **GitHub-Ops**. Deploy: **Hostinger-Ops**.
 On-deck (vendored, reference): `.cursor/skills-external/` (gsap, awesome-design-md).
 
+## Voice + MCP
+
+- **OmniVoice** is shared from the Hermes core install — ritual-only. See
+  `.cursor/rules/voice-policy.mdc` (`npm run jarvis:speak`).
+- **MCPs:** project servers (21st-dev-magic, markdownify, browserbase, pencil, composio)
+  in gitignored `.cursor/mcp.json`; keys synced from `.env.local` via `npm run sync:mcp-env`.
+
 ## Session rituals
+
+See `.cursor/rules/workflow.mdc` for the full trigger map.
 
 | Jon says | Agent action |
 |----------|--------------|
-| **Start Project**, **Start Session**, **Cold Start** | `.cursor/prompts/Start-Project.md` + `npm run session:start` |
+| **Start Project**, **Start Session**, **Cold Start** | `.cursor/prompts/Start-Project.md` + `npm run session:start` (`:full` pre-warms voice) |
 | **End Project**, **End Session** | `.cursor/prompts/End-Project.md` + `npm run session:stop` |
-| **update docs** | `npm run docs:sync` + align TRUTH / START-HERE / ReCall |
+| **update docs** | `.cursor/prompts/Update-Docs.md` + `npm run docs:sync` |
+| **backup / backup full** | `npm run backup:quick` / `backup:quick:full` (interactive for **backup project**) |
 | **branch cut** | `.cursor/prompts/Branch-Cut.md` |
 | **release version** | `.cursor/prompts/Release-Version.md` |

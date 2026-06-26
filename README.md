@@ -68,8 +68,12 @@ then flush the CDN. Full runbook: [`.cursor/docs/JONBEATZ-DEV-DEPLOY.md`](.curso
 
 ## Boundaries
 
-Self-contained. No JARVIS voice / Telegram / DeepSeek / ComfyUI / Google / image-gen —
-those belong to the personal profile at `D:\Hermes\projects\JonBeatz`. This repo ships
-only `jonbeatz.dev` (red); the gold `jon-beatz.com` stays in the personal profile.
+Self-contained, with OmniVoice (JARVIS, ritual-only) and project MCPs. Telegram /
+DeepSeek / ComfyUI / Google / image-gen stay in the personal profile at
+`D:\Hermes\projects\JonBeatz`. This repo ships only `jonbeatz.dev` (red); the gold
+`jon-beatz.com` stays in the personal profile.
+
+> Secrets: `.cursor/mcp.json` + `.env.local` are gitignored. Copy the `*.example` files,
+> fill keys, then `npm run sync:mcp-env`.
 
 — Maintainer: **Jon Beatz** · License: UNLICENSED (private)

@@ -1,5 +1,13 @@
 # JONBEATZ.DEV — ReCall Log
 
+## [2026-06-26] — Deploy ownership confirmed (canonical repo)
+- **Decision:** jonbeatz.dev is **owned exclusively by this repo** (`D:\Hermes\projects\JonBeatz.dev`,
+  GitHub `jonbeatz/JonBeatz-Dev`). The JonBeatz personal profile no longer builds or deploys the
+  red site — its old `:dev` npm scripts (`site:package:dev`, `dev:devsite`) now redirect here.
+- **Deploy from here:** `npm run site:package` → Hostinger MCP `jonbeatz.dev` → CDN flush.
+  Runbook: `.cursor/docs/JONBEATZ-DEV-DEPLOY.md`.
+- **Gold jon-beatz.com** stays in `D:\Hermes\projects\JonBeatz` only.
+
 ## [2026-06-25] — Session closeout (End Project)
 - **Done for now.** Standalone project is live on GitHub (public), v1.0.0 released, README
   has hero/pipelines/stack screenshots, OmniVoice + MCP + full workflow rituals wired,

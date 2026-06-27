@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start -p ${PORT:-3000}",
+    "start": "next start",
     "lint": "next lint",
     "site:build:static": "node scripts/build-static-site.mjs",
     "site:preview": "npx --yes serve out -l 5057",
@@ -39,18 +39,19 @@
   "author": "Jon Beatz",
   "license": "UNLICENSED",
   "dependencies": {
-    "next": "14.2.3",
+    "@react-three/drei": "^10.7.7",
+    "@react-three/fiber": "^9.6.1",
+    "motion": "^11.11.0",
+    "next": "^15.5.19",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "motion": "^11.11.0",
-    "three": "^0.163.0",
-    "@react-three/fiber": "^8.16.0",
-    "@react-three/drei": "^9.105.0"
+    "three": "^0.163.0"
   },
   "devDependencies": {
     "@types/node": "^20",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
+    "eslint-config-next": "^15.5.19",
     "typescript": "^5"
   },
   "optionalDependencies": {

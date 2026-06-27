@@ -1,5 +1,15 @@
 # JONBEATZ.DEV — ReCall Log
 
+## [2026-06-25] — Session closeout (End Project)
+- **Done for now.** Standalone project is live on GitHub (public), v1.0.0 released, README
+  has hero/pipelines/stack screenshots, OmniVoice + MCP + full workflow rituals wired,
+  Hostinger static deploy layer complete (reference doc, skill, SSH, `site:ssh`).
+- **Not done yet:** first deploy of **https://jonbeatz.dev** from THIS repo (live site may
+  still be the Tier-1 variant from the personal profile). Fill `HOSTINGER_API_TOKEN` in
+  `.env.local` → `npm run sync:mcp-env` when ready to go live.
+- **Next session:** open `D:\Hermes\projects\JonBeatz.dev`, say **Start Project**, then
+  deploy or continue Tier 2/3 redesign (DevHome split, scroll choreography, more 3D).
+
 ## [2026-06-25] — Hostinger deploy layer completed (static-focused)
 - Added a self-contained Hostinger setup for the **static** jonbeatz.dev (NOT the MSC Node
   FTPS pipeline — that's a different repo). New: `.cursor/docs/HOSTINGER-REFERENCE.md`

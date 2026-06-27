@@ -5,6 +5,10 @@
   standalone project (Tier 3). Curated scaffold: site + UI/3D skills + docs + scripts.
 - Red baked as the default variant. Mem0 scope `jonbeatz_dev`. See `ReCall.md` for detail.
 
+## 2026-06-25 — Session closeout
+- End Project: scaffold complete, repo public, Hostinger layer added, all pushed to
+  `jonbeatz/JonBeatz-Dev`. Awaiting first deploy from this project.
+
 ## 2026-06-25 — v1.0.0 to GitHub + workflow/voice/MCP parity
 - GitHub repo `jonbeatz/JonBeatz-Dev` created, v1.0.0 release, README screenshots; repo
   flipped **public**.

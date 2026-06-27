@@ -1,5 +1,9 @@
 # JONBEATZ.DEV — ReCall Log
 
+## [2026-06-26b] — Next.js 15 upgrade
+- **next 15.5.19** + R3F v9 / drei v10 (React 19). `npm run build` + `site:build:static` verified.
+- `package-lock.json` + `.npmrc` (legacy-peer-deps). `npm start` fixed for Windows.
+
 ## [2026-06-26] — Deploy ownership confirmed (canonical repo)
 - **Decision:** jonbeatz.dev is **owned exclusively by this repo** (`D:\Hermes\projects\JonBeatz.dev`,
   GitHub `jonbeatz/JonBeatz-Dev`). The JonBeatz personal profile no longer builds or deploys the

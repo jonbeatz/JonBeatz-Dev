@@ -1,5 +1,9 @@
 # JONBEATZ.DEV — ReCall Log
 
+## [2026-07-03] — Hermes ecosystem Sprint 4 (Next.js alignment)
+- **Next.js 15.5.19 → 16.2.10** + React 19.2.4; `npm run build` verified.
+- Part of cross-profile `_core-scripts` boot/stack upgrade — see DigitalStudioz audit plan.
+
 ## [2026-06-26b] — Next.js 15 upgrade
 - **next 15.5.19** + R3F v9 / drei v10 (React 19). `npm run build` + `site:build:static` verified.
 - `package-lock.json` + `.npmrc` (legacy-peer-deps). `npm start` fixed for Windows.

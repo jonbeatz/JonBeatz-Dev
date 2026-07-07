@@ -50,6 +50,16 @@ function AnimatedModel({ url }) {
 3. **Texture Limits** — Max 1024x1024 compressed textures (using Basis Universal, KTX2, or high-compression WebP).
 4. **Caching** — Cache models globally to prevent redundant HTTP requests and re-parsing.
 
+## AI-generated GLBs (top picks)
+
+| Job | Tool | Doc |
+|-----|------|-----|
+| Product photo → GLB (cloud) | [Tripo Studio](https://www.tripo3d.ai/) | Vault `ai-scroll-product-workflow/WORKFLOW.md` |
+| Local ComfyUI pipeline | [3DGenStudio](https://github.com/visualbruno/3DGenStudio) | [TOOLS-REFERENCE.md](../docs/TOOLS-REFERENCE.md) § AI 3D |
+| Free library GLBs | GLB-Asset-Sourcing skill (this repo) | Poly Haven, poly.pizza |
+
+Skip Meshy / Hyper3D / Fast3D unless Jon picks one — Tripo covers the same product workflow. See TOOLS-REFERENCE decision matrix.
+
 ## Anti-Slop
 - **No loading > 5MB models without a loading warning** — Always display a progress indicator or percentage loader for models exceeding 2MB.
 - **No animating without useMemo** — Avoid running render/animations checks on raw unmemoized scene hierarchies.

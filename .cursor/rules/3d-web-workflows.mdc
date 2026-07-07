@@ -1,0 +1,29 @@
+---
+description: 3D web workflow vault — single asset path, no project duplicates
+alwaysApply: false
+globs:
+  - "**/*.{tsx,ts,jsx,js,md}"
+---
+
+# 3D Web Workflows — vault policy
+
+## Single sources (no duplicates)
+
+| What | Canonical path |
+|------|----------------|
+| **Asset vault** | `D:\Hermes\assets\3d-web-workflows\` |
+| **Agent hub doc** | `.cursor/docs/3D-WEB-WORKFLOWS.md` (from `sync:docs`) |
+| **3d-scroll-website skill** | `.cursor/skills/3d-scroll-website/` (from `npm run sync:skills`) |
+| **Taste catalog** | `.cursor/docs/3D-WEBSITE-TASTE-CATALOG.md` |
+
+## Never
+
+- Copy the vault into `.cursor/3d-web-workflows/` inside a project repo
+- Store duplicate skill packs or `TOOLS-REFERENCE.md` in the vault
+- Edit taste catalog in the vault — edit shared docs, then `npm run sync:docs -- -Write`
+
+## Before scroll/3D builds
+
+1. Read `.cursor/docs/3D-WEB-WORKFLOWS.md`
+2. Run `npm run workflows:3d:status` + `npm run scroll:motion:status`
+3. Trigger: `.cursor/prompts/Build-3D-Website.md`

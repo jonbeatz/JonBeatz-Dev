@@ -1,0 +1,22 @@
+# global.mdc - Global shortcuts for JonBeatz.dev
+
+| Operator says | Agent action |
+|---------------|--------------|
+| **Start Project**, **Cold Start** | `npm run session:start -- -Full` + [Start-Project.md](../prompts/Start-Project.md) |
+| **Open Project**, **Resume Session** | `npm run session:open` + [Open-Project.md](../prompts/Open-Project.md) |
+| **Close Project**, **Close Session**, **Switch Project** | [Close-Project.md](../prompts/Close-Project.md) + `npm run session:handoff` (no stack stop) |
+| **End Project**, **End Session**, **Done for today** | [End-Project.md](../prompts/End-Project.md) + `npm run session:stop` (AskQuestion → `-StopDeepSeek`) |
+| **update docs** | [Update-Docs.md](../prompts/Update-Docs.md) + `npm run docs:sync` |
+| **update docs and mem0** | Update-Docs Phase 5b + `npm run mem0:add` |
+| **backup profile**, **backup**, **backup quick** | `npm run backup:quick` |
+| **backup project** | `npm run backup:project` |
+| **backup full** | `npm run backup:full` |
+| **deepseek test** | `npm run deepseek:test` |
+| **deepseek ngrok** | `npm run deepseek:ngrok` (force-restarts proxy with ngrok for Cursor Agent) |
+| **sync mcp** | `npm run sync:mcp-env` |
+| **log session** | `npm run log:session -- "summary"` |
+| **log fix** | `npm run log:fix` |
+
+**Local commands** always run from the project root (`D:\\Hermes\\projects\\JonBeatz.dev`).
+
+For a full phrase list, check `.cursor/docs/MASTER-COMMANDS.md`, or see the prompts in `.cursor/prompts/`.

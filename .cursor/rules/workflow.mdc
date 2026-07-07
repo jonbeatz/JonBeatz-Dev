@@ -1,73 +1,94 @@
 ---
-description: Session workflow triggers for the standalone JONBEATZ.DEV site project
+description: Session workflow triggers for JonBeatz.dev
 alwaysApply: true
 ---
 
-# Workflow Session Rules — JONBEATZ.DEV
+# Workflow Session Rules - JonBeatz.dev
 
-All commands run from `D:\Hermes\projects\JonBeatz.dev` (PowerShell). This is the
-standalone red site project — keep the personal JonBeatz profile's DeepSeek / Telegram /
-ComfyUI / image-gen / Google services out of here. OmniVoice and the project MCPs ARE
-available here.
+## Start Project (cold boot)
 
-## Start Project
-
-When Jon says **Start Project**, **Begin Project**, **Start Session**, or **Cold Start**:
+When user says **Start Project**, **Begin Project**, or **Cold Start**:
 
 - Execute [`.cursor/prompts/Start-Project.md`](../prompts/Start-Project.md)
-- Run **`npm run session:start`** (add **`:full`** to also pre-warm OmniVoice)
+- Run **`npm run session:start -- -Full`** from the JonBeatz.dev profile root (`D:\\Hermes\\projects\\JonBeatz.dev`)
 - Read `TRUTH.md`, `.cursor/docs/START-HERE.md`, `.cursor/docs/ReCall.md`
-- Speak the greeting once via **`npm run jarvis:speak -- "..."`** (ritual-only)
-- Handshake: **"Ok Jon — JONBEATZ.DEV site loaded, ready."**
+- Do **not** auto-start long-running dev servers unless the operator explicitly asks
 
-## End Project
+## Open Project (resume workspace)
 
-When Jon says **End Project**, **End Session**, or **Close Session**:
+When user says **Open Project** or **Resume Session**:
+
+- Execute [`.cursor/prompts/Open-Project.md`](../prompts/Open-Project.md)
+- Run **`npm run session:open`** (light probes — does **not** restart LiteLLM/ngrok if warm)
+- Read `TRUTH.md`, `.cursor/docs/START-HERE.md`, `.cursor/docs/ReCall.md`
+- Do **not** run `draven:speak` or `session:start -- -Full` unless stack is down and operator wants cold boot
+
+## Close Project (switch workspace — keep fleet)
+
+When user says **Close Project**, **Close Session**, or **Switch Project**:
+
+- Execute [`.cursor/prompts/Close-Project.md`](../prompts/Close-Project.md)
+- Update `.cursor/docs/ReCall.md` and `.cursor/docs/project-log.md`
+- Run **`npm run session:handoff`** (vault note only — **no** `session:stop`)
+- Use **AskQuestion** for git commit/push — never auto-commit
+- Do **not** run `draven:speak` or `-StopDeepSeek`
+
+## End Project (day-end)
+
+When user says **End Project**, **End Session**, **Session Closeout**, or **Done for today**:
 
 - Execute [`.cursor/prompts/End-Project.md`](../prompts/End-Project.md)
 - Update `.cursor/docs/ReCall.md` and `.cursor/docs/project-log.md`
-- Short farewell via **`npm run jarvis:speak -- "..."`** (ritual-only)
-- Run **`npm run session:stop`** (also stops the OmniVoice daemon)
+- Use **AskQuestion** for git, then **AskQuestion** for **Stop LiteLLM + ngrok** (recommend stop)
+- Run **`npm run session:stop`** (add **`-- -StopDeepSeek`** when operator confirms stop)
 
 ## Update Docs
 
-When Jon says **update docs** or **update docs and mem0**:
+When user says **update docs** or **update docs and mem0**:
 
 - Execute [`.cursor/prompts/Update-Docs.md`](../prompts/Update-Docs.md)
-- Run **`npm run docs:sync`**, then **`npm run version:sync`** if the version changed
-- Align version across `package.json`, `TRUTH.md`, `.cursor/docs/MASTER-COMMANDS.md`, `README.md`
-- `update docs and mem0` → also `npm run mem0:add -- "..."` (scope `jonbeatz_dev`)
-
-## Backup
-
-Follow [`.cursor/rules/interactive-workflows.mdc`](interactive-workflows.mdc) for gates.
-
-| Jon says | Action |
-|----------|--------|
-| **backup**, **backup quick**, **backup profile** | **`npm run backup:quick`** (non-interactive, standard) |
-| **backup full** | **`npm run backup:quick:full`** (non-interactive, includes node_modules-free full set) |
-| **backup project**, **restore point**, **milestone backup** | Interactive — `AskQuestion` gates, then `npm run backup:project` |
+- Run **`npm run docs:sync`**
+- Run **`npm run version:sync`** when version changed
+- Align version across `TRUTH.md`, `package.json`, `MASTER-COMMANDS.md`, `CHANGELOG.md`
 
 ## Release Version
 
-When Jon says **release version** or **publish release**:
+When user says **release version**, **publish release**, or after a version bump on a milestone branch:
 
 - Execute [`.cursor/prompts/Release-Version.md`](../prompts/Release-Version.md)
-- **`npm run version:sync`** → commit → **`npm run release`** (tag + GitHub release `--latest`)
+- Run **`npm run version:sync`** then **`npm run release`**
 
 ## Branch Cut
 
-When Jon says **branch cut** or **cut new development branch**:
+When user says **branch cut**, **cut JonBeatz.dev-Project-vN**, **cut new development branch**:
 
 - Execute [`.cursor/prompts/Branch-Cut.md`](../prompts/Branch-Cut.md)
-- Ritual: `npm run backup:quick` → freeze previous branch → `git checkout -b JonBeatz-dev-v{N}`
-  → bump `N.0.0` → `version:sync` → update governance docs → `npm run release`
-- Leave **`main`** untouched unless Jon explicitly asks for a merge
+- Full ritual: backup -> freeze previous branch @ SHA -> create `JonBeatz.dev-Project-v{N}` -> bump **`N.0.0`** -> update Restore-Points -> **`npm run release`**
+- Do **not** stop at `git checkout -b` alone
+- Leave **`main`** untouched unless the operator explicitly requests a merge
 
-## Deploy
+## Backup
 
-When Jon says **deploy** / **push live** / **go live**:
+When user says **backup profile** or **backup**:
 
-- Build + package: **`npm run site:package`** → zip in `.deploy/`
-- Deploy via Hostinger MCP to `jonbeatz.dev`, then flush CDN. Runbook:
-  [`.cursor/docs/JONBEATZ-DEV-DEPLOY.md`](../docs/JONBEATZ-DEV-DEPLOY.md)
+- Run **`npm run backup:quick`** from profile root (non-interactive)
+
+## Review Tool
+
+When user pastes a **repo/product URL** or says **review tool**, **evaluate tool**, **add to watchlist**:
+
+- Execute [`.cursor/prompts/Review-Tool.md`](../prompts/Review-Tool.md)
+- Update shared canonical docs: `_core-scripts/shared-profile-content/docs/TOOLS-*.md`
+- Run **`npm run tools:status`** after install to verify config queue
+
+## Build Showcase Demo
+
+When user says **Build Showcase Demo**, **Fire Showcase**, **Hermes Motion Lab**, **build motion lab**, or **ultimate demo site**:
+
+- Execute [`.cursor/prompts/Build-Showcase-Demo.md`](../prompts/Build-Showcase-Demo.md)
+- Read **`.cursor/docs/HERMES-SHOWCASE-SPEC.md`** — living spec + add queue
+- Default target: **JonBeatz.dev** route `/showcase`
+
+When user sends a **design reference URL** (no build yet):
+
+- Append row to **DESIGN-REFERENCES.md** add queue **and** **HERMES-SHOWCASE-SPEC.md** add queue

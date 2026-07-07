@@ -1,0 +1,17 @@
+---
+description: Open Project / Resume Session — light workspace entry; keep fleet running.
+alwaysApply: true
+---
+
+# Open Project ritual
+
+Treat as **Open Project** when the operator says **Open Project**, **Resume Session**, or clearly wants to enter this workspace without cold-booting the paid stack.
+
+**Canonical procedure:** [`.cursor/prompts/Open-Project.md`](../prompts/Open-Project.md)
+
+**Hard defaults**
+
+1. Run **`npm run session:open`** — not `session:start -- -Full`.
+2. **Re-read** TRUTH, START-HERE, ReCall via the Read tool.
+3. **Do not** run `draven:speak`.
+4. If `:4000` / `:4040` are offline, suggest **Start Project** — do not silently run `-Full` unless operator confirms.

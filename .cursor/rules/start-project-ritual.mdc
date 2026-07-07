@@ -1,0 +1,19 @@
+---
+description: When the user says Start Project / start project / cold session — mandatory doc refresh, smoke test; never long-running dev by default.
+alwaysApply: true
+---
+
+# Start Project ritual
+
+Treat the operator message as a **Start Project** ritual when they say **Start Project**, **start project**, **cold start**, **cold session**, **full bootstrap**, or clearly want the **cold boot** ritual.
+
+**Not** Open Project / Resume Session — those use [Open-Project.md](../prompts/Open-Project.md).
+
+**Canonical procedure:** follow **`.cursor/prompts/Start-Project.md`** step-for-step. Do not skip the **mandatory document reads** there.
+
+**Hard defaults**
+
+1. **Re-read** the files listed in **Start-Project.md** (full context refresh) using the editor **Read** tool before executing shells or claiming the repo state.
+2. **Do not** run long-running development servers unless the operator **explicitly** asks.
+3. **Do** run the project's default health check as the baseline verification.
+4. **Do** start any required API bridges per **Start-Project.md**, unless the operator says **verify-only**.

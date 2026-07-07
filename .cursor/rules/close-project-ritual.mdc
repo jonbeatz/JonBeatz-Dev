@@ -1,0 +1,17 @@
+---
+description: Close Project / Close Session — handoff without stopping LiteLLM, ngrok, or Telegram.
+alwaysApply: true
+---
+
+# Close Project ritual
+
+Treat as **Close Project** when the operator says **Close Project**, **Close Session**, **Switch Project**, or is leaving this folder for another Hermes workspace.
+
+**Canonical procedure:** [`.cursor/prompts/Close-Project.md`](../prompts/Close-Project.md)
+
+**Hard defaults**
+
+1. Update ReCall + project-log; note **fleet left running**.
+2. Run **`npm run session:handoff`** — **never** `session:stop`.
+3. **Do not** run `draven:speak` or `-StopDeepSeek`.
+4. Use **AskQuestion** for git — never auto-commit.

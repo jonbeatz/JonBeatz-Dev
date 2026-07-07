@@ -1,83 +1,403 @@
-# MASTER COMMANDS — JONBEATZ.DEV
+# JonBeatz — Master Command Reference
 
-**Last updated:** 2026-06-25 (voice + MCP + workflow) · **Version:** 1.0.0
+**Profile root:** `D:\Hermes\projects\JonBeatz`  
+**Last updated:** 2026-06-25 · **Version:** 4.0.0
 
-All commands run from `D:\Hermes\projects\JonBeatz.dev` (Windows PowerShell).
+---
 
-## Site
+## Session rituals
 
-| Command | Does |
-|---------|------|
-| `npm run dev` | Local dev server — red site + glow beam @ :3000 |
-| `npm run build` | Standard Next.js build (local dashboard, keeps API routes) |
-| `npm run site:build:static` | Static export → `out/` (red, API routes stashed) |
-| `npm run site:preview` | Serve `out/` @ http://localhost:5057 |
-| `npm run site:package` | Build + zip → `.deploy/jonbeatz-dev-site_*.zip` for Hostinger MCP |
-| `npm run site:ssh -- "<cmd>"` | Account-wide Hostinger SSH (inspect/clean `public_html`; needs `HOSTINGER_SSH_*`) |
+| Command | What it does | When |
+|---------|--------------|------|
+| `npm run dev` | Launch Next.js local Playground UI on **localhost:3000** | Anytime |
+| `npm run build` | Compile Playground UI static files | Prior to ship |
+| `npm run session:start` | LM Studio preflight + probes + Telegram ensure | Light probe |
+| `npm run session:start -- -Full` | Mem0 + DeepSeek + **ngrok** + image doctor | **Start Project** |
+| `npm run session:start -- -WithDeepSeek` | Also start DeepSeek stack | Paid cloud prep |
+| `npm run session:start -- -WithDeepSeek -WithNgrok` | DeepSeek + ngrok | Cursor Agent boot |
+| `npm run session:stop` | Session closeout summary | **End Project** |
+| `npm run session:stop -- -StopDeepSeek -StopComfy` | Stop DeepSeek + ComfyUI | End + free VRAM |
+| `npm run session:stop -- -StopGoogleApi` | Legacy alias for `-StopDeepSeek` | Same |
+| `npm run doctor` | **Unified** health: services, env, image, Google, git | Anytime |
+| `npm run boot:setup` | Refresh Master-Startup + DeepSeek + Telegram shortcuts; remove duplicate boot `.vbs` | After boot script changes |
+| `npm run boot:doctor` | Audit shortcuts, single Startup entry, ports, LM Studio tuning | Troubleshoot boot |
 
-## Session
+---
 
-| Command | Does |
-|---------|------|
-| `npm run session:start` | Mem0 preflight + port probes (lightweight) |
-| `npm run session:start:full` | Same + pre-warms the OmniVoice daemon |
-| `npm run session:stop` | Closeout reminder + stops OmniVoice daemon (frees RAM) |
+## Boot workflow (PC login)
 
-## Voice (OmniVoice / JARVIS — ritual-only)
+| Item | Path / command |
+|------|----------------|
+| **Windows Startup** | `Startup\Master-Startup.lnk` only (hidden) → `Master-Startup.ps1 -SkipDesktop` |
+| Boot sequence | Telegram gateway → partial ping → LiteLLM + ngrok (background). **Desktop skipped** — open via `npm run hermes:desktop-ready` |
+| Manual boot | `D:\Hermes\Master-Startup.lnk` or `Master-Startup.ps1 -ShowWindows` (omit `-SkipDesktop` to also launch Desktop) |
+| DeepSeek only | `D:\Hermes\My-DeepSeek-API.lnk` or `npm run deepseek:on` |
+| Telegram reconnect | `D:\Hermes\Start Telegram Gateway.lnk` or `npm run telegram:gateway` |
 
-| Command | Does |
-|---------|------|
-| `npm run jarvis:speak -- "text"` | Speak via OmniVoice (Edge Ryan fallback) |
-| `npm run jarvis:voice-test` | One-line smoke test |
-| `npm run jarvis:omni-daemon` | Pre-warm the daemon (`-- -Stop` to free RAM) |
+**Do not** use `Master-Startup-Relay.vbs` or `Hermes_Gateway_jonbeatz.cmd` in Startup — duplicates boot. `npm run boot:setup` removes them.
 
-## MCP
+---
 
-| Command | Does |
-|---------|------|
-| `npm run sync:mcp-env` | Inject keys from `.env.local` into `.cursor/mcp.json` (gitignored) + global `~/.cursor/mcp.json` |
+## Mem0 (personal memory)
 
-Project MCPs: 21st-dev-magic, markdownify, browserbase, pencil, composio.
-Global (shared): github, tavily, hostinger-*, fal-ai. Copy `.cursor/mcp.json.example` →
-`.cursor/mcp.json`, fill `.env.local`, run `npm run sync:mcp-env`, then refresh in Cursor Settings → MCP.
+| Command | What it does |
+|---------|--------------|
+| `npm run mem0:preflight` | Verify LM Studio up; load **qwen3-4b-instruct-2507** @ 16384 ctx / parallel 1 if no model loaded (no swap) |
+| `npm run mem0:add -- "text"` | Add memory directly (`infer=False`, reliable) |
+| `npm run mem0:add:infer -- "text"` | Add memory with LLM fact extraction (`infer=True`) |
+| `npm run mem0:search -- "query"` | Semantic search personal memory |
+| `npm run mem0:list` | List all personal memories |
+| `npm run mem0:seed:profile-jedi` | Re-seed Profile Jedi knowledge (infer=False) |
 
-## Mem0 (scope: jonbeatz_dev)
+**Requires:** LM Studio local server on **port 1234**.
 
-| Command | Does |
-|---------|------|
-| `npm run mem0:preflight` | Verify LM Studio :1234 has an LLM loaded |
-| `npm run mem0:search -- "q"` | Search memories |
-| `npm run mem0:add -- "text"` | Add a memory (infer=False) |
-| `npm run mem0:list` | List all memories |
+---
 
-## Docs / version
+## Image workflow (Hugging Face + ComfyUI)
 
-| Command | Does |
-|---------|------|
-| `npm run encoding:check` | UTF-8 mojibake scan (.md/.mdc) |
-| `npm run version:sync` | Sync version + README badges (Python UTF-8) |
-| `npm run docs:sync` | Docs alignment audit + encoding gate |
+| Command | What it does |
+|---------|--------------|
+| `npm run env:setup` | Create `.env.local` from template; merge HF_TOKEN from MSC if present |
+| `npm run image:doctor` | Verify HF_TOKEN, ComfyUI paths, Python deps, output dir |
+| `npm run image:gen -- "prompt"` | Cloud FLUX.1-schnell → `D:\Hermes\assets\media\JonBeatz` |
+| `npm run image:gen:open -- "prompt"` | Same + open in default viewer |
+| `npm run image:fal -- "prompt"` | fal.ai pay-per-use bonus (`FAL_API_KEY`) |
+| `npm run image:fal:open -- "prompt"` | fal + open in default viewer |
+| `npm run video:fal -- -StartImage a.png -EndImage b.png` | Kling I2V scroll clip via fal queue |
+| `npm run video:fal:open -- -StartImage a.png -EndImage b.png` | Kling clip + open MP4 |
+| `npm run comfy:start` | Start shared ComfyUI (:8188) with VRAM guards |
+| `npm run comfy:stop` | Stop ComfyUI only (keeps LM Studio) |
+| `npm run comfy:restart` | Restart ComfyUI |
+| `npm run comfy:status` | JSON: port, queue, PIDs |
+| `npm run comfy:repair-symlinks` | Recreate ComfyUI model symlinks (H:\LLM_VAULT → models/) |
+| `npm run comfy:compare -- "prompt"` | Run all txt2img workflows + HF cloud comparison |
+| `npm run lmstudio:audit` | LM Studio vault + API health check |
+| `npm run comfy:idle-watcher` | MSC idle watcher daemon (suggest stop after 15m idle) |
 
-## Backup
+**Docs:** [IMAGE-WORKFLOW.md](./IMAGE-WORKFLOW.md) · [COMFYUI-MODELS.md](./COMFYUI-MODELS.md) · [VRAM-IMAGE.md](./VRAM-IMAGE.md)
 
-| Command | Does |
-|---------|------|
-| `npm run backup:quick` | Standard versioned backup → `jonbeatz-dev-project-v{N}-{a-z}` |
-| `npm run backup:quick:full` | Full mirror backup |
-| `npm run backup:clean` | Retain 10 newest backups |
+**Profile commands** (PowerShell profile, require ComfyUI): `gen-image-local`, `edit-image`, `inpaint-image`, `upscale-image`, `generate-video`, `animate-image`.
 
-## Release
+---
 
-| Command | Does |
-|---------|------|
-| `npm run release` | Tag + push + publish GitHub release from `package.json` version (needs `gh` + remote) |
+## Command Center (JonBeatz hub)
 
-## Deploy (Hostinger MCP — agent)
+| Command | What it does |
+|---------|--------------|
+| `npm run fleet:status` | Audit shared skeleton + sibling profile parity |
+| `npm run fleet:sync` | Push sync:docs + sync:skills to all fleet profiles |
+| `npm run docs:pull-shared` | Alias: sync universal docs into this profile |
 
-```text
-hosting_deployStaticWebsite { domain: "jonbeatz.dev", archivePath: "<.deploy\jonbeatz-dev-site_*.zip>" }
+**Doc:** [COMMAND-CENTER.md](./COMMAND-CENTER.md)
+
+---
+
+## Scroll, 3D & motion (Hermes web profiles)
+
+| Command | What it does |
+|---------|--------------|
+| `npm run scroll:motion:status` | Verify **gsap / lenis / @gsap/react / three / R3F / motion** baseline + docs |
+| `npm run workflows:3d:status` | Verify **3d-web-workflows** asset vault + shared docs/skills wiring |
+| `npm run vault:robonuggets` | Clone/update RoboNuggets HTML modules into asset vault |
+| `npm run vault:robonuggets:refresh` | Force re-clone RoboNuggets vault repos |
+| `npm run 3dgenstudio:install` | Install 3DGenStudio @ `D:\Hermes\apps\3DGenStudio` |
+| `npm run 3dgenstudio:start` | Start UI (:5183) + API (:3021); requires ComfyUI :8188 |
+| `npm run hermes:theme:reflect` | Install **Reflect** Hermes dashboard theme (+ rollback manifest) |
+| `npm run hermes:theme:restore` | Restore previous dashboard theme (was `default` before Reflect) |
+| `npm run hermes:theme:status` | Active theme + rollback manifest |
+| `npm run sync:skills` | Pull shared skills (incl. **3d-scroll-website**) into `.cursor/skills/` |
+| `npm run sync:docs -- -Write -AddMissing` | Pull `3D-WEB-WORKFLOWS.md`, `SCROLL-3D-REFERENCES.md`, taste catalog |
+
+**Docs:** [3D-WEB-WORKFLOWS.md](./3D-WEB-WORKFLOWS.md) · [SCROLL-3D-REFERENCES.md](./SCROLL-3D-REFERENCES.md) · [DESIGN-REFERENCES.md](./DESIGN-REFERENCES.md) · [3D-WEBSITE-TASTE-CATALOG.md](./3D-WEBSITE-TASTE-CATALOG.md) · [HERMES-DASHBOARD-THEMES.md](./HERMES-DASHBOARD-THEMES.md)
+
+**Skills (read order):** `Scroll-Video-Sequence` (canvas frame scrub) → `Scroll-Motion` (Lenis+GSAP) → `3D-Website-Fusion` → `Motion-Accessibility`
+
+**Component:** `components/SmoothScrollProvider.tsx` — wrap `app/layout.tsx` when using ScrollTrigger.
+
+**New site bootstrap:** `npm run bootstrap:website` copies `ThreeBackground` + `SmoothScrollProvider`.
+
+**Optional agent pack:** `npx skills add https://github.com/greensock/gsap-skills -g -a cursor`
+
+---
+
+## Hermes & Google API
+
+| Command | What it does |
+|---------|--------------|
+| `npm run desktop` | Launch Hermes Desktop (JonBeatz profile) |
+| `npm run hermes:lmstudio` | Smart-load **qwen3-4b-instruct-2507** @ 16384 / parallel 1 (skips if already optimal) |
+| `npm run lmstudio:dedupe` | Remove duplicate LM Studio instances (`qwen3-4b` + `qwen3-4b:2`) |
+| `npm run lmstudio:switch -- -Model <id>` | Unload other LLMs, load target (before heavy picker switch) |
+| `npm run hermes:local` | Set **active** Hermes model to LM Studio default (providers stay dual-registered) |
+| `npm run gcp:billing-stop` | Stop LiteLLM/ngrok + switch **active** Hermes model to local LM Studio |
+| `npm run gcp:billing-status` | Show LM Studio vs LiteLLM billing mode |
+| `npm run gcp:vertex-on` | Re-enable Vertex via LiteLLM (paid) |
+| `npm run sync:deepseek-env` | Sync DeepSeek keys from JonBeatz `.env.local` → `deepseek-api/.env.local` |
+| `npm run deepseek:ngrok` | Full start + ngrok tunnel (Cursor Agent HTTPS) |
+| Shortcut | `D:\Hermes\My-DeepSeek-API.lnk` — sync env + LiteLLM :4000 + Hermes `deepseek-v4-pro` |
+| `npm run deepseek:shortcut` | Recreate `My-DeepSeek-API.lnk` (+ Desktop copy) |
+| `npm run stop` | Alias for `gcp:billing-stop` |
+| `npm run google:doctor` | OAuth token + LiteLLM + setup.py --check |
+| `npm run google:status` | JSON status for agents |
+
+## Telegram (iPhone ↔ PC)
+
+| Command | What it does |
+|---------|--------------|
+| `npm run sync:telegram-env` | Sync `TELEGRAM_*` from `.env.local` → all Hermes profile `.env` files |
+| `npm run telegram:ensure` | Sync creds + start gateway for active profile |
+| `npm run telegram:gateway` | Full reconnect (LiteLLM + sync + gateway + ping) — same as `D:\Hermes\Start Telegram Gateway.lnk` |
+| `npm run telegram:shortcut` | Recreate `Start Telegram Gateway.lnk` (+ Desktop copy) |
+| `npm run telegram:sessions` | List recent Telegram chat sessions (Desktop TELEGRAM sidebar data) |
+| `npm run telegram:doctor` | Audit creds, gateway, LiteLLM, duplicate pollers |
+| `npm run telegram:test` | Send UTF-8-safe boot-style test notification |
+| `npm run notify` | Send custom alert (`$env:TELEGRAM_MESSAGE` recommended) |
+
+**Docs:** [TELEGRAM-WORKFLOW.md](./TELEGRAM-WORKFLOW.md)
+
+**Pitfall:** Hermes Desktop UI ≠ Telegram listener. Gateway must be running and profile `.env` must have `TELEGRAM_BOT_TOKEN`. Desktop UI is optional for phone chat; use TELEGRAM sidebar or `telegram:sessions` to view phone threads on PC.
+
+**Shortcut (one-click local prep + Desktop):** `D:\Hermes\Start Hermes Desktop (JonBeatz).lnk`  
+Script: `D:\Hermes\projects\_core-scripts\hermes-desktop\Start-JonBeatz-Hermes-Desktop.ps1`
+
+LiteLLM / DeepSeek stack scripts live in `D:\Hermes\projects\_core-scripts\deepseek-api\scripts\` (the legacy `google-api` stack is retired under `_archive/`).
+
+---
+
+## Switching between DeepSeek and LM Studio in Hermes
+
+**Dual-provider config** (jonbeatz `config.yaml`):
+
+| Provider slug | Endpoint | Models |
+|---------------|----------|--------|
+| `local-127.0.0.1:4000` | LiteLLM `:4000` | `deepseek-v4-pro`, `deepseek-v4-flash` |
+| `local-lm-studio-(free)` | LM Studio `:1234` | `qwen3-4b-instruct-2507`, `qwen3.5-9b`, `qwen2.5-coder-32b-instruct`, `deepseek-r1-distill-qwen-14b` |
+
+**Desktop picker (preferred):** Hermes Desktop → model menu → **Refresh Models** → pick from **LOCAL DEEPSEEK LITELLM (PAID)** or **LOCAL LM STUDIO (FREE)**. Use **Edit Models…** to show/hide rows.
+
+**LM Studio must already be running** (app open → Developer → Local Server → **Running** on `:1234`). Hermes does **not** launch the LM Studio app — it talks to the local server only. When you pick a local model, Hermes sends chat to `:1234`; you'll see the model appear in LM Studio's **Loaded Models** panel (Hermes may JIT-load on first message for models not pre-loaded).
+
+**Avoid duplicate loads:** `hermes:lmstudio` and Mem0 preflight use smart-load (skip if same model already loaded). If you see `qwen3-4b` twice (`:2` suffix), run `npm run lmstudio:dedupe`. Switching local models: `npm run lmstudio:switch -- -Model qwen3.5-9b` (unloads previous LLM first).
+
+| Command | What it does |
+|---------|--------------|
+| `npm run hermes:lmstudio` | Smart-load default **qwen3-4b-instruct-2507** @ 16384 / parallel 1 (no duplicate) |
+| `npm run lmstudio:switch -- -Model qwen3.5-9b` | Unload other LLMs, load target model |
+| `npm run lmstudio:dedupe` | Eject duplicate instances (`model` + `model:2`) |
+
+**CLI default switch** (sets active `model:` block only — both providers stay registered):
+
+| Goal | Command |
+|------|---------|
+| Paid DeepSeek default | `npm run deepseek:on` |
+| Free local default | `npm run hermes:local` or `npm run gcp:billing-stop` |
+| Billing status | `npm run gcp:billing-status` |
+
+**Offline:** Start LM Studio server → `npm run hermes:lmstudio` → pick a local model in Desktop — internet optional once loaded.
+
+---
+
+## DeepSeek + LiteLLM (active paid cloud)
+
+**Docs:** [AI-Master-Plan.md](./AI-Master-Plan.md) · [DeepSeek-Master.md](./DeepSeek-Master.md) · [Google-Cloud.md](./Google-Cloud.md)
+
+| Command | What it does |
+|---------|--------------|
+| `npm run deepseek:on` | Start LiteLLM (DeepSeek yaml, **--keep-gateway**) + switch Hermes to `deepseek-v4-pro` |
+| `npm run deepseek:off` | Stop LiteLLM + switch Hermes to local qwen3-4b-instruct-2507 |
+| `npm run deepseek:status` | Probe `:4000/v1/models` + Hermes model line |
+| `npm run deepseek:test` | One-shot LiteLLM chat completion smoke test |
+
+**Ngrok (Cursor Agent):** Run `npm run deepseek:ngrok` (LiteLLM + ngrok from the `_core-scripts/deepseek-api` stack) — use the HTTPS URL + `/v1` in Cursor Override. The public URL is written to `_core-scripts/deepseek-api/logs/ngrok-public-url.txt`. Localhost `:4000` fails Agent ("private networks forbidden").
+
+**Cursor (Setup B — JonBeatz hub):** Override ON → ngrok `/v1` + `sk-jonbeatz-deepseek-2026`. Models: `deepseek-v4-pro` / `deepseek-v4-flash` (direct) + OpenRouter `*-or` aliases. Registry: JonBeatz **`CURSOR-MODELS-CHEATSHEET.md`** · `npm run cursor:models`. **Auto** = Cursor subscription, not BYOK list — pick models explicitly.
+
+**Verify:** `npm run deepseek:test` · `npm run deepseek:test:openrouter`
+
+**Emergency Vertex rollback:** `npm run gcp:vertex-on` — `litellm_config.vertex.yaml` only; GCP billing risk.
+
+---
+
+## Logging & maintenance
+
+| Command | What it does |
+|---------|--------------|
+| `npm run version:sync` | Sync README badges + TRUTH/MASTER-COMMANDS from `package.json` (Python UTF-8) |
+| `npm run hermes:tune` | Apply Hermes Desktop display + timeout tuning (jonbeatz profile) |
+| `npm run release` | Tag `vX.Y.Z`, push, publish GitHub release (`--latest`) |
+| `npm run log:session -- "summary"` | Append to `project-log.md` |
+| `npm run log:fix` | Append to `ISSUES-RESOLVED.md` (interactive) |
+| `npm run log:fix -- --issue "..." --cause "..." --solution "..."` | Non-interactive fix log |
+| `npm run backup:project` | Interactive backup (Standard or Full, robocopy) |
+| `npm run backup:standard` | Standard backup — skips node_modules, .next, output, logs |
+| `npm run backup:full` | Full mirror — includes everything |
+| `npm run backup:quick` | Standard quick — auto `jonbeatz-project-v{N}-{a-z}`, no prompts |
+| `npm run backup:quick:full` | Full quick — auto folder name, no prompts |
+| `npm run backup:hermes-profile` | Hermes runtime only → `hermes-profile-latest/` (config.yaml, .env, memories) |
+| `npm run backup:profile` | Alias for `backup:quick` (legacy phrase) |
+| `npm run backup:clean` | Retain 10 newest `jonbeatz-project-v*` folders |
+
+**Backup root:** `G:\Hermes_Project_BackUpz\JonBeatz` (`JONBEATZ_BACKUP_ROOT` in `.env.local`). Each backup includes `_hermes-profile-snapshot/jonbeatz/` (`config.yaml`, `.env`, `memories/` — no logs/sessions). Restore Hermes: copy `config.yaml` to `%LOCALAPPDATA%\hermes\profiles\jonbeatz\`.
+
+| `npm run python:setup` | `pip install -r requirements.txt` |
+| `npm run draven:speak -- "text"` | Draven TTS — OmniVoice (ritual + explicit only; Ryan fallback) |
+| `npm run draven:voice-test` | Short OmniVoice test phrase |
+| `npm run draven:omni-daemon` | Warm OmniVoice model on `:18776` (lazy-started by speak) |
+| `npm run draven:omni-daemon -- -Stop` | Stop OmniVoice daemon |
+
+**Voice policy:** `DRAVEN_VOICE_POLICY=ritual` — no auto-read of replies or Mem0 recall. See [VOICE-WORKFLOW.md](./VOICE-WORKFLOW.md).
+
+| `npm run env:setup` | Create / refresh `.env.local` |
+| `npm run dev:recover` | Free port 3000, clear `.next`/cache, `npm install`, `npm run dev` |
+| `npm run sync:mcp-env` | Sync project MCP keys from `.env.local` → `.cursor/mcp.json` |
+| `npm run obsidian:distill` | Scan `I:\Vader_Vault` for weekly ReCall.md candidate notes |
+
+---
+
+## Playground UI
+
+| Command | What it does |
+|---------|--------------|
+| `npm run dev` | Playground UI @ **localhost:3000** |
+| `npm run build` | Production build gate |
+| `npm run dev:recover` | Hard recovery when stale `.next` or port conflict |
+
+**API routes (server-side, secrets in `.env.local`):**
+
+| Route | Method | Purpose |
+|-------|--------|---------|
+| `/api/system/status` | GET | Live port probe: LiteLLM, LM Studio, ComfyUI, ngrok |
+| `/api/deepseek/chat` | POST | Proxy chat to LiteLLM `deepseek-v4-pro` |
+| `/api/comfyui/status` | GET | ComfyUI port 8188 up/down |
+| `/api/telegram/sessions` | GET | Recent iPhone Telegram sessions |
+
+---
+
+## MCP (project)
+
+See **`.cursor/docs/MCP-SETUP.md`**. After editing `.env.local` MCP keys: `npm run sync:mcp-env` → reload Cursor Settings → MCP.
+
+---
+
+## Hostinger (MSC reference)
+
+See **`.cursor/docs/HOSTINGER-REFERENCE.md`**. Deploy runs from MSC repo; MCP + docs available here.
+
+| Command | What it does |
+|---------|--------------|
+| `npm run sync:mcp-env` | Sync project + **global** MCP (github, tavily, hostinger-*) |
+
+| Command | What it does |
+|---------|--------------|
+| `npm run docs:sync` | Audit TRUTH / START-HERE / ReCall alignment |
+| `npm run docs:update` | Same as `docs:sync` (Cursor hook alias) |
+
+---
+
+## VS Code tasks (keyboard shortcuts)
+
+Open **`JonBeatz.code-workspace`** or folder `JonBeatz` in Cursor.
+
+| Shortcut | Task | npm script |
+|----------|------|------------|
+| **Ctrl+Shift+B** | Start Session | `session:start` |
+| **Ctrl+Shift+E** | End Session | `session:stop` |
+| **Ctrl+Shift+Alt+D** | Doctor | `doctor` |
+| **Ctrl+Shift+Alt+M** | Search Mem0 | `mem0:search` (prompt) |
+
+One-time install into Cursor user keybindings:
+
+```powershell
+npm run vscode:keybindings
 ```
-Then flush CDN: hPanel → jonbeatz.dev → Performance → CDN → Flush cache.
 
-Full reference: `.cursor/docs/HOSTINGER-REFERENCE.md` (MCP quartet, SSH, SSL, pitfalls) +
-`.cursor/docs/JONBEATZ-DEV-DEPLOY.md` (runbook). MCP token: `npm run sync:mcp-env`.
+Bindings apply only when `workspaceFolderBasename == 'JonBeatz'` (Explorer shortcut unchanged in other projects).
+
+Run any task: **Ctrl+Shift+P** → **Tasks: Run Task**.
+
+## Direct PowerShell (when npm wrappers aren't enough)
+
+```powershell
+# Mem0 via Python
+python scripts/mem0_integration.py --action search --query "priorities"
+
+# Hermes desktop launcher
+powershell -File scripts/start-hermes-desktop-jonbeatz.ps1
+
+# Google API (_legacy archived — use DeepSeek)
+powershell -File D:\Hermes\projects\_core-scripts\deepseek-api\scripts\start-deepseek.ps1
+```
+
+---
+
+## Ports (personal stack)
+
+| Port | Service |
+|------|---------|
+| 1234 | LM Studio (Mem0 LLM + embedder host) |
+| 4000 | LiteLLM |
+| 4040 | ngrok inspector |
+| 7780 | Profile Jedi app |
+| 7781 | Profile Jedi tray supervisor |
+
+MSC Kanban ports (3001/3005/9119) live in the **MyStudioChannel** repo — not started by default here.
+
+---
+
+## jon-beatz.com deploy (personal static site — gold only)
+
+| Command | What it does |
+|---------|--------------|
+| `npm run dev` | Gold Command Center @ :3000 (local APIs, live dashboard) |
+| `npm run site:build:static` | Static export → `out/` — **jon-beatz.com** (gold footer) |
+| `npm run site:preview` | Serve `out/` at http://localhost:5055 (pre-deploy QA) |
+| `npm run site:package` | Build + zip → `.deploy\jonbeatz-site_<ts>.zip` → deploy **jon-beatz.com** |
+| `npm run site:ssh -- "cmd"` | SSH remote command (optional; reads `.env.local`) |
+
+**jonbeatz.dev (red site)** — standalone repo `D:\Hermes\projects\JonBeatz.dev` (GitHub `jonbeatz/JonBeatz-Dev`). Deploy with `npm run site:package` from **that** folder. Runbook: `JonBeatz.dev\.cursor\docs\JONBEATZ-DEV-DEPLOY.md`. The old `:dev` scripts here (`dev:devsite`, `site:package:dev`, etc.) print a redirect message.
+
+**After deploy:** hPanel → target domain → **Performance → CDN → Flush cache** (required on updates; first deploy often skips).
+
+**Stale WordPress icon in hPanel?** Website → **Auto Installer** → Delete WP app (**application only** — do not check installation files). See [JONBEATZ-SITE-DEPLOY.md](./JONBEATZ-SITE-DEPLOY.md) → "Clear stale WordPress label".
+
+**Docs:** [JONBEATZ-SITE-DEPLOY.md](./JONBEATZ-SITE-DEPLOY.md) · env: `JONBEATZ_*` + `HOSTINGER_SSH_*` in `.env.local`
+
+---
+
+---
+
+## Tools watchlist (Hermes-wide)
+
+| Command | What it does |
+|---------|--------------|
+| `npm run tools:status` | Config queue + verdict counts (READY vs NEEDS_KEY) |
+| `npm run ecosystem:audit` | Regenerate secrets inventory + credentials manifest + G:\\ backup |
+| `npm run agent-reach:doctor` | Agent-Reach channel health |
+| `npm run watch:check` | claude-video `/watch` preflight + Groq optional |
+| `npx skills find [query]` | **find-skills** — search 2000+ agent skills catalog |
+| `agent-browser snapshot -i` | **Agent Browser** — ref-based page snapshot (CLI) |
+| `npm run sync:docs -- -Write -AddMissing` | Pull TOOLS-*.md into `.cursor/docs/` |
+
+**Canonical:** `D:\Hermes\projects\_core-scripts\shared-profile-content\docs\TOOLS-*.md`
+
+**Cursor trigger:** paste repo URL or say **review tool** → `Review-Tool.md`.
+
+---
+
+## Cursor chat triggers
+
+| Say this | Agent runs |
+|----------|------------|
+| **Start Project** / **Start Session** | `session:start -- -Full` + Start-Project.md |
+| **End Project** / **End Session** | End-Project.md + `session:stop` |
+| **update docs** | `docs:sync` / Update-Docs.md |
+| **backup profile** / **backup quick** | `backup:quick` |
+| **backup project** | `backup:project` |
+| **backup full** | `backup:quick:full` |
+| **push jon-beatz live** / **update jon-beatz site** | `site:package` + MCP deploy + CDN flush |
+| **push jonbeatz.dev live** / **update .dev site** | Open `D:\Hermes\projects\JonBeatz.dev` → `npm run site:package` + MCP deploy `jonbeatz.dev` + CDN flush |
+| **review tool** / paste repo URL | Review-Tool.md + update TOOLS-*.md |
+
+See **[Agent-Runbook.md](./Agent-Runbook.md)** for full copy/paste prompts.
+
+---

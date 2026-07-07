@@ -25,6 +25,11 @@
     "mem0:search": "powershell -File scripts/mem0-chat.ps1 -Action search -Query",
     "mem0:list": "powershell -File scripts/mem0-chat.ps1 -Action list",
     "docs:sync": "powershell -File scripts/docs-update.ps1",
+    "docs:pull-shared": "powershell -ExecutionPolicy Bypass -File D:\\Hermes\\projects\\_core-scripts\\shared-profile-content\\scripts\\sync-docs.ps1 -Write -AddMissing",
+    "sync:docs": "powershell -ExecutionPolicy Bypass -File D:\\Hermes\\projects\\_core-scripts\\shared-profile-content\\scripts\\sync-docs.ps1",
+    "tools:status": "powershell -ExecutionPolicy Bypass -File D:\\Hermes\\projects\\_core-scripts\\shared-profile-content\\scripts\\tools-status.ps1",
+    "agent-reach:doctor": "powershell -ExecutionPolicy Bypass -File D:\\Hermes\\projects\\_core-scripts\\shared-profile-content\\scripts\\agent-reach-doctor.ps1",
+    "watch:check": "powershell -ExecutionPolicy Bypass -File D:\\Hermes\\projects\\_core-scripts\\shared-profile-content\\scripts\\watch-check.ps1",
     "version:sync": "python scripts/sync-version.py",
     "encoding:check": "python scripts/encoding-check.py",
     "backup": "node scripts/jonbeatz-dev-backup.mjs",
@@ -34,17 +39,25 @@
     "backup:quick": "node scripts/jonbeatz-dev-backup.mjs --standard --yes",
     "backup:quick:full": "node scripts/jonbeatz-dev-backup.mjs --full --yes",
     "backup:clean": "powershell -File scripts/clean-old-backups.ps1",
-    "release": "powershell -File scripts/github-release.ps1"
+    "release": "powershell -File scripts/github-release.ps1",
+    "scroll:motion:status": "powershell -ExecutionPolicy Bypass -File D:\\Hermes\\projects\\_core-scripts\\shared-profile-content\\scripts\\scroll-motion-status.ps1",
+    "workflows:3d:status": "powershell -ExecutionPolicy Bypass -File D:\\Hermes\\projects\\_core-scripts\\shared-profile-content\\scripts\\3d-web-workflows-status.ps1",
+    "sync:skills": "powershell -ExecutionPolicy Bypass -File D:\\Hermes\\projects\\_core-scripts\\shared-profile-content\\scripts\\sync-skills.ps1",
+    "sync:skills:global": "powershell -ExecutionPolicy Bypass -File D:\\Hermes\\projects\\_core-scripts\\shared-profile-content\\scripts\\sync-skills.ps1 -Global"
   },
   "author": "Jon Beatz",
   "license": "UNLICENSED",
   "dependencies": {
+    "@gsap/react": "^2.1.2",
     "@react-three/drei": "^10.7.7",
     "@react-three/fiber": "^9.6.1",
+    "gsap": "^3.15.0",
+    "lenis": "^1.3.25",
     "motion": "^11.11.0",
     "next": "16.2.10",
     "react": "19.2.4",
     "react-dom": "19.2.4",
+    "split-type": "^0.3.4",
     "three": "^0.185.1"
   },
   "devDependencies": {

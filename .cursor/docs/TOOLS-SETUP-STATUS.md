@@ -112,6 +112,7 @@ Everything else in **production** below is configured on Jon's PC (2026-07-04) u
 | **Claude Blog** | B (84) | IN USE | **READY** | Optional `GOOGLE_AI_API_KEY` (hero images) | Installed 2026-07-04 — skills + `npm run skills:claude-blog:scripts` |
 | **Claude Watch** | B+ (88) | IN USE | PARTIAL | Optional `GROQ_API_KEY` | Installed 2026-07-04 — persistent study notes |
 | **Agent Browser** | B+ (86) | IN USE | **READY** | None (local Chrome) | Installed 2026-07-04 — CLI; MCP optional |
+| **AgentMail** | A- (91) | **ADOPT** | PARTIAL | `AGENTMAIL_API_KEY` | Key SET Next-Flick `.env.local` (2026-07-07); install SDK/MCP on first use |
 | **Agent Skills (Osmani)** | B (84) | IN USE | **READY** | None | Installed 2026-07-04 — cherry-pick vs rituals |
 | **devini-tea** | A (93) | REF | **READY** | None | Reference repo — see SCROLL-3D-REFERENCES |
 | **Hermes Agora** | B (84) | WATCH | PRE_RELEASE | None | Wait for launch — local Hermes gateway; unofficial fan project |
@@ -127,8 +128,22 @@ Everything else in **production** below is configured on Jon's PC (2026-07-04) u
 | **AgentsView** | B+ (87) | IN USE | **READY** | None | Sessions `:8080` — 2026-07-04 |
 | **TokenTracker** | B+ (87) | IN USE | **READY** | None | Primary spend dashboard `:7680` |
 | **ccusage** | B+ (86) | WATCH | **READY** | None | Demoted 2026-07-04 — optional `npx ccusage hermes daily` |
+| **Payload CMS** | A (94) | **IN USE** | **READY** | `PAYLOAD_SECRET`, `DATABASE_URL` | MSC — SQLite local; Hostinger prod |
+| **Better Auth** | A (92) | **ADOPT** | NOT_INSTALLED | `BETTER_AUTH_SECRET`, `BETTER_AUTH_URL`, `DATABASE_URL` | Spike on Next-Flick v6 branch |
+| **Stack Auth** | B+ (86) | WATCH | NOT_INSTALLED | Docker env + API URL | Self-host compose — Clerk-like |
+| **Strapi** | B+ (87) | WATCH | NOT_INSTALLED | DB URL + admin JWT secrets | Separate Node service |
+| **Directus** | B+ (86) | WATCH | NOT_INSTALLED | `DB_*` connection | Docker or Node; BSL license check |
+| **Sanity** | B+ (85) | WATCH | NEEDS_KEY | `SANITY_PROJECT_ID`, dataset, token | Content Lake cloud |
+| **MarkText** | A- (91) | WATCH | NOT_INSTALLED | None | Desktop `.exe` install |
+| **pg0** | A- (90) | **IN USE** | **READY** | `DATABASE_URL` → `:5433` | Next-Flick `npm run db:local` |
+| **Neon PostgreSQL** | B+ (86) | **IN USE** | **READY** | `NEON_DATABASE_URL` | Next-Flick prod; hPanel `DATABASE_URL` |
+| **shadcn/ui** | A+ (97) | **IN USE** | **READY** | None | Copy components via CLI; registries in skills |
+| **Zod** | A+ (96) | **IN USE** | **READY** | None | MSC `package.json` |
+| **React Hook Form** | A (93) | **IN USE** | **READY** | None | MSC `package.json` |
+| **TanStack Query** | A (94) | **ADOPT** | NOT_INSTALLED | None | `npm i @tanstack/react-query` when needed |
+| **bknd** | B+ (87) | WATCH | NOT_INSTALLED | `DB_URL`, `JWT_SECRET` | Beta — `npx bknd create` spike only |
 
----
+**Stack options index:** [TOOLS-STACK-OPTIONS.md](./TOOLS-STACK-OPTIONS.md)
 
 ## Quick reference — env vars by tool
 
@@ -152,6 +167,9 @@ Everything else in **production** below is configured on Jon's PC (2026-07-04) u
 | `BROWSERBASE_*` | Browserbase MCP | If using cloud browser |
 | `21ST_DEV_MAGIC_API_KEY` | 21st.dev Magic | If using UI registry MCP |
 | `STRIPE_API_KEY` | Stripe MCP | Billing tasks only |
+| `BETTER_AUTH_SECRET` / `BETTER_AUTH_URL` | Better Auth | When adopted |
+| `AGENTMAIL_API_KEY` | AgentMail | When using agent inboxes API |
+| `PAYLOAD_SECRET` / `DATABASE_URL` | Payload CMS (MSC) | Yes on MSC |
 | Burner accounts | Agent-Reach (Twitter/Reddit) | Optional per channel |
 
 Full registry: [ENV-VARS-REFERENCE.md](../ENV-VARS-REFERENCE.md)
@@ -177,4 +195,4 @@ Full registry: [ENV-VARS-REFERENCE.md](../ENV-VARS-REFERENCE.md)
 | MCP manifest (bootstrap) | `shared-profile-content\mcp.json` |
 | JonBeatz command center | `D:\Hermes\projects\JonBeatz\.cursor\docs\TOOLS-*.md` (mirrors shared) |
 
-**Last updated:** 2026-07-04
+**Last updated:** 2026-07-07

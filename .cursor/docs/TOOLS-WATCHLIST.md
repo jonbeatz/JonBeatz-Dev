@@ -4,7 +4,7 @@
 **Setup status (keys / ready):** [TOOLS-SETUP-STATUS.md](./TOOLS-SETUP-STATUS.md)  
 **Detailed reviews:** [TOOLS-REFERENCE.md](./TOOLS-REFERENCE.md)  
 **Vault mirror:** `H:\Vader_Vault\04_Research\Repo-Watchlist.md`  
-**Ecosystem MCP audit:** `D:\Hermes\projects\JonBeatz\.cursor\plans\2026-07-03_HERMES-ECOSYSTEM-AUDIT.md`
+**Ecosystem MCP audit:** `D:\Hermes\projects\JonBeatz\.cursor\plans\2026-07-03-hermes-ecosystem-audit.plan.md`
 
 Jon researches tools → paste links in Cursor → Draven reviews → **grade + summary + setup status** lands here.
 ---
@@ -54,6 +54,7 @@ Jon researches tools → paste links in Cursor → Draven reviews → **grade + 
 | **Claude Watch** | B+ (88) | IN USE | PARTIAL‡ | Free† | Persistent video **study notes** — scene frames + transcript library |
 | **Agent Skills (Osmani)** | B (84) | IN USE | **READY** | Free | 24 engineering workflow skills — cherry-pick; overlaps Hermes rituals |
 | **Agent Browser** | B+ (86) | IN USE | PARTIAL | Free | Rust CLI/MCP browser — ref snapshots; alt to Playwright/Browserbase |
+| **AgentMail** | A- (91) | ADOPT | PARTIAL | Freemium | Agent email inboxes API — 2-way threads, OTP/attachments; alt to Resend for agents |
 | **NeuTTS** | A- (90) | WATCH | NOT_INSTALLED | Free§ | On-device clone TTS (GGUF/CPU); needs ref wav + transcript |
 | **OmniVoice-Studio** | B+ (87) | WATCH | NOT_INSTALLED | Free†† | Desktop GUI + 14 TTS engines incl. OmniVoice; MCP; GPU optional |
 | **LuxTTS** | B (86) | WATCH | NOT_INSTALLED | Free | Fast voice-clone TTS (~1GB VRAM GPU); speed/GPU alt to OmniVoice |
@@ -78,6 +79,30 @@ Jon researches tools → paste links in Cursor → Draven reviews → **grade + 
 | **AgentsView** | B+ (87) | IN USE | **READY** | Free OSS | Session search + messages — `:8080` |
 | **TokenTracker** | B+ (87) | IN USE | **READY** | Free OSS | **Primary** spend dashboard — `:7680` |
 | **ccusage** | B+ (86) | WATCH | **READY** | Free OSS | CLI Hermes-only alt — Jon prefers TokenTracker |
+| **Payload CMS** | **A (94)** | **IN USE** | **READY** | Free OSS | MSC mystudiochannel.com — Next.js in-process v3; SQLite local |
+| **Better Auth** | **A (92)** | **ADOPT** | NOT_INSTALLED | Free OSS | In-app auth + Drizzle/pg0; Next-Flick spike candidate |
+| **Stack Auth / Hexclave** | B+ (86) | WATCH | NOT_INSTALLED | Free OSS† | Self-host Clerk-like; Docker + AGPL backend |
+| **Strapi** | B+ (87) | WATCH | NOT_INSTALLED | Free OSS | Largest OSS CMS ecosystem; separate Node service |
+| **Directus** | B+ (86) | WATCH | NOT_INSTALLED | Free OSS‡ | Database-first admin + API; wrap existing SQL |
+| **Sanity** | B+ (85) | WATCH | NEEDS_KEY | Freemium | Studio OSS; Content Lake cloud — marketing sites |
+| **KeystoneJS** | B (82) | WATCH | NOT_INSTALLED | Free OSS | GraphQL schema CMS; Prisma |
+| **Hanko** | B (84) | WATCH | NOT_INSTALLED | Free OSS§ | Passkey-first auth server; AGPL |
+| **Authgear** | B- (80) | WATCH | NOT_INSTALLED | Free OSS | Enterprise IdP; K8s-heavy |
+| **MarkText** | A- (91) | WATCH | NOT_INSTALLED | Free OSS | Markpad replacement; MIT Electron |
+| **Zettlr** | B+ (86) | WATCH | NOT_INSTALLED | Free OSS | Research writing MD editor; GPL |
+| **Milkdown** | B+ (88) | WATCH | NOT_INSTALLED | Free OSS | Plugin MD editor framework; build custom |
+| **ApostropheCMS** | B- (80) | WATCH | NOT_INSTALLED | Free OSS | In-context page edit; MongoDB |
+| **pg0** | A- (90) | **IN USE** | **READY** | Free | Local Postgres `:5433` — Next-Flick dev |
+| **Neon PostgreSQL** | B+ (86) | **IN USE** | **READY** | Freemium | Next-Flick prod DB on Hostinger shared Node |
+| **shadcn/ui** | **A+ (97)** | **IN USE** | **READY** | Free OSS | Copy-paste Radix+Tailwind; Component-Registries skill |
+| **Zod** | **A+ (96)** | **IN USE** | **READY** | Free OSS | Schema validation — MSC; pairs with RHF + APIs |
+| **React Hook Form** | **A (93)** | **IN USE** | **READY** | Free OSS | Forms — MSC; use with Zod resolver |
+| **TanStack Query** | **A (94)** | **ADOPT** | NOT_INSTALLED | Free OSS | Client server-state; App Router prefetch/hydrate |
+| **bknd** | B+ (87) | WATCH | NOT_INSTALLED | Free OSS | Embedded BaaS (beta); Firebase alt; Next.js embed |
+
+† Stack Auth: MIT SDK + AGPL backend.  
+‡ Directus: BSL 1.1 under revenue cap; GPL alternative.  
+§ Hanko: AGPL community edition.
 
 † claude-video: free captions; optional Groq/OpenAI Whisper for no-caption sources (minimal cost).  
 ‡ claude-video PARTIAL = YouTube captions work now; optional Groq for no-caption sources.  
@@ -140,6 +165,14 @@ Install when Jon says try — not scheduled yet (2026-07-04).
 | Local **images/video** | ComfyUI | — | Generation, not consumption |
 | **Agent token analytics** | **TokenTracker** (spend) + **AgentsView** (sessions) | ccusage | Jon 2026-07-04 — ccusage demoted |
 | **Scroll / cinematic I2V** | fal Kling (`video:fal`) | LongCat, HunyuanVideo, Comfy `generate-video`, **LTX Desktop** | LTX = GUI NLE + local gen; ~160 GB disk; 16 GB VRAM min |
+| **Headless CMS** | **Payload** (MSC) | Strapi, Directus, Sanity, Keystone | See [TOOLS-STACK-OPTIONS.md](./TOOLS-STACK-OPTIONS.md) |
+| **App auth (self-host)** | Clerk (Next-Flick prod) | **Better Auth**, Stack Auth, Hanko | Better Auth = in-app + pg0; Stack = Clerk-like Docker |
+| **Local Postgres** | **pg0** `:5433` | Hostinger VPS Postgres | Neon = prod on shared Hostinger today |
+| **Markdown editor** | Markpad | **MarkText**, Zettlr, Milkdown | Jon trialing; parked fork idea |
+| **UI components** | **shadcn/ui** | Magic UI, Tailark registries | Copy-paste; Component-Registries skill |
+| **Form validation** | **Zod** + **RHF** (MSC) | — | Next-Flick: Clerk UI only today |
+| **Client fetch cache** | RSC loaders (Next-Flick) | **TanStack Query** | Add when optimistic/live refetch needed |
+| **Embedded BaaS** | Drizzle + Clerk/Better Auth | **bknd** (beta) | Overlaps Payload / BA+Drizzle |
 
 ---
 
@@ -159,8 +192,65 @@ Install when Jon says try — not scheduled yet (2026-07-04).
 | claude-video `/watch` | Video understanding | A- | Installed 2026-07-04 |
 | Hallmark | Greenfield UI / anti-slop | B+ | Installed 2026-07-04 — `npm run skills:hallmark:install` |
 | Claude Blog | Blog / SEO content | B | Installed 2026-07-04 — 30 skills + Python helpers |
+| **Payload CMS** | MSC content / admin | A | MyStudioChannel — SQLite local, Hostinger prod |
+| **Core web stack** | Next.js + React + TS + Tailwind | A+ | See [TOOLS-STACK-OPTIONS.md](./TOOLS-STACK-OPTIONS.md) § Core |
 
 *Baseline grades for tools already in daily use — not re-reviewed each session.
+
+---
+
+## Stack options deck (2026-07-07)
+
+**Full research:** [TOOLS-STACK-OPTIONS.md](./TOOLS-STACK-OPTIONS.md) — auth, CMS, database, markdown editors for new projects.
+
+### Auth — local-first watch deck
+
+| Tool | Grade | Verdict | When to reach for it |
+|------|-------|---------|----------------------|
+| [Better Auth](https://github.com/better-auth/better-auth) | A (92) | **ADOPT** | Next.js + Drizzle/pg0; replace Clerk dual-store |
+| [Stack Auth](https://github.com/stack-auth/stack) | B+ (86) | WATCH | Clerk-like components; self-host Docker |
+| [Hanko](https://github.com/teamhanko/hanko) | B (84) | WATCH | Passkey-first; separate auth server |
+| [Authgear](https://github.com/authgear/authgear-server) | B- (80) | WATCH | Enterprise SSO/MFA; K8s ops |
+
+### Headless CMS watch deck
+
+| Tool | Grade | Verdict | When to reach for it |
+|------|-------|---------|----------------------|
+| [Payload](https://github.com/payloadcms/payload) | A (94) | **IN USE** | MSC + any new Next marketing site |
+| [Strapi](https://github.com/strapi/strapi) | B+ (87) | WATCH | GUI content builder; non-dev editors |
+| [Directus](https://github.com/directus/directus) | B+ (86) | WATCH | Admin over existing Postgres |
+| [Sanity](https://www.sanity.io/) | B+ (85) | WATCH | Marketing content; cloud Content Lake OK |
+| [KeystoneJS](https://keystonejs.com/) | B (82) | WATCH | GraphQL-first backend CMS |
+| [ApostropheCMS](https://apostrophecms.com/) | B- (80) | WATCH | On-page visual editing; MongoDB |
+
+**SKIP (chat/doc only):** Contentful C+ (74), Cosmic C (72), brixcms.com cloud D (55) — see STACK-OPTIONS.
+
+### Markdown editor watch deck (Jon 2026-07-07)
+
+| Tool | Grade | Verdict | When to reach for it |
+|------|-------|---------|----------------------|
+| [MarkText](https://github.com/marktext/marktext) | A- (91) | WATCH | **Try first** — Markpad upgrade; MIT |
+| [Zettlr](https://github.com/Zettlr/Zettlr) | B+ (86) | WATCH | Long-form / project folders |
+| [Milkdown](https://github.com/Milkdown/milkdown) | B+ (88) | WATCH | Build custom Hermes-branded editor |
+
+### Database / hosting (Next-Flick pattern)
+
+| Layer | Tool | Verdict | Notes |
+|-------|------|---------|-------|
+| Local dev | **pg0** `:5433` | IN USE | `npm run db:local` |
+| Prod (today) | **Neon** | IN USE | Hostinger shared has no native Postgres |
+| Prod (future) | **Hostinger VPS** Postgres | WATCH | One-vendor; `pg_dump` from Neon |
+| ORM | **Drizzle** | IN USE | Same schema local + prod |
+
+### Frontend & data layer (Jon 2026-07-07)
+
+| Tool | Grade | Verdict | When to reach for it |
+|------|-------|---------|----------------------|
+| [shadcn/ui](https://ui.shadcn.com/) | A+ (97) | **IN USE** | Default UI for new Next pages — `npx shadcn add` |
+| [Zod](https://zod.dev/) | A+ (96) | **IN USE** | MSC — API/forms/env validation |
+| [React Hook Form](https://react-hook-form.com/) | A (93) | **IN USE** | MSC — complex forms + Zod resolver |
+| [TanStack Query](https://tanstack.com/query) | A (94) | **ADOPT** | Client cache, mutations, live refetch in App Router |
+| [bknd](https://bknd.io/) | B+ (87) | WATCH | Beta embedded BaaS — trial vs Better Auth+Drizzle |
 
 ---
 
@@ -193,6 +283,26 @@ Install when Jon says try — not scheduled yet (2026-07-04).
 | 2026-07-04 | [AgentsView](https://github.com/kenn-io/agentsview) | B+ (87) | **IN USE** — sessions `:8080` |
 | 2026-07-04 | [TokenTracker](https://github.com/mm7894215/TokenTracker) | B+ (87) | **IN USE** — primary spend `:7680` |
 | 2026-07-04 | [ccusage](https://github.com/ccusage/ccusage) | B+ (86) | **WATCH** — demoted; CLI alt only |
+| 2026-07-07 | [Better Auth](https://github.com/better-auth/better-auth) | A (92) | **ADOPT** — Next-Flick local-first auth spike |
+| 2026-07-07 | [Payload CMS](https://github.com/payloadcms/payload) | A (94) | **IN USE** — MSC; documented in STACK-OPTIONS |
+| 2026-07-07 | [Stack Auth](https://github.com/stack-auth/stack) | B+ (86) | **WATCH** — Clerk-like self-host |
+| 2026-07-07 | [Strapi](https://github.com/strapi/strapi) | B+ (87) | **WATCH** — GUI CMS alt |
+| 2026-07-07 | [Directus](https://github.com/directus/directus) | B+ (86) | **WATCH** — SQL admin wrapper |
+| 2026-07-07 | [Sanity](https://www.sanity.io/) | B+ (85) | **WATCH** — cloud content lake |
+| 2026-07-07 | [MarkText](https://github.com/marktext/marktext) | A- (91) | **WATCH** — Jon trialing vs Markpad |
+| 2026-07-07 | [Milkdown](https://github.com/Milkdown/milkdown) | B+ (88) | **WATCH** — custom editor framework |
+| 2026-07-07 | [Hanko](https://github.com/teamhanko/hanko) | B (84) | **WATCH** — passkey server |
+| 2026-07-07 | [KeystoneJS](https://github.com/keystonejs/keystone) | B (82) | **WATCH** — GraphQL CMS |
+| 2026-07-07 | [Authgear](https://github.com/authgear/authgear-server) | B- (80) | **WATCH** — enterprise IdP |
+| 2026-07-07 | [ApostropheCMS](https://github.com/apostrophecms/apostrophe) | B- (80) | **WATCH** — on-page CMS |
+| 2026-07-07 | [Zettlr](https://github.com/Zettlr/Zettlr) | B+ (86) | **WATCH** — research MD editor |
+| 2026-07-07 | Stack options index | — | **DOC** — [TOOLS-STACK-OPTIONS.md](./TOOLS-STACK-OPTIONS.md) |
+| 2026-07-07 | [shadcn/ui](https://ui.shadcn.com/) | A+ (97) | **IN USE** — ecosystem default UI |
+| 2026-07-07 | [Zod](https://zod.dev/) | A+ (96) | **IN USE** — MSC validation |
+| 2026-07-07 | [React Hook Form](https://react-hook-form.com/) | A (93) | **IN USE** — MSC forms |
+| 2026-07-07 | [TanStack Query](https://tanstack.com/query) | A (94) | **ADOPT** — client server-state |
+| 2026-07-07 | [bknd](https://bknd.io/) | B+ (87) | **WATCH** — beta embedded BaaS |
+| 2026-07-07 | [AgentMail](https://www.agentmail.to/) | A- (91) | **ADOPT** — key in Next-Flick `.env.local`; SDK/MCP when needed |
 
 ---
 
@@ -212,6 +322,7 @@ Install when Jon says try — not scheduled yet (2026-07-04).
 
 - [TOOLS-SETUP-STATUS.md](./TOOLS-SETUP-STATUS.md) — **READY vs NEEDS_KEY** matrix (Hermes-wide)
 - [TOOLS-REFERENCE.md](./TOOLS-REFERENCE.md) — full write-ups + grade breakdowns
+- **[TOOLS-STACK-OPTIONS.md](./TOOLS-STACK-OPTIONS.md)** — **auth, CMS, DB, markdown editors** (new-project cheat sheet)
 - [DESIGN-REFERENCES.md](./DESIGN-REFERENCES.md) — **inspiration & UI craft** (not install queue)
 - [SCROLL-3D-REFERENCES.md](./SCROLL-3D-REFERENCES.md) — scroll animation, 3D scroll, video-frame scrub map
 - [AI-Master-Plan.md](./AI-Master-Plan.md) — cloud vs local strategy

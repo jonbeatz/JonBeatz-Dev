@@ -5,11 +5,13 @@
 | Doc | Purpose |
 |-----|---------|
 | **This file** | Daily cheat sheet — start here |
+| **[TOOLS-STACK-OPTIONS.md](./TOOLS-STACK-OPTIONS.md)** | **Full stack catalog** — core tech IN USE + researched alternatives |
 | [MASTER-ECOSYSTEM-AUDIT.md](./MASTER-ECOSYSTEM-AUDIT.md) | Full system overview (sites, stacks, MCPs) |
 | [CREDENTIALS-MANIFEST.md](./CREDENTIALS-MANIFEST.md) | Auto-generated — *where* every key lives (no values) |
 | `MASTER-SECRETS-INVENTORY.local.md` | **Gitignored** — full API keys & passwords (run audit to refresh) |
 | [TOOLS-SETUP-STATUS.md](./TOOLS-SETUP-STATUS.md) | Per-tool READY / NEEDS_KEY matrix |
 | [TOOLS-WATCHLIST.md](./TOOLS-WATCHLIST.md) | Grades, verdicts, paid vs free |
+| **[TOOLS-STACK-OPTIONS.md](./TOOLS-STACK-OPTIONS.md)** | **Auth, CMS, DB, MD editors** — researched stack picks for new projects |
 | [ENV-VARS-REFERENCE.md](../ENV-VARS-REFERENCE.md) | Every env var defined |
 
 **Refresh everything:** `npm run ecosystem:audit` (any Hermes profile)  
@@ -42,8 +44,10 @@
 | **Neon Postgres** | SaaS | `NEON_DATABASE_URL` | Next-Flick prod | Next-Flick |
 | **TMDB** | Free tier | `TMDB_API_KEY` | Next-Flick search | Next-Flick |
 | **Resend** | SaaS | `RESEND_API_KEY` | MSC email | MSC |
+| **AgentMail** | Freemium | `AGENTMAIL_API_KEY` | [agentmail.to](https://www.agentmail.to/) — agent inboxes | Next-Flick (ADOPT) |
 | **Sentry** | SaaS | `SENTRY_*` | MSC monitoring | MSC |
 | **GCP / Vertex** | GCP billing | `GOOGLE_APPLICATION_CREDENTIALS` | MSC google-api-proxy | JSON file path |
+| **Google Workspace (personal)** | Free (OAuth) | File: `%LOCALAPPDATA%\hermes\profiles\jonbeatz\google_token.json` | `npm run google:doctor` (JonBeatz) | jonbeatz@gmail.com — Gmail, Drive, Docs |
 | **Firecrawl MCP** | Freemium | `FIRECRAWL_API_KEY` | VPE / optional | Master has key |
 | **Browserbase** | SaaS | `BROWSERBASE_*` | JonBeatz project MCP | Hub overlay |
 
@@ -59,7 +63,9 @@ Run `npm run ecosystem:audit` for exact SET/EMPTY per file.
 4. **`MASTER-SECRETS-INVENTORY.local.md`** — full dump after `npm run ecosystem:audit`
 5. **`G:\Hermes_Project_BackUpz\MASTER-ECOSYSTEM-AUDIT\*-SECRETS-BACKUP.local.md`** — external backup
 6. **Hermes Desktop** — `%LOCALAPPDATA%\hermes\profiles\jonbeatz\.env` (Telegram)
-7. **Groq / claude-video** — `%USERPROFILE%\.config\watch\.env`
+7. **Hermes Desktop root** — `%LOCALAPPDATA%\hermes\.env` (Telegram mirror)
+8. **Hermes config.yaml** — LiteLLM `api_key` / provider URLs (root + profiles — in secrets inventory)
+9. **Groq / claude-video** — `%USERPROFILE%\.config\watch\.env`
 
 **Re-enter a key somewhere new?** Open `CREDENTIALS-MANIFEST.md` → find env var → open source file from manifest. Or open `MASTER-SECRETS-INVENTORY.local.md` for copy-paste.
 
@@ -80,9 +86,12 @@ Run `npm run ecosystem:audit` for exact SET/EMPTY per file.
 | **Hugging Face** | https://huggingface.co/settings/tokens | Image inference |
 | **fal.ai** | https://fal.ai/dashboard | Image/video API |
 | **Tavily** | https://tavily.com/ | Search API |
-| **Resend** | https://resend.com/api-keys | MSC email |
+| **Resend** | https://resend.com/api-keys | MSC transactional email |
+| **AgentMail** | https://www.agentmail.to/ | Agent email inboxes (Next-Flick key SET) |
 | **Sentry** | https://sentry.io/ | MSC errors |
 | **Google Cloud** | https://console.cloud.google.com/ | Vertex / MSC |
+| **Google Workspace (jonbeatz@gmail.com)** | https://mail.google.com · https://drive.google.com · https://docs.google.com | Personal OAuth — see `JonBeatz\.cursor\docs\GOOGLE-WORKSPACE.md` |
+| **GCP OAuth clients** | https://console.cloud.google.com/auth/clients?project=wordpress-map-1492461083797 | Desktop client for Hermes skill |
 | **Cursor** | https://cursor.com/dashboard | IDE subscription |
 | **Spaceship** | cPanel for MSC-Projectz | jon-beatz.com vault app |
 | **SiteGround** | Site tools | kristinairwin.com |
@@ -160,6 +169,19 @@ App passwords: see `WORDPRESS_*` / `WP_*` in env or `MASTER-SECRETS-INVENTORY.lo
 7. Run **`npm run ecosystem:audit`** — refreshes secrets + manifest.
 8. If tool is graded B-+: update **`TOOLS-WATCHLIST.md`** + **`TOOLS-SETUP-STATUS.md`**.
 9. Optional: `npm run draven:add -- "Service X: configured for Y"`.
+
+---
+
+## After fleet sync (commit checklist)
+
+`npm run fleet:sync` can change sibling **`package.json`** without updating the lockfile. **Always commit `package.json` + `package-lock.json` together** before push — CI uses `npm ci`.
+
+1. Run **`npm run fleet:sync`** from JonBeatz
+2. Check output for **WARN package.json / package-lock.json changed**
+3. Per profile: `npm install` → `git add package.json package-lock.json` → commit → push
+4. **`npm run fleet:status`** — lockfile must show OK
+
+See [COMMAND-CENTER.md](./COMMAND-CENTER.md) § Fleet sync commit checklist. DigitalStudioz GitHub Pages requires **Node 22+**.
 
 ---
 

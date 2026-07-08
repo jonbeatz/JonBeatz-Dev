@@ -5,7 +5,7 @@
 | **Start Project**, **Cold Start** | `npm run session:start -- -Full` + [Start-Project.md](../prompts/Start-Project.md) |
 | **Open Project**, **Resume Session** | `npm run session:open` + [Open-Project.md](../prompts/Open-Project.md) |
 | **Close Project**, **Close Session**, **Switch Project** | [Close-Project.md](../prompts/Close-Project.md) + `npm run session:handoff` (no stack stop) |
-| **End Project**, **End Session**, **Done for today** | [End-Project.md](../prompts/End-Project.md) + `npm run session:stop` (AskQuestion → `-StopDeepSeek`) |
+| **End Project**, **End Session**, **Done for today** | [End-Project.md](../prompts/End-Project.md) + `npm run session:stop` (AskQuestion git → dev :3000 if up → `-StopDeepSeek`) |
 | **update docs** | [Update-Docs.md](../prompts/Update-Docs.md) + `npm run docs:sync` |
 | **update docs and mem0** | Update-Docs Phase 5b + `npm run mem0:add` |
 | **backup profile**, **backup**, **backup quick** | `npm run backup:quick` |

@@ -39,7 +39,7 @@ When user says **End Project**, **End Session**, **Session Closeout**, or **Done
 
 - Execute [`.cursor/prompts/End-Project.md`](../prompts/End-Project.md)
 - Update `.cursor/docs/ReCall.md` and `.cursor/docs/project-log.md`
-- Use **AskQuestion** for git, then **AskQuestion** for **Stop LiteLLM + ngrok** (recommend stop)
+- Use **AskQuestion** for git, then **AskQuestion** to stop dev on **:3000** when listening (recommend stop before quitting Cursor), then **AskQuestion** for **Stop LiteLLM + ngrok** (recommend stop)
 - Run **`npm run session:stop`** (add **`-- -StopDeepSeek`** when operator confirms stop)
 
 ## Update Docs

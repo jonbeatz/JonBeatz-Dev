@@ -297,16 +297,21 @@
 13|| Channel | Config | JonBeatz |
 14||---------|--------|----------|
 15|| **Global manual MCPs** | `%USERPROFILE%\.cursor\mcp.json` | github, tavily, playwright, fetch, Hostinger ×4, etc. |
-16|| **Project manual MCPs** | `.cursor/mcp.json` in repo (gitignored — copy from `mcp.json.example`) | **5 servers** (see table below) |
-17|| **Workspace / plugin MCPs** | Cursor Settings → MCP, marketplace | cursor-ide-browser, Stripe, Vercel, Firebase — no JSON in repo |
-18|
-19|**Merge rule:** Cursor loads global + project. If the same server name exists in both, **project wins**.
-20|
-21|**Registered vs configured:** A server in `mcp.json` only works when **enabled** in **Cursor Settings → MCP** and successfully started. After edits, refresh the server or restart Cursor.
-22|
-23|---
-24|
-25|## Health check
+16|| **Project manual MCPs** | `.cursor/mcp.json` in repo (gitignored — copy from `mcp.json.example`) | JonBeatz: 6 extra servers; bootstrap profiles: **empty** `{}` |
+17|| **Project MCP catalog** | `.cursor/mcp-manifest.json` (committed reference only) | Lists recommended servers — **not** read by Cursor |
+18|| **Workspace / plugin MCPs** | Cursor Settings → MCP, marketplace | cursor-ide-browser, Stripe, Vercel, Firebase — no JSON in repo |
+19|
+20|**Merge rule:** Cursor loads global + project. If the same server name exists in both, **project wins**.
+21|
+22|**Cursor schema (2026):** `.cursor/mcp.json` **must** be `{ "mcpServers": { ... } }`. The bootstrap key `project_mcp_servers` causes **red MCP configuration errors**. Catalog docs → **`mcp-manifest.json`**; launch commands → **global** `%USERPROFILE%\.cursor\mcp.json` (or project `mcpServers` with `command`/`args`).
+23|
+24|**Fleet audit:** `node D:\Hermes\projects\_core-scripts\shared-profile-content\scripts\check-project-mcp-json.mjs`
+25|
+26|**Registered vs configured:** A server in `mcp.json` only works when **enabled** in **Cursor Settings → MCP** and successfully started. After edits, refresh the server or restart Cursor.
+27|
+28|---
+29|
+30|## Health check
 26|
 27|```powershell
 28|cd D:\Hermes\projects\JonBeatz
@@ -691,8 +696,9 @@
 74|- Summarize what we did
 75|- Update ReCall.md and project-log.md
 76|- npm run mem0:add -- "<one-line session takeaway>" if significant
-77|- npm run session:stop
-78|Handshake: "Great work Jon — personal session saved."
+77|- AskQuestion git → dev :3000 (if listening) → stop LiteLLM/ngrok
+78|- npm run session:stop (with -StopDeepSeek if confirmed)
+79|Handshake: "Great work Jon — personal session saved."
 79|```
 80|
 81|---
@@ -931,7 +937,7 @@
 180|| Say this | Agent runs |
 181||----------|------------|
 182|| **Start Project** / **Start Session** | `session:start` + Start-Project.md |
-183|| **End Project** / **End Session** | End-Project.md + `session:stop` |
+183|| **End Project** / **End Session** | End-Project.md + `session:stop` (AskQuestion git → dev `:3000` if up → `-StopDeepSeek`) |
 184|| **update docs** | `docs:sync` / Update-Docs.md |
 185|| **backup profile** / **backup quick** | `backup:quick` |
 186|| **backup project** | `backup:project` |
@@ -956,7 +962,7 @@
 10|| Say this | Agent does |
 11||----------|------------|
 12|| **Start Project** / **Start Session** / **Cold Start** | `session:start` + Start-Project.md + read TRUTH/START-HERE/ReCall |
-13|| **End Project** / **End Session** | End-Project.md + `session:stop` + update logs |
+13|| **End Project** / **End Session** | End-Project.md + `session:stop` + AskQuestion git/dev/stop stack |
 14|| **update docs** | Update-Docs.md + `docs:sync` |
 15|| **update docs and mem0** | Update-Docs + Mem0 summary add |
 16|| **postflight personal** | `doctor` + report all service ports |

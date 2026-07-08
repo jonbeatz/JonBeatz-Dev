@@ -2,7 +2,7 @@
 
 **Generated:** 2026-07-07  
 **Operator:** Jon (JonBeatz)  
-**Scope:** `D:\Hermes`, `D:\Hermes\projects`, `D:\Cursor_Projectz` (MSC trio), Hermes Desktop profile, Cursor global MCPs  
+**Scope:** `D:\Hermes`, `D:\Hermes\projects`, `D:\Cursor_Projectz` (MSC trio), **`%LOCALAPPDATA%\hermes`** (root + profiles + config.yaml), Cursor global MCPs  
 **Secrets policy:** This file lists **env var names, paths, and status only** — never live key values.  
 **Live secrets backup:** `G:\Hermes_Project_BackUpz\MASTER-ECOSYSTEM-AUDIT\2026-07-07-SECRETS-BACKUP.local.md` (external drive — **do not commit**)
 
@@ -13,6 +13,7 @@
 | Need | Go to |
 |------|--------|
 | **Daily cheat sheet** | **[TOOL-CHEST-INDEX.md](./TOOL-CHEST-INDEX.md)** ← start here |
+| **Full stack catalog (core + options)** | **[TOOLS-STACK-OPTIONS.md](./TOOLS-STACK-OPTIONS.md)** |
 | Copy-paste API keys | `MASTER-SECRETS-INVENTORY.local.md` (gitignored — `npm run ecosystem:audit`) |
 | Where each key lives (no values) | [CREDENTIALS-MANIFEST.md](./CREDENTIALS-MANIFEST.md) |
 | What's configured vs missing keys | §4 Env inventory + [TOOLS-SETUP-STATUS.md](./TOOLS-SETUP-STATUS.md) |
@@ -80,6 +81,7 @@
 | **Neon** | SaaS Postgres | Next-Flick prod DB | ✅ SET | `NEON_DATABASE_URL` |
 | **TMDB** | Free API key | Next-Flick metadata | ✅ SET | `TMDB_API_KEY`, `TMDB_API_Read_Access_Token` |
 | **Resend** | Email SaaS | MSC + MSC-Projectz email | ✅ SET (MSC) | `RESEND_API_KEY` |
+| **AgentMail** | Agent inbox API | Hermes agent email (on deck) | ✅ SET (Next-Flick) | `AGENTMAIL_API_KEY` |
 | **Sentry** | SaaS | MSC error monitoring | ✅ SET (MSC) | `SENTRY_*` |
 | **fal.ai** | Per-image/video | Bonus image/video pipeline | ✅ SET | `FAL_API_KEY` |
 | **Hugging Face** | Free tier + optional paid | Cloud image inference | ✅ SET | `HF_TOKEN` |
@@ -87,6 +89,7 @@
 | **Browserbase** | Cloud browser SaaS | MCP automation | ✅ SET | `BROWSERBASE_API_KEY`, `BROWSERBASE_PROJECT_ID` |
 | **Composio** | Freemium | Social automation MCP | ✅ SET (optional use) | `COMPOSIO_API_KEY` |
 | **Google Cloud / Vertex** | GCP billing | MSC LiteLLM Vertex bridge, VPE | ✅ SET (MSC) | `GOOGLE_APPLICATION_CREDENTIALS`, `GOOGLE_CLOUD_*` |
+| **Google Workspace (personal)** | Free (Gmail/Drive/Docs OAuth) | Hermes skill, Telegram, Cursor | ✅ AUTHENTICATED | `jonbeatz@gmail.com` — token at `%LOCALAPPDATA%\hermes\profiles\jonbeatz\google_token.json` |
 | **Netlify** | Free/paid | Kristina-Irwin previews | ✅ SET | `NETLIFY_AUTH_TOKEN` |
 | **SiteGround** | Hosting | kristinairwin.com prod | ✅ SET | `SITEGROUND_*` |
 | **Namecheap** | Registrar | DNS/domain ops | ✅ SET (KI) | `NAMECHEAP_*` |
@@ -149,8 +152,11 @@ The recursive scan found **~100+ env files** across the machine. Below: **active
 | Category | Path | Notes |
 |----------|------|-------|
 | **LiteLLM runtime** | `_core-scripts\deepseek-api\.env.local` | Active LiteLLM start env (synced from master) |
-| **Hermes Desktop** | `%LOCALAPPDATA%\hermes\profiles\jonbeatz\.env` | Telegram |
+| **Hermes Desktop root** | `%LOCALAPPDATA%\hermes\.env` | Telegram mirror (synced from JonBeatz) |
+| **Hermes Desktop** | `%LOCALAPPDATA%\hermes\profiles\jonbeatz\.env` | Telegram + profile secrets |
 | **Hermes Desktop** | `%LOCALAPPDATA%\hermes\profiles\msc\.env` | MSC Hermes profile |
+| **Hermes config (LiteLLM keys)** | `%LOCALAPPDATA%\hermes\config.yaml` + `profiles\*\config.yaml` | `api_key`, `base_url` — in secrets backup as YAML |
+| **Hermes OAuth / state** | `%LOCALAPPDATA%\hermes\google_*.json`, `auth.json`, `gateway_state.json` | See CREDENTIALS-MANIFEST Hermes inventory table |
 | **Hermes apps** | `D:\Hermes\apps\3DGenStudio\.env` | 3D Kanban studio |
 | **Hermes apps** | `D:\Hermes\apps\hermes-workspace\.env` | Workspace app |
 | **Hermes apps** | `D:\Hermes\apps\TaskBoardAI\.env` | Task board |
@@ -232,6 +238,8 @@ The recursive scan found **~100+ env files** across the machine. Below: **active
 
 ## 6. Tech stacks at our disposal
 
+> **Expanded catalog:** [TOOLS-STACK-OPTIONS.md](./TOOLS-STACK-OPTIONS.md) — core **IN USE** (Node, Next.js, Tailwind, SQLite, …) + researched alternatives.
+
 ### Frameworks & languages
 
 | Tech | Versions in use | Projects |
@@ -247,7 +255,7 @@ The recursive scan found **~100+ env files** across the machine. Below: **active
 | Tech | Projects |
 |------|----------|
 | **Tailwind CSS** v3 / v4 | All web apps |
-| **shadcn/ui** (Radix) | Next-Flick, MSC, MSC-Projectz |
+| **shadcn/ui** (Radix) | MSC, MSC-Projectz, JonBeatz; Next-Flick = custom Tailwind (shadcn in design refs) |
 | **GSAP + ScrollTrigger** | JonBeatz, DigitalStudioz, showcase work |
 | **Three.js / R3F** | MSC, Kristina-Irwin, DigitalStudioz |
 | **Lenis / Motion / Framer** | Scroll sites, MSC |
@@ -258,6 +266,7 @@ The recursive scan found **~100+ env files** across the machine. Below: **active
 | Tech | Use |
 |------|-----|
 | **PostgreSQL** | Next-Flick (pg0 local `:5433`, Neon prod) |
+| **MySQL** | Hostinger hPanel (available; not used in Hermes Node apps) |
 | **SQLite** | MSC Payload, MSC-Projectz Payload, VPE registry |
 | **Drizzle ORM** | Next-Flick |
 | **Payload CMS** | MSC, MSC-Projectz |
@@ -280,6 +289,7 @@ The recursive scan found **~100+ env files** across the machine. Below: **active
 | **DeepSeek V4** | Cloud daily driver |
 | **OpenRouter** | Model aliases via LiteLLM |
 | **Google Vertex / Gemini** | MSC google-api-proxy |
+| **Google Workspace OAuth** | jonbeatz@gmail.com — Gmail, Calendar, Drive, Docs, Sheets via Hermes `setup.py` |
 | **Hugging Face Inference** | Cloud images |
 | **fal.ai** | Image/video API |
 | **ComfyUI** | Local GPU workflows |

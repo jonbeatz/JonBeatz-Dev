@@ -42,6 +42,34 @@ Sibling profiles **consume** shared docs/skills; they do **not** copy the asset 
 
 ---
 
+## Fleet sync commit checklist (required before push)
+
+`fleet:sync` updates docs/skills and may touch **`package.json`** on siblings (e.g. scroll-motion deps). **GitHub Actions `npm ci` fails if `package-lock.json` is not committed in the same push.**
+
+After every `npm run fleet:sync`:
+
+| Step | Action |
+|------|--------|
+| 1 | Read fleet sync output — **WARN** lines for any profile with dirty `package.json` / `package-lock.json` |
+| 2 | Per warned profile: `cd <profile>` → `npm install` (or accept lockfile from `npm install --package-lock-only`) |
+| 3 | **Commit `package.json` + `package-lock.json` together** in that repo before `git push` |
+| 4 | **DigitalStudioz GitHub Pages:** workflow uses **Node 22** — keep `engines.node >= 22` in `package.json` (R3F / `camera-controls`) |
+| 5 | Run **`npm run fleet:status`** — lockfile row must show **OK** for each fleet profile |
+
+**One-liner fix (single profile):**
+
+```powershell
+cd D:\Hermes\projects\DigitalStudioz
+npm install
+git add package.json package-lock.json
+git commit -m "chore: sync package-lock after fleet sync"
+git push
+```
+
+**Incident reference:** 2026-07-07 — DigitalStudioz Pages CI failed on `b07c65a` (docs-only commit left lockfile stale). Fixed in `397f717`.
+
+---
+
 ## New project bootstrap
 
 ```powershell

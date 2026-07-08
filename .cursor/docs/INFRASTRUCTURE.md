@@ -429,7 +429,7 @@
 97|
 98|## Obsidian (optional think layer)
 99|
-100|Personal vault: `I:\Vader_Vault` (not in git). Ship layer = this profile's `.cursor/docs/` + `TRUTH.md`. Distill weekly using **`npm run obsidian:distill`** to find candidate notes for `ReCall.md`.
+100|Personal vault: `H:\Vader_Vault` (not in git). Ship layer = this profile's `.cursor/docs/` + `TRUTH.md`. Distill weekly using **`npm run obsidian:distill`** to find candidate notes for `ReCall.md`.
 101|
 
 ---
@@ -438,7 +438,7 @@
 
 1|# OBSIDIAN-BRIDGE.md — JonBeatz Think Layer vs Ship Layer
 2|
-3|**Personal vault (think):** `I:\Vader_Vault` (Obsidian, not in git)  
+3|**Personal vault (think):** `H:\Vader_Vault` (Obsidian, not in git)  
 4|**Ship layer (agents):** `D:\Hermes\projects\JonBeatz\.cursor\docs\` + `TRUTH.md` + Mem0
 5|
 6|---
@@ -466,7 +466,7 @@
 28|
 29|### Weekly distill (manual — Jon)
 30|
-31|1. Review Obsidian daily notes in `I:\Vader_Vault`
+31|1. Review Obsidian daily notes in `H:\Vader_Vault`
 32|2. Move actionable items to **ReCall.md** Idea Log
 33|3. Archive or delete stale vault clutter
 34|4. Optional: one Mem0 memory per week summarizing themes
@@ -477,7 +477,7 @@
 39|
 40|## Agent rules
 41|
-42|1. **Do not** write to `I:\Vader_Vault` unless Jon explicitly asks
+42|1. **Do not** write to `H:\Vader_Vault` unless Jon explicitly asks
 43|2. **Do not** assume vault contents are in context — Jon must paste or summarize
 44|3. **Prefer ReCall + Mem0** for anything agents need next session
 45|4. Creative/design extraction → **DesignMD** skill → ship to `.cursor/docs/` or specs
@@ -489,7 +489,7 @@
 51|| Layer | Path |
 52||-------|------|
 53|| JonBeatz ship | `D:\Hermes\projects\JonBeatz` |
-54|| Obsidian vault | `I:\Vader_Vault` |
+54|| Obsidian vault | `H:\Vader_Vault` |
 55|| MSC website ship | `D:\Cursor_Projectz\MyStudioChannel` |
 56|
 57|---

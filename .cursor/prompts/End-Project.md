@@ -71,7 +71,28 @@ Never commit `.env.local` or secrets.
 
 ---
 
-## Step 6: Stop paid stack (AskQuestion — required)
+## Step 6: Dev server on :3000 (AskQuestion — if listening)
+
+After `web:verify-local` or `npm run web:dev`, port **3000** often stays up and Cursor warns on quit ("something still running").
+
+**Probe first** (skip this step if port is free):
+
+```powershell
+Get-NetTCPConnection -LocalPort 3000 -State Listen -ErrorAction SilentlyContinue
+```
+
+If something is listening, use **`AskQuestion`**:
+
+| Option | Action |
+|--------|--------|
+| **Stop dev server** (Recommended when quitting Cursor) | `npm run web:dev:stop` when the profile has that script; else free :3000 with PowerShell (stop owning PID only — do **not** run `web:dev:reset`, which wipes `.next` and restarts dev) |
+| **Leave running** | No action — dev stays on :3000 for quick return |
+
+**Next-Flick:** `npm run web:dev:stop` — kills :3000 only; no cache wipe, no restart.
+
+---
+
+## Step 7: Stop paid stack (AskQuestion — required)
 
 Use **`AskQuestion`** before `session:stop`:
 
@@ -100,7 +121,7 @@ npm run session:stop -- -StopDeepSeek -StopComfy
 
 ---
 
-## Step 7: Farewell
+## Step 8: Farewell
 
 ```
 Great work Jon — JonBeatz.dev session saved.

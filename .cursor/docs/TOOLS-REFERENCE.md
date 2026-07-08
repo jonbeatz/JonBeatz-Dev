@@ -564,6 +564,50 @@ Skills land in `%USERPROFILE%\.agents\skills\` (spec-driven-development, test-dr
 
 ---
 
+## AgentMail
+
+- **URL:** https://www.agentmail.to/ · **Docs:** https://docs.agentmail.to/
+- **Grade:** **A- (91/100)** · **Cost:** Freemium — free tier, no credit card to start; paid at scale
+- **Verdict:** **ADOPT** — on deck for agent email workflows; key provisioned 2026-07-07
+- **Setup:** **PARTIAL** — `AGENTMAIL_API_KEY` SET in Next-Flick `.env.local`; SDK/MCP not installed until first use
+- **Summary:** Email **inbox API for AI agents** — programmatic inboxes, threads, replies, attachments, webhooks, semantic search. YC-backed (Seed $6M).
+
+### vs our stack
+
+| | **Resend (IN USE — MSC)** | **AgentMail (ADOPT)** |
+|---|---------------------------|------------------------|
+| Model | Transactional **outbound** (Payload, site email) | **Two-way** agent inboxes (read + reply) |
+| Use case | "Send password reset / contact form" | "Agent signs up for service, reads OTP, handles support thread" |
+| Overlap | Both send email | Different layer — **complementary**, not a Resend replacement |
+
+### When to reach for it
+
+- Browser/automation agents need **OTP / verification codes** from email
+- Executive-assistant flows — schedule via email thread
+- Parse **attachments** (invoices, receipts) into agent pipeline
+- Customer-service routing — ingest + classify inbound mail
+- Hermes/Telegram agent needs a dedicated `@agentmail.to` (or custom domain) inbox
+
+### Setup (when Jon says go)
+
+1. Key already in Next-Flick `.env.local` → `AGENTMAIL_API_KEY`
+2. TypeScript: `npm i agentmail` or Python SDK per [docs](https://docs.agentmail.to/)
+3. Optional: AgentMail MCP for Cursor agent tooling
+4. Copy key to JonBeatz `.env.local` / `.env.local.master` if used from hub-wide scripts
+
+### Grade breakdown
+
+| Factor | Score | Notes |
+|--------|-------|-------|
+| Gap fill | 38/40 | No current agent inbox layer; Resend is outbound-only |
+| Stack fit | 23/25 | REST + TS/Python SDKs + MCP; fits Hermes agent stack |
+| Cost/complexity | 17/20 | Freemium; API-only until integrated |
+| Maturity | 13/15 | YC, enterprise references, 100M+ emails claimed |
+
+**Install gate:** ADOPT — no SDK install until a concrete agent email task.
+
+---
+
 ## devini-tea (reference — not a CLI)
 
 - **URL:** https://github.com/devinilabs/devini-tea · [stayahead](https://stayahead.space/resources/devini-tea)
@@ -736,7 +780,7 @@ Requires Playwright Chromium (~170 MB) + Claude CLI or `ANTHROPIC_API_KEY`.
 | **Stripe / Vercel / Firebase** | B+ (85) | IN USE | Free tier | Cursor plugins for deploy/billing |
 | **Composio** | B (84) | WATCH | Freemium | Social automation — in manifest, optional |
 
-Full audit: `D:\Hermes\projects\JonBeatz\.cursor\plans\2026-07-03_HERMES-ECOSYSTEM-AUDIT.md`
+Full audit: `D:\Hermes\projects\JonBeatz\.cursor\plans\2026-07-03-hermes-ecosystem-audit.plan.md`
 
 **Doc threshold:** C+ and below are not persisted here unless Jon asks — see [TOOLS-WATCHLIST.md](./TOOLS-WATCHLIST.md) policy §6.
 
@@ -1004,3 +1048,22 @@ Overlap with existing MCPs/skills is **expected** — document **alternatives on
 ### When to use / skip
 …
 ```
+
+---
+
+## Stack options index (2026-07-07)
+
+**Canonical:** [TOOLS-STACK-OPTIONS.md](./TOOLS-STACK-OPTIONS.md)
+
+Researched in one pass for **new-project planning** — auth, headless CMS, database/hosting, markdown editors. Includes:
+
+- **Auth:** Better Auth (ADOPT), Stack Auth, Hanko, Authgear, Clerk (IN USE Next-Flick)
+- **CMS:** Payload (IN USE MSC), Strapi, Directus, Sanity, Keystone, Apostrophe; SKIP notes for Contentful, Cosmic, brixcms.com
+- **DB:** pg0, Drizzle, Neon, Hostinger VPS Postgres path
+- **MD editors:** MarkText, Zettlr, Milkdown (Markpad replacement brainstorm)
+- **Frontend:** shadcn/ui (IN USE), Zod + RHF (IN USE MSC), TanStack Query (ADOPT), bknd (WATCH beta)
+- **Core stack (IN USE):** Next.js, Node, TypeScript, Tailwind, React, Drizzle, PostgreSQL, SQLite, Payload, Clerk, Playwright, Hostinger — full table in STACK-OPTIONS
+
+**Next-Flick repo:** `NEXT-FLICK-AUTH-NOTES.md`, `NEXT-FLICK-DATABASE-NOTES.md`, backlog platform section.
+
+Full per-tool grade breakdowns live in STACK-OPTIONS; add individual TOOLS-REFERENCE entries here only when a tool moves to IN USE or ADOPT with install notes.

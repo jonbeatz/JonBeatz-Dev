@@ -19,11 +19,12 @@ Every project lives under `D:\Hermes\projects\<ProjectName>\` and follows this s
 ├── .cursor/
 │   ├── rules/                    # Shared rules (*.mdc) from _core-scripts
 │   ├── prompts/                  # Session rituals (Start-Project, End-Project, etc.)
-│   ├── docs/                     # Project docs + references
+│   ├── plans/                    # Dated plans & spikes — `YYYY-MM-DD-topic.plan.md`
+│   ├── docs/                     # Project docs + references (PRDs, runbooks, ReCall)
 │   │   ├── ReCall.md             # Session memory log
 │   │   ├── project-log.md        # Project changelog
 │   │   ├── MASTER-COMMANDS.md    # All npm commands
-│   │   └── ...                   # Project-specific docs
+│   │   └── ...                   # Project-specific docs (e.g. *-PRD.md, *-APP.md)
 │   ├── skills/                   # Domain skills from shared library
 │   └── mcp.json                  # MCP server configurations
 └── scripts/                      # Project-specific scripts (mirrors shared scripts)

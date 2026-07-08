@@ -10,12 +10,17 @@
 | Command | What it does | When |
 |---------|--------------|------|
 | `npm run dev` | Launch Next.js local Playground UI on **localhost:3000** | Anytime |
+| `npm run web:dev:stop` | Free port **3000** only (no `.next` wipe) — website profiles | **End Project** before quitting Cursor |
 | `npm run build` | Compile Playground UI static files | Prior to ship |
 | `npm run session:start` | LM Studio preflight + probes + Telegram ensure | Light probe |
 | `npm run session:start -- -Full` | Mem0 + DeepSeek + **ngrok** + image doctor | **Start Project** |
 | `npm run session:start -- -WithDeepSeek` | Also start DeepSeek stack | Paid cloud prep |
 | `npm run session:start -- -WithDeepSeek -WithNgrok` | DeepSeek + ngrok | Cursor Agent boot |
-| `npm run session:stop` | Session closeout summary | **End Project** |
+| `npm run session:start:full` | Same as `-Full` | **Start Project** |
+| `npm run session:open` | Light probes — no stack restart | **Open Project** / **Resume Session** |
+| `npm run session:resume` | Alias of `session:open` | Same |
+| `npm run session:handoff` | Vault note only — fleet stays up | **Close Project** / **Close Session** |
+| `npm run session:stop` | Day-end closeout (+ optional stack stop) | **End Project** |
 | `npm run session:stop -- -StopDeepSeek -StopComfy` | Stop DeepSeek + ComfyUI | End + free VRAM |
 | `npm run session:stop -- -StopGoogleApi` | Legacy alias for `-StopDeepSeek` | Same |
 | `npm run doctor` | **Unified** health: services, env, image, Google, git | Anytime |
@@ -35,6 +40,8 @@
 | Telegram reconnect | `D:\Hermes\Start Telegram Gateway.lnk` or `npm run telegram:gateway` |
 
 **Do not** use `Master-Startup-Relay.vbs` or `Hermes_Gateway_jonbeatz.cmd` in Startup — duplicates boot. `npm run boot:setup` removes them.
+
+**LM Studio:** Disable Windows Startup autostart (Task Manager → Startup apps). `session:start -- -Full` launches LM Studio when needed. See `FLEET-BOOT-SESSION.md`.
 
 ---
 
@@ -250,7 +257,7 @@ LiteLLM / DeepSeek stack scripts live in `D:\Hermes\projects\_core-scripts\deeps
 | `npm run env:setup` | Create / refresh `.env.local` |
 | `npm run dev:recover` | Free port 3000, clear `.next`/cache, `npm install`, `npm run dev` |
 | `npm run sync:mcp-env` | Sync project MCP keys from `.env.local` → `.cursor/mcp.json` |
-| `npm run obsidian:distill` | Scan `I:\Vader_Vault` for weekly ReCall.md candidate notes |
+| `npm run obsidian:distill` | Scan `H:\Vader_Vault` for weekly ReCall.md candidate notes |
 
 ---
 
@@ -300,8 +307,10 @@ Open **`JonBeatz.code-workspace`** or folder `JonBeatz` in Cursor.
 
 | Shortcut | Task | npm script |
 |----------|------|------------|
-| **Ctrl+Shift+B** | Start Session | `session:start` |
-| **Ctrl+Shift+E** | End Session | `session:stop` |
+| **Ctrl+Shift+B** | Start Project (full) | `session:start:full` |
+| **Ctrl+Shift+O** | Open / Resume | `session:open` |
+| **Ctrl+Shift+E** | Close Session (handoff) | `session:handoff` |
+| **Ctrl+Shift+Alt+E** | End Project (stop stack) | `session:stop` |
 | **Ctrl+Shift+Alt+D** | Doctor | `doctor` |
 | **Ctrl+Shift+Alt+M** | Search Mem0 | `mem0:search` (prompt) |
 
@@ -388,8 +397,10 @@ MSC Kanban ports (3001/3005/9119) live in the **MyStudioChannel** repo — not s
 
 | Say this | Agent runs |
 |----------|------------|
-| **Start Project** / **Start Session** | `session:start -- -Full` + Start-Project.md |
-| **End Project** / **End Session** | End-Project.md + `session:stop` |
+| **Start Project** / **Cold Start** | `session:start -- -Full` + Start-Project.md |
+| **Open Project** / **Resume Session** | `session:open` + Open-Project.md |
+| **Close Project** / **Close Session** | Close-Project.md + `session:handoff` |
+| **End Project** / **End Session** | End-Project.md + `session:stop` (AskQuestion git → dev `:3000` if up → `-StopDeepSeek`) |
 | **update docs** | `docs:sync` / Update-Docs.md |
 | **backup profile** / **backup quick** | `backup:quick` |
 | **backup project** | `backup:project` |

@@ -12,6 +12,7 @@
 |-------------|------|
 | **Yes** | **Start Project** greeting (once) |
 | **Yes** | **End Project** farewell (once, short) |
+| **No** | **Open Project** / **Close Project** (silent handoff) |
 | **Yes** | Jon says **speak** / **say** / **talk this** |
 | **Maybe** | Critical Mem0/stack errors (`DRAVEN_VOICE_ERRORS=1`) |
 | **No** | Ordinary chat replies, summaries, `mem0:add`, `mem0:search` recall |

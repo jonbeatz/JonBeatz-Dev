@@ -20,8 +20,10 @@ This checks that templates, skills, prompts, rules, docs, MCP config, and script
 ### 1. Session rituals
 | Ritual | Prompt | When |
 |--------|--------|------|
-| Start Project | `.cursor/prompts/Start-Project.md` | Beginning of work |
-| End Project | `.cursor/prompts/End-Project.md` | End of work |
+| Start Project | `.cursor/prompts/Start-Project.md` | Cold boot (`-Full`) |
+| Open Project | `.cursor/prompts/Open-Project.md` | Resume workspace |
+| Close Project | `.cursor/prompts/Close-Project.md` | Switch folder — fleet stays up |
+| End Project | `.cursor/prompts/End-Project.md` | Day-end |
 | Update Docs | `.cursor/prompts/Update-Docs.md` | Doc sync + Mem0 + backport review |
 | Branch Cut | `.cursor/prompts/Branch-Cut.md` | New milestone branch |
 | Release Version | `.cursor/prompts/Release-Version.md` | Version bump + GitHub release |
@@ -31,7 +33,7 @@ This checks that templates, skills, prompts, rules, docs, MCP config, and script
 |------|-----------------|
 | `voice-policy.mdc` | Draven ritual-only TTS (OmniVoice) |
 | `mem0-lmstudio.mdc` | Per-project isolated Mem0 + Draven cross-session memory |
-| `workflow.mdc` | Start/End Project sessions, branch cut, backup |
+| `workflow.mdc` | Start/Open/Close/End rituals, branch cut, backup |
 | `docs-checkpoint-governance.mdc` | Doc source-of-truth order, drift audits |
 | **tools-watchlist.mdc** | Tool review workflow (grades, setup status, install gate) |
 
@@ -90,7 +92,7 @@ Draven's own memory (`draven_memories`) is **shared across all projects** — no
 | 17 | tools-watchlist rule | `.cursor/rules/tools-watchlist.mdc` present |
 | 18 | 3D workflow vault docs | `.cursor/docs/3D-WEB-WORKFLOWS.md` + `npm run workflows:3d:status` |
 | 19 | Scroll/motion baseline | `npm run scroll:motion:status` + `3d-scroll-website` skill (`npm run sync:skills`) |
-| 20 | Command Center fleet (JonBeatz hub) | `npm run fleet:status` + `.cursor/docs/COMMAND-CENTER.md` |
+| 20 | Command Center fleet (JonBeatz hub) | `npm run fleet:status` + `.cursor/docs/COMMAND-CENTER.md` — lockfile rows must be OK before push |
 
 **If any check fails**, the best fix is usually:
 1. Re-bootstrap shared artifacts: copy missing files from `_core-scripts\shared-profile-content\`
@@ -113,8 +115,10 @@ Draven's own memory (`draven_memories`) is **shared across all projects** — no
 - `update docs and mem0` runs Phase 5b (Mem0) + Phase 6 (skeleton backport review)
 
 ### Rituals
-- **Start Project:** agent reads TRUTH → START-HERE → ReCall → searches Mem0
-- **End Project:** agent summarizes → updates ReCall/project-log → optionally Mem0 → stops session
+- **Start Project:** agent reads TRUTH → START-HERE → ReCall → `-Full` or probes → Mem0
+- **Open Project:** light probes only — no stack restart, no voice
+- **Close Project:** handoff docs + Mem0 + `session:handoff` — no `session:stop`
+- **End Project:** summarize → docs → Mem0 → AskQuestion git → AskQuestion dev `:3000` (if up) → AskQuestion stop stack → voice → `session:stop`
 - **Update Docs:** agent scans drift → fixes links/versions → runs auditor → reports
 
 ### Backporting
@@ -123,4 +127,4 @@ Draven's own memory (`draven_memories`) is **shared across all projects** — no
 
 ---
 
-*Last updated: 2026-07-03 · shared-profile-content v1.13.0*
+*Last updated: 2026-07-08 · shared-profile-content v1.22.0*

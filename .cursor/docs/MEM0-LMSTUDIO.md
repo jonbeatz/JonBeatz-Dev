@@ -51,6 +51,13 @@ Preflight **does not swap models**. If an LLM is already loaded (e.g. Hermes `qw
 
 LM Studio is required for **search** and **`mem0:add:infer`** (LLM fact extraction). Standard **`mem0:add`** uses `infer=False` and only needs the local HuggingFace embedder — preflight is skipped.
 
+### Windows boot policy (2026-07-08)
+
+- **Disable** LM Studio in Task Manager → **Startup apps** (saves RAM/VRAM at login).
+- **Start Project** (`session:start -- -Full`) auto-launches LM Studio if `:1234` is offline.
+- **End Project** does **not** stop LM Studio — close the app manually if desired.
+- Full fleet context: `FLEET-BOOT-SESSION.md`.
+
 If preflight fails:
 1. Open LM Studio → Local Server → start on port **1234**
 2. Ensure `lms` is on PATH

@@ -55,6 +55,7 @@ See `SKILL-INDEX.md` for the full catalog — design, 3D, git, deploy, automatio
 | `3D-WEB-WORKFLOWS.md` | Hermes workflow vault hub (`D:\Hermes\assets\3d-web-workflows\`) |
 | `SCROLL-3D-REFERENCES.md` | Scroll/3D skill map + motion baseline |
 | `TOOLS-WATCHLIST.md` / `TOOLS-SETUP-STATUS.md` | Hermes-wide tool grades + setup checklist |
+| `KANBAN-WORKFLOW.md` | TaskBoardAI fleet kanban, boardId map, MCP + ports |
 
 ### 5. Environment variables
 | Variable set | Purpose |
@@ -93,6 +94,7 @@ Draven's own memory (`draven_memories`) is **shared across all projects** — no
 | 18 | 3D workflow vault docs | `.cursor/docs/3D-WEB-WORKFLOWS.md` + `npm run workflows:3d:status` |
 | 19 | Scroll/motion baseline | `npm run scroll:motion:status` + `3d-scroll-website` skill (`npm run sync:skills`) |
 | 20 | Command Center fleet (JonBeatz hub) | `npm run fleet:status` + `.cursor/docs/COMMAND-CENTER.md` — lockfile rows must be OK before push |
+| 21 | Kanban stack + MCP | Global `taskboard` MCP; `npm run kanban:start` (JonBeatz); `.cursor/docs/KANBAN-WORKFLOW.md` + `taskboard-kanban.mdc` |
 
 **If any check fails**, the best fix is usually:
 1. Re-bootstrap shared artifacts: copy missing files from `_core-scripts\shared-profile-content\`
@@ -127,4 +129,4 @@ Draven's own memory (`draven_memories`) is **shared across all projects** — no
 
 ---
 
-*Last updated: 2026-07-08 · shared-profile-content v1.22.0*
+*Last updated: 2026-07-08 · shared-profile-content v1.23.0*

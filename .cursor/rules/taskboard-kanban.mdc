@@ -1,0 +1,49 @@
+---
+description: TaskBoardAI kanban — use when Jon asks to add tasks, todos, kanban cards, or manage the project board
+alwaysApply: false
+---
+
+# TaskBoard Kanban (Hermes fleet)
+
+## When this applies
+
+Jon says **task**, **todo**, **kanban**, **add to board**, **move card**, **what's on the board**, etc.
+
+## MCP
+
+- Server: **global** `taskboard` in `%USERPROFILE%\.cursor\mcp.json` only — never add a duplicate to project `.cursor/mcp.json`.
+- Env: `USE_LOCAL_BOARDS=true` — boards live under `D:\Hermes\apps\TaskBoardAI\boards\`.
+
+## boardId for this workspace
+
+Resolve from `_core-scripts/profile-switcher/profiles.json` (`boardId` field) or:
+
+| Workspace folder | boardId |
+|------------------|---------|
+| JonBeatz | `jonbeatz` |
+| Next-Flick | `next-flick` |
+| DigitalStudioz | `digitalstudioz` |
+| VaderLabz | `vaderlabz` |
+| JonBeatz.dev | `jonbeatz-dev` |
+| MyStudioChannel (MSC) | `msc` |
+
+**Rule:** `boardId` = JSON filename without `.json`. Pass it to every MCP call that accepts `boardId`.
+
+## Tools (prefer)
+
+- `get-boards` — list fleet boards
+- `get-board` — full board state
+- `update-card` / `move-card` / `batch-cards` — mutations
+
+## UI (human)
+
+- Manager: `http://localhost:3001/?board={boardId}`
+- Custom kanban UX: `http://localhost:3005`
+- Start stack from JonBeatz: `npm run kanban:start`
+
+## vs docs
+
+- **ReCall.md** — session handoff, not a substitute for kanban
+- Product **BACKLOG** docs — strategic queue; copy to kanban only when Jon wants active tracking
+
+Full reference: `.cursor/docs/KANBAN-WORKFLOW.md`

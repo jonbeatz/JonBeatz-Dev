@@ -24,6 +24,9 @@ JonBeatz is the **delegation and propagation hub** — bootstrap new Hermes proj
 |---------|--------------|
 | `npm run fleet:status` | Audit shared skeleton + all sibling profiles for docs/skills/npm parity |
 | `npm run fleet:sync` | Push `sync:docs` + `sync:skills` to DigitalStudioz, VaderLabz, JonBeatz.dev |
+| `npm run kanban:start` | TaskBoardAI :3001 + Hermes Workspace :3005 + Dashboard :9119 |
+| `npm run kanban:stop` | Stop kanban stack |
+| `npm run kanban:seed` | One fleet-verify task per profile board (idempotent smoke) |
 | `npm run sync:docs -- -Write -AddMissing` | Pull shared universal docs into **this** profile |
 | `npm run sync:skills:global` | Install all shared skills machine-wide (`~/.claude/skills`) |
 | `npm run bootstrap:website` | Scaffold new `-Website` project from shared template (if aliased) |

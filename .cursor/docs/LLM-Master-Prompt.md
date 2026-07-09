@@ -77,6 +77,7 @@ Cursor Auto **does not** see the premium model's chat history automatically — 
 | `D:\Hermes\projects\JonBeatz.dev` | same pattern |
 | `D:\Hermes\apps\profile-jedi` | `TRUTH.md`, `CHANGELOG.md`, `GITHUB-SETUP.md` |
 | `D:\Hermes\apps\TaskBoardAI` | `TRUTH.md`, `GITHUB-SETUP.md`, `server/`, fleet API routes |
+| `D:\Hermes\apps\Open-Generative-AI` | `TRUTH.md` (boundary only — upstream clone, no fleet scaffold) |
 | `D:\Hermes\projects\_core-scripts` | `shared-profile-content/scripts/`, `deepseek-api/`, `profile-switcher/` |
 
 ### Tier 3 — Code hotspots (sample, then expand)

@@ -122,7 +122,7 @@ Everything else in **production** below is configured on Jon's PC (2026-07-04) u
 | **OpenWhispr** | B (85) | WATCH | NOT_INSTALLED | None (local STT); optional LM Studio `:1234` for cleanup | `.exe` from GitHub releases — Local → Parakeet |
 | **Calliop** | B- (82) | WATCH | NOT_INSTALLED | None (bundled whisper.cpp + Qwen sidecar) | NSIS installer — SmartScreen unsigned warning |
 | **LTX Desktop** | B+ (87) | WATCH | NOT_INSTALLED | Optional LTX API key (free text encode); local mode needs none | `.exe` from GitHub — ~160 GB disk; 16 GB VRAM min; Jon download later |
-| **Open Generative AI + muapi** | B+ (87) | WATCH | NOT_INSTALLED | `MUAPI_API_KEY` (cloud) | MIT + muapi.ai |
+| **Open Generative AI + muapi** | B+ (87) | WATCH | CLONED @ `D:\Hermes\apps\Open-Generative-AI` | `MUAPI_API_KEY` (VaderLabz / cloud) | MIT + muapi.ai |
 | **Hermes WebUI** | B+ (88) | WATCH | NOT_INSTALLED | None | `:8787` Hermes-native web UI |
 | **Open WebUI** | B (85) | WATCH | NOT_INSTALLED | Docker + `API_SERVER_KEY` | Hermes `:8642/v1` integration |
 | **AgentsView** | B+ (87) | IN USE | **READY** | None | Sessions `:8080` — 2026-07-04 |

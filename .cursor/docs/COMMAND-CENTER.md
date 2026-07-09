@@ -12,7 +12,7 @@ JonBeatz is the **delegation and propagation hub** — bootstrap new Hermes proj
 
 | Zone | Path | Role |
 |------|------|------|
-| **Factory** | `D:\Hermes\apps\` | Profile Jedi, TaskBoardAI, Hermes Desktop |
+| **Factory** | `D:\Hermes\apps\` | Profile Jedi, TaskBoardAI, Open-Generative-AI, 3DGenStudio, Hermes Desktop |
 | **Office** | `D:\Hermes\projects\` | JonBeatz (hub), `_core-scripts`, sibling profiles |
 | **Vault** | `D:\Hermes\assets\` | Media, 3D workflow assets, backups |
 
@@ -143,6 +143,7 @@ Not in `hermes-fleet-profiles.json` — open as separate workspaces or via Profi
 |-----|------|--------|--------|
 | **Profile Jedi** | `D:\Hermes\apps\profile-jedi` | [jonbeatz/profile-jedi](https://github.com/jonbeatz/profile-jedi) | `npm run backup:quick` |
 | **TaskBoardAI** | `D:\Hermes\apps\TaskBoardAI` | [jonbeatz/hermes-taskboard](https://github.com/jonbeatz/hermes-taskboard) private | `npm run backup:quick` (includes `boards/*.json`) |
+| **Open-Generative-AI** | `D:\Hermes\apps\Open-Generative-AI` | [Anil-matcha/Open-Generative-AI](https://github.com/Anil-matcha/Open-Generative-AI) upstream | None — local clone; dev `:3000` |
 | **Hermes Desktop** | `%LOCALAPPDATA%\hermes` | — | Profile env mirrors |
 
 **Audit doc:** [FLEET-GITHUB-AUDIT.md](./FLEET-GITHUB-AUDIT.md) · **Kanban:** [KANBAN-WORKFLOW.md](./KANBAN-WORKFLOW.md)

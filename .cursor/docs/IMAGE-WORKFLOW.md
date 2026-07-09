@@ -109,7 +109,7 @@ Output default: `D:\Hermes\assets\media\JonBeatz\generated-YYYYMMDD-HHMMSS.png`
 
 Pay-per-use prepaid wallet — use when HF is capped or Jon wants premium models. Docs: [fal.ai pricing](https://fal.ai/pricing).
 
-**GUI alt (WATCH):** [Open Generative AI](https://github.com/Anil-matcha/Open-Generative-AI) + [muapi](https://muapi.ai) — OSS studio for 200+ cloud models (image/video/lip sync/cinema) + optional local **sd.cpp** (incl. Z-Image). Not default over HF/fal; see `TOOLS-REFERENCE.md` § Open Generative AI.
+**GUI alt (WATCH):** [Open Generative AI](https://github.com/Anil-matcha/Open-Generative-AI) @ `D:\Hermes\apps\Open-Generative-AI` + [muapi](https://muapi.ai) — OSS studio for 200+ cloud models (image/video/lip sync/cinema) + optional local **sd.cpp** (incl. Z-Image). Dev `:3000` only. Not default over HF/fal; see `TOOLS-REFERENCE.md` § Open Generative AI.
 
 Architecture:
 

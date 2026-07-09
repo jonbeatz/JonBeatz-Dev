@@ -96,7 +96,7 @@
 | **Cursor** | Subscription | IDE | ✅ SET | `CURSOR_API_KEY` (JonBeatz hub) |
 | **Parallel** | API | Documented in env | ✅ SET | `PARALLEL_API_KEY` |
 | **Postiz** | Self-host / API | MSC social module | ✅ SET (MSC) | `POSTIZ_API_*` |
-| **muapi.ai** | Wallet | VaderLabz + Open-Generative-AI path | ✅ SET (VaderLabz) | `MUAPI_API_KEY` |
+| **muapi.ai** | Wallet | VaderLabz + `D:\Hermes\apps\Open-Generative-AI` | ✅ SET (VaderLabz) | `MUAPI_API_KEY` |
 | **Vercel** | SaaS | Analytics token in MSC | ✅ SET | `VERCEL_API_TOKEN` |
 
 ### Free / local (production)
@@ -158,6 +158,7 @@ The recursive scan found **~100+ env files** across the machine. Below: **active
 | **Hermes apps** | `D:\Hermes\apps\3DGenStudio\.env` | 3D Kanban studio |
 | **Hermes apps** | `D:\Hermes\apps\hermes-workspace\.env` | Workspace app |
 | **Hermes apps** | `D:\Hermes\apps\TaskBoardAI\.env` | Task board |
+| **Hermes apps** | `D:\Hermes\apps\Open-Generative-AI\` | Upstream MuAPI studio (no Hermes `.env.local`; keys via VaderLabz or browser) |
 | **Mobile** | `D:\Hermes\mobile-dev\apps\Jedi-iOS\.env.local` | Flutter iOS project |
 | **Profile assets** | `D:\Hermes\assets\hermes-profiles\jonbeatz\`, `msc\` | Hermes profile copies |
 | **MGR** | `D:\Cursor_Projectz\MGR\.env` | Cross-tool task manager |
@@ -291,7 +292,7 @@ The recursive scan found **~100+ env files** across the machine. Below: **active
 | **fal.ai** | Image/video API |
 | **ComfyUI** | Local GPU workflows |
 | **OmniVoice** | CPU TTS (Draven) |
-| **muapi.ai** | VaderLabz / Open-Generative-AI cloud |
+| **muapi.ai** | VaderLabz + `D:\Hermes\apps\Open-Generative-AI` |
 
 ### Deploy & ops
 
@@ -326,7 +327,6 @@ The recursive scan found **~100+ env files** across the machine. Below: **active
 | **Next-Flick** | Family movie app | `next-flick_memories` | Bootstrap (15) | next-flick.com |
 | **VaderLabz** | Dev lab | `vaderlabz_memories` | Bootstrap | — |
 | **DigitalStudioz** | Studio showcase | `digitalstudioz_memories` | Global only | GH Pages |
-| **Open-Generative-AI** | OSS fork (experimental) | — | — | Local only |
 | **_core-scripts** | Shared infra | — | Template | LiteLLM, Telegram, voice |
 
 **Draven (cross-project):** `draven_memories` @ `%USERPROFILE%\.mem0\qdrant_draven`
@@ -337,6 +337,8 @@ The recursive scan found **~100+ env files** across the machine. Below: **active
 |-----|--------|--------|-------|
 | **Profile Jedi** | [jonbeatz/profile-jedi](https://github.com/jonbeatz/profile-jedi) public | `npm run backup:quick` | GITHUB-SETUP.md added 2026-07-08; v1.1 uncommitted locally |
 | **TaskBoardAI** | [TuckerTucker/TaskBoardAI](https://github.com/TuckerTucker/TaskBoardAI) upstream only | `npm run backup:quick` | Create **jonbeatz/hermes-taskboard** (private); TRUTH + GITHUB-SETUP added |
+| **Open-Generative-AI** | [Anil-matcha/Open-Generative-AI](https://github.com/Anil-matcha/Open-Generative-AI) upstream clone | None (upstream only) | `D:\Hermes\apps\Open-Generative-AI`; dev `:3000`; excluded from fleet scaffold |
+| **3DGenStudio** | [visualbruno/3DGenStudio](https://github.com/visualbruno/3DGenStudio) upstream | — | API **3021**, UI **5183** |
 | **Hermes Desktop** | (Tauri app — separate) | — | Not in project backup mirror |
 
 Full audit: **[FLEET-GITHUB-AUDIT.md](./FLEET-GITHUB-AUDIT.md)**

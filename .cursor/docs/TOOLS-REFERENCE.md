@@ -956,7 +956,7 @@ cd HunyuanVideo
 
 **Do not default over** HF or fal. Try hosted studio + muapi key first; self-host when Jon approves.
 
-**Install gate:** NOT_INSTALLED — WATCH on deck.
+**Install gate:** Cloned @ `D:\Hermes\apps\Open-Generative-AI` (2026-06-29). Upstream only — no Jon fork. Dev **`:3000`** (TaskBoardAI owns `:3001`). `MUAPI_API_KEY` in VaderLabz when using cloud models. Excluded from fleet scaffold / Mem0.
 
 ---
 

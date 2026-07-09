@@ -62,7 +62,21 @@ node D:\Hermes\projects\_core-scripts\shared-profile-content\scripts\check-proje
 
 **After global/project MCP edits:** Reload MCP in Cursor Settings or restart Cursor.
 
-**Trim policy (Jon 2026-07-08):** Keep fal-ai + firebase; removed browsermcp, sequential-thinking, terminal-controller from global. Project overlays minimal (JonBeatz: 2; VaderLabz/Next-Flick: empty).
+**Browser automation stack (Jon 2026-07-08):**
+
+| Slot | MCP / tool | Brave extension | Use |
+|------|------------|-----------------|-----|
+| 1 | `playwright` | No | Localhost `:3000` / `:3001` — isolated Playwright Chrome |
+| 2 | `cursor-ide-browser` | No | In-IDE tab (Cursor built-in) |
+| 3 | **`playwright-brave`** | **Playwright MCP Bridge** (on) | Real Brave tab — share tab in extension |
+| 4 | **`pilot`** (experimental) | **Pilot** (`npx pilot-mcp --install-extension`) | Tab list, handoff, lean snapshots |
+| — | ~~browsermcp~~ | Off (retired 2026-07-08) | Replaced by playwright-brave |
+
+**playwright-brave:** Global `mcp.json` uses `--extension`, Brave `--executable-path` + `--user-data-dir`, and `PLAYWRIGHT_MCP_EXTENSION_TOKEN` from the Bridge extension status page (local only — never commit).
+
+**pilot:** Install extension once: `npx pilot-mcp --install-extension` → Load unpacked in Brave. Extension badge **ON** when connected.
+
+**Trim policy (Jon 2026-07-08):** Keep fal-ai + firebase; removed sequential-thinking, terminal-controller, **browsermcp** from global. Project overlays minimal (JonBeatz: 2; VaderLabz/Next-Flick: empty).
 
 ---
 

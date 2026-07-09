@@ -12,6 +12,7 @@ Treat as **Open Project** when the operator says **Open Project**, **Resume Sess
 **Hard defaults**
 
 1. Run **`npm run session:open`** — not `session:start -- -Full`.
-2. **Re-read** TRUTH, START-HERE, ReCall via the Read tool.
-3. **Do not** run `draven:speak`.
-4. If `:4000` / `:4040` are offline, suggest **Start Project** — do not silently run `-Full` unless operator confirms.
+2. If session output shows **Hermes active mismatch**, use **AskQuestion** then run **`npm run profile:align`** (light) or **`profile:align:full`** on cold boot — never auto-align without confirmation.
+3. **Re-read** TRUTH, START-HERE, ReCall via the Read tool.
+4. **Do not** run `draven:speak`.
+5. If `:4000` / `:4040` are offline, suggest **Start Project** — do not silently run `-Full` unless operator confirms.

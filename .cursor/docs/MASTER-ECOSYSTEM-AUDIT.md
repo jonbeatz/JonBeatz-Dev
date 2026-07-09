@@ -1,6 +1,6 @@
 # Master Ecosystem Audit — JonBeatz / Hermes
 
-**Generated:** 2026-07-07  
+**Generated:** 2026-07-08 (apps GitHub audit refresh)  
 **Operator:** Jon (JonBeatz)  
 **Scope:** `D:\Hermes`, `D:\Hermes\projects`, `D:\Cursor_Projectz` (MSC trio), **`%LOCALAPPDATA%\hermes`** (root + profiles + config.yaml), Cursor global MCPs  
 **Secrets policy:** This file lists **env var names, paths, and status only** — never live key values.  
@@ -30,7 +30,7 @@
 
 ## 1. Executive summary
 
-| Layer | Status (2026-07-07) |
+| Layer | Status (2026-07-08) |
 |-------|---------------------|
 | **AI daily driver** | DeepSeek via LiteLLM `:4000` + OpenRouter `*-or` aliases — **READY** |
 | **Local LLM** | LM Studio `:1234` (qwen3-4b) — **READY** |
@@ -41,6 +41,9 @@
 | **Image gen** | HF cloud + fal.ai bonus + ComfyUI local `:8188` — **READY** (ComfyUI start on demand) |
 | **Hosting** | Hostinger (primary), Spaceship/cPanel (MSC-Projectz), SiteGround (Kristina-Irwin) — **READY** |
 | **MCPs** | 16 global + project overlays — mostly **READY**; Stripe/Firebase/Vercel = plugin login when needed |
+| **Profile Jedi** | `:7780` control panel v**1.1.0** — [jonbeatz/profile-jedi](https://github.com/jonbeatz/profile-jedi); backup npm wired |
+| **TaskBoardAI fleet** | `:3001` Fleet Command — [jonbeatz/hermes-taskboard](https://github.com/jonbeatz/hermes-taskboard) private; upstream TuckerTucker |
+| **Profile align** | `Align-Hermes-Profile.ps1` + `profile:align` on Open Project — Hermes active vs Cursor workspace |
 
 **Master env source:** `D:\Hermes\projects\_core-scripts\.env.local.master` (105 keys set)  
 **Hub profile:** `D:\Hermes\projects\JonBeatz\.env.local` (93 keys set)
@@ -204,13 +207,12 @@ The recursive scan found **~100+ env files** across the machine. Below: **active
 | tavily | `TAVILY_API_KEY` | READY |
 | hostinger-dns / hosting / vps / domains | `HOSTINGER_API_TOKEN` | READY |
 | fetch | No | READY |
-| playwright | No | READY |
+| playwright | No | READY — slot 1 localhost |
+| playwright-brave | `PLAYWRIGHT_MCP_EXTENSION_TOKEN` (global mcp.json, gitignored) | READY — slot 3 Brave Bridge |
+| pilot | No (Pilot extension in Brave) | PARTIAL until extension loaded |
 | desktop-commander | No | READY |
-| sequential-thinking | No | READY |
-| terminal-controller | No | READY |
 | vault | No (local `H:\Vader_Vault`) | READY |
 | fal-ai | `FAL_API_KEY` | READY |
-| browsermcp | No | READY |
 
 ### 5.2 Workspace plugins (Cursor — no repo JSON)
 
@@ -337,6 +339,16 @@ The recursive scan found **~100+ env files** across the machine. Below: **active
 
 **Draven (cross-project):** `draven_memories` @ `%USERPROFILE%\.mem0\qdrant_draven`
 
+### Hermes apps (`D:\Hermes\apps`) — GitHub & backup
+
+| App | GitHub | Backup | Notes |
+|-----|--------|--------|-------|
+| **Profile Jedi** | [jonbeatz/profile-jedi](https://github.com/jonbeatz/profile-jedi) public | `npm run backup:quick` | GITHUB-SETUP.md added 2026-07-08; v1.1 uncommitted locally |
+| **TaskBoardAI** | [TuckerTucker/TaskBoardAI](https://github.com/TuckerTucker/TaskBoardAI) upstream only | `npm run backup:quick` | Create **jonbeatz/hermes-taskboard** (private); TRUTH + GITHUB-SETUP added |
+| **Hermes Desktop** | (Tauri app — separate) | — | Not in project backup mirror |
+
+Full audit: **[FLEET-GITHUB-AUDIT.md](./FLEET-GITHUB-AUDIT.md)**
+
 ---
 
 ## 8. MSC ecosystem (`D:\Cursor_Projectz`)
@@ -356,6 +368,8 @@ The recursive scan found **~100+ env files** across the machine. Below: **active
 | Port | Service | Auto-start |
 |------|---------|------------|
 | 3000 | Next-Flick dev | On demand (`web:dev`) |
+| 3001 | TaskBoardAI + MCP | `npm run kanban:start` (JonBeatz hub) |
+| 7780 | Profile Jedi | Tray / `start-profile-jedi.ps1` |
 | 1234 | LM Studio | Manual / session |
 | 4000 | LiteLLM | `session:start` / `deepseek:on` |
 | 4040 | ngrok dashboard | With LiteLLM ngrok |
@@ -390,7 +404,9 @@ The recursive scan found **~100+ env files** across the machine. Below: **active
 |----------|------|
 | **This audit (safe)** | `D:\Hermes\projects\_core-scripts\shared-profile-content\docs\MASTER-ECOSYSTEM-AUDIT.md` |
 | **Secrets backup (PRIVATE)** | `G:\Hermes_Project_BackUpz\MASTER-ECOSYSTEM-AUDIT\2026-07-07-SECRETS-BACKUP.local.md` |
-| **Profile backups** | `G:\Hermes_Project_BackUpz\` (`npm run backup:quick`) |
+| **Profile backups** | `G:\Hermes_Project_BackUpz\` (`npm run backup:quick` from each project) |
+| **Hermes apps backups** | `G:\Hermes_Project_BackUpz\apps\{profile-jedi,TaskBoardAI}\` |
+| **Fleet GitHub audit** | `shared-profile-content\docs\FLEET-GITHUB-AUDIT.md` |
 | **Master env** | `D:\Hermes\projects\_core-scripts\.env.local.master` |
 | **Vader Vault** | `H:\Vader_Vault` |
 | **AI models** | `H:\AI_Models` (ComfyUI, caches) |
@@ -409,6 +425,10 @@ The recursive scan found **~100+ env files** across the machine. Below: **active
 | Next-Flick TRUTH | `Next-Flick\TRUTH.md` |
 | MSC TRUTH | `MyStudioChannel\TRUTH.md` |
 | Ecosystem upgrades map | `_core-scripts\UPGRADES-SYSTEMS.md` |
+| Fleet GitHub audit | `shared-profile-content\docs\FLEET-GITHUB-AUDIT.md` |
+| Kanban workflow | `shared-profile-content\docs\KANBAN-WORKFLOW.md` |
+| Profile Jedi TRUTH | `D:\Hermes\apps\profile-jedi\TRUTH.md` |
+| TaskBoardAI TRUTH | `D:\Hermes\apps\TaskBoardAI\TRUTH.md` |
 | Vault watchlist mirror | `H:\Vader_Vault\04_Research\Repo-Watchlist.md` |
 
 ---

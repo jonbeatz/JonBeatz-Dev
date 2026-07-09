@@ -32,7 +32,9 @@
 | JonBeatz.dev | `D:\Hermes\projects\JonBeatz.dev` | `jonbeatz-dev` |
 | MSC | `D:\Cursor_Projectz\MyStudioChannel` | `msc` |
 
-**New profile:** add row to `profiles.json`, create `boards/{boardId}.json` from `shared-profile-content/templates/board-stub.json`.
+**New profile:** bootstrap (`bootstrap-new-project.ps1`) and Profile Jedi **New/Adopt** auto-register via `kanban-stack/register-fleet-kanban-board.ps1` — upserts `profiles.json` + creates `boards/{boardId}.json` from `board-stub.json`. Manual fallback below.
+
+**Manual only if needed:** add row to `profiles.json`, create `boards/{boardId}.json` from `shared-profile-content/templates/board-stub.json`.
 
 ---
 
@@ -110,6 +112,17 @@ Clear Hermes Workspace SQLite board (agent ops, not fleet JSON): `_core-scripts/
 | **Profile Jedi** | Smart: opens :7780 if running, otherwise auto-starts dev server (**minimized** cmd window on Windows) |
 | **Switch Board** | Opens fleet board picker modal |
 
+### Header controls (`:3001`)
+
+| Button | Behavior |
+|--------|----------|
+| **Attention** | Fleet Command: blocked tasks fleet-wide + missing boards. Board view: agent approvals + task errors. |
+| **Copy** | Clipboard JSON — fleet overview or current board snapshot |
+| **Refresh** | Re-fetch board / fleet rollup + service probes |
+| **Import** | Pick a `.json` file → `POST /api/boards/import` → open imported board |
+| **Archive** | Board view only — `POST /api/boards/{id}/archive` (disabled on Fleet Command home) |
+| **Settings** | HUD, Next Steps, polling, compact density (localStorage) |
+
 **Core services (red when offline):** Hermes :8642, LM Studio :1234, Dashboard :9119, LiteLLM :4000  
 **Optional (muted when off):** ComfyUI :8188  
 (Postiz removed — MSC social-autopost only, not fleet-wide.)
@@ -177,4 +190,4 @@ Agents may **mirror** a backlog item to kanban when Jon wants it tracked this we
 
 ---
 
-*shared-profile-content v1.23.0 · 2026-07-08*
+*shared-profile-content v1.24.0 · 2026-07-08*

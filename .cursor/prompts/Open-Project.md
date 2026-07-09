@@ -18,11 +18,32 @@ npm run session:open
 
 Equivalent: `npm run session:start` (no `-Full`) — Mem0 preflight + port probes only. **Skips** DeepSeek/ngrok restart if already warm.
 
+**Hermes active profile:** `session:open` prints a **yellow line** if fleet active ≠ `hermes-desktop-profile.json` in this repo. When mismatched, use **AskQuestion** then:
+
+```powershell
+npm run profile:align        # set-active only — no Hermes relaunch (Open Project default)
+npm run profile:align:full   # full switch + Hermes Desktop launch (Start Project optional)
+npm run profile:align:check  # probe for agents
+```
+
 | Mode | Command | When |
 |------|---------|------|
 | **Open Project** | `npm run session:open` | Switching into this workspace |
+| **Align (light)** | `npm run profile:align` | After operator confirms mismatch on Open |
 | **Start Project** | `npm run session:start -- -Full` | Cold boot / first PC session / stack down |
+| **Align (full)** | `npm run profile:align:full` | Cold boot — optional after `-Full` |
 | **Add ngrok only** | `npm run deepseek:ngrok` | LiteLLM up but Agent needs HTTPS |
+
+---
+
+## Step 1.5: Hermes active profile (if mismatch reported)
+
+If Step 1 printed **Hermes active mismatch**, ask the operator:
+
+- **Align (recommended for Open)** → `npm run profile:align` — updates AppData + CLI sync, **does not** relaunch Hermes Desktop.
+- **Skip** — continue; Mem0 in Cursor still uses this repo’s `.env.local`.
+
+Do **not** auto-run align without confirmation.
 
 ---
 
@@ -58,6 +79,10 @@ SERVICE STATUS (probes only — stack not restarted)
   DeepSeek LiteLLM (4000) [online/offline]
   ngrok (4040)            [online/offline]
   Web dev (3000)          [online/offline]  — not auto-started
+
+HERMES ACTIVE
+  workspace slug          jonbeatz-dev (from hermes-desktop-profile.json)
+  fleet active            [aligned / mismatch → offer profile:align]
 
 RECALL FOCUS
   - [from ReCall.md]

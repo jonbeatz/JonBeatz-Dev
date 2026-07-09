@@ -135,11 +135,41 @@ Add a sibling: edit JSON + run `fleet:sync`.
 
 ---
 
+## Hermes apps (`D:\Hermes\apps`) — GitHub & backup
+
+Not in `hermes-fleet-profiles.json` — open as separate workspaces or via Profile Jedi Extras.
+
+| App | Path | GitHub | Backup |
+|-----|------|--------|--------|
+| **Profile Jedi** | `D:\Hermes\apps\profile-jedi` | [jonbeatz/profile-jedi](https://github.com/jonbeatz/profile-jedi) | `npm run backup:quick` |
+| **TaskBoardAI** | `D:\Hermes\apps\TaskBoardAI` | [jonbeatz/hermes-taskboard](https://github.com/jonbeatz/hermes-taskboard) private | `npm run backup:quick` (includes `boards/*.json`) |
+| **Hermes Desktop** | `%LOCALAPPDATA%\hermes` | — | Profile env mirrors |
+
+**Audit doc:** [FLEET-GITHUB-AUDIT.md](./FLEET-GITHUB-AUDIT.md) · **Kanban:** [KANBAN-WORKFLOW.md](./KANBAN-WORKFLOW.md)
+
+### Profile Jedi template compliance
+
+| Item | Status |
+|------|--------|
+| README badges + status table | Yes |
+| TRUTH.md / AGENTS.md / CHANGELOG | Yes |
+| GITHUB-SETUP.md | Yes (2026-07-08) |
+| `npm run release` / version:sync | Pending (manual tag for now) |
+| GitHub Pages | Not used |
+
+### TaskBoardAI fork — **live**
+
+- Repo: https://github.com/jonbeatz/hermes-taskboard (private)
+- Remotes: `jonbeatz` (push) · `upstream` (TuckerTucker)
+- Branches: `hermes-fleet-v1` (default) · `main` (same baseline)
+- Board JSON: gitignored — backup with `npm run backup:quick`
+
+---
+
 ## Related repos (outside fleet sync)
 
 | Project | Path |
 |---------|------|
 | MyStudioChannel | `D:\Cursor_Projectz\MyStudioChannel` |
-| Profile Jedi | `D:\Hermes\apps\profile-jedi` |
 
-Open those workspaces separately — not in `hermes-fleet-profiles.json`.
+Open MSC workspace separately — not in `hermes-fleet-profiles.json`.

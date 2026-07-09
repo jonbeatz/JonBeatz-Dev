@@ -160,7 +160,7 @@ We build **directly in code** (Tailwind + React). Penpot pays off only if:
 ### When to use
 
 - Designer handoff workflow
-- Client wants mockups before build (Kristina, MSC, etc.)
+- Client wants mockups before build (MSC, etc.)
 
 ---
 

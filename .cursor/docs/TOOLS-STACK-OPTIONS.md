@@ -32,7 +32,7 @@ Grades on researched options follow [TOOLS-WATCHLIST](./TOOLS-WATCHLIST.md) rubr
 
 | Tech | Versions | Projects |
 |------|----------|----------|
-| **Next.js** (App Router) | 15.4–16.2 | **Next-Flick** 15.5, **MSC** 15.4, **MSC-Projectz** 16.2, **JonBeatz** 16.2, Node-Launcher renderer, Kristina-Irwin |
+| **Next.js** (App Router) | 15.4–16.2 | **Next-Flick** 15.5, **MSC** 15.4, **MSC-Projectz** 16.2, **JonBeatz** 16.2, Node-Launcher renderer |
 | **React** | **19.x** | All Next apps |
 | **React DOM** | **19.x** | Paired with React |
 | **Server Components / RSC** | Next default | Data loaders on server (Next-Flick `lib/media/queries.ts`, etc.) |
@@ -96,7 +96,7 @@ Grades on researched options follow [TOOLS-WATCHLIST](./TOOLS-WATCHLIST.md) rubr
 |------|----------|
 | **GSAP** + **ScrollTrigger** | JonBeatz, DigitalStudioz, showcase |
 | **@gsap/react** | React integration |
-| **Three.js** | MSC, JonBeatz, Kristina-Irwin, DigitalStudioz |
+| **Three.js** | MSC, JonBeatz, DigitalStudioz |
 | **React Three Fiber (R3F)** | 3D scroll sites |
 | **@react-three/drei** | R3F helpers |
 | **Lenis** | Smooth scroll |
@@ -120,8 +120,6 @@ Grades on researched options follow [TOOLS-WATCHLIST](./TOOLS-WATCHLIST.md) rubr
 | **Passenger** | Hostinger Node process manager |
 | **FTPS / SSH** | MSC deploy pipelines (`pushit:live*`) |
 | **Spaceship cPanel** | MSC-Projectz |
-| **SiteGround** | kristinairwin.com |
-| **Netlify** | Kristina-Irwin previews |
 | **GitHub Pages** | DigitalStudioz preview |
 | **GitHub Actions** | Next-Flick `deploy-hostinger.yml` |
 | **ngrok** | LiteLLM ↔ Cursor tunnel `:4040` |

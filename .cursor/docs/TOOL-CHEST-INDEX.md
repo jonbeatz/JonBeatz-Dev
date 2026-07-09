@@ -94,9 +94,6 @@ Run `npm run ecosystem:audit` for exact SET/EMPTY per file.
 | **GCP OAuth clients** | https://console.cloud.google.com/auth/clients?project=wordpress-map-1492461083797 | Desktop client for Hermes skill |
 | **Cursor** | https://cursor.com/dashboard | IDE subscription |
 | **Spaceship** | cPanel for MSC-Projectz | jon-beatz.com vault app |
-| **SiteGround** | Site tools | kristinairwin.com |
-| **Netlify** | https://app.netlify.com/ | KI previews |
-| **Namecheap** | https://www.namecheap.com/ | KI domain |
 
 **Cursor plugins (OAuth in IDE):** Stripe, Vercel, Firebase — no env var until you use them.
 

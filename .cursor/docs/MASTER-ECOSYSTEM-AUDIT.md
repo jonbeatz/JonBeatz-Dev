@@ -39,7 +39,7 @@
 | **Telegram agent** | Gateway + Hermes Desktop — **READY** |
 | **Cursor bridge** | ngrok `:4040` when LiteLLM ngrok on — **READY** |
 | **Image gen** | HF cloud + fal.ai bonus + ComfyUI local `:8188` — **READY** (ComfyUI start on demand) |
-| **Hosting** | Hostinger (primary), Spaceship/cPanel (MSC-Projectz), SiteGround (Kristina-Irwin) — **READY** |
+| **Hosting** | Hostinger (primary), Spaceship/cPanel (MSC-Projectz) — **READY** |
 | **MCPs** | 16 global + project overlays — mostly **READY**; Stripe/Firebase/Vercel = plugin login when needed |
 | **Profile Jedi** | `:7780` control panel v**1.1.0** — [jonbeatz/profile-jedi](https://github.com/jonbeatz/profile-jedi); backup npm wired |
 | **TaskBoardAI fleet** | `:3001` Fleet Command — [jonbeatz/hermes-taskboard](https://github.com/jonbeatz/hermes-taskboard) private; upstream TuckerTucker |
@@ -60,7 +60,6 @@
 | **JonBeatz.dev** | https://jonbeatz.dev | Hostinger static | `JonBeatz.dev` | Red variant site |
 | **MSC-Projectz** | https://jon-beatz.com | Spaceship cPanel | `MSC-Projectz` | Private ops dashboard (same domain, different host than gold static) |
 | **DigitalStudioz** | GitHub Pages preview | GitHub Pages | `DigitalStudioz` | Prod target `digitalstudioz.dev` |
-| **Kristina-Irwin** | https://kristinairwin.com | SiteGround | `Kristina-Irwin` | Netlify previews also |
 | **Hermes analytics** | http://127.0.0.1:7680 | Local | TokenTracker | Spend dashboard |
 | **Hermes sessions** | http://127.0.0.1:8080 | Local | AgentsView | Session search |
 | **LiteLLM** | http://127.0.0.1:4000/v1 | Local | `_core-scripts/deepseek-api` | Cursor + Hermes + Telegram |
@@ -93,9 +92,6 @@
 | **Composio** | Freemium | Social automation MCP | ✅ SET (optional use) | `COMPOSIO_API_KEY` |
 | **Google Cloud / Vertex** | GCP billing | MSC LiteLLM Vertex bridge, VPE | ✅ SET (MSC) | `GOOGLE_APPLICATION_CREDENTIALS`, `GOOGLE_CLOUD_*` |
 | **Google Workspace (personal)** | Free (Gmail/Drive/Docs OAuth) | Hermes skill, Telegram, Cursor | ✅ AUTHENTICATED | `jonbeatz@gmail.com` — token at `%LOCALAPPDATA%\hermes\profiles\jonbeatz\google_token.json` |
-| **Netlify** | Free/paid | Kristina-Irwin previews | ✅ SET | `NETLIFY_AUTH_TOKEN` |
-| **SiteGround** | Hosting | kristinairwin.com prod | ✅ SET | `SITEGROUND_*` |
-| **Namecheap** | Registrar | DNS/domain ops | ✅ SET (KI) | `NAMECHEAP_*` |
 | **Spaceship** | Hosting | MSC-Projectz on jon-beatz.com | ✅ ACTIVE | Hosting only — **Spacemail SMTP retired** (Jon 2026-07-07) |
 | **Cursor** | Subscription | IDE | ✅ SET | `CURSOR_API_KEY` (JonBeatz hub) |
 | **Parallel** | API | Documented in env | ✅ SET | `PARALLEL_API_KEY` |
@@ -142,7 +138,6 @@ Audit date: **2026-07-07**. “Set” = non-empty value present. Values are **no
 | `Next-Flick\.env.local` | 110 | 0 | Full merge — Neon, Clerk, TMDB, Telegram, DeepSeek |
 | `VaderLabz\.env.local` | 10 | 0 | Lab — includes `MUAPI_API_KEY` |
 | `DigitalStudioz\.env.local` | 91 | 0 | Near-full Hermes stack |
-| `Kristina-Irwin\.env.local` | 26 | 0 | SiteGround + Netlify + Mem0 |
 | `MyStudioChannel\.env.local` | 63 | 0 | Payload, Hostinger, Sentry, Vertex, social |
 | `MSC-Projectz\.env.local` | 5 | 2 legacy SMTP vars empty | Spacemail retired — env SMTP optional |
 | `Node-Launcher-v2\.env.local` | 3 | 15 | Google cred paths only — rest via global MCP |
@@ -246,7 +241,7 @@ The recursive scan found **~100+ env files** across the machine. Below: **active
 
 | Tech | Versions in use | Projects |
 |------|-----------------|----------|
-| **Next.js** | 14, 15.4–15.5, 16.2 | Next-Flick, MSC, MSC-Projectz, Node-Launcher renderer, Kristina-Irwin |
+| **Next.js** | 14, 15.4–15.5, 16.2 | Next-Flick, MSC, MSC-Projectz, Node-Launcher renderer |
 | **React** | 19 | All modern web apps |
 | **TypeScript** | 5.3–5.7 | All TS projects |
 | **Electron** | 28.x | Node-Launcher-v2 |
@@ -259,7 +254,7 @@ The recursive scan found **~100+ env files** across the machine. Below: **active
 | **Tailwind CSS** v3 / v4 | All web apps |
 | **shadcn/ui** (Radix) | MSC, MSC-Projectz, JonBeatz; Next-Flick = custom Tailwind (shadcn in design refs) |
 | **GSAP + ScrollTrigger** | JonBeatz, DigitalStudioz, showcase work |
-| **Three.js / R3F** | MSC, Kristina-Irwin, DigitalStudioz |
+| **Three.js / R3F** | MSC, DigitalStudioz |
 | **Lenis / Motion / Framer** | Scroll sites, MSC |
 | **Clerk Themes** | Next-Flick dark auth |
 
@@ -304,8 +299,6 @@ The recursive scan found **~100+ env files** across the machine. Below: **active
 |------|--------|
 | **Hostinger** hPanel Node + FTPS/SSH | Next-Flick, MSC, JonBeatz static |
 | **Spaceship cPanel** | MSC-Projectz |
-| **SiteGround** | Kristina-Irwin |
-| **Netlify** | KI previews |
 | **GitHub Pages** | DigitalStudioz preview |
 | **ngrok** | LiteLLM tunnel |
 | **PM2** | Node-Launcher process management |
@@ -333,7 +326,6 @@ The recursive scan found **~100+ env files** across the machine. Below: **active
 | **Next-Flick** | Family movie app | `next-flick_memories` | Bootstrap (15) | next-flick.com |
 | **VaderLabz** | Dev lab | `vaderlabz_memories` | Bootstrap | — |
 | **DigitalStudioz** | Studio showcase | `digitalstudioz_memories` | Global only | GH Pages |
-| **Kristina-Irwin** | Client campaign | `kristina_irwin` | Global / docs | kristinairwin.com |
 | **Open-Generative-AI** | OSS fork (experimental) | — | — | Local only |
 | **_core-scripts** | Shared infra | — | Template | LiteLLM, Telegram, voice |
 

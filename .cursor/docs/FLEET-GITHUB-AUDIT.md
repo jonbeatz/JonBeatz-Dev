@@ -199,6 +199,24 @@ Templates: `_core-scripts/shared-profile-content/templates/.githooks/`
 
 Mark incidents resolved in GitGuardian after rotation.
 
+**Full procedure:** `SECRETS-ROTATION-RUNBOOK.md` (fleet-synced to every profile).
+
+---
+
+## Drift prevention (2026-07-08)
+
+| Ritual | When | Command |
+|--------|------|---------|
+| Fleet sync | After `_core-scripts` doc/script changes | `npm run fleet:sync` (JonBeatz hub) |
+| Fitness check | Weekly or before major push | `npm run fleet:status` |
+| Doc parity | Single profile | `npm run sync:docs -- -Write` |
+| Secret hooks | New clone / new repo | `npm run git:hooks:install` |
+| Pre-push scan | Every push | `npm run git:secrets-scan:push` |
+| Hermes scaffold | New profile | Commit `HERMES.md`, `cli-profile/`, `hermes-desktop-profile.json`, desktop launcher |
+| Ecosystem keys map | Monthly | `npm run ecosystem:audit` |
+
+**Do not commit:** orphan `scripts/mem0-chat.ps1` copies when `package.json` points at `_core-scripts` — add gitignore entries instead.
+
 ---
 
 *Maintainer: Jon · Refresh after fork or major fleet release*

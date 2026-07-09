@@ -1,0 +1,19 @@
+{
+  "profileName": "jonbeatz-dev",
+  "displayName": "jonbeatz.dev",
+  "workspaceDir": "D:\\Hermes\\projects\\JonBeatz.dev",
+  "hermesHome": "%LOCALAPPDATA%\\hermes\\profiles\\jonbeatz-dev",
+  "desktopConfig": {
+    "projectDirFile": "%APPDATA%\\Hermes\\project-dir.json",
+    "activeProfileFile": "%APPDATA%\\Hermes\\active-profile.json"
+  },
+  "launcher": "scripts\\start-hermes-desktop-jonbeatz-dev.ps1",
+  "npmScript": "npm run desktop",
+  "cliAlias": "jonbeatz-dev",
+  "mem0": {
+    "userId": "jonbeatz-dev",
+    "collection": "jonbeatz-dev_memories",
+    "qdrantPath": "%USERPROFILE%\\.mem0\\qdrant_jonbeatz-dev"
+  },
+  "notes": "Self-contained profile generated from the Hermes profile template."
+}

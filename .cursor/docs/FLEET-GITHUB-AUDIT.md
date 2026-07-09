@@ -168,4 +168,37 @@ Shared script: `_core-scripts/shared-profile-content/scripts/backup-hermes-app.m
 
 ---
 
+## Security — GitGuardian 2026-07-08 (repos scrubbed; rotation pending)
+
+**What happened:** GitGuardian emailed after `hermes-taskboard` fork push (old MSC vault docs in git history) and `JonBeatz-Command-Center` commit `e9aaa0f` (live keys in `mcp-overlays-archived.json`).
+
+**Remediated (2026-07-08):**
+- `hermes-taskboard` — removed `Personal-Secrets-Vault*.md`, gitignored, history rewritten, force-pushed.
+- `JonBeatz-Command-Center` — scrubbed overlay keys from history; file restored with placeholders.
+
+**Prevention (2026-07-08):** Fleet **pre-commit + pre-push** hooks + `npm run git:secrets-scan` — install on every GitHub repo before push:
+
+```powershell
+npm run git:hooks:install          # from any Hermes profile
+npm run git:secrets-scan           # staged changes
+npm run git:secrets-scan:push      # outgoing commits vs remote
+```
+
+Templates: `_core-scripts/shared-profile-content/templates/.githooks/`
+
+**Jon — rotate when ready (do not skip):**
+
+| Service | Where to update after rotate |
+|---------|------------------------------|
+| GitHub PAT | `.env.local`, `_core-scripts/.env.local.master`, `sync:mcp-env` |
+| Resend | master env + any profile using `RESEND_API_KEY` |
+| Firecrawl | master env + Cursor MCP if wired |
+| Tavily | master env (was in vault doc) |
+| Browserbase | `.env.local` + `npm run sync:mcp-env` |
+| Composio | `.env.local` + `npm run sync:mcp-env` |
+
+Mark incidents resolved in GitGuardian after rotation.
+
+---
+
 *Maintainer: Jon · Refresh after fork or major fleet release*

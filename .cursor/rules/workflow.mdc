@@ -1,16 +1,16 @@
 ---
-description: Session workflow triggers for JonBeatz.dev
+description: Session workflow triggers for JonBeatz
 alwaysApply: true
 ---
 
-# Workflow Session Rules - JonBeatz.dev
+# Workflow Session Rules - JonBeatz
 
 ## Start Project (cold boot)
 
 When user says **Start Project**, **Begin Project**, or **Cold Start**:
 
 - Execute [`.cursor/prompts/Start-Project.md`](../prompts/Start-Project.md)
-- Run **`npm run session:start -- -Full`** from the JonBeatz.dev profile root (`D:\\Hermes\\projects\\JonBeatz.dev`)
+- Run **`npm run session:start -- -Full`** from the JonBeatz profile root (`D:\\Hermes\\projects\\JonBeatz`)
 - Read `TRUTH.md`, `.cursor/docs/START-HERE.md`, `.cursor/docs/ReCall.md`
 - Do **not** auto-start long-running dev servers unless the operator explicitly asks
 
@@ -49,7 +49,7 @@ When user says **update docs** or **update docs and mem0**:
 - Execute [`.cursor/prompts/Update-Docs.md`](../prompts/Update-Docs.md)
 - Run **`npm run docs:sync`**
 - Run **`npm run version:sync`** when version changed
-- Align version across `TRUTH.md`, `package.json`, `MASTER-COMMANDS.md`, `CHANGELOG.md`
+- Align version across `TRUTH.md`, `package.json`, `MASTER-COMMANDS.md`, `.cursor/docs/CHANGELOG.md`
 
 ## Release Version
 
@@ -60,10 +60,10 @@ When user says **release version**, **publish release**, or after a version bump
 
 ## Branch Cut
 
-When user says **branch cut**, **cut JonBeatz.dev-Project-vN**, **cut new development branch**:
+When user says **branch cut**, **cut JonBeatz-Project-vN**, **cut new development branch**:
 
 - Execute [`.cursor/prompts/Branch-Cut.md`](../prompts/Branch-Cut.md)
-- Full ritual: backup -> freeze previous branch @ SHA -> create `JonBeatz.dev-Project-v{N}` -> bump **`N.0.0`** -> update Restore-Points -> **`npm run release`**
+- Full ritual: backup -> freeze previous branch @ SHA -> create `JonBeatz-Project-v{N}` -> bump **`N.0.0`** -> update Restore-Points -> **`npm run release`**
 - Do **not** stop at `git checkout -b` alone
 - Leave **`main`** untouched unless the operator explicitly requests a merge
 

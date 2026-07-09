@@ -133,7 +133,7 @@ App passwords: see `WORDPRESS_*` / `WP_*` in env or `MASTER-SECRETS-INVENTORY.lo
 | Layer | Location | Count |
 |-------|----------|-------|
 | **Global** | `C:\Users\JONBEATZ\.cursor\mcp.json` | 16 servers |
-| **JonBeatz project** | `.cursor\mcp.json` | 6 (21st, browserbase, composio, …) |
+| **JonBeatz project** | `.cursor\mcp.json` | **2** live (`21st-dev-magic`, `markdownify`); example template lists optional extras |
 | **Next-Flick / VaderLabz** | Bootstrap template | 15 |
 | **MSC** | `.cursor\mcp.json` | 7 (+ global 12) |
 | **Node-Launcher** | `.cursor\mcp.json` | 12 (WP locals, firecrawl, docker, …) |

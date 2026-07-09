@@ -1,4 +1,4 @@
-# Start Project - JonBeatz.dev Initialization
+# Start Project - JonBeatz Initialization
 
 ## Trigger
 **Start Project**, **Begin Project**, **Cold Start**
@@ -9,7 +9,7 @@
 
 ## Step 1: Session Stack & Engine Check
 
-Run from the **JonBeatz.dev** profile root:
+Run from the **JonBeatz** profile root:
 
 ```powershell
 npm run session:start -- -Full
@@ -33,7 +33,7 @@ npm run session:start -- -Full
 **Voice greeting (Start Project only):**
 
 ```powershell
-npm run draven:speak -- "JonBeatz.dev online Jon. Draven standing by. Ready when you are."
+npm run draven:speak -- "JonBeatz online Jon. Draven standing by. Ready when you are."
 ```
 
 OmniVoice lazy-starts the daemon on first speak (~15s first load). **Do NOT** speak ordinary session summaries aloud.
@@ -89,7 +89,7 @@ If LM Studio was offline in Step 2, Mem0 search will fail — fall back to **`Re
 ## Step 5: Environment Handshake (print in chat)
 
 ```
-Ok Jon - JonBeatz.dev is ONLINE.
+Ok Jon - JonBeatz is ONLINE.
 
 SERVICE STATUS
   LM Studio (1234)       [online/offline]  - free local / Mem0
@@ -106,7 +106,7 @@ What's the mission for today, Operator?
 
 ---
 
-## Step 5: Paid cloud decision
+## Step 6: Paid cloud decision
 
 | Operator needs | Agent action |
 |----------------|--------------|

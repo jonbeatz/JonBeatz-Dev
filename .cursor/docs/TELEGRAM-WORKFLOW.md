@@ -200,7 +200,7 @@ Test ping: `npm run telegram:test` — time line shows `PDT`/`PST` and timezone 
 | Garbled emoji `ðŸ°` | Emoji passed via PowerShell argv | Use `--startup` or `TELEGRAM_MESSAGE` env var |
 | Weird `**n**` in replies | Markdown on AI text | Fixed: AI replies use plain text |
 | Proxy errors | LiteLLM `:4000` down | `npm run deepseek:on` (the legacy `google-api` stack is retired) |
-| "Model provider failed after retries" | LiteLLM offline mid-session | `npm run deepseek:on`; avoid "diagnose" prompts that run terminal tool loops |
+| "Model provider failed after retries" | Wrong gateway profile won Telegram token (e.g. `next-flick` with `vader-3-flash` while Cursor active profile ≠ jonbeatz) **or** LiteLLM offline | `npm run boot:setup` (removes `Hermes_Gateway_*.vbs` dupes); `hermes -p jonbeatz gateway stop` then `Start-Telegram-Gateway.ps1`; confirm only **one** `gateway run` and profile **jonbeatz**; `python scripts/hermes-billing-mode.py --mode deepseek` |
 | Wrong / stale reply content | Old Telegram session history | Send **`/new`** before test messages |
 | Gateway shutdown mid-chat | `deepseek:on` recycled proxy (fixed) | Now uses `--keep-gateway`; gateway stays up |
 | Random missed messages | Two pollers same token | Stop `msc-telegram-bot` when gateway runs |

@@ -24,7 +24,7 @@
 | `npm run session:stop -- -StopDeepSeek -StopComfy` | Stop DeepSeek + ComfyUI | End + free VRAM |
 | `npm run session:stop -- -StopGoogleApi` | Legacy alias for `-StopDeepSeek` | Same |
 | `npm run doctor` | **Unified** health: services, env, image, Google, git | Anytime |
-| `npm run boot:setup` | Refresh Master-Startup + DeepSeek + Telegram shortcuts; remove duplicate boot `.vbs` | After boot script changes |
+| `npm run boot:setup` | Refresh Master-Startup + DeepSeek + Telegram shortcuts; remove duplicate `Hermes_Gateway_*`, Profile Jedi Tray from Startup | After boot script changes |
 | `npm run boot:doctor` | Audit shortcuts, single Startup entry, ports, LM Studio tuning | Troubleshoot boot |
 
 ---
@@ -39,7 +39,7 @@
 | DeepSeek only | `D:\Hermes\My-DeepSeek-API.lnk` or `npm run deepseek:on` |
 | Telegram reconnect | `D:\Hermes\Start Telegram Gateway.lnk` or `npm run telegram:gateway` |
 
-**Do not** use `Master-Startup-Relay.vbs` or `Hermes_Gateway_jonbeatz.cmd` in Startup — duplicates boot. `npm run boot:setup` removes them.
+**Do not** use `Master-Startup-Relay.vbs`, `Hermes_Gateway_*.vbs`, or `Hermes_Gateway_*.cmd` in Startup — duplicates boot and can steal the Telegram token (wrong Hermes profile). Telegram gateway is **always jonbeatz** (not Cursor `active-profile.json`). `npm run boot:setup` removes dupes.
 
 **LM Studio:** Disable Windows Startup autostart (Task Manager → Startup apps). `session:start -- -Full` launches LM Studio when needed. See `FLEET-BOOT-SESSION.md`.
 
@@ -136,14 +136,19 @@
 | `npm run lmstudio:dedupe` | Remove duplicate LM Studio instances (`qwen3-4b` + `qwen3-4b:2`) |
 | `npm run lmstudio:switch -- -Model <id>` | Unload other LLMs, load target (before heavy picker switch) |
 | `npm run hermes:local` | Set **active** Hermes model to LM Studio default (providers stay dual-registered) |
-| `npm run gcp:billing-stop` | Stop LiteLLM/ngrok + switch **active** Hermes model to local LM Studio |
-| `npm run gcp:billing-status` | Show LM Studio vs LiteLLM billing mode |
-| `npm run gcp:vertex-on` | Re-enable Vertex via LiteLLM (paid) |
+| `npm run deepseek:billing-stop` | Stop LiteLLM/ngrok + switch **active** Hermes model to local LM Studio |
+| `npm run deepseek:billing-status` | Show LM Studio vs LiteLLM billing mode |
+| `npm run gcp:billing-stop` | **Alias** → `deepseek:billing-stop` (legacy name) |
+| `npm run gcp:billing-status` | **Alias** → `deepseek:billing-status` (legacy name) |
+| `npm run gcp:vertex-on` | Re-enable Vertex via LiteLLM (paid) — retired path; prefer DeepSeek |
 | `npm run sync:deepseek-env` | Sync DeepSeek keys from JonBeatz `.env.local` → `deepseek-api/.env.local` |
 | `npm run deepseek:ngrok` | Full start + ngrok tunnel (Cursor Agent HTTPS) |
 | Shortcut | `D:\Hermes\My-DeepSeek-API.lnk` — sync env + LiteLLM :4000 + Hermes `deepseek-v4-pro` |
 | `npm run deepseek:shortcut` | Recreate `My-DeepSeek-API.lnk` (+ Desktop copy) |
-| `npm run stop` | Alias for `gcp:billing-stop` |
+| `npm run stop` | Alias for `deepseek:billing-stop` (not Next.js stop) |
+| `npm run profile:align` | Set Hermes active profile to this workspace (no Desktop launch) |
+| `npm run profile:align:full` | Align + full Hermes profile switch |
+| `npm run profile:align:check` | Report mismatch only (exit 2 if misaligned) |
 | `npm run google:doctor` | OAuth token + LiteLLM + setup.py --check |
 | `npm run google:status` | JSON status for agents |
 
@@ -197,8 +202,8 @@ LiteLLM / DeepSeek stack scripts live in `D:\Hermes\projects\_core-scripts\deeps
 | Goal | Command |
 |------|---------|
 | Paid DeepSeek default | `npm run deepseek:on` |
-| Free local default | `npm run hermes:local` or `npm run gcp:billing-stop` |
-| Billing status | `npm run gcp:billing-status` |
+| Free local default | `npm run hermes:local` or `npm run deepseek:billing-stop` |
+| Billing status | `npm run deepseek:billing-status` |
 
 **Offline:** Start LM Studio server → `npm run hermes:lmstudio` → pick a local model in Desktop — internet optional once loaded.
 

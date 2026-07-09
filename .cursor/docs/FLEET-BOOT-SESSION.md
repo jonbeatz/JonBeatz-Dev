@@ -1,7 +1,7 @@
 # Fleet Boot + Session Rituals — Hermes Ecosystem
 
 **Canonical reference** for PC login, Cursor MCP, LM Studio, and **Start / Open / Close / End** workflows.  
-**Shared library:** `D:\Hermes\projects\_core-scripts\shared-profile-content` · **v1.22.0+**
+**Shared library:** `D:\Hermes\projects\_core-scripts\shared-profile-content` · **v1.28.2+**
 
 New skeleton projects inherit this via bootstrap + `npm run sync:docs -- -Write -AddMissing` + `npm run sync:rituals`.
 
@@ -19,7 +19,7 @@ New skeleton projects inherit this via bootstrap + `npm run sync:docs -- -Write 
 
 **Single Startup entry:** `%APPDATA%\Microsoft\Windows\Start Menu\Programs\Startup\Master-Startup.lnk` → `Master-Startup.ps1 -SkipDesktop` (hidden VBS).
 
-**Do not** duplicate boot with `Hermes_Gateway_jonbeatz.vbs`, `Master-Startup-Relay.vbs`, or gateway `.cmd` in Startup. Run `npm run boot:setup` to refresh shortcuts and remove dupes.
+**Do not** duplicate boot with `Hermes_Gateway_jonbeatz.vbs`, `Hermes_Gateway_<other-profile>.vbs`, `Master-Startup-Relay.vbs`, or gateway `.cmd` in Startup. Telegram **always** uses **jonbeatz** — never Cursor `active-profile.json` (e.g. next-flick). Run `npm run boot:setup` to refresh shortcuts and remove dupes.
 
 **Manual:** `D:\Hermes\Master-Startup.lnk` or `Master-Startup.ps1 -ShowWindows` for visible windows.
 
@@ -48,8 +48,8 @@ New skeleton projects inherit this via bootstrap + `npm run sync:docs -- -Write 
 | Layer | Path | Purpose |
 |-------|------|---------|
 | **Global launch** | `%USERPROFILE%\.cursor\mcp.json` | github, Hostinger×4, playwright, fetch, context7, fal-ai, firebase, vault, etc. |
-| **Project launch** | `.cursor/mcp.json` (gitignored) | **Must** be `{ "mcpServers": { } }` or real `command`/`args` blocks |
-| **Catalog only** | `.cursor/mcp-manifest.json` | Docs/reference — **never** paste `project_mcp_servers` into `mcp.json` |
+| **Project launch** | `.cursor/mcp.json` (gitignored) | Valid `{ "mcpServers": { ... } }` — empty `{}` for new leaves, **or** real `command`/`args` blocks (JonBeatz hub: 2 live servers) |
+| **Catalog only** | `.cursor/mcp-manifest.json` | Optional docs/reference — **never** paste `project_mcp_servers` into `mcp.json` |
 | **Hermes profile** | `%LOCALAPPDATA%\hermes\profiles\jonbeatz\config.yaml` | `mcp_servers: {}` — Cursor-only MCP (no duplicate Hostinger/github Node children) |
 
 **Red Cursor error:** `mcpServers must be an object` → fix project `.cursor/mcp.json` schema.
@@ -158,7 +158,7 @@ Get-NetTCPConnection -LocalPort 3000 -State Listen -ErrorAction SilentlyContinue
 ## Skeleton checklist (new project)
 
 1. Bootstrap from `shared-profile-content` (`bootstrap-new-project.ps1`)
-2. `.cursor/mcp.json` → `{"mcpServers": {}}` + `mcp-manifest.json` catalog
+2. `.cursor/mcp.json` → valid `{ "mcpServers": {} }` (or live servers) + optional `mcp-manifest.json` catalog
 3. `npm run sync:rituals` + `npm run sync:docs -- -Write -AddMissing`
 4. Per-project Mem0 in `.env.local` (`MEM0_USER_ID`, `MEM0_COLLECTION`, `MEM0_QDRANT_PATH`)
 5. Read `FLEET-BOOT-SESSION.md`, `START-HERE.md`, `FITNESS-CHECK.md`
@@ -177,4 +177,4 @@ Get-NetTCPConnection -LocalPort 3000 -State Listen -ErrorAction SilentlyContinue
 
 ---
 
-*Last updated: 2026-07-08 · shared-profile-content v1.22.0*
+*Last updated: 2026-07-09 · shared-profile-content v1.28.2*

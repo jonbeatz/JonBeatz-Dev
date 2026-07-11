@@ -8,9 +8,42 @@
 
 ---
 
+## Hard UI rule (clickable choices)
+
+For **every** operator choice in this ritual, call the Cursor **`AskQuestion` tool** so options render as **clickable buttons** in the Agent window.
+
+**Do NOT** ask for typed answers such as:
+- "Reply **1** or **2**"
+- "Type stop / leave"
+- Numbered markdown lists as the only choice UI
+
+**One `AskQuestion` per assistant turn.** Wait for the selection before the next gate.
+
+### AskQuestion shape (required)
+
+```json
+{
+  "title": "End Project — Stop paid stack",
+  "questions": [
+    {
+      "id": "stop_stack",
+      "prompt": "Stop LiteLLM + ngrok for the day? (recommended)",
+      "options": [
+        { "id": "stop_deepseek", "label": "Stop LiteLLM + ngrok (recommended)" },
+        { "id": "leave_deepseek", "label": "Leave DeepSeek running" }
+      ]
+    }
+  ]
+}
+```
+
+If `AskQuestion` is truly unavailable in the tool list, say so once, then ask the **same labeled options in prose** (still no "Reply 1/2"). Prefer retrying `AskQuestion` on the next turn.
+
+---
+
 ## Step 1: Summarize
 
-From conversation + any file changes under **D:\\Hermes\\projects\\JonBeatz.dev**:
+From conversation + any file changes under **{PROJECT_ROOT}**:
 - What was accomplished
 - What's in progress
 - Blockers (if any)
@@ -21,13 +54,13 @@ From conversation + any file changes under **D:\\Hermes\\projects\\JonBeatz.dev*
 
 Append **`.cursor/docs/project-log.md`** and update **`ReCall.md`**.
 
-Optional hub logger (JonBeatz):
+Optional hub logger (JonBeatz.dev):
 
 ```powershell
 npm run log:session -- "[short title]: [summary of session]"
 ```
 
-Update **`HISTORY.md`** (JonBeatz) when milestone-level.
+Update **`HISTORY.md`** (JonBeatz.dev) when milestone-level.
 
 ---
 
@@ -56,52 +89,50 @@ Per `.cursor/rules/mgr-handoff.mdc` — overwrite `MGR/sessions/handoff.md`, app
 
 ---
 
-## Step 5: Git (AskQuestion — never auto-commit)
+## Step 5: Git (`AskQuestion` — never auto-commit)
 
-If meaningful uncommitted changes, use **`AskQuestion`**:
+If meaningful uncommitted changes, call **`AskQuestion`**:
 
-| Option | Action |
-|--------|--------|
-| **Commit and push** (recommended when ready) | Stage, commit (why-focused message), push |
-| **Commit only** | Commit, no push |
-| **Skip git** | Docs/Mem0 only |
-| **I'll commit manually** | Operator handles git |
+| Option id | Label | Action |
+|-----------|--------|--------|
+| `commit_push` | Commit and push (recommended) | Stage, commit (why-focused), push |
+| `commit_only` | Commit only | Commit, no push |
+| `skip_git` | Skip git | Docs/Mem0 only |
+| `manual_git` | I'll commit manually | Operator handles git |
+
+If the tree is clean (or only junk like `.vault-sync-last`), **skip this AskQuestion** and note "git clean".
 
 Never commit `.env.local` or secrets.
 
 ---
 
-## Step 6: Dev server on :3000 (AskQuestion — if listening)
+## Step 6: Dev server on :3000 (`AskQuestion` — if listening)
 
-After `web:verify-local` or `npm run web:dev`, port **3000** often stays up and Cursor warns on quit ("something still running").
-
-**Probe first** (skip this step if port is free):
+Probe first (skip if free):
 
 ```powershell
 Get-NetTCPConnection -LocalPort 3000 -State Listen -ErrorAction SilentlyContinue
 ```
 
-If something is listening, use **`AskQuestion`**:
+If listening, call **`AskQuestion`**:
 
-| Option | Action |
-|--------|--------|
-| **Stop dev server** (Recommended when quitting Cursor) | `npm run web:dev:stop` when the profile has that script; else free :3000 with PowerShell (stop owning PID only — do **not** run `web:dev:reset`, which wipes `.next` and restarts dev) |
-| **Leave running** | No action — dev stays on :3000 for quick return |
-
-**Next-Flick:** `npm run web:dev:stop` — kills :3000 only; no cache wipe, no restart.
+| Option id | Label | Action |
+|-----------|--------|--------|
+| `stop_dev` | Stop dev server (recommended when quitting Cursor) | `npm run web:dev:stop` if present; else stop owning PID only — never `web:dev:reset` |
+| `leave_dev` | Leave :3000 running | No action |
 
 ---
 
-## Step 7: Stop paid stack (AskQuestion — required)
+## Step 7: Stop paid stack (`AskQuestion` — required)
 
-Use **`AskQuestion`** before `session:stop`:
+Always call **`AskQuestion`** before `session:stop` (even when recommending stop):
 
-| Option | Action |
-|--------|--------|
-| **Stop LiteLLM + ngrok** (Recommended — day done) | `npm run session:stop -- -StopDeepSeek` |
-| **Leave DeepSeek running** | `npm run session:stop` (no `-StopDeepSeek`) |
+| Option id | Label | Action |
+|-----------|--------|--------|
+| `stop_deepseek` | Stop LiteLLM + ngrok (recommended) | `npm run session:stop -- -StopDeepSeek` |
+| `leave_deepseek` | Leave DeepSeek running | `npm run session:stop` (no `-StopDeepSeek`) |
 
-Default recommendation: **Stop** — End Project means billing-safe day off. Hermes switches to local LM Studio via `deepseek:off` when `-StopDeepSeek` runs.
+Default recommendation: **stop** — billing-safe day off. Hermes switches to local LM Studio via `deepseek:off` when `-StopDeepSeek` runs.
 
 **Voice (before session:stop):**
 
@@ -111,7 +142,7 @@ npm run draven:speak -- "Great work Jon. JonBeatz.dev session saved. Until next 
 
 Ritual-only — never read the session summary aloud.
 
-**Optional VRAM free (JonBeatz):**
+**Optional VRAM free:**
 
 ```powershell
 npm run session:stop -- -StopDeepSeek -StopComfy
@@ -142,3 +173,4 @@ Say **Open Project** or **Start Project** when you return.
 - **End Project** = **End Session** = same ritual
 - Legacy `Personal-End.md` → this file
 - `-StopGoogleApi` → same as `-StopDeepSeek` (deprecated alias)
+

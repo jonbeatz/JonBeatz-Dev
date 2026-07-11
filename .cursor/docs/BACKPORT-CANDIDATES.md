@@ -22,6 +22,7 @@ When you discover something during a session that could benefit future projects,
 
 | # | What | Version | Date |
 |---|------|---------|------|
+| 4 | n8n `N8N_LISTEN_ADDRESS` gotcha + Extended Health sidecar pattern (CE no Execute Command) | 1.29.0 | 2026-07-11 |
 | 2 | DigitalStudioz gaps: env merge, Hostinger/GitHub docs, sync-mcp-env wrapper, repair script, universal doc copy in bootstrap | 1.12.0 | 2026-07-03 |
 | 1 | Premium scroll toolkit: Lenis provider, GSAP scroll hook, CustomCursor, StudioRails | 1.8.0 | 2026-06-29 |
 | 2 | TROUBLESHOOTING #11: removed gateway platform retries due to auth.json credential_pool cache (Photon gotcha) | 1.9.0 | 2026-06-29 |

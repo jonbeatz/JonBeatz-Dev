@@ -15,7 +15,7 @@ This checks that templates, skills, prompts, rules, docs, MCP config, and script
 
 ---
 
-## What the skeleton provides (shared-profile-content v1.28.2)
+## What the skeleton provides (shared-profile-content v1.29.0)
 
 ### 1. Session rituals
 | Ritual | Prompt | When |

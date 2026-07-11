@@ -105,6 +105,8 @@ npm run fleet:sync
 
 ## End Project — AskQuestion sequence
 
+Use Cursor **`AskQuestion`** so options are **clickable buttons** in the Agent window. Never “Reply 1 or 2”. See `end-project-ritual.mdc` + `End-Project.md` Hard UI rule. (If AskQuestion is missing from the model tool list, say so once and restate labeled options in prose.)
+
 1. Summarize + update `ReCall.md` + `project-log.md`
 2. Mem0 + vault (if substantive)
 3. MGR handoff (if `MGR/` exists)

@@ -1,0 +1,31 @@
+---
+description: End Project / End Session — day-end closeout with clickable AskQuestion gates (never Reply 1/2)
+alwaysApply: true
+---
+
+# End Project ritual
+
+Treat as **End Project** when the operator says **End Project**, **End Session**, **Session Closeout**, **Done for today**, or clearly wants day-end closeout.
+
+**Canonical procedure:** [`.cursor/prompts/End-Project.md`](../prompts/End-Project.md)
+
+## Hard defaults
+
+1. Update ReCall + project-log; Mem0 + vault when substantive.
+2. **Git / :3000 / StopDeepSeek gates MUST use the Cursor `AskQuestion` tool** (clickable buttons in the Agent window).
+3. **Never** ask the operator to type `1` / `2` or "Reply 1 or 2" for these gates.
+4. One `AskQuestion` per turn — wait for the click before the next gate.
+5. After StopDeepSeek choice: `draven:speak` once, then `npm run session:stop` (add `-- -StopDeepSeek` when they chose stop).
+6. Do **not** stop Telegram gateway or LM Studio unless the operator separately asks.
+
+## AskQuestion checklist
+
+| When | Call AskQuestion? |
+|------|-------------------|
+| Meaningful uncommitted changes | Yes — commit/push / commit only / skip / manual |
+| Git clean | No — note and continue |
+| Port 3000 listening | Yes — stop / leave |
+| Port 3000 free | No — skip |
+| Before `session:stop` | **Always yes** — stop LiteLLM+ngrok / leave DeepSeek |
+
+See also [interactive-workflows.mdc](./interactive-workflows.mdc).

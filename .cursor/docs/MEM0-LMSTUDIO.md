@@ -79,6 +79,17 @@ npm run mem0:add:infer -- "Long conversational note for LLM to distill into fact
 
 # List all
 npm run mem0:list
+
+# Delete a memory by ID
+npm run mem0:delete -- <memory-id>
+```
+
+Draven memory commands:
+```powershell
+npm run draven:add -- "text"
+npm run draven:search -- "query"
+npm run draven:list
+npm run draven:delete -- <memory-id>
 ```
 
 Python direct:
@@ -150,3 +161,40 @@ Unlike `mem0:add` which targets each project's own Qdrant collection, `draven:ad
 3. `npm run draven:search -- "<topic>"` — check Draven's cross-session memory (shared across all projects)
 4. `npm run mem0:add -- "<takeaway>"` at end of significant work
 5. `npm run draven:add -- "<takeaway>"` — also store in Draven's memory so he recalls next session
+6. `npm run mem0:delete -- <id>` / `npm run draven:delete -- <id>` — clean up stale/incorrect memories
+
+## Recommended setup (locked 2026-07-09)
+
+| Setting | Value | Why |
+|---------|-------|-----|
+| Embedder | `BAAI/bge-small-en-v1.5` | Best quality/speed for English tech memories on this PC |
+| Dims | `384` | Matches Qdrant collection; no rebuild tax vs MiniLM |
+| Reranker | **off** (do not set `MEM0_RERANKER=1`) | Extra CPU latency; only enable if search feels fuzzy |
+| Add mode | `mem0:add` (`infer=False`) | Reliable; use `mem0:add:infer` only for short natural notes |
+
+Set in `.env.local` (already recommended):
+
+```
+MEM0_EMBEDDER_MODEL=BAAI/bge-small-en-v1.5
+MEM0_EMBEDDER_DIMS=384
+```
+
+### What “dims” means (bge-small vs bge-m3)
+
+An **embedder** turns each memory into a list of numbers (a vector) so search can find similar notes.
+
+| Model | Dims | Meaning |
+|-------|------|---------|
+| **bge-small-en-v1.5** (current) | **384** | 384 numbers per memory — fast, English-strong, fits our Qdrant stores |
+| **bge-m3** (parked) | **1024** | 1024 numbers per memory — richer multilingual vectors, but ~3× larger storage + must wipe/rebuild every collection |
+
+**Stay on bge-small** unless you need strong non-English recall. Switching to bge-m3 requires changing `MEM0_EMBEDDER_DIMS=1024` and re-running `mem0:reembed` / `draven:reembed` on every profile.
+
+## Version notes
+
+- **mem0ai 2.0.10** pinned in `requirements.txt` — re-run `pip install -r requirements.txt` after venv rebuilds.
+- **Per-profile `history_db_path`** — each project writes memory history to `~/.mem0/history_<user_id>.db` (no cross-profile mixing).
+- **`lmstudio_response_format`** — defaults to `{"type": "json_object"}` for broad model compatibility. Set `MEM0_JSON_SCHEMA=true` in `.env.local` to enable `json_schema` format for `infer=True` fact extraction.
+- **`~/.mem0/config.json`** — redacted (platform API key removed). Gitignored via `.mem0/` entry in `.gitignore`.
+- **Embedder (2026-07-09):** locked to `BAAI/bge-small-en-v1.5` (384 dims). After changing embedder, run **`npm run mem0:reembed`** (and **`npm run draven:reembed`** for Draven) once to rebuild vectors.
+- **Reranker:** leave off. Set `MEM0_RERANKER=1` only if search quality is weak after a week of normal use.

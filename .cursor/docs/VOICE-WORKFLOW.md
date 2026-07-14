@@ -1,6 +1,6 @@
 # Draven Voice Workflow — OmniVoice + Edge Ryan
 
-**Last updated:** 2026-07-09  
+**Last updated:** 2026-07-12  
 **Operator:** Jon Beatz  
 **Status:** **Ritual-only** — OmniVoice primary, Ryan backup, no auto-read replies
 
@@ -26,7 +26,7 @@
 
 | | **OmniVoice** (primary) | **Edge Ryan** (backup) |
 |--|-------------------------|-------------------------|
-| Quality | Lifelike, British male Draven | Robotic but clear |
+| Quality | Lifelike OmniVoice (accent via instruct preset) | Robotic but clear |
 | Speed | **Warm ~6-7s short / ~33-43s long** (CPU) | ~1–2s |
 | RAM | **~2–4 GB** while daemon warm | **~0** (cloud) |
 | GPU | None (CPU only) | None |
@@ -65,11 +65,12 @@ DRAVEN_VOICE_FALLBACK=edge
 DRAVEN_VOICE_POLICY=ritual
 DRAVEN_VOICE_ERRORS=1
 DRAVEN_OMNI_STOP_ON_END=1
-DRAVEN_OMNI_INSTRUCT=male, low pitch, british accent
-DRAVEN_OMNI_STEPS=16
+DRAVEN_OMNI_INSTRUCT=male, low pitch, american accent
+DRAVEN_OMNI_STEPS=24
 DRAVEN_OMNI_STEPS_MEDIUM=24
 DRAVEN_OMNI_STEPS_LONG=32
 DRAVEN_OMNI_GUIDANCE=1.5
+DRAVEN_OMNI_SPEED=0.92
 DRAVEN_OMNI_PORT=18776
 DRAVEN_OMNI_CHUNK_LEN=70
 DRAVEN_OMNI_CHUNK_GAP=0.25
@@ -85,8 +86,25 @@ OMNIVOICE_PYTHON=D:\Hermes\apps\OmniVoice\.venv\Scripts\python.exe
 | `DRAVEN_OMNI_CHUNK_LEN=70` | Auto-split longer text before synthesis |
 | `DRAVEN_OMNI_CHUNK_GAP=0.25` | Silence between stitched chunks (seconds) |
 | `DRAVEN_OMNI_MIN_ZCR=0.02` | Reject muffled rumble generations |
+| `DRAVEN_OMNI_SPEED=1.0` | Speaking pace (`<1.0` slower, `>1.0` faster) — not instruct text |
 
 Set `DRAVEN_VOICE_ERRORS=0` to silence error speaks too.
+
+---
+
+## Voice presets (`voice-profiles.json`)
+
+Profiles live at `D:\Hermes\projects\_core-scripts\voice-engine\voice-profiles.json`. Copy `env_vars` into a project's `.env.local`, then restart the OmniVoice daemon.
+
+| Preset | Accent | Instruct | Notes |
+|--------|--------|----------|-------|
+| `draven-natural-american` | American | `male, low pitch, american accent` | **CTFU.tv active default** (2026-07-12) |
+| `draven-default` / `draven-natural-british` | British | `male, low pitch, british accent` | Saved British preset — same tuning (steps 24, g1.5, speed 1.0) |
+| `edge-fallback` | British (cloud) | — | Edge `en-GB-RyanNeural` — backup only if OmniVoice fails |
+
+**Instruct vocabulary (OmniVoice):** fixed tokens only — e.g. `male`, `low pitch`, `very low pitch`, `british accent`, `american accent`. Free text (e.g. `calm pace`, `deep low pitch`) causes daemon **500** and silent Edge fallback.
+
+**Tuning notes (2026-07-12):** `very low pitch` + `speed 0.9` + `guidance 2.0` sounded robotic; locked natural profile uses `low pitch`, `guidance 1.5`, `steps 24`, `speed 1.0`.
 
 ---
 
@@ -123,6 +141,11 @@ Allowed speak request
 ---
 
 ## Errors we hit and fixes
+
+### Invalid instruct → silent Edge fallback (2026-07-12)
+- **Cause:** OmniVoice `instruct` is a fixed vocabulary; free-text phrases error at synthesis.
+- **Symptom:** Daemon returns 500; `draven-voice.ps1` falls back to Edge Ryan without obvious warning.
+- **Fix:** Use only valid tokens (see presets table above). Check daemon health if voice suddenly sounds like Ryan.
 
 ### Muffled feedback on long phrases (CPU OmniVoice)
 - **Cause:** Text over ~70 chars synthesizes as low-frequency rumble on CPU — passes amplitude checks (`std`/`peak`) but zero-crossing rate collapses (~0.004 vs healthy ~0.08). Sounds like muffled feedback/scratch.

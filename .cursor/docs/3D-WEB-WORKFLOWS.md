@@ -15,6 +15,7 @@ Jon’s curated **prompts, build guides, and reference sites** for premium scrol
 |-----------------|------------|
 | Build scroll-video cinematic site | **devini-tea/** vault bundle → `Scroll-Video-Sequence` |
 | **Product explode scroll** (2-image Kling clip) | **ai-scroll-product-workflow/WORKFLOW.md** → FFmpeg → `ScrollFrameHero` |
+| **Doc Mo food/property scroll guides** (UMAMI, villa, PRIME, …) | **`docmo-guides-pdf/`** → [DOCMO-GUIDES-INDEX.md](./DOCMO-GUIDES-INDEX.md) |
 | **Research external workflows** | **`SCROLL-VIDEO-RESEARCH.md`** (vault root) — Masonry, cinematic-scroll-kit, Mejba, etc. |
 | Premium agency landing (motion-first) | **premium-site-workflow/** → `Premium-UI` + `NovaMira-Design` |
 | Canvas frame-sequence Next.js site | **3d-scroll-website** skill (shared library) |
@@ -22,6 +23,7 @@ Jon’s curated **prompts, build guides, and reference sites** for premium scrol
 | Luxury scroll system (MAVRA) | **MAVRA_Build_Guide.md** |
 | Pick accent / scroll color-shift | [3D-WEBSITE-TASTE-CATALOG.md](./3D-WEBSITE-TASTE-CATALOG.md) |
 | **RoboNuggets HTML module** (sticky stack, cursor trail, …) | **`robonuggets/INDEX.md`** → port to Next.js |
+| **Scored cinematic scroll craft** (doctor, tokens, themes) | **`cinematic-scroll-skill/`** → pair with `Scroll-Motion` |
 | New `-Website` bootstrap | `bootstrap-new-project.ps1 -Website` |
 
 **Cursor prompt:** `.cursor/prompts/Build-3D-Website.md`
@@ -41,8 +43,18 @@ Jon’s curated **prompts, build guides, and reference sites** for premium scrol
 | **MAVRA** | `MAVRA_Build_Guide.md` | Full luxury scroll playbook |
 | **RoboNuggets modules** | `robonuggets/cinematic-site-components/` + `INDEX.md` | 30 single-file GSAP scroll/cursor HTML demos |
 | **RoboNuggets design inspo** | `robonuggets/design-inspo/` | Live HTML taste samples (CC BY 4.0) |
+| **Design engineer agent** | `design-agent-solpowa/` | Screenshot rubric + design canon → **Design-Engineer** skill |
+| **cinematic-scroll-skill** | `cinematic-scroll-skill/` | MustBeSimo craft skill — doctor, tokens, themes, bench |
+| **web-xtraz** | `web-xtraz/` | Archive/staging — see **`VAULT-PDF-INDEX.md`** (full PDF/DOCX read 2026-07-13) |
+| **docmo-guides-pdf** | `docmo-guides-pdf/` | **16 Doc Mo PDFs** (2026) — scroll scrub, configurators, AI ads — see **`DOCMO-GUIDES-INDEX.md`** |
 
 ---
+
+## Dev system
+
+Full operator guide: **[3D-DEV-SETUP.md](./3D-DEV-SETUP.md)** — frame paths on disk, daily commands, ship checklist.
+
+Bundle summaries: **[VAULT-BUNDLE-SUMMARIES.md](./VAULT-BUNDLE-SUMMARIES.md)** — MAVRA, Luke, Iron Man one-pagers.
 
 ## Shared library (not in vault)
 
@@ -63,6 +75,7 @@ Read `references/00-hermes-adapter.md` inside **3d-scroll-website** before codin
 3. **Scroll-Motion** (Lenis + GSAP)  
 4. **3D-Website-Fusion** (live R3F backdrop)  
 5. **Motion-Accessibility** (required gate)
+6. **Design-Engineer** (screenshot polish pass before ship)
 
 ```powershell
 npm run sync:skills
@@ -80,7 +93,8 @@ npm run workflows:3d:status
 | **Product assembled→exploded** scroll | `ai-scroll-product-workflow/` | Notion workflow · Kling + FFmpeg |
 | Scroll scrubs **video** | `devini-tea/devini-tea-main/` | `Scroll-Video-Sequence` |
 | Agency landing, video hero | `premium-site-workflow/` | `Premium-UI`, `frontend-design` |
-| Live 3D + page scroll | `IronMan/iron-man-main/` (reference) | `3D-Website-Fusion` |
+| HUD cinematic + dual sequences | `IronMan/iron-man-main/` | `08-iron-man-patterns` + `CinematicBeatOverlay` |
+| Design polish / audit | `design-agent-solpowa/` | **Design-Engineer** |
 | Full luxury playbook | `MAVRA_Build_Guide.md` | All scroll skills |
 
 ---
@@ -99,6 +113,8 @@ npm run workflows:3d:status
 ## Related
 
 - [SCROLL-3D-REFERENCES.md](./SCROLL-3D-REFERENCES.md)
+- [3D-DEV-SETUP.md](./3D-DEV-SETUP.md)
+- [VAULT-BUNDLE-SUMMARIES.md](./VAULT-BUNDLE-SUMMARIES.md)
 - [DESIGN-REFERENCES.md](./DESIGN-REFERENCES.md)
 - [IMAGE-WORKFLOW.md](./IMAGE-WORKFLOW.md)
 - Vault README: `D:\Hermes\assets\3d-web-workflows\README.md`

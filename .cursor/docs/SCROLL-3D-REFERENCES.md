@@ -179,6 +179,8 @@ npm install @theatre/core @theatre/studio @theatre/r3f
 | **Progressive frame loader UX** | **Done (2026-07-04)** | `Scroll-Video-Sequence` Step 3 + `templates/components/ScrollFrameHero.tsx` |
 | **Hash / anchor section sync** | **Done (2026-07-04)** | Skill Step 6 + `ScrollFrameHero` chapters prop |
 | **[scroll-cinema](https://github.com/vvlars-cmd/scroll-cinema)** | **WATCH** | Browser MP4→frames, keyframe text, React export — see vault `SCROLL-VIDEO-RESEARCH.md` |
+| **[mp4-to-jpg](https://github.com/allarddewinter/mp4-to-jpg)** | **REF** | **Bookmark** [demo](https://allarddewinter.github.io/mp4-to-jpg/) — privacy-local browser JPEG extract; ffmpeg still primary for scroll builds |
+| **[Video To JPG](https://videotojpg.com/)** | **REF** | Browser frame extract — blur detection, HEVC WASM, PNG/WebP; richer alt to mp4-to-jpg |
 | **External scroll-video workflow index** | **Done (2026-07-04)** | `D:\Hermes\assets\3d-web-workflows\SCROLL-VIDEO-RESEARCH.md` — Masonry, cinematic-scroll-kit, Mejba, Kling docs |
 | **CapCut / multi-clip merge ritual** | **Done (2026-07-04)** | devini-tea + ai-scroll-product WORKFLOW §3b + research index |
 | **Google AI Studio → Hermes port** | **Done (2026-07-04)** | Documented in `Scroll-Video-Sequence` — prototype → FFmpeg WebP → `ScrollFrameHero` → `SmoothScrollProvider` |
@@ -203,6 +205,42 @@ npm install @theatre/core @theatre/studio @theatre/r3f
 | **Locomotive Scroll** | Legacy | **Do not adopt** — use Lenis |
 | **Spline embeds** | Alternative | Skip — use R3F + GLB |
 | **Postprocessing Bloom** | Broken combo | See `R3F-Gotchas` before shipping bloom |
+| **Design-Engineer visual loop** | **Done (2026-07-13)** | `Design-Engineer` skill + vault `design-agent-solpowa` |
+| **Iron Man HUD / dual sequence** | **Done (2026-07-13)** | `08-iron-man-patterns.md` + `CinematicBeatOverlay` + `HudFrame` templates |
+| **RoboNuggets module map in shared** | **Done (2026-07-13)** | See § RoboNuggets module map below |
+| **MAVRA / Luke vault summaries** | **Done (2026-07-13)** | `VAULT-BUNDLE-SUMMARIES.md` |
+| **useSplitType template** | **Done (2026-07-13)** | `templates/lib/useSplitType.ts` (MAVRA ch.14) |
+| **cinematic-scroll-skill doctor/tokens** | **Done (2026-07-13)** | Vendored vault + `vault:cinematic-scroll-skill`; A- ADOPT |
+| **Vault PDF/DOCX full read** | **Done (2026-07-13)** | `VAULT-PDF-INDEX.md` — premium PDF + web-xtraz Guide/webguide/Devini docx |
+| **Doc Mo guides (16 PDFs)** | **Done (2026-07-13)** | `docmo-guides-pdf/` → `DOCMO-GUIDES-INDEX.md` — scroll scrub, configurators, AI ads |
+
+---
+
+## Scroll-video workflow tiers
+
+| Tier | Images | Videos | Best for | Vault |
+|------|--------|--------|----------|-------|
+| **A — Product explode** | 2 | 1 clip | CPG / hardware hero | `ai-scroll-product-workflow/` |
+| **B — Luxury story** | 10+ | Multi-clip merge | Brand narrative | `devini-tea/BUILD-GUIDE.md` |
+| **C — Multi-chapter** | 9×2 pairs | 9 clips | Editorial reel | [cinematic-scroll-kit](https://github.com/yojahny55/cinematic-scroll-kit) |
+
+Full ranked guide list + Kling matrix: vault `SCROLL-VIDEO-RESEARCH.md`.
+
+---
+
+## RoboNuggets module map → Hermes skills
+
+Browse: `D:\Hermes\assets\3d-web-workflows\robonuggets\cinematic-site-components\index.html`
+
+| # | Module | Hermes skill |
+|---|--------|--------------|
+| 01–09 | Scroll-driven (mask, sticky stack, parallax, horizontal, …) | **Scroll-Motion**, **Scroll-Video-Sequence** |
+| 10–17 | Cursor & hover (magnetic, trail, flip cards, …) | **Premium-UI**, **WebGL-UI** |
+| 18 | View Transition Morphing | **View-Transitions** |
+| 19–23 | Click / tap (particles, odometer, coverflow, …) | **NovaMira-Design**, **Component-Registries** |
+| 24–30 | Ambient (marquee, mesh gradient, glitch, …) | **Scroll-Motion** § grain, **DesignMD** |
+
+Port: extract motion logic → Next.js client component + Lenis. Do **not** ship raw HTML in production.
 
 ---
 
@@ -273,4 +311,4 @@ npm install @theatre/core @theatre/studio @theatre/r3f
 - [IMAGE-WORKFLOW.md](./IMAGE-WORKFLOW.md) — generating source video/stills
 - `.cursor/skills-external/README.md` — when to pull vendored gsap-skills
 
-**Last updated:** 2026-07-04 (batch 4: persistent canvas, grain overlay, Barba→View Transitions, Lenis desktop-only)
+**Last updated:** 2026-07-13 (vault backport: Design-Engineer, Iron Man templates, tier table, RoboNuggets map)

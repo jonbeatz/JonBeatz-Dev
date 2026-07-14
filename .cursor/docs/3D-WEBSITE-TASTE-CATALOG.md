@@ -225,3 +225,21 @@ export default function Home() {
 - For performance-sensitive pages, reduce particles with a `calm` prop
 - Scroll shift at 50% is the default — adjust `secondary` color to change the
   destination hue, or set it to the same as `accent` to disable shifting
+
+---
+
+## 7. RoboNuggets design-inspo (vault font pairs)
+
+Live HTML samples at `D:\Hermes\assets\3d-web-workflows\robonuggets\design-inspo\` — open `index.html` in browser.
+
+| ID | Pairing | Mood | Sample path |
+|----|---------|------|-------------|
+| 001 | Open Sauce + Peace Sans | Friendly editorial | `001-open-sauce-peace-sans/sample.html` |
+| 002 | Inter + Tempting | Modern SaaS | `002-inter-tempting/sample.html` |
+| 003 | Avant Garde + Cooper | Bold display | `003-avant-garde-cooper/sample.html` |
+| 004 | Recoleta + Berthold | Luxury serif-led | `004-recoleta-berthold/sample.html` |
+| 006 | ASCII dither painting | Retro tech / grain | `006-ascii-dither-painting/sample.html` |
+
+Use for taste checks before Next.js port — pair with **Design-Engineer** rubric. Entry 005 not vendored.
+
+---

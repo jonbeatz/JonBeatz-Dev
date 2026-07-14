@@ -48,7 +48,9 @@ When user says **End Project**, **End Session**, **Session Closeout**, or **Done
 When user says **update docs** or **update docs and mem0**:
 
 - Execute [`.cursor/prompts/Update-Docs.md`](../prompts/Update-Docs.md)
-- Run **`npm run docs:sync`**
+- Edit **shared canonical** docs first when TOOLS-* or universal docs changed (`_core-scripts/shared-profile-content/docs/`)
+- Run **`npm run docs:sync`** (mirrors shared → `.cursor/docs`)
+- Run **`npm run fleet:sync`** from hub when skills/scripts/rules changed this session
 - Run **`npm run version:sync`** when version changed
 - Align version across `TRUTH.md`, `package.json`, `MASTER-COMMANDS.md`, `.cursor/docs/CHANGELOG.md`
 
@@ -74,13 +76,18 @@ When user says **backup profile** or **backup**:
 
 - Run **`npm run backup:quick`** from profile root (non-interactive)
 
-## Review Tool
+## Review Tool (v2)
 
-When user pastes a **repo/product URL** or says **review tool**, **evaluate tool**, **add to watchlist**:
+| Trigger | Action |
+|---------|--------|
+| **review tool** / one repo URL | [Review-Tool.md](../prompts/Review-Tool.md) single mode |
+| **review batch** / multiple URLs | Review-Tool.md batch mode — all grades first, one install AskQuestion |
+| **review design** / **grade this site** | Review-Tool.md design grade → DESIGN-REFERENCES + optional showcase queue |
+| Design URL only (no grade keyword) | DESIGN-REFERENCES + HERMES-SHOWCASE-SPEC add queue (bookmark) |
+| **re-review** / **refresh grade** | Re-grade per TOOLS-WATCHLIST policy |
+| **review session done** | [Review-Session-Done.md](../prompts/Review-Session-Done.md) |
 
-- Execute [`.cursor/prompts/Review-Tool.md`](../prompts/Review-Tool.md)
-- Update shared canonical docs: `_core-scripts/shared-profile-content/docs/TOOLS-*.md`
-- Run **`npm run tools:status`** after install to verify config queue
+**Always:** Step 0 duplicate pre-check (`npm run tools:review-precheck`). Update **shared canonical** `TOOLS-*.md` in `_core-scripts/shared-profile-content/`. `sync:docs` then `fleet:sync` when fleet artifacts change. Run **`npm run tools:status`** after installs.
 
 ## Build Showcase Demo
 
@@ -90,6 +97,6 @@ When user says **Build Showcase Demo**, **Fire Showcase**, **Hermes Motion Lab**
 - Read **`.cursor/docs/HERMES-SHOWCASE-SPEC.md`** — living spec + add queue
 - Default target: **JonBeatz.dev** route `/showcase`
 
-When user sends a **design reference URL** (no build yet):
+When user sends a **design reference URL** (no build yet) **without** **review design** / **grade this site**:
 
 - Append row to **DESIGN-REFERENCES.md** add queue **and** **HERMES-SHOWCASE-SPEC.md** add queue

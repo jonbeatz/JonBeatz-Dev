@@ -180,6 +180,8 @@ If the user is driving you through Claude Code and asks vague things like "make 
 
 Full prompting + workflow guide: **references/07-claude-code-guide.md**
 
+Iron Man HUD / dual-sequence / beat overlays: **references/08-iron-man-patterns.md**
+
 ## Common pitfalls (check these first when things break)
 
 1. **Missing `"use client"`** — any component using `useEffect`, `useRef`, `useState`, or Framer Motion needs it. Symptom: hydration mismatch or "useState is not a function."

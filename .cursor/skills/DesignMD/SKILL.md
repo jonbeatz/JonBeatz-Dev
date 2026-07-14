@@ -4,7 +4,7 @@ Extract, download, and apply production design systems using `@designmdcc/cli` a
 
 ## Capabilities
 - **Extracting Custom URLs**: Retrieve visual languages from live websites.
-- **Downloading Curated Templates**: Fetch production-grade brand layouts directly from the `getdesign.md` catalog of 72 master brand alignments.
+- **Downloading Curated Templates**: Fetch production-grade brand layouts directly from the `getdesign.md` catalog of **300+** brand design analyses.
 - **Enforcing Brand Memory**: Apply extracted design systems to mock-ups and production interfaces.
 
 ## Workflow

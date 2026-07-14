@@ -39,9 +39,13 @@ Sibling profiles **consume** shared docs/skills; they do **not** copy the asset 
 
 1. Edit under `_core-scripts/shared-profile-content/` (docs, skills, rules, prompts, scripts)
 2. Bump `VERSION.md` if milestone-worthy
-3. From JonBeatz: **`npm run fleet:sync`**
+3. From JonBeatz: **`npm run sync:docs -- -Write`** then **`npm run fleet:sync`**
 4. Verify: **`npm run fleet:status`**
 5. Optional: `npm run draven:add -- "..."`
+
+### Tool reviews (fleet knowledge)
+
+Reviews triggered from JonBeatz (or any profile) **must** persist to shared `TOOLS-*.md` — not JonBeatz-only mirrors. See **[FLEET-TOOLS-KNOWLEDGE.md](./FLEET-TOOLS-KNOWLEDGE.md)**.
 
 ---
 

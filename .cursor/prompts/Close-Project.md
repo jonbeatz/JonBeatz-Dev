@@ -49,6 +49,8 @@ Skip Mem0 if LM Studio offline — note in project-log.
 npm run session:handoff -- -Summary "Handoff [date]: [one-line summary]"
 ```
 
+**Auto:** `session:handoff` sweeps Hermes `cua-driver` (prevents blank grey overlay leak). **Prevention:** `npm run cua:overlay:harden` once (bakes `serve --no-overlay` into logon task — re-run after cua-driver update). If a stuck grey box remains with no window controls, run `npm run cua:cleanup:reset` (~1s screen flicker; no apps close).
+
 Or: `npm run vault:log -- -Summary "..."` (same vault note; handoff script is preferred).
 
 Update `H:\Vader_Vault\01_Projects\JonBeatz.dev.md` hub if decisions changed. See `.cursor/rules/vader-vault.mdc`.

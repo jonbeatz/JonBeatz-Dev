@@ -1,25 +1,51 @@
 ---
-description: Docs sync + commit discipline for JONBEATZ.DEV
-alwaysApply: true
+description: Documentation synchronization — fleet canonical write order + profile mirrors
+alwaysApply: false
+globs:
+  - .cursor/docs/**/*.md
+  - package.json
+  - TRUTH.md
+  - `.cursor/docs/CHANGELOG.md`
 ---
 
-# Docs Sync — JONBEATZ.DEV
+# Docs Sync Rules — Hermes Fleet
+
+## Canonical vs mirror
+
+| Type | Write here | Sync command |
+|------|------------|--------------|
+| Tool reviews, TOOLS-*, design refs, tool chest | `_core-scripts/shared-profile-content/docs/` | `npm run sync:docs -- -Write` |
+| Profile constitution, session state | `<profile>/TRUTH.md`, `ReCall.md` | Manual |
+| Skills, doctor scripts, review rules | `shared-profile-content/skills|scripts|rules|prompts/` | `npm run fleet:sync` (hub) |
+
+**JonBeatz** is often where Jon works — **not** where tool knowledge should live exclusively. See `FLEET-TOOLS-KNOWLEDGE.md`.
+
+## Path standards
+
+- **START-HERE.md** is the primary entry point per profile
+- Use relative links in profile docs — avoid hardcoding sibling repo paths unless hub-specific (COMMAND-CENTER)
+- Profile root varies (`JonBeatz`, `DigitalStudioz`, etc.) — never MSC deploy paths unless Jon opened MSC repo
 
 ## Version tracking
 
-- Sync version across `package.json`, `TRUTH.md`, `.cursor/docs/MASTER-COMMANDS.md`, README badge.
-- Use `npm run version:sync` (Python, UTF-8 safe) — never rewrite README badges from raw PowerShell.
-- Run `npm run encoding:check` before doc commits; `npm run docs:sync` runs it automatically.
-- `ReCall.md` captures significant session outcomes; `Restore-Points.md` at milestones.
+- Sync version across **profile** `package.json`, `TRUTH.md`, `MASTER-COMMANDS.md`, `CHANGELOG.md`
+- **Shared skeleton** has its own `VERSION.md` — bump when fleet artifacts ship
+- Use **`npm run version:sync`** (Python UTF-8) for README badges
+- Run **`npm run encoding:check`** before doc commits
 
-## Backup ritual
+## Issue management
 
-- Default destination `G:\Hermes_Project_BackUpz\JonBeatz.dev` (override via `JBD_BACKUP_ROOT`).
-- Quick path: `npm run backup:quick` → `jonbeatz-dev-project-v{N}-{a-z}`.
-- The backup script refuses to write into the personal `...\JonBeatz` tree (allows `...\JonBeatz.dev`).
+- Profile bugs → `.cursor/docs/ISSUES-RESOLVED.md` or `npm run log:fix`
+- Fleet-wide tool gotchas → `TOOLS-REFERENCE.md` Risks section + optional vault atomic note
 
 ## Commit discipline
 
-- Do **not** auto-commit unless Jon asks. Doc-only changes use a `docs:` prefix.
-- Update docs when behavior changes (scripts, rituals, deploy).
-- No contradictory rules across `.mdc` files.
+- Doc-only: `docs:` prefix when Jon requests commit
+- Tool review sessions: prefer **`_core-scripts` + hub** commits together
+- Do **not** auto-commit unless Jon asks
+
+## MCP + skills
+
+- Project MCP secrets in `.env.local` — `npm run sync:mcp-env`
+- IN USE skills → vendored under `shared-profile-content/skills/` when possible
+- UI skills read order: Hallmark → NovaMira-Design → MSC-UI-Taste → Premium-UI → Emil motion pack

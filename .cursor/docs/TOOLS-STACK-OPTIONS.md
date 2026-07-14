@@ -272,6 +272,7 @@ Hostinger Node deploy · Playwright smoke
 | **Local dev** | pg0 `:5433` | Same | `npm run db:local`, `demo:seed`, `web:dev` |
 | **ORM** | Drizzle | Same | `lib/db/schema.ts` |
 | **Prod DB** | Neon PostgreSQL | VPS Postgres optional | `NEON_DATABASE_URL`, `db:push:prod` |
+| **Prod DB alt** | **Supabase** (WATCH B+ 88) | Neon | PG + Auth + Storage + Vector + MCP; self-host or cloud |
 | **Prod app** | Hostinger Node | Same | `deploy:package` + hPanel Restart |
 | **Auth** | Clerk (cloud) | Better Auth (in-app) | parked spike |
 

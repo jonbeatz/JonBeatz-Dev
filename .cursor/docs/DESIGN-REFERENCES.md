@@ -17,8 +17,10 @@ Living list of **design inspiration, component libraries, typography, and UI cra
 | **Copy-paste React blocks** | [21st.dev](https://21st.dev/) or [React Bits](https://www.reactbits.dev/) (watchlist) |
 | **Pick shadcn registry** | `.cursor/skills/Component-Registries/SKILL.md` + [registry.directory](https://registry.directory) |
 | **Jon sends a new link** | Agent appends a row under the best category + **Add queue** table + **[HERMES-SHOWCASE-SPEC.md](./HERMES-SHOWCASE-SPEC.md)** add queue if it's a build technique |
+| **Jon says `review design` / `grade this site`** | Full rubric via [Review-Tool.md](../prompts/Review-Tool.md) — grade + DESIGN-REFERENCES + optional showcase queue |
+| **Formal tool review** | Jon says **`review tool`** → TOOLS-WATCHLIST (not this file alone) |
 
-**Policy:** Reference only — **do not** add these to TOOLS-WATCHLIST unless Jon asks for a formal tool review (e.g. paid MCP/API).
+**Policy:** Reference only by default — **do not** add to TOOLS-WATCHLIST unless Jon asks for a formal tool review (paid MCP/API) or uses **review tool** / **review design**.
 
 ---
 
@@ -53,7 +55,7 @@ Living list of **design inspiration, component libraries, typography, and UI cra
 | [Cult UI](https://www.cult-ui.com/) | AI-agent UI patterns (chat, tool calls) | Pairs with Hermes/Telegram UI experiments |
 | [registry.directory](https://registry.directory) | Explorer for all shadcn/ui registries | Find `@namespace` URLs |
 | [shadcn/ui directory](https://ui.shadcn.com/docs/directory) | Official registry index | Authoritative list |
-| [DesignMD / getdesign.md](https://github.com/designmdcc/getdesign.md) | 72-brand DESIGN.md catalog | Skill: `.cursor/skills/DesignMD/` |
+| [DesignMD / getdesign.md](https://getdesign.md/) | **300+** brand DESIGN.md catalog (Google DESIGN.md spec) | Skill: `.cursor/skills/DesignMD/` · `npx getdesign add <brand>` |
 
 ---
 
@@ -101,6 +103,7 @@ Living list of **design inspiration, component libraries, typography, and UI cra
 | [Codrops](https://tympanus.net/codrops/) | Cutting-edge web experiments + tutorials | Pairs with **Scroll-Motion** / **GSAP** skills |
 | [Hover States](https://hoverstates.com/) | Interaction-focused web design | Scroll + hover reference |
 | [Navbar Gallery](https://navbar.gallery/) | Nav patterns only | Quick header audits |
+| [GitHub responsive-navbar topic](https://github.com/topics/responsive-navbar) | OSS nav pattern index | Fleet REF 2026-07-13 — browse repos for Next.js header implementations |
 
 ### Parallax inspiration feeds (gallery — design idea refs only)
 
@@ -311,7 +314,7 @@ Inspected from live `/_next/static/css/*` on [huly.io](https://huly.io/) (Jul 20
 
 | Date | URL | Category | Source | Note |
 |------|-----|----------|--------|------|
-| 2026-07-04 | https://21st.dev/ | Components | Jon | MCP in stack |
+| 2026-07-13 | https://brandmotion.in/violet-car.html | Showcase | Agent | Five-video scroll EV + liquid glass + plasma cursor — Build Showcase queue |
 | 2026-07-04 | https://designspells.com/?tag=desktop | Motion | Jon | Desktop micro-interaction spells |
 | 2026-07-04 | https://www.fontpair.co/ | Typography | Jon | Google font pairings |
 | 2026-07-04 | https://www.dark.design/ | Inspiration | Jon | Dark UI gallery |
@@ -320,6 +323,8 @@ Inspected from live `/_next/static/css/*` on [huly.io](https://huly.io/) (Jul 20
 | 2026-07-04 | https://godly.website/ | Inspiration | Jon | Premium web + scroll videos |
 | 2026-07-04 | https://mobbin.com/ | App UI | Jon | Production app patterns |
 | 2026-07-04 | https://refero.design/ | App UI | Agent/Tavily | SaaS screenshots by component |
+| 2026-07-13 | https://refero.design/mcp | Agent MCP | **Bookmark** A- (91) | Pro $17/mo when ready — Jon bookmark 2026-07-13 |
+| 2026-07-13 | https://styles.refero.design/ | DESIGN.md | **Bookmark** B+ (88) | 2k+ AI-readable design systems — setup later |
 | 2026-07-04 | https://www.lapa.ninja/ | Inspiration | Agent/Tavily | LP gallery |
 | 2026-07-04 | https://www.awwwards.com/ | Inspiration | Agent/Tavily | Award-level web |
 | 2026-07-04 | https://onepagelove.com/ | Inspiration | Agent/Tavily | Single-page sites |
@@ -377,6 +382,34 @@ Inspected from live `/_next/static/css/*` on [huly.io](https://huly.io/) (Jul 20
 | 2026-07-04 | https://help.runwayml.com/hc/en-us/articles/34170748696595-Creating-with-Keyframes-on-Gen-3 | Docs | Agent | Runway Turbo first+middle+last |
 | 2026-07-04 | https://zerasoftwarestudio.com/webdeveloper?ref=hassen | Built reference | Jon | Next.js Lenis+GSAP course LP — pinned 6-chapter hero, iMessage proof, grain frame |
 | 2026-07-04 | https://huly.io/ | SaaS hero / glass | Jon | Batch 6 — pointer spotlight, blue glow, transparent hero feature tiles |
+| 2026-07-13 | https://github.com/MustBeSimo/cinematic-scroll-skill | Tool (ADOPT) | Agent | Craft skill + doctor — vendored vault; A- (92) |
+| 2026-07-13 | https://mustbesimo.github.io/cinematic-scroll-skill/ | Live demo | Agent | Eleven-worlds reel; theme-adaptive Petroleum/Swiss |
+| 2026-07-13 | https://alvarotrigo.com/fullPage/scroll-effects/ | Inspiration / tool | Agent | Section scroll transitions — WATCH B- (82) |
+| 2026-07-13 | https://github.com/zubair-trabzada/scroll-cinematic-claude | Workflow doc | Agent | Higgsfield MCP scroll — WATCH; fal is primary |
+| 2026-07-13 | vault:web-xtraz/Guide.pdf | Workflow doc | Agent | Vigneshwari 5-phase premium AI site — archive |
+| 2026-07-13 | vault:web-xtraz/webguide.pdf | Workflow doc | Agent | RIFT Scroll-Cinema six-act multi-clip engine (2026) |
+| 2026-07-13 | vault:web-xtraz/Devini-Labs-Scroll-Website-Build-Guide.docx | Workflow doc | Agent | TEA export — canonical devini-tea/BUILD-GUIDE |
+| 2026-07-13 | vault:web-xtraz/Ai site prompt v1.docx | Prompt | Agent | Dark luxury agency one-shot (Three.js/GSAP/Lenis) |
+| 2026-07-13 | https://github.com/DeusData/codebase-memory-mcp | Tool (IN USE) | Agent | Code graph MCP — A- (92); JonBeatz indexed |
+| 2026-07-13 | https://github.com/calesthio/OpenMontage | Tool (IN USE) | Agent | Agentic video studio — A- (90); `assets/openmontage` |
+| 2026-07-13 | https://github.com/msitarzewski/agency-agents | Tool (WATCH) | Agent | 230+ agent personas — cherry-pick only B+ (86) |
+| 2026-07-13 | https://github.com/mintplex-labs/anything-llm | Tool (WATCH) | Agent | RAG chat desktop — overlaps Hermes B (83) |
+| 2026-07-13 | https://github.com/emilkowalski/skills | Tool (IN USE) | Agent | Animation taste pack A- (90); `skills:emil:status` |
+| 2026-07-13 | https://brandmotion.in/violet-car.html | Prompt / showcase | Agent | Five-video scroll cinematic EV — liquid glass + R3F + GSAP; B+ (85) REF |
+| 2026-07-13 | https://github.com/ionic-team/capacitor | Tool (WATCH) | Agent | Web→native shell v8.4 — B- (82); Flutter primary mobile |
+| 2026-07-13 | https://www.prisma.io/ | Tool (WATCH) | Agent | ORM + Prisma Postgres/Compute — B- (81); Drizzle chosen |
+| 2026-07-13 | https://github.com/topics/responsive-navbar | Pattern catalog | Agent | OSS responsive nav repos — REF alongside Navbar Gallery |
+| 2026-07-13 | https://github.com/Eugeny/tabby | Tool (WATCH) | Agent | Tabbed terminal + SSH B (83) |
+| 2026-07-13 | https://github.com/Graphify-Labs/graphify | Tool (WATCH) | Agent | Multimodal knowledge graph B (84); CBM IN USE |
+| 2026-07-13 | https://artlist.io/ | Tool (WATCH) | Agent | Stock + AI toolkit B- (81); paid |
+| 2026-07-13 | https://nosignups.net/ | Resource directory | Jon | 210 no-signup OSS browser tools — B (84) REF bookmark |
+| 2026-07-13 | https://allarddewinter.github.io/mp4-to-jpg/ | Tool (REF) | Jon | Browser MP4→JPEG — B (85); privacy-local; scroll/LLM stills; ffmpeg primary |
+| 2026-07-13 | https://videotojpg.com/ | Tool (REF) | Jon | Browser frame extract B+ (88) — bookmarked; blur detect, HEVC WASM |
+| 2026-07-13 | https://github.com/cheahjs/free-llm-api-resources | Resource directory | Agent | Free LLM API tiers B+ (88) REF — pair with CURSOR-MODELS-CHEATSHEET |
+| 2026-07-13 | https://freellm.net/ | Resource directory | Jon | awesome-freellm-apis B+ (87) REF — bookmarked; Cursor config generator |
+| 2026-07-13 | https://supabase.com/ | Platform (REF) | Jon | B+ (88) — **bookmark** Neon alt for Next-Flick; PG + Auth/Storage/Vector/MCP; use Better Auth for in-app auth |
+| 2026-07-13 | https://opencut.app/ | Tool (WATCH) | Jon | CapCut alt classic UI — B- (82); rewrite MCP pending |
+| 2026-07-13 | https://github.com/aievolutionpl/step-beyond | Tool (WATCH) | Agent | Agent verify/permission skill v4 — B- (80); cherry-pick refs |
 
 ---
 

@@ -50,6 +50,9 @@
 | **Google Workspace (personal)** | Free (OAuth) | File: `%LOCALAPPDATA%\hermes\profiles\jonbeatz\google_token.json` | `npm run google:doctor` (JonBeatz) | jonbeatz@gmail.com — Gmail, Drive, Docs |
 | **Firecrawl MCP** | Freemium | `FIRECRAWL_API_KEY` | VPE / optional | Master has key |
 | **Browserbase** | SaaS | `BROWSERBASE_*` | JonBeatz project MCP | Hub overlay |
+| **codebase-memory-mcp** | Free | — | `npm run codebase-memory:status` | IN USE — code graph MCP; JonBeatz indexed |
+| **OpenMontage** | Per use‡ | `FAL_KEY` | `npm run openmontage:status` | IN USE — `D:\Hermes\assets\openmontage` |
+| **profile-health-watchdog** | Free | — | Hermes cron every 6h | Fleet — LiteLLM key probe; Telegram on failure |
 
 Run `npm run ecosystem:audit` for exact SET/EMPTY per file.
 
@@ -114,6 +117,17 @@ Run `npm run ecosystem:audit` for exact SET/EMPTY per file.
 
 **Do not** let agents `taskkill` LiteLLM/ngrok — use `npm run deepseek:off` from JonBeatz only.
 
+### Hermes profile fleet health (2026-07-13)
+
+| Check | What | Where |
+|-------|------|-------|
+| **Master key policy** | All 7 profiles use `sk-jonbeatz-deepseek-2026` + `deepseek-v4-pro` | `%LOCALAPPDATA%\hermes\profiles\*\config.yaml` |
+| **Watchdog** | Cron every 6h — probes LiteLLM `/v1/models` per profile key | `profiles\jonbeatz\scripts\profile-health-watchdog.py` |
+| **Alert** | Telegram only on failure; silent = healthy | Hermes cron `56769cb1e0f3` |
+| **Backups** | Before fleet-wide key changes | `D:\Hermes\projects\JonBeatz\.backups\profiles\YYYYMMDD\` |
+
+**Gotcha:** Wrong per-profile key → LiteLLM returns HTTP 400 **"No connected db"** (misleading — not a SQLite issue). See JonBeatz `TRUTH.md` → LiteLLM Master Key Policy.
+
 ---
 
 ## WordPress / LocalWP sites
@@ -148,9 +162,11 @@ App passwords: see `WORDPRESS_*` / `WP_*` in env or `MASTER-SECRETS-INVENTORY.lo
 | Location | Contents |
 |----------|----------|
 | `D:\Hermes\projects\Next-Flick\SKILL-INDEX.md` | Catalog of `.cursor/skills/` |
-| `%USERPROFILE%\.agents\skills\` | Global skills (GSAP, blog, hallmark, find-skills, …) |
+| `%USERPROFILE%\.agents\skills\` | Global skills (GSAP, blog, hallmark, emil-design-eng, find-skills, …) |
 | `%USERPROFILE%\.claude\skills\` | Claude Code skills |
 | `npm run skills:hallmark:install` | Anti-slop design skill |
+| `npm run skills:emil:install` | Emil animation pack — vendor to shared library + sync |
+| `npm run skills:emil:status` | Verify emilkowalski/skills (library + project) |
 | `npx skills find [query]` | Discover new skills |
 
 ---

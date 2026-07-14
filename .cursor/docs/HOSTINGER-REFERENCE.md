@@ -37,4 +37,4 @@ See `.cursor/docs/HOSTINGER-DEPLOY.md` and `.cursor/skills/Hostinger-Ops/SKILL.m
 
 ---
 
-*Bootstrap template — 2026-07-11*
+*Bootstrap template — 2026-07-13*

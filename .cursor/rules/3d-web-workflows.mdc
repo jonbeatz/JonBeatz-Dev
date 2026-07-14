@@ -24,6 +24,8 @@ globs:
 
 ## Before scroll/3D builds
 
-1. Read `.cursor/docs/3D-WEB-WORKFLOWS.md`
+1. Read `.cursor/docs/3D-WEB-WORKFLOWS.md` + `.cursor/docs/3D-DEV-SETUP.md`
 2. Run `npm run workflows:3d:status` + `npm run scroll:motion:status`
 3. Trigger: `.cursor/prompts/Build-3D-Website.md`
+4. Polish pass: **Design-Engineer** skill (screenshot rubric)
+5. Quality gate: **cinematic-scroll-skill** `npm run doctor` in vault (≥ 80) — see Build-3D-Website Step 4

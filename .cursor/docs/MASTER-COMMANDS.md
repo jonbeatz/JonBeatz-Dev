@@ -19,8 +19,8 @@
 | `npm run session:start:full` | Same as `-Full` | **Start Project** |
 | `npm run session:open` | Light probes — no stack restart | **Open Project** / **Resume Session** |
 | `npm run session:resume` | Alias of `session:open` | Same |
-| `npm run session:handoff` | Vault note only — fleet stays up | **Close Project** / **Close Session** |
-| `npm run session:stop` | Day-end closeout (+ optional stack stop) | **End Project** |
+| `npm run session:handoff` | Vault note only — fleet stays up; sweeps Hermes `cua-driver` | **Close Project** / **Close Session** |
+| `npm run session:stop` | Day-end closeout (+ optional stack stop); sweeps Hermes `cua-driver` | **End Project** |
 | `npm run session:stop -- -StopDeepSeek -StopComfy` | Stop DeepSeek + ComfyUI | End + free VRAM |
 | `npm run session:stop -- -StopGoogleApi` | Legacy alias for `-StopDeepSeek` | Same |
 | `npm run doctor` | **Unified** health: services, env, image, Google, git | Anytime |
@@ -93,6 +93,7 @@
 |---------|--------------|
 | `npm run fleet:status` | Audit shared skeleton + sibling profile parity |
 | `npm run fleet:sync` | Push sync:docs + sync:skills to all fleet profiles |
+| `npm run fleet:merge-npm` | Additive merge of fleet npm aliases into each profile package.json |
 | `npm run docs:pull-shared` | Alias: sync universal docs into this profile |
 
 **Doc:** [COMMAND-CENTER.md](./COMMAND-CENTER.md)
@@ -107,6 +108,9 @@
 | `npm run workflows:3d:status` | Verify **3d-web-workflows** asset vault + shared docs/skills wiring |
 | `npm run vault:robonuggets` | Clone/update RoboNuggets HTML modules into asset vault |
 | `npm run vault:robonuggets:refresh` | Force re-clone RoboNuggets vault repos |
+| `npm run vault:cinematic-scroll-skill` | Clone MustBeSimo cinematic-scroll-skill into asset vault |
+| `npm run vault:cinematic-scroll-skill:refresh` | Force re-clone cinematic-scroll-skill |
+| `npm run vault:pdf:inventory` | Extract text from all vault PDF/DOCX → `vault-pdf-inventory.json` |
 | `npm run 3dgenstudio:install` | Install 3DGenStudio @ `D:\Hermes\apps\3DGenStudio` |
 | `npm run 3dgenstudio:start` | Start UI (:5183) + API (:3021); requires ComfyUI :8188 |
 | `npm run hermes:theme:reflect` | Install **Reflect** Hermes dashboard theme (+ rollback manifest) |
@@ -168,6 +172,36 @@
 **Docs:** [TELEGRAM-WORKFLOW.md](./TELEGRAM-WORKFLOW.md)
 
 **Pitfall:** Hermes Desktop UI ≠ Telegram listener. Gateway must be running and profile `.env` must have `TELEGRAM_BOT_TOKEN`. Desktop UI is optional for phone chat; use TELEGRAM sidebar or `telegram:sessions` to view phone threads on PC.
+
+## Hermes Browser Extension (Chrome / Brave ↔ `:8642`)
+
+| Command | What it does |
+|---------|--------------|
+| `npm run hermes-browser:install` | Sync `API_SERVER_*` to profile env, build extension, restart gateway, open browser extensions + copy API key |
+| `npm run hermes-browser:status` | Dist manifest, profile CORS, `:8642` health |
+| `npm run hermes-browser:cors-sync` | Detect extension IDs → set `API_SERVER_CORS_ORIGINS` → restart gateway |
+| `npm run hermes-browser:sync-api-env` | Copy `API_SERVER_*` from global Hermes `.env` into profile `.env` |
+| `npm run hermes-browser:clip-key` | Copy `API_SERVER_KEY` to clipboard (paste in extension Settings) |
+| `npm run hermes-browser:companion` | Install + enable `hermes-browser-companion` plugin (Desktop bridge tools) |
+| `npm run hermes-browser:build` | Rebuild `D:\Hermes\apps\hermes-browser-extension` only |
+
+**Paths:** extension clone `D:\Hermes\apps\hermes-browser-extension` · load unpacked `dist/` · gateway `http://127.0.0.1:8642`
+
+**Workflow:** Live webpage questions → **side panel (Alt+H)**. Hermes Desktop = code/files; does not auto-see open tabs. Companion plugin adds `browser_context_*` tools when enabled on the profile.
+
+**Pitfall:** After load unpacked, **must** run `hermes-browser:cors-sync` or every browser request gets **403**. Profile-scoped `HERMES_HOME` needs `API_SERVER_*` in `profiles/<slug>/.env`, not global only.
+
+**Docs:** [TOOLS-REFERENCE.md](./TOOLS-REFERENCE.md) § hermes-browser-extension
+
+## PocketBase (on-deck backend `:8090`)
+
+| Command | What it does |
+|---------|--------------|
+| `npm run pocketbase:install` | Download v0.39.6 binary to `D:\Hermes\apps\pocketbase` + smoke `:8090` |
+| `npm run pocketbase:status` | Binary present + port check |
+| `npm run pocketbase:start` | Start localhost `:8090` on demand (does not touch `:3000` / `:4000` / `:8642`) |
+
+**Theatre.js (on-deck):** devDeps `@theatre/core`, `@theatre/studio`, `@theatre/r3f` in JonBeatz playground — not wired to routes until showcase spike.
 
 **Shortcut (one-click local prep + Desktop):** `D:\Hermes\Start Hermes Desktop (JonBeatz).lnk`  
 Script: `D:\Hermes\projects\_core-scripts\hermes-desktop\Start-JonBeatz-Hermes-Desktop.ps1`
@@ -385,6 +419,23 @@ MSC Kanban ports (3001/3005/9119) live in the **MyStudioChannel** repo — not s
 | Command | What it does |
 |---------|--------------|
 | `npm run tools:status` | Config queue + verdict counts (READY vs NEEDS_KEY) |
+| `npm run tools:review-precheck -- "url-or-name"` | Duplicate check before review (TOOLS-* + DESIGN-REFERENCES) |
+| `npm run codebase-memory:status` | Code graph MCP index health (JonBeatz hub) |
+| `npm run codebase-memory:reindex` | Rebuild codebase-memory-mcp index |
+| `npm run openmontage:status` | OpenMontage venv + Remotion + FAL_KEY check |
+| `npm run cua:cleanup` | Close Cua overlay + sweep orphaned `cua-driver` only |
+| `npm run cua:cleanup:all` | Also kill live Hermes `cua-driver` (session close uses this) |
+| `npm run cua:cleanup:reset` | Kill driver + restart DWM (clears leaked grey GPU overlay; ~1s flicker) |
+| `npm run cua:cleanup:check` | Dry run — report only |
+| `npm run cua:overlay:harden` | **Permanent grey-box fix** — bake `serve --no-overlay` into logon task + restart daemon (re-run after cua-driver update) |
+| `npm run cua:overlay:check` | Dry run — is overlay hardened? |
+| `npm run handy:status` | Handy offline STT install check (`%LOCALAPPDATA%\Handy\Handy.exe` + winget) |
+| `npm run handy:model` | Download default Parakeet model into HF cache (workaround for Handy content-range bug) |
+| `npm run handy:model:list` | List Handy catalog repo ids + default GGUF filenames |
+| `npm run wan21:install` | Clone Wan2.1 + download T2V-1.3B weights to `H:\AI_Models\Wan2.1` |
+| `npm run wan21:status` | Verify Wan2.1 repo + native/Diffusers checkpoints on H: |
+| `npm run skills:emil:install` | Install/update emilkowalski/skills — npx global + vendor to `shared-profile-content/skills` + sync project |
+| `npm run skills:emil:status` | Verify 5 Emil skills in shared library, global `~\.agents\skills`, and project `.cursor\skills` |
 | `npm run ecosystem:audit` | Regenerate secrets inventory + credentials manifest + G:\\ backup |
 | `npm run agent-reach:doctor` | Agent-Reach channel health |
 | `npm run watch:check` | claude-video `/watch` preflight + Groq optional |
@@ -392,9 +443,10 @@ MSC Kanban ports (3001/3005/9119) live in the **MyStudioChannel** repo — not s
 | `agent-browser snapshot -i` | **Agent Browser** — ref-based page snapshot (CLI) |
 | `npm run sync:docs -- -Write -AddMissing` | Pull TOOLS-*.md into `.cursor/docs/` |
 
-**Canonical:** `D:\Hermes\projects\_core-scripts\shared-profile-content\docs\TOOLS-*.md`
+**Canonical:** `D:\Hermes\projects\_core-scripts\shared-profile-content\docs\TOOLS-*.md`  
+**Fleet policy:** [FLEET-TOOLS-KNOWLEDGE.md](./FLEET-TOOLS-KNOWLEDGE.md) — reviews are Hermes-wide; JonBeatz is hub, not sole owner.
 
-**Cursor trigger:** paste repo URL or say **review tool** → `Review-Tool.md`.
+**Cursor trigger:** paste repo URL or say **review tool** → `Review-Tool.md`. **review batch** · **review design** · **review session done** → same ritual family.
 
 ---
 
@@ -413,6 +465,9 @@ MSC Kanban ports (3001/3005/9119) live in the **MyStudioChannel** repo — not s
 | **push jon-beatz live** / **update jon-beatz site** | `site:package` + MCP deploy + CDN flush |
 | **push jonbeatz.dev live** / **update .dev site** | Open `D:\Hermes\projects\JonBeatz.dev` → `npm run site:package` + MCP deploy `jonbeatz.dev` + CDN flush |
 | **review tool** / paste repo URL | Review-Tool.md + update TOOLS-*.md |
+| **review batch** / multiple URLs | Review-Tool.md batch — grades first, one install gate |
+| **review design** / **grade this site** | Review-Tool.md design grade → DESIGN-REFERENCES |
+| **review session done** | Review-Session-Done.md + sync:docs + tools:status |
 
 See **[Agent-Runbook.md](./Agent-Runbook.md)** for full copy/paste prompts.
 

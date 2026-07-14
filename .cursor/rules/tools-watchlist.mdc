@@ -1,0 +1,69 @@
+---
+description: Tool review workflow — grades, setup status, additive arsenal policy (v2)
+alwaysApply: true
+---
+
+# Tools Watchlist — Agent Rules
+
+When Jon pastes a **GitHub/repo URL**, says **review tool**, **evaluate tool**, **add to watchlist**, **review batch**, **review design**, or **review session done**:
+
+## Fleet scope (mandatory)
+
+- **JonBeatz is the review desk, not the knowledge base.** Grades, setup status, and accepted tools belong to the **entire Hermes fleet**.
+- **Write canonical first:** `D:\Hermes\projects\_core-scripts\shared-profile-content\` (docs, skills, scripts, rules, prompts).
+- **Then mirror:** `npm run sync:docs -- -Write` → profile `.cursor/docs/`.
+- **Then propagate:** `npm run fleet:sync` from hub when skills/scripts/rules/prompts changed.
+- **Never** persist tool grades only under JonBeatz without updating shared `TOOLS-*.md`.
+- Policy doc: [FLEET-TOOLS-KNOWLEDGE.md](../docs/FLEET-TOOLS-KNOWLEDGE.md)
+
+## Canonical docs (Hermes-wide)
+
+| Doc | Path |
+|-----|------|
+| Watchlist + grades | `D:\Hermes\projects\_core-scripts\shared-profile-content\docs\TOOLS-WATCHLIST.md` |
+| Setup status (READY vs keys) | `...\docs\TOOLS-SETUP-STATUS.md` |
+| Full research | `...\docs\TOOLS-REFERENCE.md` |
+| Verify commands | `...\docs\TOOLS-SETUP-STATUS.md` → Post-install verify registry |
+
+| Prompt | When |
+|--------|------|
+| [Review-Tool.md](../prompts/Review-Tool.md) | Single, batch, design grade, re-review |
+| [Review-Session-Done.md](../prompts/Review-Session-Done.md) | **review session done** |
+
+## Policy (Jon 2026-07-04, v2 2026-07-13)
+
+1. **Additive only** — never disable or replace working stack (Mem0, DeepSeek, ComfyUI, MCPs).
+2. **Overlap OK** — strong alternatives on deck still earn ADOPT / IN USE.
+3. **OSS/free first** — minimal paid OK when ROI is high.
+4. **Install gate** — IN USE only after Jon approves (or says "run install now").
+5. **Doc threshold** — only **B- (80+) and above** persist to watchlist / setup-status / reference. C+ and below: grade in chat only unless Jon asks.
+6. **Grades first** — full review block in chat **before** any `AskQuestion` install prompt.
+7. **Duplicate pre-check** — run `npm run tools:review-precheck` or grep TOOLS-* / DESIGN-REFERENCES before research; skip unless **re-review**.
+8. **Batch mode** — multiple URLs → all grade blocks first → one scoreboard → **one** install AskQuestion.
+9. **Security gate** — mandatory `security-review` subagent for auth/deploy/agent-config-writing tools.
+10. **Risks required** — every review includes Windows/ports/VRAM/license/auto-install gotchas.
+
+## Required outputs per review
+
+1. Letter grade (A+→F) + score /100 + one-line summary (use fixed template in Review-Tool.md)
+2. Verdict: IN USE | ADOPT | WATCH | SKIP
+3. Setup status: READY | PARTIAL | NEEDS_KEY | NEEDS_LOGIN | NOT_INSTALLED
+4. Gap, Overlap, **Risks**, Verify, Recommendation
+5. Update **shared canonical** docs in `_core-scripts/shared-profile-content/docs/` → `npm run sync:docs -- -Write`
+6. If install added skills/scripts/rules → shared skeleton + `npm run fleet:sync` (hub)
+7. **Only then** — install AskQuestion (single or batch)
+8. Post-install: verify registry command → flip Setup READY/PARTIAL in **shared** TOOLS-SETUP-STATUS
+9. Optional: `draven:add` + vault on ADOPT→IN USE (link canonical row, do not duplicate full grade table)
+
+## Re-grade policy
+
+- **WATCH:** 6 months or major version
+- **IN USE:** breakage/upgrade or Jon **re-review**
+- **ADOPT:** before install if row >3 months old
+
+## Quick status
+
+```powershell
+npm run tools:review-precheck -- "name-or-url"
+npm run tools:status
+```

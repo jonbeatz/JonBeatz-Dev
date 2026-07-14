@@ -148,7 +148,7 @@ Ritual-only — never read the session summary aloud.
 npm run session:stop -- -StopDeepSeek -StopComfy
 ```
 
-**Default `session:stop` also:** stops OmniVoice daemon when `DRAVEN_OMNI_STOP_ON_END=1`. Does **not** stop LM Studio or Telegram gateway.
+**Default `session:stop` also:** stops OmniVoice daemon when `DRAVEN_OMNI_STOP_ON_END=1`; sweeps Hermes `cua-driver` (prevents grey overlay leak). Does **not** stop LM Studio or Telegram gateway. **Prevention:** `npm run cua:overlay:harden` (re-run after cua-driver update). If a stuck grey box remains, run `npm run cua:cleanup:reset` (~1s flicker).
 
 ---
 

@@ -1,7 +1,7 @@
 # Fleet Boot + Session Rituals — Hermes Ecosystem
 
 **Canonical reference** for PC login, Cursor MCP, LM Studio, and **Start / Open / Close / End** workflows.  
-**Shared library:** `D:\Hermes\projects\_core-scripts\shared-profile-content` · **v1.28.2+**
+**Shared library:** `D:\Hermes\projects\_core-scripts\shared-profile-content` · **v1.29.1+**
 
 New skeleton projects inherit this via bootstrap + `npm run sync:docs -- -Write -AddMissing` + `npm run sync:rituals`.
 
@@ -51,6 +51,8 @@ New skeleton projects inherit this via bootstrap + `npm run sync:docs -- -Write 
 | **Project launch** | `.cursor/mcp.json` (gitignored) | Valid `{ "mcpServers": { ... } }` — empty `{}` for new leaves, **or** real `command`/`args` blocks (JonBeatz hub: 2 live servers) |
 | **Catalog only** | `.cursor/mcp-manifest.json` | Optional docs/reference — **never** paste `project_mcp_servers` into `mcp.json` |
 | **Hermes profile** | `%LOCALAPPDATA%\hermes\profiles\jonbeatz\config.yaml` | `mcp_servers: {}` — Cursor-only MCP (no duplicate Hostinger/github Node children) |
+
+**LiteLLM master key (all profiles — 2026-07-13):** Every Hermes profile `model.api_key` must be `sk-jonbeatz-deepseek-2026` with `deepseek-v4-pro` at `http://127.0.0.1:4000/v1`. Wrong keys return HTTP 400 **"No connected db"** (stateless LiteLLM — not a SQLite bug). **Watchdog:** `profiles\jonbeatz\scripts\profile-health-watchdog.py` — Hermes cron every 6h; Telegram alert on failure only. Policy: JonBeatz `TRUTH.md` → LiteLLM Master Key Policy.
 
 **Red Cursor error:** `mcpServers must be an object` → fix project `.cursor/mcp.json` schema.
 
@@ -179,4 +181,4 @@ Get-NetTCPConnection -LocalPort 3000 -State Listen -ErrorAction SilentlyContinue
 
 ---
 
-*Last updated: 2026-07-09 · shared-profile-content v1.28.2*
+*Last updated: 2026-07-13 · shared-profile-content v1.30.6*

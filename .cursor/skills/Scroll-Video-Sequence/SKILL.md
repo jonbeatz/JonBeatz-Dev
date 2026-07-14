@@ -226,6 +226,9 @@ Don't ship the AI Studio bundle as-is — migrate to our stack for CWV, reduced 
 | Resource | Path |
 |----------|------|
 | **ScrollFrameHero template** | `templates/components/ScrollFrameHero.tsx` |
+| **Cinematic beat overlays** | `templates/components/CinematicBeatOverlay.tsx` + `templates/lib/scrollBeats.ts` |
+| **HUD chrome** | `templates/components/HudFrame.tsx` |
+| **Iron Man port guide** | `3d-scroll-website/references/08-iron-man-patterns.md` |
 | **Scroll-Motion** | Lenis + GSAP for sections after hero |
 | **3d-scroll-website** | Full pipeline + vault adapters |
 | **Vault workflows** | `D:\Hermes\assets\3d-web-workflows\devini-tea\`, `ai-scroll-product-workflow\`, `SCROLL-VIDEO-RESEARCH.md`, `IronMan\` |

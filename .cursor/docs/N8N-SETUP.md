@@ -41,6 +41,20 @@ For process / disk / ngrok checks, run the localhost sidecar and probe it from n
 | `EXTENDED_HEALTH_PROFILE` | (optional) | Require this Hermes profile in `hermes gateway list` |
 | `NGROK_API_URL` | `http://127.0.0.1:4040/api/tunnels` | ngrok inspector |
 | `HERMES_EXE` | auto | Path to `hermes.exe` |
+| `EXTENDED_HEALTH_PYTHON` | auto (system) | **Must not** be Hermes venv Python — locks `.pyd` files and blocks `hermes update` on Windows |
+
+### Launcher Python (Windows)
+
+`start-extended-health.bat` resolves Python in this order:
+
+1. `EXTENDED_HEALTH_PYTHON` (if set)
+2. `py -3.12` / `py -3` launcher
+3. `%LocalAppData%\Programs\Python\Python312\python.exe` (or 311)
+4. First `python` on PATH **excluding** `%LOCALAPPDATA%\hermes\hermes-agent\venv`
+
+It **refuses** to start if the only match is Hermes venv Python.
+
+Starts with **`pythonw.exe`** (no console window). Skip-if-already-listening on `:5699`. Sidecar is started by `start-n8n.bat` when n8n boots — not needed when n8n is off.
 
 ### Suggested n8n pattern
 

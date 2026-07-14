@@ -80,7 +80,9 @@
     "pocketbase:start": "powershell -ExecutionPolicy Bypass -File D:\\Hermes\\projects\\_core-scripts\\shared-profile-content\\scripts\\pocketbase-start.ps1",
     "fleet:sync": "powershell -ExecutionPolicy Bypass -File D:\\Hermes\\projects\\_core-scripts\\shared-profile-content\\scripts\\hermes-fleet-sync.ps1",
     "fleet:merge-npm": "powershell -ExecutionPolicy Bypass -File D:\\Hermes\\projects\\_core-scripts\\shared-profile-content\\scripts\\merge-fleet-npm-scripts.ps1",
-    "fleet:status": "powershell -ExecutionPolicy Bypass -File D:\\Hermes\\projects\\_core-scripts\\shared-profile-content\\scripts\\hermes-fleet-status.ps1"
+    "fleet:status": "powershell -ExecutionPolicy Bypass -File D:\\Hermes\\projects\\_core-scripts\\shared-profile-content\\scripts\\hermes-fleet-status.ps1",
+    "kinocut:install": "powershell -ExecutionPolicy Bypass -File D:\\Hermes\\projects\\_core-scripts\\shared-profile-content\\scripts\\kinocut-install.ps1",
+    "kinocut:status": "powershell -ExecutionPolicy Bypass -File D:\\Hermes\\projects\\_core-scripts\\shared-profile-content\\scripts\\kinocut-status.ps1"
   },
   "author": "Jon Beatz",
   "license": "UNLICENSED",

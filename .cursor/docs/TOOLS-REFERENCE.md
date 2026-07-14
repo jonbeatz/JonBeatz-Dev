@@ -2634,3 +2634,171 @@ Next.js + TypeScript dashboard: auth, i18n, RBAC, ~18 pages, 90+ UI components.
 
 **Recommendation:** **WATCH** — layout reference for admin dashboards; spike only.
 
+---
+
+## InsForge (2026-07-14)
+
+- **URL:** https://github.com/InsForge/InsForge · https://insforge.dev/
+- **Grade:** **B+ (88/100)** · **License:** Apache-2.0 · **Stars:** ~12k
+- **Verdict:** **IN USE** — agent-native BaaS spike stack (auth/DB/storage/MCP)
+- **Status:** **READY** @ `D:\Hermes\apps\insforge` (localhost binds; telemetry off)
+
+### Summary
+
+Open-source backend aimed at AI agents: Postgres, auth, storage, serverless functions, built-in MCP. **Hermes install:** official `deploy/docker-compose` under `D:\Hermes\apps\insforge`, project `hermes-insforge`, ports **127.0.0.1 only** (`:7130` app, `:15432` disposable PG — **not Neon**).
+
+### Commands
+
+```powershell
+npm run insforge:install   # ensure compose + .env + up + smoke
+npm run insforge:status
+npm run insforge:start
+npm run insforge:stop      # add -- -Purge to wipe volumes
+```
+
+Admin: `D:\Hermes\apps\insforge\ADMIN-CREDENTIALS.txt` (gitignored). MCP: wire only during spikes — remove from Cursor MCP after.
+
+### Gap / overlap
+
+| Layer | Hermes |
+|-------|--------|
+| **Neon** | **IN USE** — PG for Next-Flick |
+| **Supabase** | **REF** — Neon alt bookmark |
+| **LiteLLM / DeepSeek** | **IN USE** — LLM gateway |
+| **InsForge** | Full agent backend — would stack auth+storage on top of Neon |
+
+### Risks
+
+- **Docker + port surface** — do not expose admin/MCP publicly without auth
+- **Overlap** with Neon/Supabase/Better Auth — avoid dual truth for prod data
+- **Cloud vendor path** — evaluate pricing before defaulting off self-host
+- **Security gate required** before install (auth + deploy + agent config)
+
+**Verify:** `npm run insforge:status` → HTTP 200 on `http://127.0.0.1:7130/`.
+
+**Recommendation:** **IN USE** (toolchest spike) — keep Neon for Next-Flick prod; stop stack when idle.
+
+---
+
+## aitmpl.com — Claude Code Templates (2026-07-14)
+
+- **URL:** https://aitmpl.com/
+- **Grade:** **B (84/100)** · **License:** mixed (per component) · **Type:** marketplace
+- **Verdict:** **REF** — browse catalog; cherry-pick only
+- **Status:** **READY** (web)
+
+### Summary
+
+Marketplace of ready-to-use Claude Code configs: skills, agents, commands, hooks, MCPs, plugins. Stack builder UI for installing curated component sets.
+
+### Gap / overlap
+
+| Layer | Hermes |
+|-------|--------|
+| **agency-agents / fleet skills** | **IN USE** — curated `.cursor/skills` |
+| **TOOLS watchlist** | Fleet-wide review desk |
+| **aitmpl** | External Claude Code component shop |
+
+### Risks
+
+- **Quality variance** — community templates; grade before install
+- **Skill sprawl** — do not bulk-install into JonBeatz without review
+- **MCP auto-add** — security gate for any auth/deploy tools
+
+**Recommendation:** **REF** — use as discovery when hunting Claude Code patterns; keep fleet `shared-profile-content` as source of truth.
+
+---
+
+## Toolfolio (2026-07-14)
+
+- **URL:** https://toolfolio.com/
+- **Grade:** **B- (81/100)** · **License:** N/A (directory) · **Type:** discovery site
+- **Verdict:** **REF** — bookmark only
+- **Status:** **READY** (web)
+
+### Summary
+
+Curated AI/dev tool directory for browsing SaaS and OSS tools. Not an installable product.
+
+### Risks
+
+- **Affiliate/marketing bias** possible — verify claims independently
+- **Not a substitute** for Hermes TOOLS-WATCHLIST grades
+
+**Recommendation:** **REF** — discovery bookmark alongside Nosignups / free-llm directories.
+
+---
+
+## Databasement (2026-07-14)
+
+- **URL:** https://github.com/David-Crty/databasement
+- **Grade:** **A- (90/100)** · **License:** MIT · **Stars:** ~1.3k
+- **Verdict:** **IN USE** — self-hosted DB backup ops UI + MCP
+- **Status:** **READY** @ `D:\Hermes\apps\databasement` (Docker `127.0.0.1:2226`)
+
+### Summary
+
+Self-hosted dashboard for database backups (Postgres/MySQL/SQLite and related targets), with MCP + Telegram hooks for agent-driven ops. **Hermes install:** `davidcrty/databasement:1`, data volume `D:\Hermes\apps\databasement\data`, bound **127.0.0.1:2226** only.
+
+### Commands
+
+```powershell
+npm run databasement:install
+npm run databasement:status
+npm run databasement:start
+npm run databasement:stop
+```
+
+First browser visit: create admin + enable 2FA. Prefer backup-only DB roles for Neon targets. MCP: scoped token; avoid restore tools in daily Cursor MCP.
+
+### Gap / overlap
+
+| Layer | Hermes |
+|-------|--------|
+| **Neon** | **IN USE** — prod PG; limited native backup UX in agent loop |
+| **Hostinger / payload.sqlite (MSC)** | MSC-scoped; not JonBeatz default |
+| **Databasement** | Fills **backup + restore ops** gap for fleet DBs |
+
+### Risks
+
+- **Docker + credentials** — backup jobs need DB URLs; keep secrets in vault/.env, not UI notes
+- **`:2226` bind** — localhost only unless reverse-proxied
+- **Security gate** before MCP enable (can touch live DBs)
+- **Windows Docker** — Desktop required; resource cost vs Hostinger SSH backups
+
+**Verify:** `npm run databasement:status` → HTTP 200 on `http://127.0.0.1:2226/`.
+
+**Recommendation:** **IN USE** — primary hermes-side DB backup ops UI; restore stays human-gated.
+
+---
+
+## Voicebox (jamiepine) (2026-07-14)
+
+- **URL:** https://voicebox.sh/ · https://github.com/jamiepine/voicebox
+- **Grade:** **A- (92/100)** · **License:** MIT · **Stars:** ~41k
+- **Verdict:** **WATCH** — local voice studio; Jon self-install later; do **not** replace Handy + OmniVoice yet
+- **Status:** **NOT_INSTALLED** (operator will install MSI from https://voicebox.sh and report back)
+
+### Summary
+
+Open-source local TTS/STT/voice-cloning desktop app (Windows/macOS/Linux). Multi-engine (Qwen3-TTS, Chatterbox, Kokoro, Whisper, etc.), system dictation, MCP `voicebox.speak` on `127.0.0.1:17493`, REST API. Positioned as ElevenLabs/WisprFlow alternative, fully on-device.
+
+### Gap / overlap
+
+| Layer | Hermes |
+|-------|--------|
+| **Handy** | **IN USE** — offline dictation |
+| **OmniVoice + Edge Ryan** | **IN USE** — Draven ritual speak |
+| **Voicebox** | Broader studio (clone + stories + MCP TTS) — heavy overlap |
+
+### Risks
+
+- **VRAM / model downloads** — Qwen/Chatterbox compete with ComfyUI / LM Studio
+- **MCP always-on TTS** — voice policy says ritual-only speak; do not auto-wire Hermes `auto_tts`
+- **Clone ethics / ToS** — celebrity samples on marketing site; use only owned/licensed clips
+- **Windows MSI + ports** — `:17493`; security review before Cursor MCP entry
+
+**Verify:** Install MSI → health `:17493` → one Kokoro generate (light) → MCP speak smoke; measure VRAM before enabling larger engines.
+
+**Recommendation:** **WATCH** — excellent capability, but stack already covers dictation + Draven. Spike when cloning / multi-voice production is needed; keep OmniVoice primary for rituals.
+

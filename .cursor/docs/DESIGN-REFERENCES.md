@@ -39,6 +39,8 @@ Living list of **design inspiration, component libraries, typography, and UI cra
 | **Typography** | [Fontpair](https://www.fontpair.co/), [Typewolf](https://www.typewolf.com/) |
 | **Color palettes** | [Coolors](https://coolors.co/) |
 | **React components to install** | [21st.dev](https://21st.dev/), [Magic UI](https://magicui.design/), [Aceternity UI](https://ui.aceternity.com/) |
+| **Claude Code skill/agent templates** | [aitmpl.com](https://aitmpl.com/) — REF marketplace (cherry-pick only) |
+| **AI/dev tool discovery** | [Toolfolio](https://toolfolio.com/) — REF directory (bookmark; grades stay in TOOLS-WATCHLIST) |
 
 ---
 
@@ -410,6 +412,9 @@ Inspected from live `/_next/static/css/*` on [huly.io](https://huly.io/) (Jul 20
 | 2026-07-13 | https://supabase.com/ | Platform (REF) | Jon | B+ (88) — **bookmark** Neon alt for Next-Flick; PG + Auth/Storage/Vector/MCP; use Better Auth for in-app auth |
 | 2026-07-13 | https://opencut.app/ | Tool (WATCH) | Jon | CapCut alt classic UI — B- (82); rewrite MCP pending |
 | 2026-07-13 | https://github.com/aievolutionpl/step-beyond | Tool (WATCH) | Agent | Agent verify/permission skill v4 — B- (80); cherry-pick refs |
+| 2026-07-14 | https://aitmpl.com/ | Resource directory | Jon | Claude Code templates marketplace — B (84) REF |
+| 2026-07-14 | https://toolfolio.com/ | Resource directory | Jon | AI/dev tool directory — B- (81) REF bookmark |
+| 2026-07-14 | https://voicebox.sh/ | Tool (WATCH) | Jon | jamiepine/voicebox local TTS+STT+MCP — A- (92); overlaps Handy/OmniVoice |
 
 ---
 

@@ -146,6 +146,11 @@ Everything else in **production** below is configured on Jon's PC (2026-07-04) u
 | **cto.new** | B (83) | WATCH | NOT_INSTALLED | None (SaaS signup) | https://cto.new/ — free pilot; overlaps Hermes Desktop |
 | **Supabase** | B+ (88) | **REF** | **READY** | None (bookmark) | **Bookmark:** https://supabase.com/ — Neon alt for Next-Flick (Jon 2026-07-13) |
 | **PocketBase** | A- (91) | WATCH | **PARTIAL** | None (local binary) | `D:\Hermes\apps\pocketbase` — `npm run pocketbase:install` smoke OK; start `:8090` on demand |
+| **InsForge** | B+ (88) | **IN USE** | **READY** | Docker Desktop | `D:\Hermes\apps\insforge` — `npm run insforge:*`; localhost `:7130` / `:15432`; spike only |
+| **aitmpl.com** | B (84) | REF | **READY** | None (web) | Browse/install individual Claude Code components cautiously |
+| **Toolfolio** | B- (81) | REF | **READY** | None (web) | Discovery bookmark only |
+| **Databasement** | A- (90) | **IN USE** | **READY** | Docker Desktop | `D:\Hermes\apps\databasement` — `npm run databasement:*`; localhost `:2226` |
+| **Voicebox** | A- (92) | WATCH | NOT_INSTALLED | Windows MSI + models | Jon self-install from https://voicebox.sh — MCP `:17493`; VRAM heavy |
 | **Theatre.js** | B+ (86) | WATCH | **PARTIAL** | None | Dev deps in JonBeatz playground — not wired to routes yet |
 | **Threlte** | B (84) | WATCH | NOT_INSTALLED | None | Svelte-only — reference; use R3F for JonBeatz/MSC stack |
 | **Nellavio** | B- (81) | WATCH | NOT_INSTALLED | None | Clone `nellavio/nellavio` — dashboard shell spike only |
@@ -241,6 +246,8 @@ Run after install or when flipping Setup → **READY**. Add a row here when a ne
 | **Better Auth** | Next-Flick: `npm run auth:status` → `npm run db:push` → sign-up smoke → `npm run web:build` | Local spike; Clerk prod default |
 | **Supabase** | Bookmark only — https://supabase.com/ | **REF** Neon alt (Jon 2026-07-13); trial later: `npx supabase init` |
 | **PocketBase** | `npm run pocketbase:install` → `npm run pocketbase:status` → optional `npm run pocketbase:start` | JonBeatz hub; `:8090` localhost only |
+| **Databasement** | `npm run databasement:install` → `npm run databasement:status` | JonBeatz hub; `:2226` localhost only; data under `D:\Hermes\apps\databasement\data` |
+| **InsForge** | `npm run insforge:install` → `npm run insforge:status` | JonBeatz hub; `:7130` localhost; creds `D:\Hermes\apps\insforge\ADMIN-CREDENTIALS.txt`; never Neon |
 | **Theatre.js** | `npm ls @theatre/core @theatre/r3f` in JonBeatz playground | Deps on deck — spike when showcase chapter needs timeline |
 | **Nellavio** | `git clone` → `npm i` → dev smoke on dashboard pages | Overlaps shadcn IN USE — spike only |
 | **3D vault bundles** | `npm run workflows:3d:status` | Asset paths on `D:\Hermes\assets` |

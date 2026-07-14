@@ -34,4 +34,4 @@ See `.cursor/docs/PITFALLS-HOSTINGER.md`
 
 ---
 
-*Bootstrap template — 2026-07-13*
+*Bootstrap template — 2026-07-14*

@@ -98,6 +98,11 @@ Jon researches tools → paste links in Cursor (often from **JonBeatz hub**) →
 | [**cto.new**](https://cto.new/) | **B (83)** | WATCH | NOT_INSTALLED | Freemium‡‡‡‡ | Ad-supported multi-agent SaaS — Team Lead + MCP; overlaps Hermes Desktop |
 | [**Supabase**](https://supabase.com/) | **B+ (88)** | **REF** | **READY** | Freemium | **Bookmark** — Neon alt for Next-Flick (Jon 2026-07-13); PG + Auth/Storage/Vector/MCP |
 | [**PocketBase**](https://pocketbase.io/) | **A- (91)** | WATCH | NOT_INSTALLED | Free MIT | Single-file Go backend `:8090` — SQLite + auth + realtime; pre-v1 migration caveat |
+| [**InsForge**](https://github.com/InsForge/InsForge) | **B+ (88)** | **IN USE** | **READY** | Free Apache-2 | Agent-backend spike @ `D:\Hermes\apps\insforge` — localhost `:7130`; **not Neon** |
+| [**aitmpl.com**](https://aitmpl.com/) | **B (84)** | **REF** | **READY** | Free | Claude Code templates marketplace (skills/agents/MCPs) — browse; overlaps agency-agents |
+| [**Toolfolio**](https://toolfolio.com/) | **B- (81)** | **REF** | **READY** | Free | Tool discovery directory — bookmark only (not install) |
+| [**Databasement**](https://github.com/David-Crty/databasement) | **A- (90)** | **IN USE** | **READY** | Free MIT | DB backup UI @ `D:\Hermes\apps\databasement` — localhost `:2226` |
+| [**Voicebox**](https://github.com/jamiepine/voicebox) | **A- (92)** | WATCH | NOT_INSTALLED | Free MIT | Local TTS+STT studio + MCP `:17493` — Jon self-install later; overlaps Handy+OmniVoice |
 | [**Theatre.js**](https://www.theatrejs.com/) | **B+ (86)** | WATCH | NOT_INSTALLED | Free Apache-2.0 | Visual R3F timeline (`@theatre/r3f`) — showcase 3D; last major push 2024 |
 | [**Threlte**](https://threlte.xyz/) | **B (84)** | WATCH | NOT_INSTALLED | Free MIT | Svelte 3D on Three.js — reference only; fleet stack is Next.js + R3F |
 | [**Nellavio**](https://github.com/nellavio/nellavio) | **B- (81)** | WATCH | NOT_INSTALLED | Free MIT | Next.js dashboard starter (auth, RBAC, i18n, 90+ components) — overlaps shadcn/Premium-UI |
@@ -417,6 +422,11 @@ Install any of these only after Jon approves. None replace `draven:speak` until 
 | 2026-07-13 | [Hermex](https://github.com/uzairansaruzi/hermex) | B+ (88) | **WATCH bookmark** — Jon: setup later; needs hermes-webui + tunnel; Telegram stays primary |
 | 2026-07-13 | [Aight](https://aight.cool/) | B (85) | **WATCH bookmark** — Jon: setup later; Hermes gateway native iOS; Telegram stays primary |
 | 2026-07-13 | [Strands Agents](https://strandsagents.com/) | C+ (74) | **SKIP** — AWS agent SDK; heavy Hermes overlap (chat only) |
+| 2026-07-14 | [InsForge](https://github.com/InsForge/InsForge) | B+ (88) | **IN USE** — hardened localhost spike @ `D:\Hermes\apps\insforge`; not Neon |
+| 2026-07-14 | [aitmpl.com](https://aitmpl.com/) | B (84) | **REF** — Claude Code component marketplace; browse |
+| 2026-07-14 | [Toolfolio](https://toolfolio.com/) | B- (81) | **REF** — tool discovery directory bookmark |
+| 2026-07-14 | [Databasement](https://github.com/David-Crty/databasement) | A- (90) | **IN USE** — Docker localhost `:2226` @ `D:\Hermes\apps\databasement` |
+| 2026-07-14 | [Voicebox](https://github.com/jamiepine/voicebox) | A- (92) | **WATCH** — Jon self-install later; keep Handy/OmniVoice primary |
 
 ---
 

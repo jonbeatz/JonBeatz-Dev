@@ -42,6 +42,9 @@
 | **vault MCP** | Free | — | `H:\Vader_Vault` | Obsidian vault |
 | **Clerk** | SaaS | `CLERK_SECRET_KEY`, `NEXT_PUBLIC_CLERK_*` | Next-Flick sign-in | Next-Flick |
 | **Neon Postgres** | SaaS | `NEON_DATABASE_URL` | Next-Flick prod | Next-Flick |
+| **Databasement** | Free local | (UI admin) | `npm run databasement:status` → `:2226` | IN USE — `D:\Hermes\apps\databasement` |
+| **InsForge** | Free local | `ADMIN-CREDENTIALS.txt` | `npm run insforge:status` → `:7130` | IN USE spike — **not Neon** |
+| **aitmpl.com / Toolfolio** | Free web | — | Browse only | REF bookmarks — discovery |
 | **TMDB** | Free tier | `TMDB_API_KEY` | Next-Flick search | Next-Flick |
 | **Resend** | SaaS | `RESEND_API_KEY` | MSC email | MSC |
 | **AgentMail** | Freemium | `AGENTMAIL_API_KEY` | [agentmail.to](https://www.agentmail.to/) — agent inboxes | Next-Flick (ADOPT) |
@@ -97,6 +100,10 @@ Run `npm run ecosystem:audit` for exact SET/EMPTY per file.
 | **GCP OAuth clients** | https://console.cloud.google.com/auth/clients?project=wordpress-map-1492461083797 | Desktop client for Hermes skill |
 | **Cursor** | https://cursor.com/dashboard | IDE subscription |
 | **Spaceship** | cPanel for MSC-Projectz | jon-beatz.com vault app |
+| **Databasement (local)** | http://127.0.0.1:2226 | DB backup UI — create admin on first visit |
+| **InsForge (local spike)** | http://127.0.0.1:7130 | Agent backend spike — see `D:\Hermes\apps\insforge\ADMIN-CREDENTIALS.txt` |
+| **aitmpl.com** | https://aitmpl.com/ | Claude Code templates REF |
+| **Toolfolio** | https://toolfolio.com/ | Tool discovery REF |
 
 **Cursor plugins (OAuth in IDE):** Stripe, Vercel, Firebase — no env var until you use them.
 
@@ -109,6 +116,8 @@ Run `npm run ecosystem:audit` for exact SET/EMPTY per file.
 | 1 | LM Studio | 1234 | Open app, load qwen3-4b |
 | 2 | LiteLLM + ngrok | 4000 / 4040 | `npm run deepseek:on` or `session:start -- -Full` |
 | 3 | Telegram gateway | — | Auto with session:start |
+| 3b | Databasement (optional) | 2226 | `npm run databasement:start` — localhost |
+| 3c | InsForge spike (optional) | 7130 | `npm run insforge:start` — stop when idle |
 | 4 | Next-Flick dev | 3000 | `npm run web:dev` |
 | 5 | ComfyUI | 8188 | Manual or `npm run comfy:start` |
 | 6 | OmniVoice | 18776 | Lazy on `draven:speak` |

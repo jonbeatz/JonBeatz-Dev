@@ -200,6 +200,12 @@
 | `npm run pocketbase:install` | Download v0.39.6 binary to `D:\Hermes\apps\pocketbase` + smoke `:8090` |
 | `npm run pocketbase:status` | Binary present + port check |
 | `npm run pocketbase:start` | Start localhost `:8090` on demand (does not touch `:3000` / `:4000` / `:8642`) |
+| `npm run databasement:install` | Docker Databasement → `D:\Hermes\apps\databasement` · localhost `:2226` |
+| `npm run databasement:status` | Container + UI health |
+| `npm run databasement:start` / `:stop` | Start/stop container (data kept) |
+| `npm run insforge:install` | Hardened InsForge spike compose @ `D:\Hermes\apps\insforge` · localhost `:7130` |
+| `npm run insforge:status` | Compose ps + UI health |
+| `npm run insforge:start` / `:stop` | Start/stop spike stack (never Neon) |
 
 **Theatre.js (on-deck):** devDeps `@theatre/core`, `@theatre/studio`, `@theatre/r3f` in JonBeatz playground — not wired to routes until showcase spike.
 

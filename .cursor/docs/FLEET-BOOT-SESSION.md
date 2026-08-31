@@ -12,8 +12,8 @@ New skeleton projects inherit this via bootstrap + `npm run sync:docs -- -Write 
 | At login | Not at login |
 |----------|----------------|
 | Telegram gateway (background) | Cursor / MCP servers |
-| LiteLLM `:4000` + ngrok `:4040` (background) | LM Studio (`:1234`) — **disable Windows Startup autostart** |
-| One visible LiteLLM console (intentional fleet dashboard) | Next.js dev `:3000` |
+| LiteLLM `:4000` + ngrok `:4040` (background, **no console**) | LM Studio (`:1234`) — **disable Windows Startup autostart** |
+| | Next.js dev `:3000` |
 | | Hermes Desktop GUI |
 | | OmniVoice daemon |
 
@@ -23,7 +23,7 @@ New skeleton projects inherit this via bootstrap + `npm run sync:docs -- -Write 
 
 **Manual:** `D:\Hermes\Master-Startup.lnk` or `Master-Startup.ps1 -ShowWindows` for visible windows.
 
-**Telegram ONLINE ping:** `boot-fleet-online.mjs` + `litellm-console-host.mjs` when `:4000` is ready (backup: `boot-ready-notify.ps1`).
+**Telegram ONLINE ping:** `boot-ready-notify.ps1` when `:4000` is ready. Optional visible LiteLLM console: `MSC_LITELLM_DETACHED_CONSOLE=1` (manual `-ShowWindows` boot).
 
 ---
 
@@ -52,7 +52,20 @@ New skeleton projects inherit this via bootstrap + `npm run sync:docs -- -Write 
 | **Catalog only** | `.cursor/mcp-manifest.json` | Optional docs/reference — **never** paste `project_mcp_servers` into `mcp.json` |
 | **Hermes profile** | `%LOCALAPPDATA%\hermes\profiles\jonbeatz\config.yaml` | `mcp_servers: {}` — Cursor-only MCP (no duplicate Hostinger/github Node children) |
 
-**LiteLLM master key (all profiles — 2026-07-13):** Every Hermes profile `model.api_key` must be `sk-jonbeatz-deepseek-2026` with `deepseek-v4-pro` at `http://127.0.0.1:4000/v1`. Wrong keys return HTTP 400 **"No connected db"** (stateless LiteLLM — not a SQLite bug). **Watchdog:** `profiles\jonbeatz\scripts\profile-health-watchdog.py` — Hermes cron every 6h; Telegram alert on failure only. Policy: JonBeatz `TRUTH.md` → LiteLLM Master Key Policy.
+**LiteLLM master key (all profiles — 2026-08-03):** Every Hermes profile on `:4000` must use real master key `<MSC_LITELLM_MASTER_KEY>` (never a chat-redacted `«redacted:sk-…»` string in YAML). Provider = DeepSeek **Flash + Pro only** + **`discover_models: false`**. Default model = **`deepseek-v4-flash`** on **all** profiles (Pro when the operator asks). **Also** set `providers.local-127.0.0.1:4000.default_model` to **flash** — that fallback catches unspecified-model calls (jonbeatz was still Pro until 2026-08-16). Do **not** add OpenRouter `0731` to DeepSeek-direct. Wrong keys return HTTP 400 **"No connected db"** (stateless LiteLLM — not a SQLite bug). **Never** add a second LiteLLM OpenRouter provider (URL merge floods DeepSeek Direct). Team + Mem0 scopes: **`FLEET-TEAM-MEMORY.md`**. **Watchdog:** Windows task `JonBeatz_Profile_Health_Watchdog` (hidden `wscript` + `pythonw`, 00/06/12/18) — Hermes cron `56769cb1e0f3` is **paused**. Telegram alert on failure only.
+
+### Hermes `no_agent` cron on Windows (no console flash)
+
+Hermes Windows cron uses uv `python.exe`, which **double-flashes a blank console**. Do not leave those jobs enabled.
+
+| Piece | Where |
+|-------|--------|
+| Launchers | `scripts/hermes-script-hidden.vbs` (Python) · `scripts/hermes-ps1-hidden.vbs` (PowerShell) |
+| Copy into a profile | `copy-hidden-hermes-launchers.ps1` (bootstrap + `fleet:sync` if missing) |
+| Register one task | `register-hidden-hermes-script-task.ps1 -TaskName ... -PythonFile foo.py -DailyTimes '10:00'` |
+| JonBeatz bundle | `npm run watchdogs:hidden` / `n8n:watchdog:hidden` |
+
+After registering a Windows task, **pause** the matching Hermes cron (`hermes cron list` looks empty when all are paused). Failures: `%LOCALAPPDATA%\hermes\profiles\<profile>\cron\output\`.
 
 **Red Cursor error:** `mcpServers must be an object` → fix project `.cursor/mcp.json` schema.
 

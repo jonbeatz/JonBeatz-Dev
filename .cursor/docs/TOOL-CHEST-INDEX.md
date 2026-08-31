@@ -50,12 +50,17 @@
 | **AgentMail** | Freemium | `AGENTMAIL_API_KEY` | [agentmail.to](https://www.agentmail.to/) — agent inboxes | Next-Flick (ADOPT) |
 | **Sentry** | SaaS | `SENTRY_*` | MSC monitoring | MSC |
 | **GCP / Vertex** | GCP billing | `GOOGLE_APPLICATION_CREDENTIALS` | MSC google-api-proxy | JSON file path |
-| **Google Workspace (personal)** | Free (OAuth) | File: `%LOCALAPPDATA%\hermes\profiles\jonbeatz\google_token.json` | `npm run google:doctor` (JonBeatz) | jonbeatz@gmail.com — Gmail, Drive, Docs |
+| **Google Workspace (personal)** | Free (OAuth) | File: `%LOCALAPPDATA%\hermes\google_token.json` (+ profile sync) | `npm run google:doctor` (JonBeatz) | jonbeatz@gmail.com — Gmail, Drive, Docs, **YouTube full** (`youtube` + `force-ssl` + `upload`) · OAuth app **In production** (2026-07-20) |
 | **Firecrawl MCP** | Freemium | `FIRECRAWL_API_KEY` | VPE / optional | Master has key |
 | **Browserbase** | SaaS | `BROWSERBASE_*` | JonBeatz project MCP | Hub overlay |
 | **codebase-memory-mcp** | Free | — | `npm run codebase-memory:status` | IN USE — code graph MCP; JonBeatz indexed |
 | **OpenMontage** | Per use‡ | `FAL_KEY` | `npm run openmontage:status` | IN USE — `D:\Hermes\assets\openmontage` |
-| **profile-health-watchdog** | Free | — | Hermes cron every 6h | Fleet — LiteLLM key probe; Telegram on failure |
+| **Kinocut MCP** | Free | — (FFmpeg on PATH) | `npm run kinocut:status` | IN USE — agent trim/QC; workspace `D:\Hermes\apps\kinocut-media` |
+| **Affinity MCP** | Free | — (Affinity app) | Affinity open · `:6767` · Cursor `affinity` | IN USE — TNIMS DTP polish |
+| **InDesign UXP Bridge** | Free | — (InDesign + UDT) | `npm run layout:indesign-bridge` · Bridge Connected ✓ | IN USE — TNIMS; `tools/layout-mcp/SETUP.md` |
+| **FreeCut** | Free | — | `npm run freecut:open` | IN USE — human polish UI (freecut.net) |
+| **Video polish chain** | Free / fal | `FAL_API_KEY` optional | `npm run video:polish:status` | IN USE — VIDEO-POLISH-CHAIN.md |
+| **profile-health-watchdog** | Free | — | Windows task 00/06/12/18 | Fleet — LiteLLM key probe; Telegram on failure |
 
 Run `npm run ecosystem:audit` for exact SET/EMPTY per file.
 
@@ -96,7 +101,7 @@ Run `npm run ecosystem:audit` for exact SET/EMPTY per file.
 | **AgentMail** | https://www.agentmail.to/ | Agent email inboxes (Next-Flick key SET) |
 | **Sentry** | https://sentry.io/ | MSC errors |
 | **Google Cloud** | https://console.cloud.google.com/ | Vertex / MSC |
-| **Google Workspace (jonbeatz@gmail.com)** | https://mail.google.com · https://drive.google.com · https://docs.google.com | Personal OAuth — see `JonBeatz\.cursor\docs\GOOGLE-WORKSPACE.md` |
+| **Google Workspace (jonbeatz@gmail.com)** | https://mail.google.com · https://drive.google.com · https://docs.google.com · [Audience/Production](https://console.cloud.google.com/auth/audience?project=wordpress-map-1492461083797) | Personal OAuth — see `GOOGLE-WORKSPACE.md` (Production + YouTube scope 2026-07-20) |
 | **GCP OAuth clients** | https://console.cloud.google.com/auth/clients?project=wordpress-map-1492461083797 | Desktop client for Hermes skill |
 | **Cursor** | https://cursor.com/dashboard | IDE subscription |
 | **Spaceship** | cPanel for MSC-Projectz | jon-beatz.com vault app |
@@ -130,9 +135,9 @@ Run `npm run ecosystem:audit` for exact SET/EMPTY per file.
 
 | Check | What | Where |
 |-------|------|-------|
-| **Master key policy** | All 7 profiles use `sk-jonbeatz-deepseek-2026` + `deepseek-v4-pro` | `%LOCALAPPDATA%\hermes\profiles\*\config.yaml` |
-| **Watchdog** | Cron every 6h — probes LiteLLM `/v1/models` per profile key | `profiles\jonbeatz\scripts\profile-health-watchdog.py` |
-| **Alert** | Telegram only on failure; silent = healthy | Hermes cron `56769cb1e0f3` |
+| **Master key policy** | All 7 profiles use `<MSC_LITELLM_MASTER_KEY>` + `deepseek-v4-pro` | `%LOCALAPPDATA%\hermes\profiles\*\config.yaml` |
+| **Watchdog** | Hidden Windows task 00/06/12/18 — probes LiteLLM `/v1/models` per profile key | `profiles\jonbeatz\scripts\profile-health-watchdog.py` |
+| **Alert** | Telegram only on failure; silent = healthy | Task `JonBeatz_Profile_Health_Watchdog` (Hermes cron `56769cb1e0f3` paused) |
 | **Backups** | Before fleet-wide key changes | `D:\Hermes\projects\JonBeatz\.backups\profiles\YYYYMMDD\` |
 
 **Gotcha:** Wrong per-profile key → LiteLLM returns HTTP 400 **"No connected db"** (misleading — not a SQLite issue). See JonBeatz `TRUTH.md` → LiteLLM Master Key Policy.

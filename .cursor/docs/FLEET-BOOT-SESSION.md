@@ -17,7 +17,7 @@ New skeleton projects inherit this via bootstrap + `npm run sync:docs -- -Write 
 | | Hermes Desktop GUI |
 | | OmniVoice daemon |
 
-**Single Startup entry:** `%APPDATA%\Microsoft\Windows\Start Menu\Programs\Startup\Master-Startup.lnk` → `Master-Startup.ps1 -SkipDesktop` (hidden VBS).
+**Startup entries (exactly two):** `%APPDATA%\Microsoft\Windows\Start Menu\Programs\Startup\Master-Startup.lnk` → `Master-Startup.ps1 -SkipDesktop` (hidden VBS) + `Start-n8n.vbs` (hidden n8n). Anything else there is a duplicate. `Hermes_Gateway_<profile>.vbs` gets rewritten by `hermes gateway install` — `Start-Telegram-Gateway.ps1` auto-removes it each run (the Scheduled Task `Hermes_Gateway_jonbeatz` is the gateway autostart).
 
 **Do not** duplicate boot with `Hermes_Gateway_jonbeatz.vbs`, `Hermes_Gateway_<other-profile>.vbs`, `Master-Startup-Relay.vbs`, or gateway `.cmd` in Startup. Telegram **always** uses **jonbeatz** — never Cursor `active-profile.json` (e.g. next-flick). Run `npm run boot:setup` to refresh shortcuts and remove dupes.
 
@@ -60,7 +60,7 @@ Hermes Windows cron uses uv `python.exe`, which **double-flashes a blank console
 
 | Piece | Where |
 |-------|--------|
-| Launchers | `scripts/hermes-script-hidden.vbs` (Python) · `scripts/hermes-ps1-hidden.vbs` (PowerShell) |
+| Launchers | `scripts/hermes-script-hidden.vbs` (Python) · `scripts/hermes-ps1-hidden.vbs` (PowerShell). **Never** `venv\Scripts\pythonw.exe` — that uv file is a CUI stub (two flashes). Use uv *home* `pythonw.exe` or Python 3.12 GUI `pythonw` + `VIRTUAL_ENV` overlay. |
 | Copy into a profile | `copy-hidden-hermes-launchers.ps1` (bootstrap + `fleet:sync` if missing) |
 | Register one task | `register-hidden-hermes-script-task.ps1 -TaskName ... -PythonFile foo.py -DailyTimes '10:00'` |
 | JonBeatz bundle | `npm run watchdogs:hidden` / `n8n:watchdog:hidden` |

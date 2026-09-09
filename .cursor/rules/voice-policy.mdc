@@ -1,5 +1,5 @@
 ---
-description: Draven voice — when to speak aloud (OmniVoice ritual-only)
+description: Draven voice — when to speak aloud (Edge Liam ritual-only; Omni optional)
 alwaysApply: true
 ---
 
@@ -9,8 +9,10 @@ alwaysApply: true
 
 | Priority | Engine | When |
 |----------|--------|------|
-| **Primary** | **OmniVoice** (British male, CPU) | Every allowed speak |
-| **Backup** | Edge `en-GB-RyanNeural` | Only if OmniVoice fails |
+| **Primary** | **Edge** `en-CA-LiamNeural` (same as Hermes Desktop) | Every allowed speak |
+| **Fallback** | **OmniVoice** (dialed-in British male, CPU) | Only if Edge fails |
+
+**OmniVoice is still installed** with your saved knobs in `.env.local`. To use it as primary again, see **Restore OmniVoice** in `.cursor/docs/VOICE-WORKFLOW.md`.
 
 ## When to speak (allowed)
 
@@ -28,16 +30,17 @@ alwaysApply: true
 - **Never** read ordinary chat replies or summaries aloud.
 - **Never** speak after `mem0:add`, `mem0:search`, or successful Mem0 recall.
 - **Never** auto-speak Hermes Desktop / Telegram agent responses (`auto_tts: false` in Hermes config).
-- **Never** start OmniVoice daemon at PC boot — lazy start on first ritual speak; stop on End Project.
+- **Never** start OmniVoice daemon at PC boot — only if Omni is primary or fallback fires; stop on End Project.
 
 ## Commands
 
 ```powershell
-npm run draven:speak -- "text"   # OmniVoice (Ryan fallback on failure)
-npm run draven:omni-daemon       # optional pre-warm before Start Project
-npm run draven:omni-daemon -- -Stop  # free RAM (also runs on session:stop)
+npm run draven:speak -- "text"              # Edge Liam (Omni fallback on failure)
+npm run draven:speak -- -OmniOnly "text"    # force OmniVoice once (premium)
+npm run draven:omni-daemon                  # only if using Omni as primary
+npm run draven:omni-daemon -- -Stop         # free RAM (also runs on session:stop)
 ```
 
 `jarvis:*` aliases deprecated — use `draven:*` equivalents.
 
-See **`.cursor/docs/VOICE-WORKFLOW.md`** for errors, fixes, and resource notes.
+See **`.cursor/docs/VOICE-WORKFLOW.md`** for restore steps, errors, and resource notes.

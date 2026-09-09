@@ -11,6 +11,7 @@
 | **`review tool`**, **`evaluate tool`**, **`grade this tool`** | Single (URL in message) |
 | **`review design`**, **`grade this site`** + URL | **Design grade** (full rubric → DESIGN-REFERENCES + optional showcase queue) |
 | Design/inspiration URL only (no grade keyword) | **Bookmark only** → DESIGN-REFERENCES add queue (no grade) |
+| Prompt library / template gallery | **Bookmark** DESIGN-REFERENCES even if an MCP/API exists; grade the generator separately if Jon wants install |
 | **`re-review`**, **`refresh grade`** + name/URL | **Re-grade** (see Re-grade policy) |
 
 ---
@@ -117,17 +118,26 @@ Assign letter (A+→F) and score /100. Overlap reduces gap-fill slightly — **d
 
 **Do not** lead with `AskQuestion` or "shall I install?" — Jon must see grades and summaries first.
 
+**Hard UI (Jon 2026-08-27):** Composer renders `AskQuestion` **above** (or instead of) the chat grades. If you call `AskQuestion` in the **same turn** as the scoreboard, Jon is asked to click before he has read Gap / Overlap / Risks.
+
+| Turn | What to send |
+|------|----------------|
+| **This turn (review)** | Grade block(s) + batch scoreboard only. Persist B-+ docs. **Do not** call `AskQuestion`. End with one line: *“When you’ve read the grades, say **install gate** (or reply what to install / skip).”* |
+| **Next turn** | Only after Jon has seen that message (he replies, or says **install gate** / **skip installs**) → then Step 6 `AskQuestion` if anything is still ADOPT/IN USE and not installed. |
+
+WATCH / SKIP / bookmark-only reviews often need **no** AskQuestion at all — Jon already has the recommendation in the grade block.
+
 ### Batch mode (multiple URLs)
 
 1. Run Step 0 per URL (can batch precheck calls).
-2. Post **one template block per tool** (all grades before any install prompt).
+2. Post **one template block per tool** (all grades in this turn).
 3. End with a **session scoreboard** table:
 
 | Tool | Grade | Verdict | Setup | Install? |
 |------|-------|---------|-------|----------|
 | … | … | … | … | queue / now / skip |
 
-4. **One** `AskQuestion` for all ADOPT/IN USE items not yet installed — not one prompt per tool.
+4. **Stop this turn.** One `AskQuestion` later (Step 6) — never in the same assistant message as the table.
 
 ---
 
@@ -181,9 +191,11 @@ Sibling profiles receive docs, skills, and review prompts/rules via fleet sync +
 
 ---
 
-## Step 6: Install gate (AskQuestion — only after Step 4)
+## Step 6: Install gate (AskQuestion — **next turn only**)
 
-**Single review:** AskQuestion only if ADOPT/IN USE and not installed.
+**Never** call `AskQuestion` in the same assistant turn as Step 4 grades. Wait until Jon has seen the scoreboard (follow-up message, **install gate**, or an explicit install/skip reply).
+
+**Single review:** AskQuestion only if ADOPT/IN USE and not installed — and only on that follow-up turn.
 
 **Batch review:** One AskQuestion with multi-select style options:
 
@@ -212,11 +224,16 @@ Flip Setup to **READY** or **PARTIAL** in TOOLS-SETUP-STATUS.md.
 
 ---
 
-## Step 8: Mem0 / vault (on ADOPT→IN USE or fleet policy)
+## Step 8: Mem0 / vault (mandatory on IN USE)
 
-- `npm run mem0:add -- "Tool X: grade, verdict, path"` (profile scope — note **fleet** path in text)
-- `npm run draven:add -- "Tool X: grade, verdict, one line"`
-- Vault: `03_AI_Memory/Sessions/YYYY-MM-DD-<profile>.md` + link to canonical `TOOLS-WATCHLIST.md` row (not a duplicate grade table)
+Jon 2026-08-27: install is **not done** until the vault knows it. Ritual: `H:\Vader_Vault\02_Knowledge\Patterns\Vault-note-after-tool-install.md`.
+
+- `npm run draven:add -- "Tool X: IN USE, one line, how to use"`
+- Optional: `npm run mem0:add -- "Tool X: grade, verdict, path"` (profile scope — note **fleet** path in text)
+- **Vault Pattern** `02_Knowledge/Patterns/<Tool>.md`: what it is, what it is for, how to use, what it upgrades, what it does **not** replace, do-nots
+- **Session** `03_AI_Memory/Sessions/YYYY-MM-DD-<profile>.md` + **hub** Decision/Learning wikilink
+- **For Hermes** bullet on `CURSOR-HERMES-BRIDGE.md`
+- Link canonical `TOOLS-WATCHLIST.md` row — **not** a duplicate grade table
 
 ---
 

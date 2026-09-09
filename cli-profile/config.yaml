@@ -1,5 +1,5 @@
 model:
-  default: vader-3-flash
+  default: deepseek-v4-pro
   provider: custom
   base_url: http://127.0.0.1:4000/v1
   api_key: sk-vader-protocol-1234
@@ -8,7 +8,7 @@ providers:
     api: http://127.0.0.1:4000/v1
     name: Local (127.0.0.1:4000)
     api_key: sk-vader-protocol-1234
-    default_model: vader-3-flash
+    default_model: deepseek-v4-pro
 agent:
   environment_hint: >-
     Windows 11 host. jonbeatz.dev workspace root is D:\Hermes\projects\JonBeatz.dev.

@@ -130,7 +130,7 @@ Grades on researched options follow [TOOLS-WATCHLIST](./TOOLS-WATCHLIST.md) rubr
 | Tech | Use |
 |------|-----|
 | **Resend** | MSC transactional email |
-| **AgentMail** | Agent email inboxes (2-way threads, OTP) — **ADOPT**; key Next-Flick |
+| **AgentMail** | Agent email — **IN USE** Grok Bot; Clerk `jonbeatz-clerk@agentmail.to`; Cursor SDK still ADOPT |
 | **Nodemailer** | MSC-Projectz / Payload email adapter |
 | **Sentry** | MSC error monitoring |
 | **TMDB API** | Next-Flick metadata + posters |

@@ -1,7 +1,7 @@
-# Hermes Voice Alignment — JonBeatz / Draven
+# Hermes Voice Alignment — Fleet / Draven
 
-**Last updated:** 2026-07-13  
-**Audience:** Hermes Desktop agent, Telegram gateway, profile operators  
+**Last updated:** 2026-08-03  
+**Audience:** Hermes Desktop agent, Telegram gateway, profile operators (all Hermes projects)  
 **Companion:** [VOICE-WORKFLOW.md](./VOICE-WORKFLOW.md) · `.cursor/rules/voice-policy.mdc`
 
 ---
@@ -10,10 +10,10 @@
 
 | Layer | Engine | When it runs |
 |-------|--------|--------------|
-| **Draven ritual TTS** | **OmniVoice** → Edge Ryan backup | `npm run draven:speak` from JonBeatz root — Start/End Project, Jon says "speak" |
-| **Hermes built-in TTS** | Hermes `tts` config (Edge Ryan today) | Hermes `/tts` or voice-mode only — **not** ritual Draven voice |
+| **Draven ritual TTS** | **Edge Liam** → OmniVoice fallback | `npm run draven:speak` from any fleet profile root — Start/End Project, Jon says "speak" |
+| **Hermes built-in TTS** | Hermes `tts` config (Edge Liam) | Hermes `/tts` or voice-mode only — **not** ritual Draven path |
 
-OmniVoice is **not** a native Hermes `tts.provider`. Ritual speech always goes through the Draven voice-engine scripts.
+Ritual speech always goes through the shared Draven voice-engine scripts (`_core-scripts/voice-engine/`). OmniVoice is **optional restore**, not the daily primary.
 
 ---
 
@@ -29,52 +29,52 @@ OmniVoice is **not** a native Hermes `tts.provider`. Ritual speech always goes t
 
 ---
 
-## Draven stack (primary)
+## Draven stack (fleet default — 2026-08-03)
 
 | Priority | Engine | Voice |
 |----------|--------|-------|
-| **1** | OmniVoice (CPU, local `:18776`) | Instruct: `male, low pitch, american accent` (active preset) |
-| **2** | Edge TTS (cloud) | `en-GB-RyanNeural` — **backup only** if Omni fails |
+| **1** | Edge TTS (cloud) | `en-CA-LiamNeural` — **same as Hermes Desktop** |
+| **2** | OmniVoice (CPU, local `:18776`) | Dialed-in British instruct — **fallback / optional restore only** |
 
-**Commands** (cwd `D:\Hermes\projects\JonBeatz`):
+**Commands** (cwd = active project root that has `draven:speak`):
 
 ```powershell
 npm run draven:speak -- "text"
-npm run draven:omni-daemon              # optional pre-warm
-npm run draven:omni-daemon -- -Stop     # free RAM (End Project)
+npm run draven:speak -- -OmniOnly "text"   # force Omni once
+npm run draven:omni-daemon -- -Stop        # free Omni RAM if it was started
 ```
 
-**Chain:** `draven-voice-gate.ps1` → `draven-voice.ps1` → OmniVoice daemon → Edge fallback.
+**Chain:** `draven-voice-gate.ps1` → `draven-voice.ps1` → Edge Liam → Omni fallback.
 
 **Paths:**
 
 - Engine: `D:\Hermes\projects\_core-scripts\voice-engine\`
-- Presets: `voice-profiles.json` (active: `draven-natural-american`)
-- OmniVoice app: `D:\Hermes\apps\OmniVoice\`
-- Env: `D:\Hermes\projects\JonBeatz\.env.local`
+- Presets: `voice-profiles.json` (active: `edge-liam-primary`)
+- OmniVoice app: `D:\Hermes\apps\OmniVoice\` (keep installed)
+- Env: each project's `.env.local` — `DRAVEN_VOICE=edge`, `DRAVEN_EDGE_VOICE=en-CA-LiamNeural`
+
+**Restore Omni as primary:** see [VOICE-WORKFLOW.md](./VOICE-WORKFLOW.md) → **Restore OmniVoice**. Flip `DRAVEN_VOICE=omnivoice` + `DRAVEN_VOICE_FALLBACK=edge`; leave all `DRAVEN_OMNI_*` knobs as-is.
 
 ---
 
-## Hermes Desktop config (verified 2026-07-13)
+## Hermes Desktop config (aligned 2026-08-03)
 
-**Global:** `%LOCALAPPDATA%\hermes\config.yaml`
+**Profile / global TTS** should match Liam:
 
 ```yaml
 tts:
-  provider: edge              # active — NOT gemini
+  provider: edge
   edge:
-    voice: en-GB-RyanNeural
+    voice: en-CA-LiamNeural
 voice:
-  auto_tts: false             # required
+  auto_tts: false
 ```
-
-`auxiliary.vision.provider: google` in profile config is **vision** (Gemini flash), not TTS.
 
 **Lock alignment (CLI):**
 
 ```powershell
 hermes config set tts.provider edge
-hermes config set tts.edge.voice en-GB-RyanNeural
+hermes config set tts.edge.voice en-CA-LiamNeural
 hermes config set voice.auto_tts false
 ```
 
@@ -84,28 +84,19 @@ hermes config set voice.auto_tts false
 
 ## Hermes agent rules
 
-1. Ritual voice → `npm run draven:speak` or `speak` (via `voice-engine.ps1` → `draven-speak.ps1` → OmniVoice).
-2. `Invoke-HermesTTS` is a **legacy alias** — same Draven path, not Gemini.
-3. Keep `auto_tts: false` — no spoken chat replies.
-4. Do not start OmniVoice at PC boot; stop on End Project (`draven:omni-daemon -- -Stop`).
-5. Hermes `tts.provider: edge` is for internal `/tts` only — not ritual Draven voice.
-6. Do not set `tts.provider` to `gemini` unless Jon asks.
+1. Ritual voice → `npm run draven:speak` (Edge Liam). Do not invent a second TTS path.
+2. Keep `auto_tts: false` — no spoken chat replies.
+3. Do not start OmniVoice at PC boot; only if Omni is primary or fallback fires; stop on End Project.
+4. Config self-breaking changes (providers / voice rails) → propose on bridge; Cursor applies.
 
 ---
 
-## Troubleshooting
+## Fleet coverage
 
-| Symptom | Fix |
-|---------|-----|
-| Voice sounds like Ryan not Omni | Omni daemon down or instruct invalid — check `VOICE-WORKFLOW.md` |
-| Gemini TTS errors | Stay on `tts.provider: edge` |
-| RAM high | `draven:omni-daemon -- -Stop` or `session:stop` |
-| Slow first speak (~44s) | Pre-warm `draven:omni-daemon` at Start Project |
+| Project | Voice env |
+|---------|-----------|
+| JonBeatz (hub) | Edge Liam + Omni knobs preserved |
+| DigitalStudioz, Next-Flick, The-Night-I-Met-Santa | Edge Liam (synced 2026-08-03) |
+| Profiles without `DRAVEN_VOICE` in `.env.local` | Script default = **edge** / Liam |
 
----
-
-## Related
-
-- [VOICE-WORKFLOW.md](./VOICE-WORKFLOW.md) — full Draven voice doc
-- [TELEGRAM-WORKFLOW.md](./TELEGRAM-WORKFLOW.md) — gateway (auto_tts off)
-- Profile hint: `%LOCALAPPDATA%\hermes\profiles\jonbeatz\config.yaml` → `agent.environment_hint`
+Shared scripts + `voice-policy.mdc` + Start/End prompts ship via `npm run fleet:sync`.

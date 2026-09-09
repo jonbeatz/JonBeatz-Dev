@@ -58,6 +58,7 @@ Switching Cursor folders does **not** change the vault bridge. Leave notes there
 | JonBeatz.dev | `jonbeatz-dev` | `jonbeatz_dev` / `jonbeatz_dev_memories` / `qdrant_jonbeatz_dev` (underscores; slug stays hyphen) |
 | Next-Flick | `next-flick` | `next-flick` / `next-flick_memories` |
 | The-Night-I-Met-Santa | `the-night-i-met-santa` | `the-night-i-met-santa_memories` |
+| Website-Templates | *(Cursor folder; Desktop stays jonbeatz)* | `website-templates` / `website-templates_memories` / `qdrant_website-templates` |
 | MSC (separate repo) | `msc` | MSC-only — never JonBeatz personal |
 
 **Never** write to `jonbeatz_memories` (stale name). Confirm `environment_hint` + `TRUTH.md` for the open project.
@@ -120,8 +121,10 @@ After a **default / shared** change (rituals, voice, tools policy, shared script
 | Hermes `MEMORY.md` / cron / vault-sync copy | Hermes | Per-profile; JonBeatz: `npm run vault:sync:install` |
 | Project ReCall / TRUTH | That project's Cursor | Do not fleet-overwrite project-specific truth |
 
-**Fleet siblings** (auto docs/skills): DigitalStudioz, VaderLabz, JonBeatz.dev, Next-Flick, The-Night-I-Met-Santa.  
-**Not in fleet JSON yet:** Local-WP, Hermes-Commander, Ai-Gang — bootstrap when those become active workspaces.
+**Fleet siblings** (auto docs/skills): DigitalStudioz, VaderLabz, JonBeatz.dev, Next-Flick, The-Night-I-Met-Santa, Harlows-Big-Adventure, **Website-Templates**, PullaraLaw-WP.
+
+**Website-Templates:** open `D:\Hermes\projects\Website-Templates` **alone** for recreate work. Do not require JonBeatz. Desktop stays **jonbeatz**. Cold-open `CURRENT.md` in that repo. Mem0 `website-templates_memories`.  
+**Not in fleet JSON yet:** Hermes-Commander, Ai-Gang — bootstrap when those become active workspaces. Local-WP/PullaraLaw is listed; treat as WP desk not a second hub.
 
 ---
 

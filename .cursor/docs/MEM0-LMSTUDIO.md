@@ -1,13 +1,38 @@
-# Mem0 + LM Studio — JonBeatz Personal Memory
+# Mem0 + LM Studio — Fleet memory
 
-How local memory works in this profile and what agents must know before add/search.
+How local memory works across Hermes profiles and what agents must know before add/search.
+
+**This doc is fleet-wide.** Identity values differ per project — **never assume `jonbeatz_personal`.**
+
+---
+
+## Identity (read for *this* open project)
+
+1. Open **`TRUTH.md`** in the current workspace — Mem0 user / collection / Qdrant path live there.
+2. Confirm **`.env.local`** (`MEM0_*` or project-prefixed vars such as `JBD_MEM0_*`).
+3. Optional cross-check: `hermes-desktop-profile.json` → `mem0` block (must match TRUTH).
+4. Full fleet table: [FLEET-TEAM-MEMORY.md](./FLEET-TEAM-MEMORY.md) → **Mem0 scopes**.
+
+| Project folder | Hermes slug | Typical Mem0 user / collection / Qdrant |
+|----------------|-------------|------------------------------------------|
+| JonBeatz | `jonbeatz` | `jonbeatz_personal` / `jonbeatz_personal_memories` / `qdrant_personal` |
+| DigitalStudioz | `digitalstudioz` | `digitalstudioz` / `digitalstudioz_memories` / `qdrant_digitalstudioz` |
+| VaderLabz | `vaderlabz` | `vaderlabz` / `vaderlabz_memories` / `qdrant_vaderlabz` |
+| JonBeatz.dev | `jonbeatz-dev` | `jonbeatz_dev` / `jonbeatz_dev_memories` / `qdrant_jonbeatz_dev` |
+| Next-Flick | `next-flick` | `next-flick` / `next-flick_memories` / `qdrant_next-flick` |
+| The-Night-I-Met-Santa | `the-night-i-met-santa` | `the-night-i-met-santa` / `the-night-i-met-santa_memories` / (profile path) |
+| MSC (separate repo) | `msc` | MSC-only — never mix with personal fleet |
+
+**Never** write to `jonbeatz_memories` (stale name). **Never** mix MSC with personal collections.
+
+**JonBeatz.dev naming lock (2026-08-04):** Mem0 IDs use **underscores** (`jonbeatz_dev`). Hermes profile folder / slug stays hyphenated (`jonbeatz-dev`). Do not invent `jonbeatz-dev_memories`.
 
 ---
 
 ## Architecture
 
 ```
-Jon / Agent
+Jon / Agent  (in an open Hermes project)
     │
     ▼
 npm run mem0:add / mem0:search
@@ -19,21 +44,14 @@ scripts/mem0-chat.ps1  →  mem0-preflight.ps1 (LM Studio)
 scripts/mem0_integration.py  →  Mem0 OSS (Qdrant local)
     │
     ├── LLM: LM Studio http://127.0.0.1:1234/v1  (shared with Hermes — default `qwen3-4b-instruct-2507`)
-    └── Vector store: %USERPROFILE%\.mem0\qdrant_personal
+    └── Vector store: %USERPROFILE%\.mem0\<this project's qdrant path>
 ```
 
----
-
-## Identity (do not change casually)
-
-| Key | Value |
-|-----|-------|
-| **user_id** | `jonbeatz_personal` |
-| **collection** | `jonbeatz_personal_memories` |
-| **qdrant path** | `%USERPROFILE%\.mem0\qdrant_personal` |
-| **Config file** | `hermes-desktop-profile.json` → `mem0` block |
-
-MSC uses a **separate** store — never mix slugs or user IDs.
+| Key | Source |
+|-----|--------|
+| **user_id / collection / qdrant** | This project's `TRUTH.md` + `.env.local` |
+| **Python runtime** | Hermes venv `%LOCALAPPDATA%\hermes\hermes-agent\venv\Scripts\python.exe` (interactive scripts pin this — **not** Python312). Hidden cron/watchdogs must **not** launch that folder's `pythonw.exe` (uv CUI stub). |
+| **Config file** | `hermes-desktop-profile.json` → `mem0` block (must match TRUTH) |
 
 ---
 
@@ -68,7 +86,7 @@ If preflight fails:
 ## Commands
 
 ```powershell
-# Search (agent cold-start)
+# Search (agent cold-start) — uses THIS project's Mem0 scope
 npm run mem0:search -- "current priorities"
 
 # Save session takeaway (direct storage — default)
@@ -120,6 +138,8 @@ python scripts/mem0_integration.py --action search --query "Profile Jedi"
 npm run mem0:seed:profile-jedi
 ```
 
+(Hub / JonBeatz — skip if the open project has no seed script.)
+
 ---
 
 ## Draven memory — AI assistant cross-session memory
@@ -131,14 +151,15 @@ Draven (the AI assistant) has his own isolated Mem0 collection, shared across **
 | **user_id** | `draven` |
 | **collection** | `draven_memories` |
 | **qdrant path** | `%USERPROFILE%\.mem0\qdrant_draven` |
-| **In JonBeatz** | `npm run draven:add -- "text"` / `npm run draven:search -- "query"` |
-| **In other projects** | Same commands — `draven-mem0.ps1` wrapper sets Draven env vars automatically |
+| **Commands** | `npm run draven:add` / `draven:search` / `draven:list` / `draven:delete` |
 
 This uses the same `mem0_integration.py` infrastructure, just with Draven-specific env vars. It's **project-independent** — Draven remembers context from all projects he works on.
 
 ### Draven memory = not per-project
 
 Unlike `mem0:add` which targets each project's own Qdrant collection, `draven:add` always writes to `draven_memories`. This means Draven can recall context about JonBeatz when working in VaderLabz, and vice versa.
+
+**Both Cursor and Hermes may write** project Mem0 one-liners **and** Draven Mem0 (fleet lock 2026-08-03).
 
 ---
 
@@ -148,20 +169,23 @@ Unlike `mem0:add` which targets each project's own Qdrant collection, `draven:ad
 |---------|-----|
 | "LM Studio endpoint not online" | Start local server on 1234; run preflight |
 | "No models loaded" | `npm run mem0:preflight` |
-| Empty search after add | Wait 2–3s; verify `user_id` is the project's own value |
+| Empty search after add | Wait 2–3s; verify `user_id` is **this project's** TRUTH value |
+| Wrong collection / mixed memories | Stop — check TRUTH + `.env.local`; never use another profile's IDs |
 | "Memory recorded" but nothing stored | Fixed in v1.3.1 — `mem0:add` now uses `infer=False` by default |
 | Context length error on add | Use `mem0:add` (infer=False) or `mem0:add:infer` only for short notes |
+| `migrations_qdrant` already accessed / “error accessing memory layer” voice | Two Mem0 Python processes at once (usually `mem0:add` + `draven:add` in parallel). Local Qdrant exclusive-locks folders. Mem0 telemetry used to open a **shared** `~\.mem0\migrations_qdrant` even when collections differ. Integration now defaults `MEM0_TELEMETRY=false` and retries the lock. Run adds **one after another**. Retry if it still fails. Store is not corrupt. |
 
 ---
 
 ## Agent checklist (memory tasks)
 
-1. `npm run mem0:preflight`
-2. `npm run mem0:search -- "<topic>"` before planning (project memory)
-3. `npm run draven:search -- "<topic>"` — check Draven's cross-session memory (shared across all projects)
-4. `npm run mem0:add -- "<takeaway>"` at end of significant work
-5. `npm run draven:add -- "<takeaway>"` — also store in Draven's memory so he recalls next session
-6. `npm run mem0:delete -- <id>` / `npm run draven:delete -- <id>` — clean up stale/incorrect memories
+1. Confirm **this project's** Mem0 IDs from `TRUTH.md` (not another profile's)
+2. `npm run mem0:preflight`
+3. `npm run mem0:search -- "<topic>"` before planning (project memory)
+4. `npm run draven:search -- "<topic>"` — check Draven's cross-session memory
+5. `npm run mem0:add -- "<takeaway>"` at end of significant work
+6. `npm run draven:add -- "<takeaway>"` — also store in Draven's memory (**after** mem0:add, not in parallel)
+7. `npm run mem0:delete -- <id>` / `npm run draven:delete -- <id>` — clean up stale/incorrect memories
 
 ## Recommended setup (locked 2026-07-09)
 
@@ -198,3 +222,4 @@ An **embedder** turns each memory into a list of numbers (a vector) so search ca
 - **`~/.mem0/config.json`** — redacted (platform API key removed). Gitignored via `.mem0/` entry in `.gitignore`.
 - **Embedder (2026-07-09):** locked to `BAAI/bge-small-en-v1.5` (384 dims). After changing embedder, run **`npm run mem0:reembed`** (and **`npm run draven:reembed`** for Draven) once to rebuild vectors.
 - **Reranker:** leave off. Set `MEM0_RERANKER=1` only if search quality is weak after a week of normal use.
+- **2026-08-04:** Doc reframed fleet-wide (no hardcoded JonBeatz-only identity). JonBeatz.dev Mem0 IDs locked to underscores.

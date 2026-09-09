@@ -37,9 +37,9 @@ When Jon pastes a **GitHub/repo URL**, says **review tool**, **evaluate tool**, 
 3. **OSS/free first** — minimal paid OK when ROI is high.
 4. **Install gate** — IN USE only after Jon approves (or says "run install now").
 5. **Doc threshold** — only **B- (80+) and above** persist to watchlist / setup-status / reference. C+ and below: grade in chat only unless Jon asks.
-6. **Grades first** — full review block in chat **before** any `AskQuestion` install prompt.
+6. **Grades first** — full review block in chat **this turn**. `AskQuestion` install gate only on the **next** turn after Jon has seen the grades (Composer puts the questionnaire above the summary).
 7. **Duplicate pre-check** — run `npm run tools:review-precheck` or grep TOOLS-* / DESIGN-REFERENCES before research; skip unless **re-review**.
-8. **Batch mode** — multiple URLs → all grade blocks first → one scoreboard → **one** install AskQuestion.
+8. **Batch mode** — multiple URLs → all grade blocks + scoreboard **this turn** → **one** install AskQuestion **next turn** (or skip if all WATCH/SKIP).
 9. **Security gate** — mandatory `security-review` subagent for auth/deploy/agent-config-writing tools.
 10. **Risks required** — every review includes Windows/ports/VRAM/license/auto-install gotchas.
 
@@ -51,9 +51,9 @@ When Jon pastes a **GitHub/repo URL**, says **review tool**, **evaluate tool**, 
 4. Gap, Overlap, **Risks**, Verify, Recommendation
 5. Update **shared canonical** docs in `_core-scripts/shared-profile-content/docs/` → `npm run sync:docs -- -Write`
 6. If install added skills/scripts/rules → shared skeleton + `npm run fleet:sync` (hub)
-7. **Only then** — install AskQuestion (single or batch)
+7. **Only then (next turn)** — install AskQuestion (single or batch). Never same turn as grades.
 8. Post-install: verify registry command → flip Setup READY/PARTIAL in **shared** TOOLS-SETUP-STATUS
-9. Optional: `draven:add` + vault on ADOPT→IN USE (link canonical row, do not duplicate full grade table)
+9. **Vault (mandatory on IN USE):** Pattern how-to + session + hub Decision + For Hermes on `CURSOR-HERMES-BRIDGE` — `what / how / what it upgrades / what it does not replace`. Link `TOOLS-*`; do **not** duplicate grade tables. Ritual: vault `Vault-note-after-tool-install`. Also `draven:add` one-liner.
 
 ## Re-grade policy
 

@@ -69,7 +69,7 @@ npm run mem0:add -- "Review session [date]: [count] tools — [one-line highligh
 npm run draven:add -- "Review session [date]: [highlights]"
 ```
 
-Append to vault `03_AI_Memory/Sessions/YYYY-MM-DD-<profile>.md` — link to shared TOOLS-WATCHLIST; installs pending/done.
+If anything flipped **IN USE** this session, confirm the vault Pattern + hub Decision + For Hermes bullet exist (`Vault-note-after-tool-install`). Session log links those notes + shared TOOLS-WATCHLIST (no duplicate grade tables).
 
 ---
 

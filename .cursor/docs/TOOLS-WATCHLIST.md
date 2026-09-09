@@ -48,12 +48,19 @@ Jon researches tools → paste links in Cursor (often from **JonBeatz hub**) →
 
 | Tool | Grade | Verdict | Setup | Cost | One-line summary |
 |------|-------|---------|-------|------|------------------|
+| [**img2pdf**](https://github.com/josch/img2pdf) | **A- (91)** | **IN USE** | **READY** | Free | Lossless images→PDF (POD interiors from page JPEGs) |
+| [**pikepdf**](https://github.com/pikepdf/pikepdf) | **A- (91)** | **IN USE** | **READY** | Free MPL | PDF Trim/Bleed/MediaBox QA for Lulu uploads |
+| **Affinity MCP** (Studio beta) | **B+ (88)** | **IN USE** | **READY** | Free‡ | Local SSE `:6767` → Cursor via `mcp-proxy`; TNIMS polish lane — Affinity must be open (not Creative Cloud) |
+| **InDesign UXP MCP** (Bridge) | **A- (90)** | **IN USE** | **READY** | Free‡ | UXP + bridge `:19300/:19301` + UDT. **Cold flow:** CC Desktop signed in (operator confirms) → UDT+InDesign+bridge → operator **Load & Watch** (agent cannot) → MCP. Web adobe.com login not enough. Keep CC installed; Startup disable OK |
 | **claude-video `/watch`** | **A- (92)** | IN USE | PARTIAL‡ | Free† | Agent watches video — frames + transcript; best for visual analysis |
 | **find-skills** | **A- (91)** | IN USE | **READY** | Free | Meta-skill — discover + install from 2000+ skill catalog via `npx skills find` |
+| [**obsidian-skills**](https://github.com/kepano/obsidian-skills) | **A- (91)** | **IN USE** | **READY** | Free MIT | Kepano OFM + JSON Canvas vendored; vault MCP stays I/O |
+| [**MeiGen**](https://github.com/jau123/MeiGen-AI-Design-MCP) | **B- (81)** | **WATCH** | NOT_INSTALLED | Freemium | 1,446 prompt gallery + MCP; bookmark [meigen.ai](https://www.meigen.ai/); do **not** `npx meigen init cursor` |
 | **Hallmark** | **B+ (88)** | IN USE | **READY** | Free | Anti-slop design skill — build/audit/redesign UI; 57 slop gates; complements NovaMira |
 | [**emilkowalski/skills**](https://github.com/emilkowalski/skills) | **A- (90)** | **IN USE** | **READY** | Free | Animation taste — 5 skills in shared library; `sync:skills` · `skills:emil:status` |
 | **Claude Blog** | **B (84)** | IN USE | **READY** | Free | 30-skill SEO/GEO blog pipeline — write, analyze, schema, editorial calendar |
 | **ComfyUI MCP** | **A- (91)** | IN USE | PARTIAL | Free | Local GPU Comfy control from Cursor; pairs with `:8188` |
+| [**Comfy Canvas**](https://github.com/Zlata-Salyukova/Comfy-Canvas) | **B (84)** | **WATCH** | NOT_INSTALLED | Free MIT | In-Comfy layer editor overlay — `custom_nodes/comfy_canvas`; no extra server |
 | **Context7 MCP** | **A (94)** | IN USE | **READY** | Free | Stops hallucinated library APIs — use before coding |
 | **devini-tea (reference)** | **A (93)** | REF | **READY** | Free | Open-source scroll-video cinematic site + 2h build playbook — study, not install |
 | **cinematic-scroll-skill** | **A- (92)** | **ADOPT** | **READY**‡ | Free MIT | MustBeSimo craft skill — doctor/tokens/themes; vendored `3d-web-workflows/cinematic-scroll-skill` |
@@ -66,12 +73,21 @@ Jon researches tools → paste links in Cursor (often from **JonBeatz hub**) →
 | **OpenMontage** | **A- (90)** | **IN USE** | **READY**‡ | Free‡ | Agentic video studio — `D:\Hermes\assets\openmontage`; `npm run openmontage:status` |
 | **agency-agents** | **B+ (86)** | WATCH | NOT_INSTALLED | Free | 230+ persona agent packs — cherry-pick; Hermes plugin; overlaps curated skills |
 | **AnythingLLM** | **B (83)** | WATCH | NOT_INSTALLED | Free OSS | All-in-one RAG chat desktop — overlaps Hermes Desktop + Mem0 + LiteLLM |
+| [**Unsloth**](https://github.com/unslothai/unsloth) | **B- (80)** | **WATCH** | NOT_INSTALLED | Apache-2 core / AGPL Studio | Local train+run (LoRA/QLoRA) — **do not** `unsloth start hermes` or `irm install.ps1` |
 | **Flowise** | **B- (82)** | WATCH | NOT_INSTALLED | Free OSS | Visual LangChain agent builder — overlaps Hermes; default `:3000` port clash |
 | **Agent-Reach** | B+ (87) | IN USE | PARTIAL | Free | CLI breadth — GitHub/YouTube/RSS/Exa; Twitter/Reddit optional login |
 | **Claude Watch** | B+ (88) | IN USE | PARTIAL‡ | Free† | Persistent video **study notes** — scene frames + transcript library |
 | **Agent Skills (Osmani)** | B (84) | IN USE | **READY** | Free | 24 engineering workflow skills — cherry-pick; overlaps Hermes rituals |
 | **Agent Browser** | B+ (86) | IN USE | PARTIAL | Free | Rust CLI/MCP browser — ref snapshots; alt to Playwright/Browserbase |
-| **AgentMail** | A- (91) | ADOPT | PARTIAL | Freemium | Agent email inboxes API — 2-way threads, OTP/attachments; alt to Resend for agents |
+| [**AgentMail**](https://www.agentmail.to/) | **A- (91)** | **IN USE** (Grok Bot) / ADOPT (Cursor SDK) | PARTIAL | Freemium | Grok Bot plugin **connected**; Clerk = `jonbeatz-clerk@agentmail.to`. Cursor SDK/MCP still not installed |
+| [**Hostinger Connector**](https://docs.hostinger.com/hostinger-connector/overview) | **C (74)** | **SKIP** | NOT_INSTALLED | Free (included) | Marketplace wrapper for MCP we already run — do **not** install (duplicates `hostinger-*`) |
+| [**OpenMausBot**](https://github.com/milind-soni/OpenMausBot) | **B- (81)** | **WATCH** | NOT_INSTALLED | Free Apache-2 | OSS Grok Bot clone (Electron); do not replace live Grok Bot; no host-control; cua 0.19.3 ≠ ours |
+| [**fx**](https://github.com/vercel-labs/fx) | **B- (80)** | **WATCH** | NOT_INSTALLED | Free Apache-2 | Vercel Labs 7.8 MiB Zig coding agent; experimental; do **not** `curl \| bash`; Cursor stays primary |
+| [**Token Harbor**](https://tokenharbor.ai/) | **C (76)** | **SKIP** | NOT_INSTALLED | Freemium | OpenRouter-shaped gateway; **never** `irm connect.ps1` / Connect ALL — writes Claude/Codex/OpenClaw + can set `OPENAI_*` |
+| [**VoxCPM**](https://github.com/OpenBMB/VoxCPM) | **B+ (85)** | **WATCH** | NOT_INSTALLED | Free Apache-2 | OpenBMB TTS 2B / ~8 GB VRAM; clone + 30 langs; do **not** replace Edge Liam / Omni |
+| [**Kokoro-82M**](https://github.com/hexgrad/kokoro) | **B (86)** | **ADOPT** | PARTIAL | Free Apache-2 | On-deck venv `D:\Hermes\apps\kokoro` — `npm run kokoro:test`; **not** Draven |
+| [**BetterWright**](https://github.com/BetterWright/betterwright) | **B- (80)** | **WATCH** | NOT_INSTALLED | Free MIT | Persistent policy-guarded Playwright; **never** `init` / `skill --install --all` (writes Cursor skills) |
+| [**Ramp Router**](https://router.com/) | **C (74)** | **SKIP** | NOT_INSTALLED | Free thru 2026 + $26 credits | Cost-routing gateway; OpenRouter stays; **never** `curl agents.ramp.com/install.sh \| sh` |
 | **NeuTTS** | A- (90) | WATCH | NOT_INSTALLED | Free§ | On-device clone TTS (GGUF/CPU); needs ref wav + transcript |
 | **OmniVoice-Studio** | B+ (87) | WATCH | NOT_INSTALLED | Free†† | Desktop GUI + 14 TTS engines incl. OmniVoice; MCP; GPU optional |
 | **LuxTTS** | B (86) | WATCH | NOT_INSTALLED | Free | Fast voice-clone TTS (~1GB VRAM GPU); speed/GPU alt to OmniVoice |
@@ -79,11 +95,24 @@ Jon researches tools → paste links in Cursor (often from **JonBeatz hub**) →
 | **Firecrawl MCP** | **B+ (86)** | WATCH | NEEDS_KEY | Freemium | Deep web scrape; skills exist — MCP optional alt to Tavily/fetch |
 | **Composio MCP** | **B (84)** | WATCH | PARTIAL | Freemium | Social automation; already in manifest, optional |
 | **Penpot** | **B (82)** | WATCH | NOT_INSTALLED | Free OSS | Figma alt + MCP; alt to Pencil when designer handoff needed |
+| **DesignLab** (alias **VaderBoard**) | **A- (90)** | **IN USE** | **READY** | Free MIT | Local Excalidraw mood board / ref studio — `D:\Hermes\apps\designlab` · `:3090` · `npm run designlab:dev` |
 | **Tripo Studio** | **A (93)** | **PRIMARY** | **READY**‡ | Freemium | Cloud image/text → GLB — product scroll §2; vault WORKFLOW |
 | **3DGenStudio** | **A- (91)** | **IN USE** | **READY**‡ | Free | Local Comfy Kanban 3D — `:3021`/`:5183`; Tripo web still primary |
 | [**TRELLIS.2**](https://github.com/microsoft/TRELLIS.2) | **B- (82)** | WATCH | NOT_INSTALLED | Free§ | MSFT 4B image→PBR GLB — Linux + **24GB VRAM**; HF Space demo on Win |
 | [**Step Beyond**](https://github.com/aievolutionpl/step-beyond) | **B- (80)** | WATCH | NOT_INSTALLED | Free | Agent behavior skill v4 alpha — cherry-pick verify/slop refs; rituals already cover |
 | [**OpenCut**](https://github.com/OpenCut-app/OpenCut) | **B- (82)** | WATCH | NOT_INSTALLED | Free | OSS CapCut alt — use [opencut.app](https://opencut.app) classic; rewrite + MCP coming |
+| [**Clypra**](https://github.com/AIEraDev/Clypra) | **B- (80)** | **WATCH** | NOT_INSTALLED | Free MIT | Tauri v2 + Rust FFmpeg NLE v1.4.5 — native HW decode; telemetry on; FreeCut stays polish UI |
+| [**FreeCut**](https://github.com/walterlow/freecut) | **A- (91)** | **IN USE** | **READY** | Free MIT | Human polish UI after Kinocut — [freecut.net](https://freecut.net); `npm run freecut:open`; workspace `D:\Hermes\apps\freecut-workspaces` |
+| [**Kinocut**](https://github.com/KyaniteLabs/kinocut) | **A- (91)** | **IN USE** | **READY** | Free Apache-2 | Agent FFmpeg video MCP (`kino` / `uvx`) — trim/caption/9:16/QC; chain: [VIDEO-POLISH-CHAIN.md](./VIDEO-POLISH-CHAIN.md) |
+| [**video-use**](https://github.com/browser-use/video-use) | **B- (80)** | **WATCH** | NOT_INSTALLED | Free MIT + ElevenLabs Scribe | Agent talking-head editor — **do not** run setup prompt / symlink into Hermes or `~/.claude/skills` |
+| [**Presenton**](https://github.com/presenton/presenton) | **B (85)** | **REF** | **READY** | Free Apache-2.0 | Jon bookmark — [presenton.ai](https://presenton.ai/); Docker `:5001` or Windows `.exe` later; **never** `:3000`; LiteLLM/LM Studio BYOK |
+| [**Camera Control**](https://aicameracontrol.com/) | **B- (82)** | **REF** | **READY** | Free web | 3D shot blocking → ref frame + prompt — [aicameracontrol.com](https://aicameracontrol.com/); Higgsfield CTA ignore; fal stays gen |
+| [**FigJam**](https://www.figma.com/figjam/) | **C (73)** | **REF** | **READY** | Freemium (Figma seats) | Jon bookmark — [figjam](https://www.figma.com/figjam/); DesignLab `:3090` stays the local board |
+| [**TestingCatalog**](https://www.testingcatalog.com/) | **B- (80)** | **REF** | **READY** | Free / subscribe | AI rumor/news desk — browse; sponsored posts exist; do not treat leaks as stack truth |
+| [**book-to-skill**](https://github.com/virgiliojr94/book-to-skill) | **B- (80)** | **WATCH** | NOT_INSTALLED | Free MIT | PDF/docs → Agent Skill — **do not** `npx skills add` into this profile; copyrighted books stay private |
+| [**loop-engineering**](https://github.com/cobusgreyling/loop-engineering) | **B+ (87)** | WATCH | NOT_INSTALLED | Free | Agent loop patterns + `loop-audit`/`loop-init` CLIs — docs-first; **do not** `loop-init` on hub without review |
+| [**system_prompts_leaks**](https://github.com/asgeirtj/system_prompts_leaks) | **B (84)** | **REF** | **READY** | Free | Catalog of extracted vendor system prompts (incl. Cursor) — research only; ToS gray |
+| [**markdownify-mcp**](https://github.com/zcaceres/markdownify-mcp) | **B+ (88)** | **IN USE** | **READY** | Free MIT | PDF/URL/Office → Markdown MCP — already in JonBeatz MCP manifest (`project-0-JonBeatz-markdownify`) |
 | [**NoSignups**](https://nosignups.net/) | **B (84)** | **REF** | **READY** | Free | 210 no-signup OSS browser tools — discovery bookmark (not install) |
 | [**Nemotron-Shared-Memory**](https://github.com/TheLasTech/Nemotron-Shared-Memory) | **B- (80)** | **REF** | **READY** | Free CC BY | Public MD+Git memory patterns — vault hygiene reference (not Nemotron model) |
 | **LongCat-Video** | B+ (87) | WATCH | NOT_INSTALLED | Free§ | Local 13.6B I2V — **fal fallback #1**; Avatar 1.5 = talking-head branch |
@@ -95,25 +124,37 @@ Jon researches tools → paste links in Cursor (often from **JonBeatz hub**) →
 | [**mp4-to-jpg**](https://github.com/allarddewinter/mp4-to-jpg) | **B (85)** | **REF** | **READY** | Free MIT | Browser MP4→JPEG bookmark — [demo](https://allarddewinter.github.io/mp4-to-jpg/); ffmpeg primary |
 | [**Video To JPG**](https://videotojpg.com/) | **B+ (88)** | **REF** | **READY** | Free | Browser frame extractor — blur detection, HEVC WASM, PNG/WebP; alt to mp4-to-jpg |
 | [**free-llm-api-resources**](https://github.com/cheahjs/free-llm-api-resources) | **B+ (88)** | **REF** | **READY** | Free | 27k★ curated free LLM API tiers — discovery bookmark; overlaps OpenRouter/Groq IN USE |
+| [**Agent Arena**](https://arena.ai/leaderboard/agent) | **A- (90)** | **REF** | **READY** | Free web | LMSYS/Arena in-the-wild agent ranking (tool hallu, bash recovery, cost/task) — browse; do not auto-swap Cursor models |
+| [**Bitwarden MCP**](https://github.com/bitwarden/mcp-server) | **B- (80)** | **WATCH** | NOT_INSTALLED | Free GPL-3 | Official vault MCP — **do not** add to Cursor (cloud models see retrieved secrets). Keep `.env.local` |
+| [**proton-pass-community-mcp**](https://github.com/hesreallyhim/proton-pass-community-mcp) | **C (76)** | **WATCH** | NOT_INSTALLED | Free GPL-3 | Unofficial `pass-cli` MCP; list-without-secrets + write gate — still skip Cursor |
+| [**protonpass-mcp**](https://github.com/aureTheDev/protonpass-mcp) | **C (70)** | **SKIP** | NOT_INSTALLED | Unlicensed OSS | 0★ Docker wrapper; Visionary CLI; session volume = keys on disk |
 | [**cto.new**](https://cto.new/) | **B (83)** | WATCH | NOT_INSTALLED | Freemium‡‡‡‡ | Ad-supported multi-agent SaaS — Team Lead + MCP; overlaps Hermes Desktop |
+| [**Paperclip**](https://github.com/paperclipai/paperclip) | **B- (81)** | **WATCH** | NOT_INSTALLED | Free MIT | Agent-org dashboard `:3100` — **never** `curl install.sh \| bash`; do not hire Cursor as a worker |
+| [**LoopX**](https://github.com/huangruiteng/loopx) | **B- (80)** | **WATCH** | NOT_INSTALLED | Free Apache-2.0 (v0.4.8+) | Long-horizon control plane on top of Cursor/Codex — **do not** `loopx workflow-skills --install`; dashboard Vite `:5173` |
 | [**Supabase**](https://supabase.com/) | **B+ (88)** | **REF** | **READY** | Freemium | **Bookmark** — Neon alt for Next-Flick (Jon 2026-07-13); PG + Auth/Storage/Vector/MCP |
 | [**PocketBase**](https://pocketbase.io/) | **A- (91)** | WATCH | NOT_INSTALLED | Free MIT | Single-file Go backend `:8090` — SQLite + auth + realtime; pre-v1 migration caveat |
 | [**InsForge**](https://github.com/InsForge/InsForge) | **B+ (88)** | **IN USE** | **READY** | Free Apache-2 | Agent-backend spike @ `D:\Hermes\apps\insforge` — localhost `:7130`; **not Neon** |
 | [**aitmpl.com**](https://aitmpl.com/) | **B (84)** | **REF** | **READY** | Free | Claude Code templates marketplace (skills/agents/MCPs) — browse; overlaps agency-agents |
 | [**Toolfolio**](https://toolfolio.com/) | **B- (81)** | **REF** | **READY** | Free | Tool discovery directory — bookmark only (not install) |
+| [**GitReverse**](https://www.gitreverse.com/) | **B- (80)** | **WATCH** | NOT_INSTALLED | Free web | Repo/site → synthetic Cursor prompt + [library](https://gitreverse.com/library); public GitHub only; do not self-host |
 | [**Databasement**](https://github.com/David-Crty/databasement) | **A- (90)** | **IN USE** | **READY** | Free MIT | DB backup UI @ `D:\Hermes\apps\databasement` — localhost `:2226` |
 | [**Voicebox**](https://github.com/jamiepine/voicebox) | **A- (92)** | WATCH | NOT_INSTALLED | Free MIT | Local TTS+STT studio + MCP `:17493` — Jon self-install later; overlaps Handy+OmniVoice |
+| [**VibeVoice-ASR**](https://huggingface.co/microsoft/VibeVoice-ASR) | **A- (90)** | WATCH | NOT_INSTALLED | Free MIT | MS 9B long-form ASR + diarization + hotwords (~60 min); VRAM-heavy vs Handy |
 | [**Theatre.js**](https://www.theatrejs.com/) | **B+ (86)** | WATCH | NOT_INSTALLED | Free Apache-2.0 | Visual R3F timeline (`@theatre/r3f`) — showcase 3D; last major push 2024 |
+| [**The Complete Shelf**](https://github.com/MengTo/complete-shelf) | **B+ (88)** | **REF** | **READY** | Free (no LICENSE file) | Bookmark — [live](https://mengto.github.io/complete-shelf/); single-file Three.js hardcover; study, not a product install |
 | [**Threlte**](https://threlte.xyz/) | **B (84)** | WATCH | NOT_INSTALLED | Free MIT | Svelte 3D on Three.js — reference only; fleet stack is Next.js + R3F |
 | [**Nellavio**](https://github.com/nellavio/nellavio) | **B- (81)** | WATCH | NOT_INSTALLED | Free MIT | Next.js dashboard starter (auth, RBAC, i18n, 90+ components) — overlaps shadcn/Premium-UI |
 | [**Mnemosyne**](https://github.com/mnemosyne-oss/mnemosyne) | **B+ (89)** | **IN USE (Cursor MCP trial)** | READY | Free MIT | JonBeatz `.cursor/mcp.json` + `MNEMOSYNE.md` — Mem0 canonical |
 | **hermes-browser-extension** | A (93) | **ADOPT** | **READY** | `API_SERVER_KEY` + `API_SERVER_CORS_ORIGINS` | Chrome+Brave `:8642`; side panel Alt+H; companion `hermes-browser-companion` |
 | [**deepseek-mcp-server**](https://github.com/DMontgomery40/deepseek-mcp-server) | **B (83)** | WATCH | NOT_INSTALLED | Free MIT | Official MCP Registry DeepSeek V4 tools — local stdio only; LiteLLM stays primary |
+| [**DeepSeek Harness**](https://github.com/deepseek-ai/deepseek-harness) | **B- (80)** | **REF** | **READY** | Free MIT | Official `dsh` docs/preview — bookmark; **do not** `npx @deepseek-ai/dsh web` on this box |
 | **HunyuanVideo** | B+ (86) | WATCH | NOT_INSTALLED | Free§ | Tencent 13B+ local I2V — **fal credit fallback #2**; FP8 weights |
 | **LTX Desktop** | B+ (87) | WATCH | NOT_INSTALLED | Free OSS‡‡ | Local AI NLE + LTX-2.3 T2V/I2V — Jon download later (scroll clips) |
 | **Open Generative AI + muapi** | B+ (87) | WATCH | NOT_INSTALLED | Freemium‡‡‡ | OSS Higgsfield-style studio; cloud = muapi wallet; local sd.cpp incl. Z-Image |
 | **Hermes Agora** | B (84) | WATCH | PRE_RELEASE | Free | Unofficial 3D Hermes agent office visualizer — fun when it ships |
 | **OpenRouter** | A- (92) | **IN USE** | **READY** | Pay-per-use | LiteLLM ~22 `*-or` aliases; Cursor Setup B/C — JonBeatz `CURSOR-MODELS-CHEATSHEET.md` |
+| [**NVIDIA Build / NIM catalog**](https://build.nvidia.com/) | **B (84)** | **WATCH** | **NEEDS_KEY** | Free† | Hosted OpenAI-compatible NIM APIs (`integrate.api.nvidia.com/v1`) — optional LiteLLM/Cursor/Hermes overflow; **not** a ComfyUI drop-in |
+| **Cursor Origin** | **B (84)** | **IN USE (trial, 1 repo)** | **PARTIAL** | Included in Pro+ | GitHub forge mirror — namespace `jonbeatz`; Command-Center only; **no Origin MCP**; playbook JonBeatz `CURSOR-ORIGIN.md` |
 | **OmniRoute** | B (85) | WATCH | NOT_INSTALLED | Free OSS | Self-hosted AI gateway alt to LiteLLM — 237 providers, compression, MCP; complex |
 | **mockit-mcp** | B- (81) | WATCH | NOT_INSTALLED | Freemium | Text → premium iOS UI mockups (PNG+HTML) via Claude + Playwright |
 | **OpenWhispr** | B (85) | WATCH | NOT_INSTALLED | Free OSS | Local dictation — Parakeet/Whisper STT; optional LM Studio `:1234` cleanup |
@@ -122,13 +163,23 @@ Jon researches tools → paste links in Cursor (often from **JonBeatz hub**) →
 | **Hermex** | B+ (88) | WATCH | NOT_INSTALLED | Free MIT | **Bookmark Jon 2026-07-13** — native iOS for `hermes-webui` `:8787`; setup later (needs WebUI + tunnel) |
 | **Aight** | B (85) | WATCH | NOT_INSTALLED | Freemium | **Bookmark Jon 2026-07-13** — Hermes gateway native iOS; setup later (free Hermes-only trial first) |
 | **Hermes WebUI** | B+ (88) | WATCH | NOT_INSTALLED | Free OSS | Native Hermes web/mobile UI — **prerequisite for Hermex**; bookmark with Hermex path |
+| [**Hermes Control Deck**](https://github.com/filipj9/Hermes-Control-Deck) | **B- (81)** | **WATCH** | NOT_INSTALLED | Free MIT | Community PWA for WebUI + Codex CLI — default `:4240`; Telegram stays primary; alpha |
+| [**oh-my-hermes**](https://github.com/rlaope/oh-my-hermes) | **B- (80)** | **WATCH** | NOT_INSTALLED | Free MIT | Unofficial OMH overlay on Nous Hermes — **do not** `omh setup` / `irm install.ps1 \| iex` on jonbeatz |
 | **Open WebUI** | B (85) | WATCH | NOT_INSTALLED | Free OSS | Docker chat UI + Hermes API `:8642` |
 | **MemPalace** | B (84) | WATCH | NOT_INSTALLED | Free MIT | **Bookmark Jon 2026-07-13** — verbatim local memory + MCP; setup later; Mem0 stays primary |
+| [**Hindsight**](https://github.com/vectorize-io/hindsight) | **B (83)** | **WATCH** | NOT_INSTALLED | Free MIT / Cloud usage | SOTA “learn not just remember” agent memory — Docker `:8888/:9999`; **do not** `hindsight-cursor init` on this PC |
+| [**OpenViking**](https://github.com/volcengine/OpenViking) | **B- (80)** | **WATCH** | NOT_INSTALLED | Free AGPLv3 / Volcengine SaaS | Filesystem context DB (`viking://`); Hermes native provider exists — **do not** `hermes memory setup openviking` |
+| [**watermarks-remover**](https://github.com/guillaumemeyer/watermarks-remover) | **B- (81)** | **WATCH** | NOT_INSTALLED | Free MIT | AI **provenance** strip (C2PA/Unicode/text marks) — **not** visual inpaint; CLI only, no hooks/plugin |
+| [**Honcho**](https://github.com/plastic-labs/honcho) | **B- (81)** | **WATCH** | NOT_INSTALLED | Free AGPL-3.0 / managed credits | Plastic Labs reasoning-first peer memory — **do not** `hermes memory setup honcho` or `npx skills add plastic-labs/honcho` |
+| [**krypt.cc/tools**](https://krypt.cc/tools) | **C (73)** | **SKIP** | NOT_INSTALLED | Free as-is | Mimosa “free tools” catalog (tweaker/cleaner/VPN/Discord/trading) — **do not** download binaries |
+| **Headroom** | B- (81) | WATCH | NOT_INSTALLED | Free Apache-2.0 | **2026-07-21** — local token compress (proxy/MCP/library); do not wrap Cursor vs LiteLLM; avoid `:8787` (Hermex/WebUI) |
+| [**ArcRift**](https://github.com/Eshaan-Nair/ArcRift) | **C (74)** | **WATCH** | NOT_INSTALLED | Free MIT | **Record Jon 2026-07-19** — browser AI chats→Cursor MCP + SQLite KG; below B- threshold but Jon asked to persist; Mem0/Mnemosyne primary — **do not install** |
 | **Refero MCP** | A- (91) | WATCH | NOT_INSTALLED | Paid $17/mo | **Bookmark Jon 2026-07-13** — 135k screens/flows MCP; setup later ($17/mo Pro) |
 | **Refero Styles** | B+ (88) | WATCH | NOT_INSTALLED | Freemium‡ | **Bookmark Jon 2026-07-13** — 2k+ DESIGN.md examples; pair Refero MCP + DesignMD later |
 | **AgentsView** | B+ (87) | IN USE | **READY** | Free OSS | Session search + messages — `:8080` |
 | **TokenTracker** | B+ (87) | IN USE | **READY** | Free OSS | **Primary** spend dashboard — `:7680` |
 | **ccusage** | B+ (86) | WATCH | **READY** | Free OSS | CLI Hermes-only alt — Jon prefers TokenTracker |
+| [**Hermes Session Analyzer**](https://github.com/tommulkins/hermes-plugin-session-analyzer) | **B- (81)** | **WATCH** | NOT_INSTALLED | Free MIT | Hermes Desktop per-session tool/cost/fail UI — **set `HERMES_HOME` to jonbeatz profile** |
 | **Payload CMS** | **A (94)** | **IN USE** | **READY** | Free OSS | MSC mystudiochannel.com — Next.js in-process v3; SQLite local |
 | **Better Auth** | **A (92)** | **ADOPT** | **PARTIAL** | Free OSS | Next-Flick v7 spike — `AUTH_PROVIDER=better-auth` local; Clerk prod default |
 | **Stack Auth / Hexclave** | B+ (86) | WATCH | NOT_INSTALLED | Free OSS† | Self-host Clerk-like; Docker + AGPL backend |
@@ -150,6 +201,9 @@ Jon researches tools → paste links in Cursor (often from **JonBeatz hub**) →
 | **React Hook Form** | **A (93)** | **IN USE** | **READY** | Free OSS | Forms — MSC; use with Zod resolver |
 | **TanStack Query** | **A (94)** | **ADOPT** | NOT_INSTALLED | Free OSS | Client server-state; App Router prefetch/hydrate |
 | **bknd** | B+ (87) | WATCH | NOT_INSTALLED | Free OSS | Embedded BaaS (beta); Firebase alt; Next.js embed |
+| [**16wells/divi-docs**](https://github.com/16wells/divi-docs) | **A- (91)** | **REF** | **READY** | Free MIT | Community Divi 5 tech docs + [LLM playbooks](https://16wells.github.io/divi-docs/) — primary external KB for DSZ LocalWP |
+| [**divilovewp/divi5-skill**](https://github.com/divilovewp/divi5-skill) | **A- (90)** | **ADOPT** | NOT_INSTALLED | Free | JSON-native Divi 5 page-gen skill — complements IAWB; clone when ready |
+| [**cjsimon2/Divi5-ToolKit**](https://github.com/cjsimon2/Divi5-ToolKit) | **B+ (88)** | **WATCH** | NOT_INSTALLED | Free | Claude Code Divi 5 CSS/a11y/CWV plugin — useful if CC on WP; Cursor stays primary |
 
 † Stack Auth: MIT SDK + AGPL backend.  
 ‡ Directus: BSL 1.1 under revenue cap; GPL alternative.  
@@ -167,11 +221,12 @@ Jon researches tools → paste links in Cursor (often from **JonBeatz hub**) →
 
 ## Voice / TTS watch deck (Jon 2026-07-04)
 
-**Production:** OmniVoice instruct (CPU, ritual-only) + Edge Ryan fallback — do not replace.
+**Production:** Edge Liam (`en-CA-LiamNeural`, ritual-only; matches Hermes) + OmniVoice optional restore — do not remove Omni install.
 
 | Tool | Grade | Verdict | When to reach for it |
 |------|-------|---------|----------------------|
 | [NeuTTS](https://github.com/neuphonic/neutts) | A- (90) | WATCH | On-device **clone** from ref wav + transcript; CPU/GGUF path |
+| [**Kokoro-82M**](https://github.com/hexgrad/kokoro) | B (86) | **ADOPT** | Fast **local catalog** TTS (CPU/ONNX); British males; play engine — not ritual primary |
 | [OmniVoice-Studio](https://github.com/debpalash/OmniVoice-Studio) | B+ (87) | WATCH | GUI lab — dubbing, clone A/B, 14 engines + MCP; GPU optional |
 | [LuxTTS](https://github.com/ysharma3501/LuxTTS) | B (86) | WATCH | Fast **clone** when GPU free (~1 GB VRAM); 48 kHz experiments |
 
@@ -181,7 +236,7 @@ Install any of these only after Jon approves. None replace `draven:speak` until 
 
 ## Voice dictation watch deck (Jon 2026-07-04)
 
-**Baseline:** Windows **Win+H** talk-to-type. **Production speak-out:** OmniVoice (`draven:speak`) — do not replace.
+**Baseline:** Windows **Win+H** talk-to-type. **Production speak-out:** Edge Liam via `draven:speak` (OmniVoice optional restore) — do not remove Omni.
 
 | Tool | Grade | Verdict | When to reach for it |
 |------|-------|---------|----------------------|
@@ -200,29 +255,48 @@ Install any of these only after Jon approves. None replace `draven:speak` until 
 | Domain | Primary | Alternative(s) | Notes |
 |--------|---------|----------------|-------|
 | Video **understanding** | claude-video | Claude Watch (study notes), Agent-Reach (text-only YouTube) | claude-video = in-task visuals; Claude Watch = persistent tutorial library |
-| **Skill discovery** | Manual `npx skills add` | **find-skills** | Ask "is there a skill for X?" → `npx skills find [query]` |
-| **Browser automation** | cursor-ide-browser MCP | Agent Browser, Playwright, Browserbase | cursor-ide-browser default in Cursor; agent-browser for Rust CLI/MCP |
+| **Skill discovery** | Manual `npx skills find` | **find-skills** IN USE · [**book-to-skill**](https://github.com/virgiliojr94/book-to-skill) WATCH | find-skills = catalog; book-to-skill = distill a PDF you own — no global `npx skills add` |
+| **AI slide decks / PPTX** | InDesign / Typst (print) | [**Presenton**](https://github.com/presenton/presenton) REF | Bookmark; Docker `:5001` or Windows exe when a deck is needed; LiteLLM `:4000` — do not take `:3000` |
+| **Mood board / whiteboard** | **DesignLab** `:3090` IN USE | [**FigJam**](https://www.figma.com/figjam/) REF · Miro SKIP · Penpot WATCH | Local Excalidraw stays; FigJam is a Figma-seat bookmark, not a subscribe |
+| **3D / AI shot blocking** | fal + R3F + [AI Camera Movements](https://aicameramovements.com/) REF | [**Camera Control**](https://aicameracontrol.com/) REF | Block in 3D then gen with fal — ignore Higgsfield CTAs |
+| **Browser automation** | cursor-ide-browser MCP | Agent Browser, Playwright, Browserbase · [BetterWright](https://github.com/BetterWright/betterwright) WATCH | BetterWright `init` writes `~/.cursor/skills` — do not run |
 | **Engineering workflow** | Hermes rituals + Workflow-Portable | Agent Skills (Osmani) | Cherry-pick Osmani gates; don't replace Start/End Project |
-| **Draven TTS** | OmniVoice (CPU, voice design) | NeuTTS, LuxTTS (clone) | Keep Omni primary; clones need ref clip |
+| **Draven TTS** | Edge Liam (ritual) + OmniVoice (optional) | [**Kokoro-82M**](https://github.com/hexgrad/kokoro) ADOPT · NeuTTS, LuxTTS, [VoxCPM](https://github.com/OpenBMB/VoxCPM) WATCH | Liam primary; Kokoro = local play catalog; VoxCPM2 ~8 GB VRAM — unload Comfy first if ever spiked |
 | **Voice dictation (STT in)** | Windows Win+H | **OpenWhispr**, **Calliop** | Local OSS alt; paste-at-cursor; try later |
 | **TTS studio / GUI** | `draven:speak` scripts | OmniVoice-Studio | Optional GUI for dubbing/clone experiments |
 | Web **research** | Tavily + fetch MCP | Firecrawl, Agent-Reach Exa | Different depth/speed |
-| **Design** mockups | Code-first (Nova/Premium-UI) | **Hallmark**, Pencil MCP, Penpot | Hallmark = agent-time anti-slop gates |
+| **DesignMD / getdesign.md** | Live site → DESIGN.md | [GitReverse](https://www.gitreverse.com/) WATCH | GitReverse = synthetic rebuild prompt (README + depth-1 tree); DesignMD = brand system extract |
+| **DTP / picture-book layout** | Pillow + Typst (TNIMS print default) | **Affinity MCP**, **InDesign UXP Bridge** | Optional polish; see TNIMS `tools/layout-mcp/SETUP.md` |
 | **Animation taste / easing** | Scroll-Motion + gsap skills | [**emilkowalski/skills**](https://github.com/emilkowalski/skills) | `improve-animations` audits whole codebase; complements Hallmark |
 | **Cross-tool memory patterns** | Mem0 + **Vader Vault** + ReCall | [**Nemotron-Shared-Memory**](https://github.com/TheLasTech/Nemotron-Shared-Memory) | Public-safe MD+Git patterns — REF only, not a runtime |
+| **Agent memory runtime** | **Mem0** (canonical) + Mnemosyne trial + Vault | [**Hindsight**](https://github.com/vectorize-io/hindsight) WATCH · [**OpenViking**](https://github.com/volcengine/OpenViking) WATCH · [**Honcho**](https://github.com/plastic-labs/honcho) WATCH · MemPalace | Do not replace; never `hermes memory setup honcho` / `openviking`; new-PC copy the cake first |
+| **Obsidian vault authoring** | `vault` filesystem MCP + vader-vault.mdc | [**obsidian-skills**](https://github.com/kepano/obsidian-skills) IN USE (markdown + canvas) | OFM/wikilinks/callouts; CLI does not replace vault MCP |
 | **Blog / SEO content** | Manual | **Claude Blog** | Articles, changelog posts; optional Gemini for hero images |
 | **UI components** | shadcn + skills | React Bits Pro | New pages only |
 | **Hermes dashboard** | Built-in + Reflect / plugins | [Hermes Agora](https://www.hermesagora.com/) | 3D fun visualizer; pre-release; unofficial |
-| **LLM routing** | LiteLLM `:4000` + DeepSeek direct + **OpenRouter** `*-or` | **OmniRoute** | OpenRouter active via LiteLLM; OmniRoute = self-host experiment only |
+| **Phone / PWA Hermes control** | Telegram (away) + Hermex/Aight WATCH | [**Hermes Control Deck**](https://github.com/filipj9/Hermes-Control-Deck) WATCH | Unofficial PWA `:4240`; needs WebUI `:8787`; never bind public Internet |
+| **Hermes skill / operating overlays** | Fleet rituals + Telegram + Cursor C&C | [**oh-my-hermes**](https://github.com/rlaope/oh-my-hermes) WATCH · LoopX WATCH | Unofficial `omh setup` writes Hermes config + `~/.omh`; never `irm install.ps1 \| iex` |
+| **LLM routing** | LiteLLM `:4000` + DeepSeek direct + **OpenRouter** `*-or` | **NVIDIA Build** WATCH · **OmniRoute** · Token Harbor SKIP · [Ramp Router](https://router.com/) SKIP · [RoutesMe](https://routesme.online/) SKIP | OpenRouter stays; NVIDIA = optional free NIM overflow (`nvapi-`); never Token Harbor Connect CLI, Ramp `install.sh`, or `routesme.online/v1` |
+| **Agent model quality (in-the-wild)** | `CURSOR-MODELS-CHEATSHEET.md` + TokenTracker spend | [**Agent Arena**](https://arena.ai/leaderboard/agent) REF · [**TestingCatalog**](https://www.testingcatalog.com/) REF | Arena = ranking; TestingCatalog = rumor news — do not auto-swap defaults |
+| **Runtime API keys (apps / LiteLLM / MCP)** | **`.env.local`** + `sync:mcp-env` + `_core-scripts/.env.local.master` | Bitwarden/Proton MCP | Human vaults stay human. **Never** wire password MCP into Cursor with cloud models |
+| **Grok Bot roster** | xAI **Grok Bot** (Ravyn/Clerk IN USE) | [OpenMausBot](https://github.com/milind-soni/OpenMausBot) WATCH | OSS local-first clone; do not install over live Grok Bot |
+| **CLI coding agent** | Cursor | [fx](https://github.com/vercel-labs/fx) WATCH · [**DeepSeek Harness**](https://github.com/deepseek-ai/deepseek-harness) REF · Kiro SKIP | Not a Cursor replacement; never `curl https://cli.kiro.dev/install \| bash` |
+| **Agent org / multi-agent company** | Hermes Desktop + Telegram | [**Paperclip**](https://github.com/paperclipai/paperclip) WATCH · cto.new | Paperclip hires Cursor/OpenClaw — do not `install.sh`; Node 24 + `:3100` |
+| **Long-horizon agent control plane** | Cursor + Hermes rituals + ReCall | [**LoopX**](https://github.com/huangruiteng/loopx) WATCH | Overlay kernel (goals/gates/quota) — not a harness swap; no skill install; keep OpenViking off |
 | **Mobile UI design** | Penpot + Mobbin refs | **mockit-mcp** | Prompt → iOS PNG/HTML before Flutter build |
-| Cloud **images** | HF `image:gen` (free) | fal.ai (paid bonus) | Already dual pipeline |
+| Cloud **images** | HF `image:gen` (free) | fal.ai (paid bonus) · [MeiGen](https://www.meigen.ai/) prompt gallery · **NVIDIA Build** image NIMs WATCH | Dual pipeline; NVIDIA hosted FLUX/Qwen-Image is REST (`nvapi-`), **not** a Comfy node; [Comfy-Org/NIMnodes](https://github.com/Comfy-Org/NIMnodes) = **local** NIM containers + `NIMSetup.exe` (skip on 16 GB) |
 | Cloud **video / lip sync GUI** | fal Kling (`video:fal`) | **Open Generative AI + muapi** | OSS studio + muapi wallet; alt to Higgsfield-style UIs |
-| Local **images/video** | ComfyUI | — | Generation, not consumption |
+| Local **images/video** | ComfyUI | MeiGen MCP Comfy bridge (WATCH) · [**Comfy Canvas**](https://github.com/Zlata-Salyukova/Comfy-Canvas) WATCH | Generation, not consumption — do not let MeiGen own `:8188`; Canvas = in-tab paint loop, not a second Comfy |
+| **Local LLM train / LoRA** | LM Studio inference `:1234` | [**Unsloth**](https://github.com/unslothai/unsloth) WATCH | Unload Comfy first; never `unsloth start hermes`; Studio UI is AGPL |
+| **AI provenance / C2PA hygiene** | Manual ExifTool / none | [**watermarks-remover**](https://github.com/guillaumemeyer/watermarks-remover) WATCH | Strips metadata/Unicode marks from **your** gens — not Lama/IOPaint visual watermarks; never `install_skill.py --target cursor` |
 | **Image → PBR GLB** | **Tripo Studio** (cloud) | **3DGenStudio** (Comfy Kanban), [**TRELLIS.2**](https://github.com/microsoft/TRELLIS.2) | TRELLIS.2 = OSS SOTA but Linux + 24GB VRAM; HF Space demo on Win |
-| **Manual video timeline** | FFmpeg + browser | [**OpenCut**](https://opencut.app) classic, LTX Desktop | OpenMontage = agent pipelines; OpenCut = human NLE cuts |
+| **Manual video timeline** | FFmpeg + browser | [**FreeCut**](https://freecut.net) (preferred WATCH), [**OpenCut**](https://opencut.app) classic, LTX Desktop | OpenMontage = agent pipelines; FreeCut/OpenCut = human NLE cuts |
+| **Agent trim / caption / Shorts QC** | [**Kinocut**](https://github.com/KyaniteLabs/kinocut) MCP **IN USE** | Raw FFmpeg · [**video-use**](https://github.com/browser-use/video-use) WATCH | Kinocut stays polish chain; video-use = talking-head EDL via ElevenLabs Scribe — no Hermes skill symlink |
+| **Human timeline polish** | [**FreeCut**](https://freecut.net) **IN USE** | OpenCut classic · [**Clypra**](https://github.com/AIEraDev/Clypra) WATCH · LTX Desktop | After Kinocut; Clypra = native Tauri NLE if WebCodecs preview is the bottleneck — do not MSI today |
 | **No-signup tool discovery** | Bookmarks + TOOL-CHEST | [**NoSignups**](https://nosignups.net/) | 210 curated browser OSS utilities — not an install |
+| **PC tweaker / “free tools” catalogs** | Windows Settings + existing stack | [**krypt.cc/tools**](https://krypt.cc/tools) SKIP | Tweaker/cleaner/Cursor customizer/VPN/Discord automation — do **not** download |
 | **Agent behavior formalism** | Cursor rules + rituals + Hallmark | [**Step Beyond**](https://github.com/aievolutionpl/step-beyond) skill | Cherry-pick verify/slop refs only; no runtime without adapter |
-| **Agent token analytics** | **TokenTracker** (spend) + **AgentsView** (sessions) | ccusage | Jon 2026-07-04 — ccusage demoted |
+| **Agent token analytics** | **TokenTracker** (spend) + **AgentsView** (sessions) | ccusage · [**Hermes Session Analyzer**](https://github.com/tommulkins/hermes-plugin-session-analyzer) WATCH | Jon 2026-07-04 — ccusage demoted; Analyzer is Hermes-Desktop-only (not Cursor) |
 | **Scroll / cinematic I2V** | fal Kling (`video:fal`) | LongCat, HunyuanVideo, Comfy `generate-video`, **LTX Desktop** | LTX = GUI NLE + local gen; ~160 GB disk; 16 GB VRAM min |
 | **Headless CMS** | **Payload** (MSC) | Strapi, Directus, Sanity, Keystone | See [TOOLS-STACK-OPTIONS.md](./TOOLS-STACK-OPTIONS.md) |
 | **App auth (self-host)** | Clerk (Next-Flick prod) | **Better Auth**, Stack Auth, Hanko | Better Auth = in-app + pg0; Stack = Clerk-like Docker |
@@ -247,6 +321,7 @@ Install any of these only after Jon approves. None replace `draven:speak` until 
 | Hugging Face + fal.ai | Cloud images | A / B+ | Free default + paid bonus |
 | Context7 MCP | Library docs | A | Version-accurate refs |
 | GitHub / Hostinger / Playwright / Tavily | Ops MCPs | A- | See `ENGINEERING.md` |
+| **Hostinger API in Cursor** | **Hostinger MCPs (4)** scoped launcher | [Hostinger Connector](https://docs.hostinger.com/hostinger-connector/overview) SKIP | Connector = same `hostinger-api-mcp`; writes `mcp.json` and duplicates ~200 tools |
 | Obsidian Copilot + vault | Knowledge | B+ | `H:\Vader_Vault` |
 | claude-video `/watch` | Video understanding | A- | Installed 2026-07-04 |
 | Hallmark | Greenfield UI / anti-slop | B+ | Installed 2026-07-04 — `npm run skills:hallmark:install` |
@@ -318,6 +393,7 @@ Install any of these only after Jon approves. None replace `draven:speak` until 
 
 | Date | Link | Grade | Status |
 |------|------|-------|--------|
+| 2026-09-03 | [Kokoro-82M](https://github.com/hexgrad/kokoro) | B (86) | **ADOPT** — local catalog TTS; skip kokoroai.org; Breeze TTS 2 graded C in chat only |
 | 2026-07-04 | [NeuTTS](https://github.com/neuphonic/neutts) | A- (90) | **WATCH** — on-device clone alt |
 | 2026-07-04 | [OmniVoice-Studio](https://github.com/debpalash/OmniVoice-Studio) | B+ (87) | **WATCH** — TTS GUI/MCP hub |
 | 2026-07-04 | [LuxTTS](https://github.com/ysharma3501/LuxTTS) | B (86) | **WATCH** — GPU clone alt |
@@ -419,6 +495,10 @@ Install any of these only after Jon approves. None replace `draven:speak` until 
 | 2026-07-13 | [MiMo Code](https://github.com/XiaomiMiMo/MiMo-Code) | C+ (76) | **REF bookmark** — Jon: blog/concepts only; no install |
 | 2026-07-13 | [AgentsView](https://github.com/kenn-io/agentsview) | B+ (87) | **RE-CONFIRMED IN USE** — 4.4k★; `:8080` (unchanged) |
 | 2026-07-13 | [MemPalace](https://github.com/MemPalace/mempalace) | B (84) | **WATCH bookmark** — Jon: setup later; additive vs Mem0 |
+| 2026-07-19 | [ArcRift](https://github.com/Eshaan-Nair/ArcRift) | C (74) | **WATCH record** — Jon asked persist despite &lt;B-; browser→IDE memory; skip install (Mem0/Mnemosyne) |
+| 2026-07-21 | [Headroom](https://github.com/headroomlabs-ai/headroom) | B- (81) | **WATCH** — token compress proxy/MCP; trial later; never blind `wrap cursor` |
+| 2026-07-21 | [MemPalace](https://github.com/MemPalace/mempalace) | B (84) | **DUPLICATE** — already WATCH bookmark 2026-07-13; no re-grade |
+| 2026-07-21 | [alisaitteke/photoshop-mcp](https://github.com/alisaitteke/photoshop-mcp) | C (72) | **SKIP** — COM; UXP path locked LIVE (chat grade; SKIP pointer in table) |
 | 2026-07-13 | [Hermex](https://github.com/uzairansaruzi/hermex) | B+ (88) | **WATCH bookmark** — Jon: setup later; needs hermes-webui + tunnel; Telegram stays primary |
 | 2026-07-13 | [Aight](https://aight.cool/) | B (85) | **WATCH bookmark** — Jon: setup later; Hermes gateway native iOS; Telegram stays primary |
 | 2026-07-13 | [Strands Agents](https://strandsagents.com/) | C+ (74) | **SKIP** — AWS agent SDK; heavy Hermes overlap (chat only) |
@@ -427,6 +507,78 @@ Install any of these only after Jon approves. None replace `draven:speak` until 
 | 2026-07-14 | [Toolfolio](https://toolfolio.com/) | B- (81) | **REF** — tool discovery directory bookmark |
 | 2026-07-14 | [Databasement](https://github.com/David-Crty/databasement) | A- (90) | **IN USE** — Docker localhost `:2226` @ `D:\Hermes\apps\databasement` |
 | 2026-07-14 | [Voicebox](https://github.com/jamiepine/voicebox) | A- (92) | **WATCH** — Jon self-install later; keep Handy/OmniVoice primary |
+| 2026-07-14 | [AI Camera Movements](https://aicameramovements.com/) | B+ (88) | **REF** — camera-move prompt library for AI video / 3D |
+| 2026-07-14 | [Brand Motion prompts](https://brandmotion.in/prompts.html) | B (84) | **REF** — agency prompt library (extend violet-car bookmark) |
+| 2026-07-14 | [VibeVoice-ASR](https://huggingface.co/microsoft/VibeVoice-ASR) | A- (90) | **WATCH** — MS long-form ASR+diarization; not Handy replacement |
+| 2026-07-14 | [markdownify-mcp](https://github.com/zcaceres/markdownify-mcp) | B+ (88) | **IN USE** — re-confirmed; already in JonBeatz MCP manifest |
+| 2026-07-14 | [system_prompts_leaks](https://github.com/asgeirtj/system_prompts_leaks) | B (84) | **REF** — vendor prompt catalog research; ToS gray; Cursor folder useful |
+| 2026-07-14 | [loop-engineering](https://github.com/cobusgreyling/loop-engineering) | B+ (87) | **WATCH** — loop patterns + CLIs; docs-first; no hub `loop-init` yet |
+| 2026-07-14 | [FreeCut](https://github.com/walterlow/freecut) | A- (91) | **IN USE** — promoted P3 polish UI (freecut.net); `npm run freecut:open` |
+| 2026-07-14 | Video polish chain | — | **IN USE** — VIDEO-POLISH-CHAIN.md + `npm run video:polish` (Kinocut cut → FreeCut optional) |
+| 2026-07-14 | [Kinocut](https://github.com/KyaniteLabs/kinocut) | A- (91) | **IN USE** — uv tool 1.8.0 + project MCP; workspace `D:\Hermes\apps\kinocut-media`; `npm run kinocut:status` |
+| 2026-07-14 | [img2pdf](https://github.com/josch/img2pdf) | A- (91) | **IN USE** — pip; The-Night-I-Met-Santa `npm run book:pdf:*`; lossless page JPEG→PDF |
+| 2026-07-14 | [pikepdf](https://github.com/pikepdf/pikepdf) | A- (91) | **IN USE** — pip; `book:pdf:verify` Trim/Bleed boxes for Lulu |
+| 2026-08-31 | [NVIDIA Build / NIM catalog](https://build.nvidia.com/) | B (84) | **WATCH** — hosted `nvapi-` OpenAI API; LiteLLM `nvidia_nim/`; not Comfy drop-in |
+| 2026-08-27 | [Hindsight](https://github.com/vectorize-io/hindsight) | B (83) | **WATCH** — SOTA learn-memory; keep Mem0; no Cursor init / no Docker now |
+| 2026-08-27 | [OpenViking](https://github.com/volcengine/OpenViking) | B- (80) | **WATCH** — `viking://` context FS; AGPL + ByteDance; no Hermes memory swap |
+| 2026-08-27 | [obsidian-skills](https://github.com/kepano/obsidian-skills) | A- (91) | **IN USE** — cherry-pick `obsidian-markdown` + `json-canvas` vendored; skip CLI/defuddle/bases |
+| 2026-08-27 | [GitReverse](https://www.gitreverse.com/) | B- (80) | **WATCH** — public repo/site → Cursor prompt; library bookmark; no self-host |
+| 2026-08-27 | [AgentMail Grok Bot plugin](https://www.agentmail.to/blog/give-grok-bot-email-address) | A- (91) | **IN USE** — Grok Bot OAuth connected (default account, 26/26 tools); Clerk owns `clerk` inbox; Cursor SDK still ADOPT |
+| 2026-08-27 | [Hostinger Connector](https://docs.hostinger.com/hostinger-connector/overview) | C (74) | **SKIP** — marketing email; same MCP as IN USE `hostinger-*` quartet; do not install |
+| 2026-08-27 | [OpenMausBot](https://github.com/milind-soni/OpenMausBot) | B- (81) | **WATCH** — OSS Grok Bot; keep xAI Grok Bot; no host-control / no cua overwrite |
+| 2026-08-27 | [fx](https://github.com/vercel-labs/fx) | B- (80) | **WATCH** — Vercel Labs experimental CLI agent; no curl\|bash |
+| 2026-08-27 | [Token Harbor](https://tokenharbor.ai/) | C (76) | **SKIP** — OpenRouter overlap; never Connect CLI / `irm \| iex` |
+| 2026-08-27 | [VoxCPM](https://github.com/OpenBMB/VoxCPM) | B+ (85) | **WATCH** — OpenBMB TTS; Edge Liam stays ritual; ~8 GB VRAM |
+| 2026-08-27 | [BetterWright](https://github.com/BetterWright/betterwright) | B- (80) | **WATCH** — agent Playwright; no `init --all` / Cursor skill write |
+| 2026-08-27 | [Ramp Router](https://router.com/) | C (74) | **SKIP** — OpenRouter overlap; never `agents.ramp.com/install.sh` |
+| 2026-08-27 | [Honcho](https://github.com/plastic-labs/honcho) | B- (81) | **WATCH** — peer-reasoning memory; keep Mem0; no Hermes memory swap / no `npx skills add` |
+| 2026-08-27 | [krypt.cc/tools](https://krypt.cc/tools) | C (73) | **SKIP** — free-tools catalog; never Tweaker/Cleaner/Cursor/Ghost/Cord/VPN binaries |
+| 2026-08-27 | [Clypra](https://github.com/AIEraDev/Clypra) | B- (80) | **WATCH** — Tauri/Rust CapCut-style NLE; keep FreeCut; no MSI today (telemetry + open-core AI) |
+| 2026-08-27 | [Agent Arena](https://arena.ai/leaderboard/agent) | A- (90) | **REF** — LMSYS/Arena agent leaderboard; bookmark; do not auto-swap Cursor/Hermes models |
+| 2026-08-27 | [Bitwarden MCP](https://github.com/bitwarden/mcp-server) | B- (80) | **WATCH** — official; keep `.env.local`; no Cursor mcp.json (cloud LLM) |
+| 2026-08-27 | [proton-pass-community-mcp](https://github.com/hesreallyhim/proton-pass-community-mcp) | C (76) | **WATCH** — unofficial pass-cli; skip Cursor |
+| 2026-08-27 | [protonpass-mcp](https://github.com/aureTheDev/protonpass-mcp) | C (70) | **SKIP** — 0★ Docker; Visionary CLI |
+| 2026-08-27 | [watermarks-remover](https://github.com/guillaumemeyer/watermarks-remover) | B- (81) | **WATCH** — C2PA/Unicode provenance strip; CLI only; no Cursor skill/hooks |
+| 2026-08-27 | [ai-memory](https://github.com/akitaonrails/ai-memory) | C+ (77) | **WATCH (chat only)** — markdown wiki+hooks; Windows experimental; keep Vault+Mem0 |
+| 2026-08-27 | [FreeForAI](https://draw.freeforai.com/) | C+ (75) | **SKIP** — browser Flux; ads + Ultimate upsell; keep HF/fal/Comfy |
+| 2026-08-27 | [Malva AI](https://malvaai.com/) | C (70) | **SKIP** — affiliate directory + $70k course; NoSignups/TOOL-CHEST win |
+| 2026-08-27 | [AnyCap](https://github.com/anycap-ai/anycap) | C+ (78) | **WATCH (chat only)** — agent media CLI/MCP; never `install.sh` / `skills add -g` |
+| 2026-08-27 | [Hermes Control Deck](https://github.com/filipj9/Hermes-Control-Deck) | B- (81) | **WATCH** — unofficial PWA `:4240`; Telegram primary; no public bind |
+| 2026-08-27 | [Unsloth](https://github.com/unslothai/unsloth) | B- (80) | **WATCH** — local LoRA/train; no `install.ps1` / no `unsloth start hermes` |
+| 2026-08-27 | [Comfy Canvas](https://github.com/Zlata-Salyukova/Comfy-Canvas) | B (84) | **WATCH** — in-Comfy layer editor; custom_nodes only |
+| 2026-08-27 | [FLORA](https://flora.ai/) | C+ (76) | **WATCH (chat only)** — paid Adobe-style canvas; keep fal/Comfy |
+| 2026-08-27 | [NASC](https://archerionlabs.com/nasc) | C+ (73) | **SKIP** — invite MCP session-capture; keep Mem0/Vault |
+| 2026-08-27 | [Hermes Session Analyzer](https://github.com/tommulkins/hermes-plugin-session-analyzer) | B- (81) | **WATCH** — Desktop plugin; `HERMES_HOME` = jonbeatz profile; TokenTracker stays spend |
+| 2026-08-27 | [Devin](https://devin.ai/) | C+ (74) | **SKIP** — Cognition cloud SWE; Cursor stays C&C |
+| 2026-08-27 | [Spines](https://spines.com/) | C (65) | **SKIP** — paid hybrid publisher $3.6k–$10k; keep Lulu + InDesign |
+| 2026-08-27 | [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) | B- (80) | **REF** — bookmark; no `npx dsh` on this box; Cursor stays C&C |
+| 2026-08-27 | [Paperclip](https://github.com/paperclipai/paperclip) | B- (81) | **WATCH** — agent org `:3100`; never `install.sh`; do not hire Cursor |
+| 2026-08-27 | [The Complete Shelf](https://github.com/MengTo/complete-shelf) | B+ (88) | **REF** — Jon bookmark; live shelf + showcase queue; no local install |
+| 2026-08-27 | [FenixAIStudio](https://github.com/FenixStudioAU/FenixAIStudio) | C (62) | **SKIP** — v0.1 zip/rar; AGPL; Ollama vs LM Studio |
+| 2026-08-27 | [MySigMail](https://github.com/antonreshetov/mysigmail) | C+ (78) | **WATCH (chat only)** — AGPL + commercial license; SaaS extra |
+| 2026-08-27 | [celld](https://github.com/denoland/celld) | C (74) | **SKIP** — Deno self-host Durable Objects; Linux Docker + S3; alpha; no `install.sh` |
+| 2026-08-27 | [LoopX](https://github.com/huangruiteng/loopx) | B- (80) | **WATCH** — long-horizon overlay; no `workflow-skills --install`; Cursor stays C&C |
+| 2026-08-27 | [video-use](https://github.com/browser-use/video-use) | B- (80) | **WATCH** — talking-head skill; keep Kinocut; no setup prompt / Hermes skill wire |
+| 2026-08-27 | [aitmpl.com](https://aitmpl.com/) | B (84) | **REF** — already graded 2026-07-14; no re-review |
+| 2026-08-27 | [CrocoBuilder](https://crocoblock.com/crocobuilder/) | C (70) | **SKIP** — paid WordPress builder; fleet is Next/Payload; no WP plugin |
+| 2026-08-27 | [Presenton](https://github.com/presenton/presenton) | B (85) | **REF** — Jon bookmark; no Docker/exe tonight; install when a PPTX is needed |
+| 2026-08-27 | [AutoSocial](https://github.com/Katzca/AutoSocial) | C (68) | **SKIP** — Playwright TikTok/IG/YouTube; default `:3000`; no auth; ToS |
+| 2026-08-27 | [Viewmax](https://www.viewmax.io/) | C (71) | **SKIP** — paid Shorts SaaS; keep fal/OpenMontage; no Cursor MCP |
+| 2026-08-27 | [book-to-skill](https://github.com/virgiliojr94/book-to-skill) | B- (80) | **WATCH** — PDF→skill; no `npx skills add`; keep copyrighted skills private |
+| 2026-08-27 | [TencentDB Agent Memory](https://github.com/TencentCloud/TencentDB-Agent-Memory) | C+ (77) | **WATCH (chat only)** — team memory hub; keep Mem0; no Hermes proxy |
+| 2026-08-27 | [Camera Control](https://aicameracontrol.com/) | B- (82) | **REF** — Jon bookmark; 3D shot block; Higgsfield CTA ignore; fal stays gen |
+| 2026-08-27 | [FigJam](https://www.figma.com/figjam/) | C (73) | **REF** — Jon bookmark (below B-; explicit); DesignLab stays local board |
+| 2026-08-27 | [Orchard](https://github.com/microsoft/Orchard) | C (72) | **SKIP** — MS K8s RL sandbox research; Azure AKS; not this workstation |
+| 2026-08-27 | [Kiro](https://kiro.dev/) | C (74) | **SKIP** — AWS spec IDE; Cursor stays C&C; never `cli.kiro.dev/install` |
+| 2026-08-27 | [Miro](https://miro.com/) | C (70) | **SKIP** — paid canvas; DesignLab `:3090` stays |
+| 2026-08-27 | [TestingCatalog](https://www.testingcatalog.com/) | B- (80) | **REF** — AI rumor news bookmark; sponsored posts; not stack truth |
+| 2026-08-27 | [Flow Devs Pack](https://aipack.flowagentautomation.com/) | C (65) | **SKIP** — paid $10/$30 AUD prompt pack; DesignMD/Hallmark stay |
+| 2026-08-27 | [RoutesMe](https://routesme.online/) | C (68) | **SKIP** — unknown OpenAI-compatible gateway; never LiteLLM/Cursor `routesme.online/v1` |
+| 2026-08-27 | [olmocr](https://github.com/allenai/olmocr) | C+ (76) | **WATCH (chat only)** — AllenAI PDF linearizer; Linux CUDA 12.8; keep markdownify |
+| 2026-08-27 | [oh-my-hermes](https://github.com/rlaope/oh-my-hermes) | B- (80) | **WATCH** — unofficial Hermes overlay; no `omh setup` / `irm install.ps1 \| iex` |
+| 2026-08-27 | [Mage](https://github.com/microsoft/Mage) | C+ (74) | **WATCH (chat only)** — MS 4B VL+Flow research; fal/Comfy/HF stay; not product deploy |
+| 2026-08-27 | [VoxCPM](https://github.com/OpenBMB/VoxCPM) | B+ (85) | **WATCH** — already reviewed 2026-08-27; no re-grade |
+| 2026-08-27 | [CheckMyVibeCode](https://checkmyvibecode.com/) | C (62) | **SKIP** — tiny showcase + paste-code checker; do not paste fleet code |
 
 ---
 
@@ -438,7 +590,7 @@ Install any of these only after Jon approves. None replace `draven:speak` until 
 2. Research (Firecrawl/fetch, Tavily, Context7); **security-review** mandatory for auth/deploy/agent-config tools
 3. Grade with fixed template (Gap, Overlap, **Risks**, Verify, Recommendation)
 4. Persist B-+ → `TOOLS-*` + `sync:docs -- -Write`
-5. Install gate **after** grades (batch = one AskQuestion)
+5. Install gate **next turn** after Jon has read the grades (batch = one AskQuestion). **Never** `AskQuestion` in the same message as the scoreboard.
 6. Post-install → verify registry command → `npm run tools:status`
 7. Closeout → **`review session done`**
 

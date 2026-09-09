@@ -36,7 +36,7 @@ npm run session:start -- -Full
 npm run draven:speak -- "JonBeatz online Jon. Draven standing by. Ready when you are."
 ```
 
-OmniVoice lazy-starts the daemon on first speak (~15s first load). **Do NOT** speak ordinary session summaries aloud.
+Uses **Edge Liam** (`en-CA-LiamNeural`) by default — fast, no Omni daemon. OmniVoice only if Edge fails or Jon restored Omni as primary (`VOICE-WORKFLOW.md`). **Do NOT** speak ordinary session summaries aloud.
 
 ---
 

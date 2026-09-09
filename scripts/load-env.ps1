@@ -1,4 +1,4 @@
-# load-env.ps1 - Load JonBeatz.dev .env.local into the current PowerShell session
+# load-env.ps1 - Load profile .env.local into the current PowerShell session
 param(
     [string]$Root = (Split-Path $PSScriptRoot -Parent)
 )

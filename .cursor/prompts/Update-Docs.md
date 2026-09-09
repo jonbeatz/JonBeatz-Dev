@@ -4,7 +4,7 @@
 
 **With Mem0:** `update docs and mem0` (includes Phase 5b)
 
-> **Fleet first:** Universal docs and **all tool reviews** live in `_core-scripts/shared-profile-content/docs/`. Edit canonical files there, then `npm run docs:sync`. JonBeatz is often the open workspace — not the source of truth. See [FLEET-TOOLS-KNOWLEDGE.md](../docs/FLEET-TOOLS-KNOWLEDGE.md).
+> **Fleet first:** Universal docs and **all tool reviews** live in `_core-scripts/shared-profile-content/docs/`. Edit canonical files there, then `npm run sync:docs -- -Write`. **`docs:sync`** is the alignment auditor (TRUTH / START-HERE / encoding) — it does not copy the fleet library. JonBeatz is often the open workspace — not the source of truth. See [FLEET-TOOLS-KNOWLEDGE.md](../docs/FLEET-TOOLS-KNOWLEDGE.md).
 
 ---
 
@@ -16,7 +16,7 @@
 | `TOOL-CHEST-INDEX`, `DESIGN-REFERENCES`, `MASTER-COMMANDS` (shared) | `CHANGELOG.md`, `Checkpoint.md` |
 | `shared-profile-content/skills/`, `scripts/`, `rules/`, `prompts/` | Site deploy runbooks, profile-specific plans |
 
-After shared edits: `npm run docs:sync -- -Write` from current profile.  
+After shared edits: `npm run sync:docs -- -Write` from current profile.  
 After skills/scripts/rules: `npm run fleet:sync` from **JonBeatz hub**.
 
 ---
@@ -38,8 +38,30 @@ Read and cross-check:
 | `.cursor/docs/FITNESS-CHECK.md` | Skeleton fitness audit (if project has it) |
 | `.cursor/docs/IMAGE-WORKFLOW.md` | Image pipeline |
 | `.cursor/docs/GOOGLE-WORKSPACE.md` | Google automation (project-specific — may not exist) |
+| **`.cursor/docs/BOOK-PRODUCTION-SYSTEM.md`** | Picture-book playbook (if this project has one) |
+| Style / prompt kits (`ILLUSTRATION-STYLE`, `PAGE-PROMPT-BIBLE`, `COVER-PROMPTS`, `BOOK-COPY-DRAFTS`) | Art + copy locks (book projects) |
+| Batch `Media/generated/*/INDEX.md` | Approved gen batches worth indexing |
 | `.cursor/rules/*.mdc` | Workflow rules |
 | `AGENTS.md`, `README.md`, `HERMES.md` | Entry points |
+
+---
+
+## Phase 1b — Session harvest (always; judgment call)
+
+Scan **this chat / session** for anything worth keeping. If yes, write it into the right place — don’t wait for Jon to list files.
+
+| Worth noting? | Put it here |
+|---------------|-------------|
+| Tool path / model / MCP recipe that worked | Project playbook (e.g. `BOOK-PRODUCTION-SYSTEM.md`) + decision log row |
+| Style / cover / layout **locked** choice | Style kit + playbook + `ReCall.md` |
+| New folder of keepers | Batch `INDEX.md` + playbook “instance status” / CONTINUE-HERE |
+| Copy / About / Thank You final | `BOOK-COPY-DRAFTS.md` (or project copy doc) |
+| Size, DPI, printer, page count | `BOOK-PLAN` / playbook decisions table |
+| Failed approach to never repeat | Decision log + `Book-Findings` / gotchas |
+| Reusable across Hermes projects | Vault `02_Knowledge/` pattern + optional `draven:add` |
+| Ephemeral chat fluff | Skip |
+
+**Jon preference (2026-07-14):** On `update docs`, fold relevant session progress into the production playbook when it exists — agents should note what’s worth keeping without being asked twice.
 
 ---
 
@@ -95,6 +117,7 @@ Print summary:
 - Files updated
 - Version line
 - Any remaining drift
+- **Playbook / decision-log rows added** (if book or system doc was harvested)
 
 End with: **"Ready to commit when you say so."**
 
@@ -110,6 +133,14 @@ npm run draven:add -- "Docs sync [date]: [one-line summary of doc changes]"
 ```
 
 This updates **both** the project's own memory and Draven's cross-session memory. Draven stores it so he has context of what was synced across sessions. Skip if LM Studio offline — note in project-log.
+
+**Also update Mnemosyne + Vader_Vault (always works — no LLM needed):**
+
+```powershell
+npm run mnemosyne:remember -- "Docs sync [date]: [one-line summary of doc changes, decisions, next steps]"
+```
+
+Write session summary to `H:\Vader_Vault\03_AI_Memory\Sessions\YYYY-MM-DD-{project}.md`. If H: not accessible, note in project-log.
 
 Also triggers **Phase 6** — skeleton backport review.
 

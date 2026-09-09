@@ -181,6 +181,7 @@ npm install @theatre/core @theatre/studio @theatre/r3f
 | **[scroll-cinema](https://github.com/vvlars-cmd/scroll-cinema)** | **WATCH** | Browser MP4→frames, keyframe text, React export — see vault `SCROLL-VIDEO-RESEARCH.md` |
 | **[mp4-to-jpg](https://github.com/allarddewinter/mp4-to-jpg)** | **REF** | **Bookmark** [demo](https://allarddewinter.github.io/mp4-to-jpg/) — privacy-local browser JPEG extract; ffmpeg still primary for scroll builds |
 | **[Video To JPG](https://videotojpg.com/)** | **REF** | Browser frame extract — blur detection, HEVC WASM, PNG/WebP; richer alt to mp4-to-jpg |
+| **[AI Camera Movements](https://aicameramovements.com/)** | **REF** | Copy-paste pan/dolly/orbit/drone prompts for AI video + R3F shot briefs |
 | **External scroll-video workflow index** | **Done (2026-07-04)** | `D:\Hermes\assets\3d-web-workflows\SCROLL-VIDEO-RESEARCH.md` — Masonry, cinematic-scroll-kit, Mejba, Kling docs |
 | **CapCut / multi-clip merge ritual** | **Done (2026-07-04)** | devini-tea + ai-scroll-product WORKFLOW §3b + research index |
 | **Google AI Studio → Hermes port** | **Done (2026-07-04)** | Documented in `Scroll-Video-Sequence` — prototype → FFmpeg WebP → `ScrollFrameHero` → `SmoothScrollProvider` |
@@ -285,6 +286,7 @@ Port: extract motion logic → Next.js client component + Lenis. Do **not** ship
 | 2026-07-04 | https://davidwhyte.com/experience/ | Built reference | Mapbox + watercolor shaders |
 | 2026-07-04 | https://open-sbs.brig.ht/ | Built reference | Bright WebGL town + flat fallback |
 | 2026-07-04 | https://github.com/14islands/r3f-scroll-rig | Tool (WATCH) | DOM-synced R3F scroll |
+| 2026-07-14 | https://aicameramovements.com/ | Prompt REF | Camera move copy-paste library for AI video / shot briefs |
 | 2026-07-04 | https://day1-run.webflow.io/ | Built reference | FUTURE THREE — Barba+Three → View Transitions port |
 | 2026-07-04 | https://jeskojets.com/ | Built reference | Aviation cinematic — The First The Last |
 | 2026-07-04 | https://www.nudot.com.tw/ | Built reference | TW agency Lenis+GSAP+Three |

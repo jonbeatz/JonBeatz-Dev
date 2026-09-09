@@ -1,0 +1,38 @@
+---
+description: ComfyUI VRAM control — explicit start/stop, never auto-launch without opt-in
+globs:
+  - "**/*comfy*"
+  - "**/vram*"
+  - "**/system-stats*"
+alwaysApply: false
+---
+
+# ComfyUI VRAM Agent Rules (fleet)
+
+## Start policy
+
+1. **Never start ComfyUI** unless the operator explicitly asks, runs `npm run comfy:start`, or sets `COMFYUI_AUTO_START=1` (legacy `JONBEATZ_COMFYUI_AUTO_START=1` OK).
+2. Before starting, run VRAM diagnostics or check HUD VRAM %. **Warn if >65%** unless operator requested `-NoVRAMCheck`.
+3. **Never run LM Studio large model + ComfyUI** on 16 GB VRAM without operator confirming — except known-safe pairs (Klein / z-image with `qwen3-4b` resident).
+4. **Qwen-Image-2512 / Edit-2511:** unload `qwen3-4b-instruct-2507` first (`lms unload …` or `comfy:start -- -UnloadLMStudio -LowVram`); restore via `npm run mem0:preflight`.
+5. **Local images run only in ComfyUI** — LM Studio cannot load diffusion GGUFs. See `IMAGE-WORKFLOW.md` + vault `[[Local-image-model-picker-16GB]]`.
+
+## Stop policy
+
+6. Prefer **`npm run comfy:stop`** over full VRAM cleanup when only ComfyUI should stop (preserves LM Studio).
+7. After stop, verify total VRAM dropped; if still high, suggest `lms unload --all` or `-UnloadLMStudio` on next start.
+
+## Detection
+
+8. Do **not** infer ComfyUI from VRAM thresholds alone.
+9. Trust **port 8188 + `/queue` + WMI command line** (with tasklist/port-PID fallback).
+10. On WDDM, per-process VRAM in `nvidia-smi` is N/A — **total used MiB** is authoritative.
+
+## Idle and logging
+
+11. If ComfyUI idle >15 min, **suggest stop** — do not auto-stop unless idle watcher daemon was explicitly enabled.
+12. Check **ComfyUI log** when debugging start/stop failures.
+
+## Voice / profile
+
+13. Operator can say **"comfy start"** / **"comfy stop"** / **"comfy restart"** or use web HUD → `:8188`.

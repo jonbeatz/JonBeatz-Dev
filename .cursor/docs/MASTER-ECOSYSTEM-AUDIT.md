@@ -35,7 +35,7 @@
 | **AI daily driver** | DeepSeek via LiteLLM `:4000` + OpenRouter `*-or` aliases — **READY** |
 | **Local LLM** | LM Studio `:1234` (qwen3-4b) — **READY** |
 | **Memory** | Mem0 + Qdrant per-profile + Draven cross-project — **READY** |
-| **Voice** | OmniVoice CPU + Edge Ryan fallback — **READY** |
+| **Voice** | Edge Liam ritual primary + OmniVoice optional restore — **READY** |
 | **Telegram agent** | Gateway + Hermes Desktop — **READY** |
 | **Cursor bridge** | ngrok `:4040` when LiteLLM ngrok on — **READY** |
 | **Image gen** | HF cloud + fal.ai bonus + ComfyUI local `:8188` — **READY** (ComfyUI start on demand) |

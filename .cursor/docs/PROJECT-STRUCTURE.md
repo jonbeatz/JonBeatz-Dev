@@ -102,6 +102,7 @@ D:\Hermes\projects\
 │   └── shared-profile-content\      ← Templates, skills, prompts, rules, scripts
 ├── JonBeatz\                        ← Personal profile (your profile)
 ├── JonBeatz.dev\                    ← Standalone site
+├── Website-Templates\               ← Recreate lab (open this folder alone)
 ├── NewProject\                      ← Any new project
 └── ...
      Each project ═══bootstraps═══>  shared-profile-content
@@ -109,3 +110,5 @@ D:\Hermes\projects\
 ```
 
 Every project is **self-contained** but **stays in sync** with the shared brain.
+
+**Website-Templates** (`D:\Hermes\projects\Website-Templates`): one lab, many `templates/<slug>/vN/` slots. Recreate in full Next.js; optional static / regular WordPress / Divi later. Open that folder for recreate work — not JonBeatz. Pointers: sibling `CURRENT.md`, `KNOWLEDGE.md`, `divi5/`, `IMAGE-PIPELINE.md`. Fleet image SoT remains this shared `IMAGE-WORKFLOW.md` + `LOCAL-COMFY-2512-LIGHTNING.md`.

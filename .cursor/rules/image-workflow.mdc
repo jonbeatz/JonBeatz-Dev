@@ -1,0 +1,52 @@
+---
+description: Fleet image workflow — HF cloud + fal + ComfyUI local GPU (shared workstation)
+globs:
+  - "**/*comfy*"
+  - "**/*image*"
+  - "**/generate-image*"
+  - "**/gen-image*"
+  - "**/vram*"
+alwaysApply: false
+---
+
+# Hermes fleet — Image Workflow Rules
+
+## Docs first
+
+1. **`.cursor/docs/IMAGE-WORKFLOW.md`** — master guide (fleet mirror from shared)
+2. **Model inventory + VRAM:** `.cursor/docs/ENGINEERING.md` (COMFYUI-MODELS + VRAM-IMAGE sections). Thin stubs `COMFYUI-MODELS.md` / `VRAM-IMAGE.md` point there if present.
+3. **Book projects:** also read project `IMAGE-LANE-SYSTEM-v2.md` + `LOCAL-COMFY-PICKER.md` when present (fal lane lock stays primary for print books).
+
+## Environment
+
+4. Secrets live in **this profile’s `.env.local`** (not MSC). Run `npm run env:setup` to seed.
+5. Local outputs: `IMAGE_OUTPUT_DIR` → `D:\Hermes\assets\media\{ProjectName}` (create if missing). Promote book keepers into project `Media/` with RECIPE/meta.
+
+## Hugging Face (cloud — free/cheap)
+
+6. **`npm run image:gen -- "prompt"`** when the profile has it — **zero local VRAM**.
+7. Requires **`HF_TOKEN`**. Run **`npm run image:doctor`** if missing.
+
+## fal.ai (paid — book dials / premium / website photoreal)
+
+8. **`npm run image:fal -- "prompt"`** (or book presets) — pay-per-use. Requires **`FAL_API_KEY`** (same wallet as MCP `user-fal-ai`). That key is **API access**, not fal.ai website login — do not ask Jon for a dashboard password.
+9. Picture books: follow project IMAGE-LANE (often Klein 4B/9B dial → Qwen alt → Banana Pro finals). Do not replace locked fal finals with random local gens without Jon asking.
+9b. **Website recreates / v0-like cinema:** `fal-ai/flux-2-pro` for packs, `fal-ai/flux-2-max` or `fal-ai/nano-banana-pro` for keepers, `fal-ai/nano-banana-2` for Google volume. **Do not** use Klein as the hero model. Default `FAL_IMAGE_MODEL` stays schnell until Jon changes it. Full cost table: `IMAGE-WORKFLOW.md` (2026-09-05).
+
+## ComfyUI (local GPU — opt-in)
+
+10. **Never start ComfyUI** unless Jon asks, runs **`npm run comfy:start`** / **`comfy:start:qwen`**, or sets **`COMFYUI_AUTO_START=1`**.
+11. Check **`npm run comfy:status`** / VRAM first. Prefer **`npm run comfy:stop`** then **`mem0:preflight`** when done.
+12. **ComfyUI is the ONLY local image runtime** — LM Studio cannot load diffusion GGUFs (text/Mem0 only). LMS will look empty during 2512 — that is correct.
+13. **VRAM (16 GB):** unload `qwen3-4b-instruct-2507` before **Qwen-Image-2512** / Lightning / **Edit-2511** (`npm run comfy:start:qwen` or `comfy:start -- -UnloadLMStudio -LowVram`); restore with `npm run mem0:preflight`. Keep Comfy **warm** (no `/free` between gens). Klein + z-image OK with text model resident.
+14. **Free local still (default):** App Mode **`qwen-image-2512-Lightning-AppMode.json`** (4-step / cfg 1). Card: `LOCAL-COMFY-2512-LIGHTNING.md`. First Run after start = warmup (~2–4 min); plate 2+ should be ~22–40s (35–55s is fine). If a later plate exceeds ~2 min, **stop + restart** — a slow finished gen poisons the next one (`lowvram` patch thrash). Then:
+    - 20-step keep → `qwen-image-2512-AppMode.json` / `txt2img-qwen-image-2512.json`
+    - Fast z-image iterate → `z-image-turbo-Q4-AppMode.json`
+    - Local edit → `edit-qwen-2511-AppMode.json` / `edit-image-qwen-2511.json`
+    - Flux → `flux-klein-9B-AppMode.json` / `flux-klein-4B-AppMode.json`
+15. Stack: ComfyUI **0.31.0** · torch **2.11.0+cu128** — never `pip install torch` from default PyPI.
+
+## Boundaries
+
+16. Do not apply MSC **deploy** rules unless working in the MSC repo.
+17. Log durable style/model decisions to project Mem0 + vault `[[Local-image-model-picker-16GB]]`.

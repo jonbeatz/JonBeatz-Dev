@@ -375,6 +375,41 @@ Optional social            agent-reach install --channels=twitter,reddit,...
 
 ---
 
+## Kokoro-82M — 2026-09-03
+
+- **URL:** https://github.com/hexgrad/kokoro · HF https://huggingface.co/hexgrad/Kokoro-82M
+- **CLI helper:** https://github.com/nazdridoy/kokoro-tts (MIT; ONNX + EPUB/PDF)
+- **Grade:** **B (86/100)** · **Cost:** Free Apache-2.0 weights
+- **Verdict:** **ADOPT** · **Setup:** PARTIAL (venv + smoke wav; not `draven:speak`)
+- **Stars:** ~8.7k (hexgrad/kokoro)
+
+**Summary:** Tiny **local catalog TTS** (82M). CPU-friendly, Windows-documented. Fast alternative to OmniVoice CPU latency. Not instruct/clone. Do **not** use [kokoroai.org](https://kokoroai.org/) (unaffiliated hosted site).
+
+| Factor | Score | Notes |
+|--------|-------|-------|
+| Gap fill | 28/40 | Offline preset voices (incl. British males). Does not replace Omni instruct or NeuTTS clone |
+| Stack fit | 24/25 | Native Windows + espeak-ng MSI; no VRAM fight; already inside Voicebox WATCH |
+| Cost/complexity | 19/20 | Apache weights; `pip install kokoro`; optional ONNX CLI |
+| Maturity/trust | 15/15 | Widely deployed; HF author warns fake `kokoro*` domains |
+
+### vs OmniVoice / Edge Liam
+
+| | Edge Liam | OmniVoice | Kokoro-82M |
+|--|-----------|-----------|------------|
+| Mode | Cloud neural catalog | Local **instruct** (CPU) | Local **catalog** (CPU/GPU) |
+| Latency | ~1–2s | Cold ~44s; warm ~6–40s | Typically seconds or less |
+| VRAM | 0 | 0 (RAM ~2–4 GB daemon) | 0 required |
+| British Draven-like | Canadian Liam | Instruct `british accent` | `bm_george` / `bm_fable` (`lang_code='b'`) |
+| Clone / design | No | Instruct + clone modes | No |
+
+**Risks:** espeak-ng extra install; short lines can sound weak; do not wire as `draven:speak` primary; Voicebox already embeds Kokoro if that GUI is installed later.
+
+**Verify (post-install):** `npm run kokoro:status` · `npm run kokoro:test` → `D:\Hermes\apps\kokoro\output\smoke-bm_george.wav`
+
+**Recommendation:** **ADOPT** as a play engine on this Windows box. Keep Edge Liam ritual + Omni restore. Do not load in LM Studio (TTS, not a chat LLM).
+
+---
+
 ## OpenWhispr
 
 - **URL:** https://github.com/OpenWhispr/openwhispr · [openwhispr.com](https://openwhispr.com/) · [docs](https://docs.openwhispr.com/quickstart)
@@ -859,6 +894,40 @@ npm run doctor -- examples/noir/index.html
 **Overlap:** LiteLLM stays the local gate; OpenRouter is one **provider**, not a replacement proxy.
 
 **Removed (do not register):** `deepseek-v4-pro-or`, `kimi-k2-or`, `glm-4-or` — superseded by direct DeepSeek + `kimi-k2.7-code-or` / `glm-air-or`.
+
+---
+
+## NVIDIA Build / NIM API catalog
+
+- **URL:** https://build.nvidia.com/ · key UI https://build.nvidia.com/settings
+- **Grade:** **B (84/100)** · **Cost:** Free for Developer Program prototyping (rate-limited; ~40 RPM community baseline). Production serving end users needs NVIDIA AI Enterprise.
+- **Verdict:** **WATCH** (2026-08-31) — on deck; do **not** replace OpenRouter or DeepSeek Direct
+- **Setup:** **NEEDS_KEY** in the *runtime* env LiteLLM reads (`JonBeatz\.env.local`). **Account exists.** Secret inventory: `_core-scripts\.env.local.master` vars `BUILD_NVIDIA_API` (the `nvapi-` key), `BUILD_NVIDIA_URL`, `BUILD_NVIDIA_USERNAME` (email only in docs — never copy password into git/vault). To activate when Jon asks: copy `BUILD_NVIDIA_API` → `NVIDIA_API_KEY` + `NVIDIA_NIM_API_KEY` in JonBeatz `.env.local`, then `npm run sync:deepseek-env`, then add a LiteLLM `nvidia_nim/<slug>` alias. **Do not wire until Jon says go.**
+- **Summary:** NVIDIA-hosted NIM models behind an OpenAI-compatible URL (`https://integrate.api.nvidia.com/v1`). Optional overflow for Cursor / Hermes / LiteLLM. Catalog includes Nemotron, gpt-oss-120b, hosted DeepSeek V4, Gemma 4, FLUX / Qwen-Image image NIMs.
+
+### LLM / harness (yes)
+
+LiteLLM already has a provider route: `nvidia_nim/<model-slug>` ([docs](https://docs.litellm.ai/docs/providers/nvidia_nim)). Cursor can use Setup B (add a `*-nim` alias on `:4000`) **or** a separate Cursor profile with Override URL = NVIDIA + `nvapi-` key (do not mix with LiteLLM master key). Hermes can pick the same LiteLLM alias. Personal desk use = NVIDIA “development/testing.”
+
+### ComfyUI (not a drop-in)
+
+**Hosted catalog ≠ ComfyUI.** Your `nvapi-` key does not light up nodes inside `:8188`. Comfy graphs load **local** checkpoints (2512 Lightning, etc.).
+
+| Path | What it is | For this PC |
+|-------|------------|-------------|
+| **build.nvidia.com hosted** | HTTP APIs (chat + some image NIMs) | Could wrap like `image:fal` (Python/REST) — **not** implemented. PNG could then be dropped into Comfy for edit. |
+| **[Comfy-Org/NIMnodes](https://github.com/Comfy-Org/NIMnodes)** | Local FLUX NIM **containers** via `NIMSetup.exe` + `HF_TOKEN` | Different product. Extra Docker/VRAM. **Skip** on 16 GB — we already run local 2512 Lightning. |
+
+Do **not** install NIMnodes expecting “free cloud Comfy.”
+
+### Overlap / do not
+
+- OpenRouter stays the multi-provider router (Claude/GPT/Grok are **not** on NVIDIA).
+- DeepSeek Direct stays daily paid coding.
+- HF `image:gen` + fal stay the cloud image lanes until a dedicated `image:nim` wrapper exists.
+- Never put Jon’s `nvapi-` in Academy `env-skeletons`; students make their own NVIDIA accounts.
+
+**Verify (when wired):** `curl https://integrate.api.nvidia.com/v1/models` with Bearer key · LiteLLM `/v1/models` lists the `*-nim` alias.
 
 ---
 
@@ -3429,6 +3498,706 @@ Context database: memories, resources, and skills as a virtual filesystem under 
 **Recommendation:** **WATCH.** Interesting if a future Hermes-only box wants one context FS. Not worth the AGPL + vendor + memory-provider swap on this workstation. New PC: clone Vault + Mem0 first; OpenViking only as a later lab.
 
 **New PC:** Skip day-one. Revisit only if you explicitly want a single `viking://` brain *instead of* (not in addition to) Vault+skills.
+
+---
+
+## watermarks-remover — 2026-08-27
+
+- **URL:** https://github.com/guillaumemeyer/watermarks-remover
+- **Grade:** **B- (81/100)** · **Cost:** Free **MIT** · Python 3.10+ stdlib (optional Docker, c2patool/exiftool/qpdf)
+- **Verdict:** **WATCH** · **Setup:** NOT_INSTALLED
+- **Stars:** ~18.8k (2026-08-27) · release v0.6.0
+
+### Summary
+
+Agent skill + stdlib HTTP service to strip **AI provenance marks you own**: Layer A Unicode/bidi hygiene, Layer B statistical text-watermark rewrite (optional model), and C2PA/EXIF/XMP/doc props from PNG/JPEG/PDF/DOCX/HTML/MD/audio-video. **Not** visual logo-inpaint (not Lama / IOPaint / Photoshop). Default service `http://127.0.0.1:8765`.
+
+### Grade breakdown
+
+| Axis | Score | Notes |
+|------|-------|-------|
+| Gap fill | 33/40 | Real gap for Comfy/HF/fal client plates (C2PA + invisible Unicode). Does not remove visible stock watermarks |
+| Stack fit | 16/25 | CLI fits Image-Workflow; plugin/hooks write Cursor/Claude agent config |
+| Cost / complexity | 18/20 | MIT, no pip deps for core; optional Ollama rewrite fights LM Studio VRAM |
+| Maturity | 14/15 | 18.8k★, v0.6.0, tests/CI; hooks can rewrite agent-written files |
+
+### Gap / overlap
+
+| vs | Notes |
+|----|--------|
+| **Background-Removal (rembg)** | Foreground extract — different job |
+| **ComfyUI / Photoshop** | Visual edit; this is metadata/provenance |
+| **pikepdf / img2pdf** | Print boxes, not C2PA strip |
+| **Hallmark / clean copy** | Overlaps Layer A Unicode hygiene slightly |
+
+### Risks
+
+- **`install_skill.py --target cursor`** writes `~/.cursor/skills/` — same class as BetterWright `skill --install`. Do not run.
+- **PostToolUse hook** (`hook_written_file.py`) can **rewrite files the agent just saved** (`clean` mode). Check-only is safer; still extra Python on every Write/Edit.
+- **Claude `/plugin marketplace add`** auto-wires hooks — do not use on this box.
+- HTTP **`:8765`** if `make serve` — loopback only; Windows login autostart exists (`docs/windows-autostart.md`) — do not enable.
+- Layer B rewrite may call **Ollama** unless `WATERMARKS_REWRITE_ALLOW_REMOTE` — keep loopback; keys only via `WATERMARKS_REWRITE_API_KEY`.
+- Legal/hygiene: documented for **content you own**. Do not strip provenance from others’ files as a product feature.
+- Optional **qpdf** required for a real PDF strip.
+
+**Verify (when trial):** clone isolated folder → `py service/scripts/inspect_file.py media\some-comfy.png` — no skill installer, no hooks.
+
+**Recommendation:** **WATCH.** Useful CLI for own Comfy/HF exports before client send. Skip plugin, Cursor skill install, and file-write hooks.
+
+**New PC:** Optional CLI later. Never day-one hooks.
+
+---
+
+## Hermes Control Deck — 2026-08-27
+
+- **URL:** https://github.com/filipj9/Hermes-Control-Deck
+- **Grade:** **B- (81/100)** · **Cost:** Free **MIT** · Node 20+ (Hermes WebUI and/or Codex CLI installed separately)
+- **Verdict:** **WATCH** · **Setup:** NOT_INSTALLED
+- **Stars:** ~99 (2026-08-27) · **v0.1.0-alpha** · 18 commits
+
+### Summary
+
+Independent community **mobile-first PWA** that sits in front of Hermes WebUI (`:8787`) and/or local Codex CLI. One UI for prompts, SSE streams, sessions, Kanban/tasks, approvals, and STOP. Default control server `http://127.0.0.1:4240`. Not affiliated with Nous / Hermes / OpenAI.
+
+### Grade breakdown
+
+| Axis | Score | Notes |
+|------|-------|-------|
+| Gap fill | 32/40 | Phone control of WebUI is a real Hermex-not-installed gap; Telegram already covers away-from-desk |
+| Stack fit | 18/25 | Fits if WebUI is up; extra privileged plane + `HERMES_PASSWORD` in `.env` |
+| Cost / complexity | 18/20 | MIT, npm start; Codex + WebUI are user-owned deps |
+| Maturity | 13/15 | Good SECURITY/COMPAT docs and tests; alpha, unofficial, small tree |
+
+### Gap / overlap
+
+| vs | Notes |
+|----|--------|
+| **Telegram + Hermes MCP bridge** | Primary away-from-desk path — keep |
+| **Hermex / Aight** | Native iOS WATCH; this is a browser PWA instead |
+| **Hermes WebUI** | Required upstream for Hermes mode |
+| **Hermes Desktop** | Desk control stays Desktop; this is phone/LAN |
+
+### Risks
+
+- Privileged control plane: can send prompts, stop processes, and ACK approvals.
+- `HERMES_PASSWORD` + `CONTROL_AUTH_TOKEN` live in `.env` — never commit; never paste into issues.
+- Default bind **must stay `127.0.0.1`**. Phone access only via VPN/Tailscale or TLS reverse proxy with explicit `CONTROL_ALLOWED_ORIGINS`. Do **not** expose `:4240` to the public Internet.
+- Optional Gateway WebSocket/TUI + approval-bridge plugins are **off by default** — leave them off unless the installed Hermes Gateway matches COMPATIBILITY.md.
+- Optional Windows **Codex Desktop** experiment is quarantined and unsupported — leave `CODEX_EXPERIMENTAL_DESKTOP_ENABLED` off.
+- Not official Nous software. WebUI route/auth drift can break the adapter.
+
+**Verify (when trial):** isolated clone → copy `.env.example` → `node scripts/generate-token.mjs` → `npm start` → open `http://127.0.0.1:4240` — WebUI must already be healthy on `:8787`.
+
+**Recommendation:** **WATCH.** Useful if you later want a phone PWA without Hermex. Do not install over Telegram/Desktop today.
+
+**New PC:** Skip day-one. Telegram + Desktop first; WebUI + Hermex before this.
+
+---
+
+## Unsloth — 2026-08-27
+
+- **URL:** https://github.com/unslothai/unsloth · **Site:** https://unsloth.ai/
+- **Grade:** **B- (80/100)** · **Cost:** Free **Apache-2.0** core · **AGPL-3.0** Studio UI
+- **Verdict:** **WATCH** · **Setup:** NOT_INSTALLED
+- **Stars:** ~75k (2026-08-27)
+
+### Summary
+
+Local **run + fine-tune** stack (LoRA/QLoRA/RL, GGUF export) for LLMs and diffusion. Three surfaces: native Desktop `.exe`, Studio web UI, Core (`uv pip install unsloth`). `unsloth start hermes` can point Hermes Agent at a local Unsloth model.
+
+### Grade breakdown
+
+| Axis | Score | Notes |
+|------|-------|-------|
+| Gap fill | 32/40 | Real LoRA/train gap vs LM Studio inference-only; not needed for daily Mem0/Hermes |
+| Stack fit | 16/25 | VRAM fight with Comfy `:8188` + LMS `:1234`; `unsloth start hermes` rewires the agent |
+| Cost / complexity | 17/20 | Apache Core; AGPL Studio; Docker also binds `:8888/:8000/:2222` |
+| Maturity | 15/15 | 75k★, notebooks, Windows Desktop |
+
+### Gap / overlap
+
+| vs | Notes |
+|----|--------|
+| **LM Studio** | Inference + GGUF for Mem0/Hermes — keep |
+| **ComfyUI** | Local GPU images — unload before any Unsloth train |
+| **LiteLLM / DeepSeek** | Paid cloud chat — Unsloth is local train |
+| **Hindsight Docker** | Same `:8888` — do not run both |
+
+### Risks
+
+- **`irm https://unsloth.ai/install.ps1 \| iex`** — same class as Token Harbor. Prefer GitHub Releases Desktop `.exe` if you ever trial.
+- **`unsloth start hermes`** (also claude/codex/openclaw) writes agent runtime to local Unsloth. Do **not** run on jonbeatz Desktop.
+- Studio **server-side tools on by default** when exposed; README says keep password or `--disable-tools`. Never `-H 0.0.0.0` or Cloudflare `--secure` on this box.
+- Docker **`:8888`** collides Hindsight; `:8000` / SSH `:2222` extra attack surface.
+- VRAM: training will evict Comfy + LMS. Stop Comfy (`npm run comfy:stop`) first.
+- AGPL applies to Studio UI, not Core.
+
+**Verify (when trial):** GitHub Desktop installer only → one small LoRA notebook — **no** `install.ps1`, **no** `unsloth start hermes`.
+
+**Recommendation:** **WATCH.** Best local fine-tune path if you later want a custom GGUF. Not day-one; LMS stays the local chat runtime.
+
+**New PC:** Skip. Copy LMS + Comfy first.
+
+---
+
+## Comfy Canvas — 2026-08-27
+
+- **URL:** https://github.com/Zlata-Salyukova/Comfy-Canvas
+- **Grade:** **B (84/100)** · **Cost:** Free **MIT** (vendored PIXI has its own notice)
+- **Verdict:** **WATCH** · **Setup:** NOT_INSTALLED
+- **Stars:** ~177 (2026-08-27) · **v1.0** in-Comfy overlay
+
+### Summary
+
+ComfyUI custom node: layered paint editor as a **modal overlay inside the Comfy tab** (no Flask sidecar). Nodes `Comfy Canvas` + `Comfy Canvas Output`. Sessions persist under Comfy user data; paint → queue → review → continue in one loop.
+
+### Grade breakdown
+
+| Axis | Score | Notes |
+|------|-------|-------|
+| Gap fill | 33/40 | Real Photoshop/Comfy round-trip gap for inpaint/composite |
+| Stack fit | 21/25 | Lives in `custom_nodes`; uses existing `:8188` |
+| Cost / complexity | 19/20 | MIT, no extra process |
+| Maturity | 11/15 | v1.0, solo maintainer, 177★ — young but focused |
+
+### Gap / overlap
+
+| vs | Notes |
+|----|--------|
+| **Photoshop + UXP** | Pro retouch — keep for client plates |
+| **DesignLab** | Mood board, not pixel layers in a gen graph |
+| **ComfyUI MCP** | Graph control — this is the human paint surface |
+| **Background-Removal** | rembg — different job |
+
+### Risks
+
+- Custom node in `H:\AI_Models\ComfyUI\custom_nodes\` — restart Comfy after clone; pin a commit if you install.
+- Needs a current Comfy frontend; old builds miss overlay APIs.
+- Session files live in Comfy user data — treat as local, not a cloud sync.
+- Not a replacement for Photoshop layer discipline on print jobs.
+
+**Verify (when trial):** clone into `custom_nodes/comfy_canvas` → restart Comfy → Open Canvas on a scratch graph — do not ship as default workflow until you like the mask convention (transparent bg).
+
+**Recommendation:** **WATCH.** Strongest in-Comfy paint loop on the deck. Install only when you want paint-inside-`:8188` instead of PS round-trip.
+
+**New PC:** Optional after Comfy is healthy.
+
+---
+
+## Hermes Session Analyzer — 2026-08-27
+
+- **URL:** https://github.com/tommulkins/hermes-plugin-session-analyzer
+- **Grade:** **B- (81/100)** · **Cost:** Free **MIT**
+- **Verdict:** **WATCH** · **Setup:** NOT_INSTALLED
+- **Stars:** ~12 (2026-08-27) · 35 commits
+
+### Summary
+
+Community Hermes **Desktop** plugin: sidebar session list with tokens, cache, spend, failed tool calls, files touched, subagents, plus Ask AI (clipboard prompt + `session.create`). Two halves: JS desktop plugin + FastAPI over `state.db`. Claims **read-only** on the session store.
+
+### Grade breakdown
+
+| Axis | Score | Notes |
+|------|-------|-------|
+| Gap fill | 32/40 | Hermes-native fail/tool breakdown TokenTracker does not show |
+| Stack fit | 20/25 | Fits jonbeatz Desktop; installer defaults to the wrong Hermes home |
+| Cost / complexity | 19/20 | MIT, local, no extra keys |
+| Maturity | 10/15 | 12★, unofficial, per-profile copy is easy to miss |
+
+### Gap / overlap
+
+| vs | Notes |
+|----|--------|
+| **TokenTracker `:7680`** | Primary spend (Cursor + Hermes totals) — keep |
+| **AgentsView `:8080`** | Cursor session search — different DB |
+| **ccusage** | Hermes CLI alt — already demoted |
+
+### Risks
+
+- **`install.ps1` writes `plugins.enabled` in `config.yaml`** and copies into `HERMES_HOME`. Default resolve is `%LOCALAPPDATA%\hermes`, **not** `profiles\jonbeatz`. Set `$env:HERMES_HOME` to the jonbeatz profile (or copy both halves per README) or the sidebar appears with a dead backend.
+- Restart Hermes Desktop once so the Python backend mounts.
+- Ask AI calls gateway `session.create` — uses your existing models; still a new session, not a silent spend spike if you send it.
+- Unofficial; schema drift on `state.db` can break aggregates.
+- Do not paste the README “install this plugin” prompt into a cloud model that might run it without the profile env.
+
+**Verify (when trial):** `$env:HERMES_HOME="$env:LOCALAPPDATA\hermes\profiles\jonbeatz"` → `install.ps1` → restart Desktop → Session Analyzer lists **this** profile’s sessions only.
+
+**Recommendation:** **WATCH.** Useful Hermes QA overlay. TokenTracker stays the spend dashboard. Do not install until you want Desktop-side fail drill-down.
+
+**New PC:** Skip until jonbeatz Desktop is the daily driver.
+
+---
+
+## DeepSeek Harness — 2026-08-27
+
+- **URL:** https://github.com/deepseek-ai/deepseek-harness · **Docs:** https://deepseek-harness.github.io/deepseek-harness/ · **Site:** https://deepseek.com/harness
+- **Grade:** **B- (80/100)** · **Cost:** Free **MIT**
+- **Verdict:** **REF** (bookmark) · **Setup:** READY
+- **Stars:** ~201k (2026-08-27) · **developer preview** (breaking changes)
+
+### Summary
+
+Official DeepSeek **agent harness** (`dsh`): everything-is-a-plugin on Cordis. `npx @deepseek-ai/dsh web` starts a local Web UI at `http://127.0.0.1:3080`. Can execute model-generated commands and load third-party `dsh-plugin`s.
+
+### Grade breakdown
+
+| Axis | Score | Notes |
+|------|-------|-------|
+| Gap fill | 30/40 | Official DeepSeek agent surface vs LiteLLM-as-API + Cursor |
+| Stack fit | 17/25 | Fits the DeepSeek daily driver; another agent runtime next to Cursor/Hermes |
+| Cost / complexity | 18/20 | MIT, npx; preview + plugin surface |
+| Maturity | 15/15 | Official org, huge star spike; SAFETY.md says unaudited |
+
+### Gap / overlap
+
+| vs | Notes |
+|----|--------|
+| **Cursor** | C&C / builder — keep |
+| **Hermes Desktop** | PM / Telegram — keep |
+| **LiteLLM `:4000`** | API routing — `dsh` is a harness, not a gateway |
+| **deepseek-mcp-server** | MCP tools — complementary, not a replace |
+| **fx WATCH** | Another experimental CLI agent |
+
+### Risks
+
+- **SAFETY.md:** experimental, no security audit, can run code/plugins, touch files/credentials/network. Prefer a VM.
+- Default **`:3080`** (DesignLab is `:3090` — close; do not collide). Loopback only.
+- Rapid **breaking changes** in developer preview.
+- Third-party `dsh-plugin`s are untrusted by default.
+- Do not point it at this JonBeatz repo as a daily coding agent.
+
+**Verify (when trial):** throwaway folder → `npx @deepseek-ai/dsh web --no-open` → hit `127.0.0.1:3080` — then quit.
+
+**Recommendation:** **REF.** Bookmark the docs. Do not run `dsh` on this workstation. Cursor stays C&C.
+
+**New PC:** Bookmark only. LiteLLM + Cursor first.
+
+---
+
+## Paperclip — 2026-08-27
+
+- **URL:** https://github.com/paperclipai/paperclip · **Site:** https://paperclip.ing · **Docs:** https://docs.paperclip.ing
+- **Grade:** **B- (81/100)** · **Cost:** Free **MIT** · Node **24.11+**
+- **Verdict:** **WATCH** · **Setup:** NOT_INSTALLED
+- **Stars:** ~79.5k (2026-08-27)
+
+### Summary
+
+Open-source **agent company** dashboard: org chart, heartbeats, budgets, tickets, skills. Hires OpenClaw / Claude Code / Codex / **Cursor** / bash / HTTP. Local `pnpm dev` → `http://localhost:3100` (mobile UI `:3101`). Embedded Postgres.
+
+### Grade breakdown
+
+| Axis | Score | Notes |
+|------|-------|-------|
+| Gap fill | 32/40 | Real multi-agent org vs Hermes-as-one-PM |
+| Stack fit | 16/25 | Can treat Cursor as a hired worker — fights C&C |
+| Cost / complexity | 18/20 | MIT; installer wants Node 24 vs fleet ~20 |
+| Maturity | 15/15 | 79k★, SECURITY.md; telemetry on by default |
+
+### Gap / overlap
+
+| vs | Notes |
+|----|--------|
+| **Hermes Desktop + Telegram** | PM / away-from-desk — keep |
+| **cto.new WATCH** | SaaS agent team — similar job, different product |
+| **TaskBoard** | Human kanban — not agent org |
+| **Cursor** | Builder — do not hire as a Paperclip worker |
+
+### Risks
+
+- **`curl https://paperclip.ing/install.sh | bash`** — same class as Ramp. Checksum is same origin. Use a git clone + `pnpm dev` if ever.
+- **Cursor as a hired agent** — do not enable on this workstation (Cursor stays C&C).
+- Heartbeats can run **24/7** and burn LiteLLM/DeepSeek/OpenRouter.
+- Anonymous usage telemetry (hashed repo refs). Opt-in Sentry if `SENTRY_DSN` is set — do not set it.
+- Node **24** vs current fleet Node 20.
+- Default **`:3100` / `:3101`**.
+
+**Verify:** isolated clone → `pnpm install` → `pnpm dev` — do not onboard Cursor adapter.
+
+**Recommendation:** **WATCH.** Strongest OSS “agent company” on the deck. Do not install over Hermes/Telegram/Cursor today.
+
+**New PC:** Skip. Hermes + Cursor first.
+
+---
+
+## The Complete Shelf — 2026-08-27
+
+- **URL:** https://github.com/MengTo/complete-shelf · **Live:** https://mengto.github.io/complete-shelf/
+- **Grade:** **B+ (88/100)** · **Cost:** Free (no LICENSE file in repo)
+- **Verdict:** **REF** · **Setup:** READY (bookmark / local static serve)
+- **Stars:** ~648 (2026-08-27)
+
+### Summary
+
+Meng To single-file Three.js library of **seven clothbound hardcovers** (Codex, Claude Code, Cursor, …). Wheel/keys along the shelf, orbit, crack-open, drag page-turn. `PROMPT.md` is the agent remix brief. No bundler.
+
+### Grade breakdown
+
+| Axis | Score | Notes |
+|------|-------|-------|
+| Gap fill | 36/40 | Hardcover PBR + hinged pages + Foley — showcase craft we do not have |
+| Stack fit | 22/25 | Vanilla Three.js + OrbitControls; remap to R3F for Next showcase |
+| Cost / complexity | 19/20 | Static HTML; CDN Three.js + Inter font |
+| Maturity | 11/15 | 648★, 3 commits, no LICENSE; craft is high |
+
+### Gap / overlap
+
+| vs | Notes |
+|----|--------|
+| **devini-tea REF** | Scroll-video cinematic — different craft |
+| **Theatre.js WATCH** | R3F timeline — complementary |
+| **3D vault / cinematic-scroll-skill** | Build system — this is a hardcover material study |
+
+### Risks
+
+- No LICENSE — treat as study/remix, not a drop-in product asset for a client.
+- Independent of Stripe Press; titles are original.
+- Needs HTTP (not `file://`); local `:4173` example.
+- CDN Three.js — pin if you vendor.
+
+**Verify:** open live demo or `python -m http.server 4173`.
+
+**Recommendation:** **REF.** Showcase bookmark. Do not “install” as an app.
+
+**New PC:** Bookmark only.
+
+---
+
+## LoopX — 2026-08-27
+
+- **URL:** https://github.com/huangruiteng/loopx · **Docs:** in-repo `docs/` + Developer Book
+- **Grade:** **B- (80/100)** · **Cost:** Free **Apache-2.0** from v0.4.8 (older releases MIT)
+- **Verdict:** **WATCH** · **Setup:** NOT_INSTALLED
+- **Stars:** ~5.2k (2026-08-27)
+
+### Summary
+
+Provider-neutral **long-horizon control plane** that sits on top of Codex, Claude Code, Cursor, dsh, or a custom runner. Kernel owns goals, gates, todos, evidence, quota, and recovery; the harness executes one bounded turn. Local-first Python 3.11+ (stdlib runtime). Optional dashboard (Vite `:5173`) and experimental Tauri shell. Partner: OpenViking (reward-memory, default-off).
+
+### Grade breakdown
+
+| Axis | Score | Notes |
+|------|-------|-------|
+| Gap fill | 32/40 | Real multi-day loop kernel (quota, gates, evidence) — rituals/ReCall already cover daily work |
+| Stack fit | 17/25 | Windows PowerShell 7 documented; **skill install writes into agent hosts**; dsh adapter we bookmarked as REF-only |
+| Cost / complexity | 16/20 | `pip`/`pipx`, no extra deps; dashboard/Tauri extra; `.loopx/` per project |
+| Maturity | 15/15 | 5.2k★, 5k+ commits, v0.4.x, Apache-2.0, Windows install path |
+
+### Gap / overlap
+
+| vs | Notes |
+|-----|--------|
+| **Cursor + Hermes rituals** | C&C stays here — LoopX is an overlay, not a replacement |
+| **Paperclip WATCH** | Agent-org company dashboard — different layer |
+| **Hermes Control Deck WATCH** | Unofficial Hermes PWA — LoopX is harness-neutral |
+| **TaskBoard / ReCall** | Human board + session notes — LoopX is agent-native Kanban |
+| **OpenViking WATCH** | LoopX partner for optional Reward Memory — keep `hermes memory setup openviking` off |
+| **DeepSeek Harness REF** | LoopX has a dsh adapter — do not enable; dsh stays bookmark-only |
+
+### Risks
+
+- **`loopx workflow-skills --install`** and `loopx slash-commands --install` write skills/commands into Cursor / Claude / Codex / Pi / ZCode. Same class as Hindsight/Honcho init — **do not** run against this profile.
+- **`.loopx/`**, `.codex/goals/`, `.local/` must stay gitignored — do not commit live goal state.
+- Dashboard Vite **`:5173`** + `loopx serve-status` loopback; experimental Tauri starts extra processes. Do not bind public Internet.
+- Optional **OpenViking** reward-memory is default-off — leave it off (AGPL + memory-provider swap).
+- Optional **dsh** extra (`loopx[deepseek-harness]`) — DeepSeek Harness is REF; do not install the adapter.
+- Unattended multi-day loops still spend tokens; LoopX is not an autonomous production controller. Dangerous writes stay human-gated.
+- Native Windows wants **PowerShell 7** + Python 3.11+ on PATH. Do not use `install-local.sh` (contributor canary) on this box.
+
+**Verify (isolated lab only):** `pipx install loopx` → `loopx doctor` — **do not** `workflow-skills --install`; **do not** `loopx connect` on JonBeatz until Jon asks.
+
+**Recommendation:** **WATCH.** Strongest OSS long-horizon overlay on the deck. Do not install over Cursor/Hermes today.
+
+**New PC:** Skip. Cursor + rituals + ReCall first.
+
+---
+
+## video-use — 2026-08-27
+
+- **URL:** https://github.com/browser-use/video-use · **Cloud try:** Browser Use Cloud
+- **Grade:** **B- (80/100)** · **Cost:** Free **MIT** + paid **ElevenLabs Scribe** (required)
+- **Verdict:** **WATCH** · **Setup:** NOT_INSTALLED
+- **Stars:** ~21.5k (2026-08-27) · 18 commits
+
+### Summary
+
+browser-use skill: drop raw takes in a folder, ask an agent to edit, get `edit/final.mp4`. LLM never watches frames — ElevenLabs Scribe word-level transcript (~12KB) plus on-demand `timeline_view` PNGs. Cuts filler/dead space, color grade, 30ms fades, burned captions, optional HyperFrames/Remotion/Manim overlays, self-eval at cut boundaries.
+
+### Grade breakdown
+
+| Axis | Score | Notes |
+|------|-------|-------|
+| Gap fill | 32/40 | Talking-head word-boundary EDL is a real Kinocut gap; Shorts/QC already covered |
+| Stack fit | 17/25 | FFmpeg already on PATH; **install.md wires Hermes/Claude skills**; no Windows section (`brew`/`ln -sfn`) |
+| Cost / complexity | 16/20 | MIT helpers; Scribe is a hard paid dependency; librosa/matplotlib extras |
+| Maturity | 15/15 | 21.5k★, browser-use org, MIT; repo is 18 commits (viral/new) |
+
+### Gap / overlap
+
+| vs | Notes |
+|-----|--------|
+| **Kinocut IN USE** | Trim/caption/9:16/QC + Hyperframes MCP — keep as polish chain |
+| **OpenMontage IN USE** | Generate pipelines — video-use is edit-from-takes |
+| **FreeCut IN USE** | Human timeline — complementary |
+| **claude-video / Watch** | Understand video — video-use is edit |
+| **Kinocut `[transcribe]`** | Local Whisper extra — video-use uses cloud Scribe instead |
+
+### Risks
+
+- **Setup prompt** tells the agent to clone, `uv sync`, register the skill, and collect `ELEVENLABS_API_KEY`. **Do not** paste that prompt into Cursor or Hermes.
+- **Hermes / Claude / Codex skill symlink** (`ln -sfn` into `~/.claude/skills` or Hermes skills dir) — same class as LoopX/Honcho skill install. Do not wire this profile.
+- **install.md has no Windows path** — brew/apt only. Junction + ffmpeg-on-PATH would be the Windows analog; still skip today.
+- **ElevenLabs Scribe** is required for layer 1. Burns credits on first transcribe. Do not write keys into a cloned `.env` unless Jon asks.
+- Lazy-installs **HyperFrames / Remotion / Manim** on first overlay — Kinocut already has Hyperframes tools.
+- Optional **yt-dlp** for URL sources.
+- Agents rewrite media into `<videos_dir>/edit/` — keep masters outside that folder.
+
+**Verify:** none on this box. Keep `npm run kinocut:status` / `npm run video:polish:status`.
+
+**Recommendation:** **WATCH.** Strongest talking-head agent-edit skill on the deck. Do not replace Kinocut or wire Hermes.
+
+**New PC:** Skip. Kinocut + FreeCut first.
+
+---
+
+## Presenton — 2026-08-27
+
+- **URL:** https://github.com/presenton/presenton · **Site:** https://presenton.ai/ · **Docs:** https://docs.presenton.ai/
+- **Grade:** **B (85/100)** · **Cost:** Free **Apache-2.0** (BYOK / LiteLLM / LM Studio)
+- **Verdict:** **REF** · **Setup:** READY (bookmark)
+- **Stars:** ~9.9k (2026-08-27)
+
+### Summary
+
+Self-hosted Gamma/Canva-class AI presentation generator: prompt or document → editable PPTX/PDF. Docker `ghcr.io/presenton/presenton` on **`:5001`**, Windows Electron `.exe`, or cloud. Built-in MCP. Speaks LiteLLM, LM Studio `:1234`, DeepSeek, OpenRouter.
+
+### Grade breakdown
+
+| Axis | Score | Notes |
+|------|-------|-------|
+| Gap fill | 34/40 | No Gamma-class PPTX lane today (InDesign/Typst is print) |
+| Stack fit | 20/25 | Windows exe + Docker `:5001`; LiteLLM/LM Studio already here; MCP optional |
+| Cost / complexity | 17/20 | OSS; BYOK; Docker volume `app_data` |
+| Maturity | 14/15 | 9.9k★, 2.6k commits, Apache-2.0 |
+
+### Gap / overlap
+
+| vs | Notes |
+|-----|--------|
+| **InDesign / Typst / Lulu** | Books/print — Presenton is slide decks |
+| **Claude Blog** | Articles — not PPTX |
+| **Hallmark / NovaMira** | Web UI craft — not PowerPoint |
+| **LiteLLM `:4000` / LM Studio `:1234`** | Presenton can BYOK those — good fit if installed later |
+
+### Risks
+
+- Docker default **`-p 5001:80`**. Compose can remap via `PRESENTON_HTTP_HOST_PORT`. **Never** bind **`:3000`** (Playground).
+- Built-in **MCP** — do not add to JonBeatz `.cursor/mcp.json` until asked.
+- Compose **`MEM0_ENABLED` defaults true** inside the container (`/app_data/mem0`). Isolated from `jonbeatz_personal` — still do not point it at the personal Qdrant.
+- **ChatGPT sign-in** path is optional; prefer LiteLLM/LM Studio.
+- Image providers (DALL-E, Gemini, Comfy) can spend extra — pin `IMAGE_PROVIDER` if you trial.
+- Electron first-run needs Node LTS + Python 3.11 + uv.
+
+**Verify (isolated lab only):** `docker run -p 5001:80 …` → http://127.0.0.1:5001 — **do not** take `:3000`; **do not** enable MCP today.
+
+**Recommendation:** **REF.** Bookmark. Install Docker `:5001` or the Windows exe only when there is a real PPTX to ship.
+
+**New PC:** Bookmark only. LiteLLM + print stack first.
+
+---
+
+## book-to-skill — 2026-08-27
+
+- **URL:** https://github.com/virgiliojr94/book-to-skill
+- **Grade:** **B- (80/100)** · **Cost:** Free **MIT**
+- **Verdict:** **WATCH** · **Setup:** NOT_INSTALLED
+- **Stars:** ~26.3k (2026-08-27)
+
+### Summary
+
+Turns a technical book PDF (or docs folder) into an Agent Skill: `SKILL.md` + per-chapter files, glossary, patterns, cheatsheet. Extract locally; the host LLM structures it. Claims 24×–51× fewer tokens than dumping the book.
+
+### Grade breakdown
+
+| Axis | Score | Notes |
+|------|-------|-------|
+| Gap fill | 32/40 | Structured on-demand book skills vs vault PDFs + markdownify |
+| Stack fit | 17/25 | Windows extractors OK; **`npx skills add` writes `~/.claude/skills`** |
+| Cost / complexity | 16/20 | MIT; poppler/pypdf; Docling slower for technical PDFs |
+| Maturity | 15/15 | 26k★, MIT, Agent Skills standard, copyright FAQ is explicit |
+
+### Gap / overlap
+
+| vs | Notes |
+|-----|--------|
+| **find-skills IN USE** | Catalog install — this *generates* a skill from your file |
+| **markdownify IN USE** | PDF→MD dump — not a structured skill |
+| **Vader Vault / 3D vault PDFs** | Human notes — book-to-skill is agent-loadable chapters |
+| **Context7** | Library APIs — not book distillation |
+
+### Risks
+
+- **`npx skills add virgiliojr94/book-to-skill`** registers into Claude/Copilot/Amp skills dirs. **Do not** run against this Cursor/Hermes profile.
+- **Copyright:** converter ships no book text; generated skills of third-party books must stay **private**. Do not publish or `npx skills add` a copyrighted book's skill.
+- Extraction is local; the **generator LLM** still sees the distilled text (same as any prompt).
+- Scanned PDFs need OCR (`ocrmypdf`) first.
+- Optional **GitHub publish** of a generated skill — keep off for copyrighted sources.
+
+**Verify:** none on this box. `python scripts/extract.py --check` only in an isolated clone if Jon asks.
+
+**Recommendation:** **WATCH.** Useful for books/docs Jon already owns. Do not global-install the converter skill today.
+
+**New PC:** Skip. Vault + find-skills first.
+
+---
+
+## Camera Control — 2026-08-27
+
+- **URL:** https://aicameracontrol.com/
+- **Grade:** **B- (82/100)** · **Cost:** Free web (Higgsfield CTA)
+- **Verdict:** **REF** · **Setup:** READY (bookmark)
+- **Related:** [AI Camera Movements](https://aicameramovements.com/) already REF (copy-paste move prompts)
+
+### Summary
+
+Browser **3D shot blocking** for AI filmmaking: set lens/angle/height, export a reference frame, auto-write a prompt. Higgsfield is the send target on the marketing page — this fleet gens with **fal**.
+
+### Grade breakdown
+
+| Axis | Score | Notes |
+|------|-------|-------|
+| Gap fill | 32/40 | Interactive 3D block vs prompt-only aicameramovements |
+| Stack fit | 20/25 | Complements fal + R3F shot language; Higgsfield is optional CTA |
+| Cost / complexity | 16/20 | Web bookmark; no local daemon |
+| Maturity | 14/15 | Focused product; marketing is Higgsfield-heavy |
+
+### Risks
+
+- Higgsfield affiliate/send CTAs — **ignore**; keep `video:fal`.
+- Not a replacement for Theatre.js / R3F camera in the showcase.
+- Treat exported frames as refs, not production assets.
+
+**Recommendation:** **REF.** Bookmark for blocking. Do not install anything.
+
+**New PC:** Bookmark only.
+
+---
+
+## FigJam — 2026-08-27
+
+- **URL:** https://www.figma.com/figjam/
+- **Grade:** **C (73/100)** · **Cost:** Freemium (included with Figma seats)
+- **Verdict:** **REF** · **Setup:** READY (Jon bookmark — below B- threshold, explicit)
+- **Overlap:** **DesignLab** (`:3090`) remains the local FigJam-style board
+
+### Summary
+
+Figma’s collaborative whiteboard (stickies, diagrams, templates, AI sort). Useful as a visual reference if a Figma seat already exists. Not a product to subscribe for this shop.
+
+### Risks
+
+- Paid Figma plans for full collab. Do not buy a seat just for FigJam.
+- Cloud canvas vs disk-backed DesignLab.
+- Not a replacement for Penpot (design-system handoff) or InDesign.
+
+**Recommendation:** **REF.** Bookmark. Daily boards stay DesignLab.
+
+**New PC:** Bookmark only. DesignLab first.
+
+---
+
+## oh-my-hermes (OMH) — 2026-08-27
+
+- **URL:** https://github.com/rlaope/oh-my-hermes
+- **Grade:** **B- (80/100)** · **Cost:** Free **MIT**
+- **Verdict:** **WATCH** · **Setup:** NOT_INSTALLED
+- **Stars:** ~1.2k (2026-08-27) · **v1.0.6** package-manager path public · ~2519 commits
+
+### Summary
+
+Unofficial operating layer on Nous Hermes Agent (`omh` CLI). After install, `omh setup` installs managed skills, registers a Hermes plugin/skin, and seeds `~/.omh/routing/model-chains.json`. Not affiliated with Nous.
+
+### Grade breakdown
+
+| Axis | Score | Notes |
+|------|-------|-------|
+| Gap fill | 33/40 | Stronger Hermes skill/TUI/evidence layer than Control Deck; fleet already has rituals + Telegram |
+| Stack fit | 16/25 | Windows npm/Bun exist, but `omh setup` mutates the live jonbeatz Hermes profile |
+| Cost / complexity | 16/20 | MIT; Homebrew / Bun / npm / `install.ps1` |
+| Maturity | 15/15 | Large tree and v1.0.6 QA notes; unofficial overlay still a config-writer |
+
+### Gap / overlap
+
+| vs | Notes |
+|----|--------|
+| **Telegram + Hermes MCP bridge** | Primary away-from-desk path — keep |
+| **Hermes Control Deck** | PWA over WebUI; OMH writes Desktop skills/config instead |
+| **LoopX** | Cursor control plane; OMH is Hermes-side |
+
+### Risks
+
+- **`omh setup` / `omh update` write Hermes config** (plugin enable, skin, `~/.omh`). Do **not** run on the jonbeatz profile.
+- **Never** `irm https://raw.githubusercontent.com/rlaope/oh-my-hermes/main/install.ps1 \| iex` or `curl …/install.sh \| sh`.
+- `omh update` on a machine that never completed setup still bootstraps the full TUI + registration.
+- Unofficial — not Nous. Same class as Control Deck / LoopX skill install.
+
+**Recommendation:** **WATCH.** Docs-first. Isolated VM only if Jon ever wants a throwaway Hermes to try OMH.
+
+**New PC:** Do not install. Rituals + Telegram first.
+
+---
+
+## Cursor Origin — 2026-08-30
+
+- **URL:** https://cursor.com/codebase · **Docs:** https://cursor.com/docs/origin
+- **Grade:** **B (84/100)** · **Cost:** Included in Cursor Pro+
+- **Verdict:** **IN USE (trial, 1 repo)** · **Setup:** PARTIAL
+
+### Summary
+
+Cursor git forge (early beta). GitHub stays source of truth. First mirror: `jonbeatz/JonBeatz-Command-Center`. Namespace `jonbeatz` claimed (cannot rename in beta). **No Origin MCP** — keep GitHub MCP. Origin CLI is WSL/mac/Linux only.
+
+### Do / don't
+
+- Add repos **one at a time**. Do not Select all (35 GitHub repos on `jonbeatz`).
+- Do **not** add a second git remote locally.
+- Do **not** Detach from GitHub unless Jon explicitly wants Origin as SoT.
+- Skip `tnyse` org (Needs Org Admin). Skip Origin CI apps (Buildkite/Depot/Vercel) for now.
+
+**Playbook:** JonBeatz `.cursor/docs/CURSOR-ORIGIN.md`
+
+**New PC:** Claim namespace carefully; sync one repo via GitHub; keep GitHub remotes.
+
+---
+
+## TestingCatalog — 2026-08-27
+
+- **URL:** https://www.testingcatalog.com/
+- **Grade:** **B- (80/100)** · **Cost:** Free / email subscribe
+- **Verdict:** **REF** · **Setup:** READY (bookmark)
+
+### Summary
+
+AI rumor/news site (ChatGPT, Claude, Grok, Cursor, Gemini). Useful desk for leaks (Grok Bot templates, Cursor Origin). Sponsored posts mixed in.
+
+### Grade breakdown
+
+| Axis | Score | Notes |
+|------|-------|-------|
+| Gap fill | 28/40 | No dedicated rumor feed; Agent Arena is ranking not news |
+| Stack fit | 22/25 | Web bookmark; Grok/Cursor coverage is relevant |
+| Cost / complexity | 18/20 | Free browse |
+| Maturity | 12/15 | Rumor quality varies; sponsored slots |
+
+### Risks
+
+- Leaks are **not** install truth — still run Review-Tool.
+- Sponsored posts (Nyx, Vorflux, etc.).
+- Subscribe/login optional — do not need an account.
+
+**Recommendation:** **REF.** Browse. Do not treat as a stack source of truth.
+
+**New PC:** Bookmark only.
 
 ---
 

@@ -6,11 +6,29 @@
 
 > **Not** Close Project / Close Session — those keep the fleet running for workspace switches. **End** = done for the day.
 
+### Shortcut: **End Project full**
+
+When Jon says **End Project full**, **End Session full**, or **Full end**:
+
+- Run the normal End Project steps (ReCall, project-log, Mem0/vault when substantive, farewell speak).
+- **Skip all AskQuestion gates** — treat selections as already chosen:
+  | Gate | Auto action |
+  |------|-------------|
+  | Git (if dirty, meaningful) | **Commit + push** (why-focused message; never `.env*` / secrets) |
+  | Git clean | Skip |
+  | `:3000` listening | **Stop** owning dev process |
+  | `:3000` free | Skip |
+  | LiteLLM + ngrok | **Stop** — `npm run session:stop -- -StopDeepSeek` |
+- Still do **not** stop Telegram gateway or LM Studio unless Jon separately asks.
+- Still run `draven:speak` once (Edge Liam) before `session:stop`.
+
+Plain **End Project** (without **full**) keeps the clickable AskQuestion gates below.
+
 ---
 
 ## Hard UI rule (clickable choices)
 
-For **every** operator choice in this ritual, call the Cursor **`AskQuestion` tool** so options render as **clickable buttons** in the Agent window.
+For **every** operator choice in this ritual **except End Project full**, call the Cursor **`AskQuestion` tool** so options render as **clickable buttons** in the Agent window.
 
 **Do NOT** ask for typed answers such as:
 - "Reply **1** or **2**"
@@ -170,7 +188,8 @@ Say **Open Project** or **Start Project** when you return.
 
 ## Aliases
 
-- **End Project** = **End Session** = same ritual
+- **End Project** = **End Session** = same ritual (AskQuestion gates)
+- **End Project full** / **End Session full** / **Full end** = same ritual with **no AskQuestion** — auto commit+push (if dirty), stop `:3000` if up, `session:stop -- -StopDeepSeek`
 - Legacy `Personal-End.md` → this file
 - `-StopGoogleApi` → same as `-StopDeepSeek` (deprecated alias)
 

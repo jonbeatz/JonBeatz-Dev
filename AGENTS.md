@@ -22,6 +22,7 @@ Three.js. Split out of the JonBeatz personal profile. **Red is the baked default
   to `D:\Hermes\projects\JonBeatz`.
 - Do **not** bring the gold `jon-beatz.com` here.
 - Mem0 = **`jonbeatz_dev`** scope only.
+- **Vader_Vault:** Project hub at `H:\Vader_Vault\01_Projects\JonBeatz.dev.md`. Log major sessions and decisions using the vault auto-log skill.
 - Windows PowerShell only (no bash heredocs). Never commit `.env*` or `.cursor/mcp.json`
   (gitignored — repo is public).
 
@@ -55,3 +56,5 @@ npm run backup:quick        # versioned backup (backup:quick:full for full)
 | Live URL | https://jonbeatz.dev |
 | Backups | `G:\Hermes_Project_BackUpz\JonBeatz.dev` |
 | Personal profile (separate) | `D:\Hermes\projects\JonBeatz` |
+
+- **Versioned backup:** Before any file edit, backup to `_backups/YYYY-MM-DD_v{version}.ext`. See `tnims-book-review` skill for protocol.

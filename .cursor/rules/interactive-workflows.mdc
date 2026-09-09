@@ -43,10 +43,12 @@ When running **multi-step rituals** (End Project, backup project, go-live gates,
 | Trigger | Behavior |
 |---------|----------|
 | **End Project** / **End Session** | **Required** AskQuestion for git (if dirty), `:3000` (if up), and StopDeepSeek — see `end-project-ritual.mdc` |
+| **End Project full** / **Full end** | **No AskQuestion** — auto commit+push, stop `:3000`, StopDeepSeek |
 | **Close Project** | AskQuestion for git when dirty |
 | **backup project** | Interactive — `npm run backup:project` with AskQuestion gates |
 | **backup quick**, **backup profile**, **backup full** | **Non-interactive** — run `backup:quick` / `backup:quick:full` immediately |
 | **restore point** / milestone backup | AskQuestion for note + confirm before `backup:quick` |
+| **review tool** / **review batch** | **Exception:** grade blocks + scoreboard **this turn** with **no** AskQuestion. Install gate AskQuestion only on the **next** turn (Composer shows the questionnaire above chat). See [Review-Tool.md](../prompts/Review-Tool.md) Step 4. |
 | Other gated workflows | Prefer `AskQuestion` when offering structured choices |
 
 ## Free-text steps

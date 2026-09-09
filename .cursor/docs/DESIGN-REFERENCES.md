@@ -17,6 +17,7 @@ Living list of **design inspiration, component libraries, typography, and UI cra
 | **Copy-paste React blocks** | [21st.dev](https://21st.dev/) or [React Bits](https://www.reactbits.dev/) (watchlist) |
 | **Pick shadcn registry** | `.cursor/skills/Component-Registries/SKILL.md` + [registry.directory](https://registry.directory) |
 | **Jon sends a new link** | Agent appends a row under the best category + **Add queue** table + **[HERMES-SHOWCASE-SPEC.md](./HERMES-SHOWCASE-SPEC.md)** add queue if it's a build technique |
+| **Prompt library / template gallery** (copy-paste prompts, style packs, trending stills) | Same as a design URL — **bookmark here** even if the product also has an MCP/API. Grade the MCP separately only if Jon wants it as a generator. |
 | **Jon says `review design` / `grade this site`** | Full rubric via [Review-Tool.md](../prompts/Review-Tool.md) — grade + DESIGN-REFERENCES + optional showcase queue |
 | **Formal tool review** | Jon says **`review tool`** → TOOLS-WATCHLIST (not this file alone) |
 
@@ -37,10 +38,15 @@ Living list of **design inspiration, component libraries, typography, and UI cra
 | **Parallax / scroll-depth mood boards** | [Awwwards parallax](https://www.awwwards.com/websites/parallax/), [CSS Design Awards parallax](https://www.cssdesignawards.com/website-gallery?feature=parallax), [Dribbble parallax](https://dribbble.com/search/parallax) |
 | **Award-level / cutting edge** | [Awwwards](https://www.awwwards.com/) |
 | **Typography** | [Fontpair](https://www.fontpair.co/), [Typewolf](https://www.typewolf.com/) |
+| **Agent model ranking (in-the-wild)** | [Agent Arena](https://arena.ai/leaderboard/agent) — REF; do not auto-swap Cursor models |
 | **Color palettes** | [Coolors](https://coolors.co/) |
 | **React components to install** | [21st.dev](https://21st.dev/), [Magic UI](https://magicui.design/), [Aceternity UI](https://ui.aceternity.com/) |
 | **Claude Code skill/agent templates** | [aitmpl.com](https://aitmpl.com/) — REF marketplace (cherry-pick only) |
 | **AI/dev tool discovery** | [Toolfolio](https://toolfolio.com/) — REF directory (bookmark; grades stay in TOOLS-WATCHLIST) |
+| **AI video camera language** | [aicameramovements.com](https://aicameramovements.com/) — copy-paste shot prompts |
+| **Agency prompt library** | [brandmotion.in/prompts.html](https://brandmotion.in/prompts.html) — website/video briefs |
+| **Trending AI still/video prompts** | [meigen.ai](https://www.meigen.ai/) — 1,400+ GPT Image / Nano Banana / Seedance prompts; MCP is optional |
+| **Repo → rebuild prompt** | [gitreverse.com](https://www.gitreverse.com/) — public GitHub/site → Cursor prompt; [library](https://gitreverse.com/library) |
 
 ---
 
@@ -106,6 +112,13 @@ Living list of **design inspiration, component libraries, typography, and UI cra
 | [Hover States](https://hoverstates.com/) | Interaction-focused web design | Scroll + hover reference |
 | [Navbar Gallery](https://navbar.gallery/) | Nav patterns only | Quick header audits |
 | [GitHub responsive-navbar topic](https://github.com/topics/responsive-navbar) | OSS nav pattern index | Fleet REF 2026-07-13 — browse repos for Next.js header implementations |
+| [AI Camera Movements](https://aicameramovements.com/) | Copy-paste **camera move** prompts (pan/dolly/orbit/drone) | REF 2026-07-14 — AI video + R3F shot language; Higgsfield affiliate CTAs ignore |
+| [Camera Control](https://aicameracontrol.com/) | **3D shot blocking** — lens/angle, export ref frame, auto prompt | REF 2026-08-27 — block then **fal**; Higgsfield send CTA ignore |
+| [FigJam](https://www.figma.com/figjam/) | Figma collaborative whiteboard | REF 2026-08-27 — Jon bookmark; DesignLab `:3090` stays daily board |
+| [Brand Motion — Prompt Library](https://brandmotion.in/prompts.html) | Agency reusable website/video/campaign prompts | REF 2026-07-14 — companion to violet-car showcase; cherry-pick language, not stack |
+| [MeiGen](https://www.meigen.ai/) | Trending **GPT Image / Nano Banana / Seedance** prompt gallery (~1,446) | REF 2026-08-27 — **bookmark only.** MCP is a later option (TOOLS-* WATCH); never `npx meigen init cursor` |
+| [GitReverse](https://www.gitreverse.com/) | Public GitHub/site → synthetic **rebuild prompt** + [prompt library](https://gitreverse.com/library) | REF 2026-08-27 — public repos only; not a DesignMD replacement; do not clone licensed products |
+| [The Complete Shelf](https://mengto.github.io/complete-shelf/) | Single-file **Three.js hardcover** shelf — orbit, crack-open, page-turn | REF 2026-08-27 — [repo](https://github.com/MengTo/complete-shelf) + `PROMPT.md`; remap to R3F; no LICENSE |
 
 ### Parallax inspiration feeds (gallery — design idea refs only)
 
@@ -415,6 +428,17 @@ Inspected from live `/_next/static/css/*` on [huly.io](https://huly.io/) (Jul 20
 | 2026-07-14 | https://aitmpl.com/ | Resource directory | Jon | Claude Code templates marketplace — B (84) REF |
 | 2026-07-14 | https://toolfolio.com/ | Resource directory | Jon | AI/dev tool directory — B- (81) REF bookmark |
 | 2026-07-14 | https://voicebox.sh/ | Tool (WATCH) | Jon | jamiepine/voicebox local TTS+STT+MCP — A- (92); overlaps Handy/OmniVoice |
+| 2026-07-14 | https://aicameramovements.com/ | Prompt library | Jon | Camera movement AI prompts B+ (88) REF — video + 3D shot language |
+| 2026-07-14 | https://brandmotion.in/prompts.html | Prompt library | Jon | Brand Motion reusable site/video prompts B (84) REF — extend violet-car |
+| 2026-07-14 | https://huggingface.co/microsoft/VibeVoice-ASR | Model (WATCH) | Jon | MS long-form ASR+diarization 9B — A- (90); VRAM heavy vs Handy |
+| 2026-08-27 | https://www.meigen.ai/ | Prompt library | Jon | 1,400+ still/video prompts — bookmark; MCP WATCH not installed |
+| 2026-08-27 | https://github.com/jau123/MeiGen-AI-Design-MCP | Tool (WATCH) | Jon | MeiGen MCP B- (81) — gallery/enhance free; skip `init cursor` |
+| 2026-08-27 | https://www.gitreverse.com/ | Prompt library | Jon | Public repo/site → Cursor rebuild prompt; [library](https://gitreverse.com/library) — B- (80) WATCH; public only |
+| 2026-08-27 | https://arena.ai/leaderboard/agent | Resource directory | Jon | Agent Arena A- (90) REF — in-the-wild tool/orchestrator ranking; pair CURSOR-MODELS-CHEATSHEET |
+| 2026-08-27 | https://github.com/MengTo/complete-shelf | Showcase | Jon | Hardcover Three.js shelf + `PROMPT.md` — B+ (88) REF; live demo on GitHub Pages |
+| 2026-08-27 | https://aicameracontrol.com/ | Tool (REF) | Jon | 3D shot blocking B- (82) — Higgsfield CTA ignore; fal gen |
+| 2026-08-27 | https://www.figma.com/figjam/ | Tool (REF) | Jon | FigJam C (73) bookmark — DesignLab stays; no Figma subscribe |
+| 2026-08-27 | https://www.testingcatalog.com/ | Resource directory | Jon | AI rumor news B- (80) REF — not stack truth |
 
 ---
 
@@ -425,4 +449,4 @@ Inspected from live `/_next/static/css/*` on [huly.io](https://huly.io/) (Jul 20
 - [IMAGE-WORKFLOW.md](./IMAGE-WORKFLOW.md) — generated assets, not layout inspiration
 - `.cursor/skills/Component-Registries/SKILL.md` — shadcn, Magic UI, registries map
 
-**Last updated:** 2026-07-04 (batch 6: Huly SaaS hero — pointer radial mask, glass tiles, blue glow → Studio Gold swap)
+**Last updated:** 2026-08-27 (FigJam + Camera Control REF)

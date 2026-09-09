@@ -186,20 +186,11 @@ npm run git:secrets-scan:push      # outgoing commits vs remote
 
 Templates: `_core-scripts/shared-profile-content/templates/.githooks/`
 
-**Jon — rotate when ready (do not skip):**
+**Jon — rotate when he says `rotate leaked keys` (parked 2026-08-31; do not nag).**
 
-| Service | Where to update after rotate |
-|---------|------------------------------|
-| GitHub PAT | `.env.local`, `_core-scripts/.env.local.master`, `sync:mcp-env` |
-| Resend | master env + any profile using `RESEND_API_KEY` |
-| Firecrawl | master env + Cursor MCP if wired |
-| Tavily | master env (was in vault doc) |
-| Browserbase | `.env.local` + `npm run sync:mcp-env` |
-| Composio | `.env.local` + `npm run sync:mcp-env` |
+Current leftover list + already-done PAT/LiteLLM: **`SECRETS-ROTATION-RUNBOOK.md` → Parked** (JonBeatz `.cursor/docs/`). After each vendor rotate, Resolve in GitGuardian (secret revoked), not Ignore as FP.
 
-Mark incidents resolved in GitGuardian after rotation.
-
-**Full procedure:** `SECRETS-ROTATION-RUNBOOK.md` (fleet-synced to every profile).
+**Full procedure:** `SECRETS-ROTATION-RUNBOOK.md`.
 
 ---
 

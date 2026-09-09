@@ -11,9 +11,9 @@
   "npmScript": "npm run desktop",
   "cliAlias": "jonbeatz-dev",
   "mem0": {
-    "userId": "jonbeatz-dev",
-    "collection": "jonbeatz-dev_memories",
-    "qdrantPath": "%USERPROFILE%\\.mem0\\qdrant_jonbeatz-dev"
+    "userId": "jonbeatz_dev",
+    "collection": "jonbeatz_dev_memories",
+    "qdrantPath": "%USERPROFILE%\\.mem0\\qdrant_jonbeatz_dev"
   },
-  "notes": "Self-contained profile generated from the Hermes profile template."
+  "notes": "Self-contained profile. Mem0 IDs use underscores (jonbeatz_dev); Hermes slug stays jonbeatz-dev."
 }

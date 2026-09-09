@@ -1,0 +1,24 @@
+---
+description: Vader Vault - cross-project Obsidian memory at H:\Vader_Vault
+alwaysApply: true
+---
+
+# Vader Vault - cross-project memory
+
+A shared Obsidian vault at `H:\Vader_Vault` is the durable, cross-project memory for the whole `D:\Hermes\projects` ecosystem. It is reachable from every workspace via the `vault` filesystem MCP.
+
+## Use it
+
+- **Before non-trivial work:** read `H:\Vader_Vault\AGENTS.md`, then the relevant `01_Projects/<Project>.md` hub for context.
+- **At session close:** append a short note to `H:\Vader_Vault\03_AI_Memory\Sessions\YYYY-MM-DD-<project>.md` (what changed, decisions, follow-ups) and update the project hub's `last_touched` + Decisions/Learnings if relevant.
+- **After an IN USE install:** write a how-to Pattern (`what / how / what it upgrades / what it does not replace`), session note, hub Decision, and a short **For Hermes** bullet on `CURSOR-HERMES-BRIDGE.md`. Do not stop at repo `TOOLS-*`. Ritual: `H:\Vader_Vault\02_Knowledge\Patterns\Vault-note-after-tool-install.md`.
+- **Reusable lessons/gotchas (cross-project):** add an atomic note under `H:\Vader_Vault\02_Knowledge\{Decisions,Learnings,Gotchas,Patterns}\` and wikilink it from the project hub(s).
+- **Vault markdown syntax:** read `.cursor/skills/obsidian-markdown/SKILL.md` before creating/editing notes (wikilinks, callouts, properties). For Obsidian `.canvas` files, read `json-canvas` (not Cursor Canvas). I/O stays the `vault` MCP.
+- **Client invoices:** vault `_attachments/invoices/JonFarrell/` (ledger + issued DOCX). Fleet playbook: profile `.cursor/docs/INVOICING.md`. Do not confuse with `deepseek:billing-*` (API spend).
+
+## Rules
+
+- **Link, never duplicate.** Repo `TRUTH.md` / `.cursor/docs/ReCall.md` stay authoritative; the vault links to them (avoids drift).
+- **No secrets** in the vault - it is git-tracked (private).
+- Complements Mem0 / Draven (runtime recall). The vault is the human-readable, durable layer; if a learning matters at runtime too, also `npm run draven:add -- "..."`.
+- **Invoices:** amounts/paid/files stay in vault ledger; projects keep a short Billing section + optional `INVOICING-<PROJECT>.md` that **links** the vault.

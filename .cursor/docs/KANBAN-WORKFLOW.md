@@ -1,6 +1,9 @@
-# Kanban Workflow — TaskBoardAI + Hermes Workspace
+# Kanban Workflow — TaskBoardAI (shared SoT)
 
-**Fleet kanban** for Hermes projects: one **TaskBoardAI** install, one **global MCP** (`taskboard`), per-profile **board JSON** files, and the custom **Hermes Workspace** visual UI.
+**Fleet kanban:** Jon’s customized **TaskBoardAI** at **`:3001`** is the **only shared source of truth** for Cursor ↔ Hermes todos.  
+One install, one global MCP (`taskboard`), per-profile `boards/{boardId}.json`.
+
+**Hard rule (2026-08-03):** Agents (Cursor + Hermes) **read/write TaskBoardAI only** — MCP or `D:\Hermes\apps\TaskBoardAI\boards\*.json` / UI `http://localhost:3001/?board={boardId}`. Do **not** use Hermes Workspace SQLite (`:3005`) or Dashboard plugin boards as shared planning truth (separate store → dual-write drift).
 
 ---
 
@@ -8,14 +11,15 @@
 
 | Layer | Path / port | Role |
 |-------|-------------|------|
-| **TaskBoardAI** | `D:\Hermes\apps\TaskBoardAI` · **:3001** | Data + manager UI (`/?board=<boardId>`) |
-| **Hermes Workspace** | `D:\Hermes\apps\hermes-workspace` · **:3005** | Custom drag-and-drop kanban UX (Jon’s designed UI) |
-| **Hermes Dashboard** | **:9119** | Agent HUD |
-| **MCP server** | `TaskBoardAI/server/mcp/kanbanMcpServer.js` | **Global only** in `%USERPROFILE%\.cursor\mcp.json` — stdio, no duplicate per project |
-| **Profile registry** | `_core-scripts/profile-switcher/profiles.json` | Each profile has `boardId` → `boards/{boardId}.json` |
-| **Profile Jedi** | `D:\Hermes\apps\profile-jedi` · **:7780** | Extras → TaskBoard / Kanban / Dashboard (board-aware) |
+| **TaskBoardAI (SoT)** | `D:\Hermes\apps\TaskBoardAI` · **:3001** | **Shared** data + Jon’s customized manager UI + Fleet Command |
+| **Hermes Workspace** | `D:\Hermes\apps\hermes-workspace` · **:3005** | Optional local UX only — **not** fleet SoT; agents ignore for todos |
+| **Hermes Dashboard** | **:9119** | Agent HUD (not the task SoT) |
+| **MCP server** | `TaskBoardAI/server/mcp/kanbanMcpServer.js` | **Global only** in `%USERPROFILE%\.cursor\mcp.json` |
+| **Profile registry** | `_core-scripts/profile-switcher/profiles.json` | `boardId` → `boards/{boardId}.json` |
+| **Profile Jedi** | `D:\Hermes\apps\profile-jedi` · **:7780** | Extras → TaskBoard (prefer `:3001`) |
 
-**Not in scope (skipped):** ai-todo, eyalzh/kanban-mcp, gablabelle/mcp-kanban — stay on the integrated TaskBoardAI fork.
+**Not in scope:** ai-todo, eyalzh/kanban-mcp, gablabelle/mcp-kanban — stay on TaskBoardAI.  
+**Not shared SoT:** Hermes built-in `kanban` / `todo` toolsets that write SQLite under `%LOCALAPPDATA%\hermes\kanban\` — use TaskBoard MCP/files instead.
 
 ---
 
@@ -76,15 +80,17 @@ Profile Jedi **Extras** auto-starts the stack if **:3001** is down.
 
 ---
 
-## TaskBoard vs Hermes Workspace (data layers)
+## TaskBoard vs Hermes Workspace (do not dual-write)
 
-| Port | UI | Data store |
-|------|-----|------------|
-| **:3001** | TaskBoardAI manager | JSON files `TaskBoardAI/boards/{boardId}.json` — **fleet source of truth for planning** |
-| **:3005** | Hermes Workspace drag-and-drop | Hermes SQLite (`%LOCALAPPDATA%\hermes\kanban\boards/<slug>/`) or Dashboard plugin when **:9119** is up |
+| Port | UI | Data store | Shared SoT? |
+|------|-----|------------|-------------|
+| **:3001** | TaskBoardAI (Jon’s customized board) | `TaskBoardAI/boards/{boardId}.json` | **YES — only** |
+| **:3005** | Hermes Workspace `/tasks` | Hermes SQLite under `%LOCALAPPDATA%\hermes\kanban\` | **NO** — optional local view only |
 
-`:3001` deep-link `?board={boardId}` + header **Switch board** modal (lists `/api/boards`, navigates on pick).  
-`:3005` → open **`http://localhost:3005/tasks`** for the visual kanban UI (Hermes Tasks screen).
+`:3001` deep-link `?board={boardId}` + header **Switch board** modal.  
+Prefer daily work at **`http://localhost:3001/?board=jonbeatz`** (or sibling boardId). Start with `npm run kanban:start` from JonBeatz (stack may also boot `:3005`/`:9119` — ignore those for shared cards).
+
+**Hermes agents:** use TaskBoard files/API/MCP equivalent — never treat Desktop “Tasks” SQLite as the fleet board.
 
 ### Fleet Command (default `:3001/`)
 
@@ -160,8 +166,9 @@ Agents may **mirror** a backlog item to kanban when Jon wants it tracked this we
 
 | Target | URL |
 |--------|-----|
-| TaskBoard (profile board) | `http://localhost:3001/?board={boardId}` |
-| Hermes Kanban UI | `http://localhost:3005` |
+| **TaskBoard SoT (use this)** | `http://localhost:3001/?board={boardId}` |
+| Fleet Command rollup | `http://localhost:3001/` |
+| Hermes Workspace (optional, not SoT) | `http://localhost:3005` |
 | Dashboard | `http://localhost:9119` |
 | Profile Jedi | `http://localhost:7780` |
 

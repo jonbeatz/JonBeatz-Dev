@@ -25,14 +25,16 @@
 |------|-------|------------|----------------|--------|
 | **DeepSeek + LiteLLM** | Paid | `DEEPSEEK_API_KEY`, `MSC_LITELLM_MASTER_KEY` | `npm run deepseek:status` | Master + JonBeatz |
 | **OpenRouter** | Pay-per-use | `OPENROUTER_API_KEY` | `npm run deepseek:test:openrouter` | JonBeatz, Next-Flick |
+| **NVIDIA Build / NIM** | Free (WATCH) | `BUILD_NVIDIA_API` in master only — not `NVIDIA_API_KEY` in JonBeatz yet | [build.nvidia.com](https://build.nvidia.com/) · vault [[NVIDIA-Build-NIM-catalog]] | **Do not wire** until Jon says go |
 | **LM Studio** | Free local | `LMSTUDIO_*` (optional) | GUI `:1234` + `npm run mem0:preflight` | Desktop app |
 | **Mem0** | Free local | `MEM0_*` per profile | `npm run mem0:preflight` | Isolated per project |
 | **Draven Mem0** | Free | (hardcoded collection) | `npm run draven:list` | Cross-project |
 | **Telegram gateway** | Free | `TELEGRAM_*` | `npm run telegram:ensure` | JonBeatz master |
 | **ngrok** | Paid | `NGROK_AUTHTOKEN` | `:4040` when LiteLLM ngrok on | Master |
 | **OmniVoice (Draven)** | Free CPU | `OMNIVOICE_PYTHON` | `npm run draven:speak -- "test"` | Ritual only |
+| **Kokoro-82M (on deck)** | Free CPU | none | `npm run kokoro:test` | Not wired to Draven |
 | **Hugging Face images** | Freemium | `HF_TOKEN` | `npm run image:gen` | JonBeatz |
-| **fal.ai** | Per use | `FAL_API_KEY` | `npm run image:fal` | Optional bonus |
+| **fal.ai** | Per use | `FAL_API_KEY` | `npm run image:fal` · MCP `user-fal-ai` | **READY** — API/MCP. Dashboard is browser OAuth, not the key. Tiers: IMAGE-WORKFLOW 2026-09-05 |
 | **ComfyUI** | Free local | `COMFYUI_ROOT`, `COMFYUI_URL` | Start `:8188`, `npm run comfy:start` | On demand |
 | **Context7 MCP** | Free | — | Always on in Cursor | No key |
 | **GitHub MCP** | Free | `GITHUB_PERSONAL_ACCESS_TOKEN` | `npm run sync:mcp-env` | Global MCP |
@@ -91,11 +93,12 @@ Run `npm run ecosystem:audit` for exact SET/EMPTY per file.
 | **Neon** | https://console.neon.tech/ | Next-Flick prod DB |
 | **DeepSeek** | https://platform.deepseek.com/ | API billing |
 | **OpenRouter** | https://openrouter.ai/keys | LiteLLM `*-or` aliases |
+| **NVIDIA Build** | https://build.nvidia.com/settings | Hosted NIM APIs — **WATCH, do not use**. Key = `BUILD_NVIDIA_API` in `.env.local.master` |
 | **ngrok** | https://dashboard.ngrok.com/ | Tunnel token |
 | **TMDB** | https://www.themoviedb.org/settings/api | Movie metadata |
 | **GitHub PAT** | https://github.com/settings/tokens | MCP + backups |
 | **Hugging Face** | https://huggingface.co/settings/tokens | Image inference |
-| **fal.ai** | https://fal.ai/dashboard | Image/video API |
+| **fal.ai** | https://fal.ai/dashboard | Keys + billing **in browser**. Agents use `FAL_API_KEY` via `image:fal` / MCP — not site login. |
 | **Tavily** | https://tavily.com/ | Search API |
 | **Resend** | https://resend.com/api-keys | MSC transactional email |
 | **AgentMail** | https://www.agentmail.to/ | Agent email inboxes (Next-Flick key SET) |

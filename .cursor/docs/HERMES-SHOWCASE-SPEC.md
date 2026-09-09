@@ -213,6 +213,8 @@ Optional per section: `mapbox-gl` (map panel) · `@theatre/r3f` (only if timelin
 | 2026-07-04 | Frosted transparent hero feature tiles (`backdrop-blur` + hairline border) | https://huly.io/ | NovaMira-Design §5 glass | queued |
 | 2026-07-04 | Gradient border glow CTA (pseudo blur — Studio Gold swap) | https://huly.io/ | Premium-UI primary CTA | queued |
 | 2026-07-04 | Horizontal hero feature marquee strip | https://huly.io/ | Premium-UI SaaS hero | queued |
+| 2026-08-27 | Clothbound hardcover shelf — orbit, crack-open, drag page-turn | https://github.com/MengTo/complete-shelf | 3D-Website-Fusion + Three.js-Ops | queued |
+| 2026-08-27 | 3D shot-block UI (lens/angle/height → ref frame) | https://aicameracontrol.com/ | Three.js-Ops + IMAGE-WORKFLOW fal | queued |
 
 **Status values:** `queued` → `in-spec` → `in-demo` → `skip`
 

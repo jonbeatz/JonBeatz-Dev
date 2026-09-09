@@ -82,7 +82,17 @@
     "fleet:merge-npm": "powershell -ExecutionPolicy Bypass -File D:\\Hermes\\projects\\_core-scripts\\shared-profile-content\\scripts\\merge-fleet-npm-scripts.ps1",
     "fleet:status": "powershell -ExecutionPolicy Bypass -File D:\\Hermes\\projects\\_core-scripts\\shared-profile-content\\scripts\\hermes-fleet-status.ps1",
     "kinocut:install": "powershell -ExecutionPolicy Bypass -File D:\\Hermes\\projects\\_core-scripts\\shared-profile-content\\scripts\\kinocut-install.ps1",
-    "kinocut:status": "powershell -ExecutionPolicy Bypass -File D:\\Hermes\\projects\\_core-scripts\\shared-profile-content\\scripts\\kinocut-status.ps1"
+    "kinocut:status": "powershell -ExecutionPolicy Bypass -File D:\\Hermes\\projects\\_core-scripts\\shared-profile-content\\scripts\\kinocut-status.ps1",
+    "video:polish": "powershell -ExecutionPolicy Bypass -File D:\\Hermes\\projects\\_core-scripts\\shared-profile-content\\scripts\\video-polish.ps1",
+    "video:polish:status": "powershell -ExecutionPolicy Bypass -File D:\\Hermes\\projects\\_core-scripts\\shared-profile-content\\scripts\\video-polish-status.ps1",
+    "freecut:open": "powershell -ExecutionPolicy Bypass -File D:\\Hermes\\projects\\_core-scripts\\shared-profile-content\\scripts\\freecut-open.ps1",
+    "comfy:start": "powershell -File scripts/comfy-delegate.ps1 -Action start",
+    "comfy:stop": "powershell -File scripts/comfy-delegate.ps1 -Action stop",
+    "comfy:restart": "powershell -File scripts/comfy-delegate.ps1 -Action restart",
+    "comfy:status": "powershell -File scripts/comfy-delegate.ps1 -Action status",
+    "comfy:repair-symlinks": "powershell -NoProfile -ExecutionPolicy Bypass -File H:/AI_Models/ComfyUI/scripts/repair-comfyui-symlinks.ps1",
+    "comfy:hardlink-check": "powershell -NoProfile -ExecutionPolicy Bypass -File H:/AI_Models/ComfyUI/scripts/repair-comfyui-symlinks.ps1 -CheckOnly",
+    "comfy:start:qwen": "powershell -File scripts/comfy-delegate.ps1 -Action start -UnloadLMStudio -LowVram -NoVRAMCheck"
   },
   "author": "Jon Beatz",
   "license": "UNLICENSED",

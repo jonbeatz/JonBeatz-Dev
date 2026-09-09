@@ -13,7 +13,7 @@
 | **Profile mirrors** | `<profile>/.cursor/docs/TOOLS-*.md` | Read-only copies via `npm run sync:docs -- -Write` |
 | **Profile skills** | `<profile>/.cursor/skills/` | Copies via `npm run sync:skills` |
 | **Machine global** | `%USERPROFILE%\.agents\skills\` | Optional; some packs (Hallmark, emilkowalski) also vendored to shared library |
-| **Vault** | `H:\Vader_Vault\04_Research\` | Human-readable cross-project memory (links to canonical docs) |
+| **Vault** | `H:\Vader_Vault` | Human-readable cross-project memory. **IN USE installs** get a Pattern how-to + session + hub + For Hermes (not just `04_Research`). Ritual: `02_Knowledge/Patterns/Vault-note-after-tool-install.md`. Grades stay in `TOOLS-*` (link, never duplicate). |
 
 **Rule:** When Jon says **review tool**, **update docs**, or accepts an install — agents **edit shared-profile-content first**, then sync/propagate. Never treat JonBeatz `.cursor/docs` as the only write target.
 
@@ -64,7 +64,8 @@ Tool **grades** and **install status** are never profile-local.
    npm run fleet:sync
    npm run fleet:status
    ```
-7. **Git** — commit `_core-scripts` **and** hub/sibling mirrors when Jon asks (two repos minimum for tool sessions).
+7. **Vault (IN USE only):** Pattern how-to (`what / how / upgrades / does not replace`) + session + hub Decision + For Hermes on `CURSOR-HERMES-BRIDGE`. See `Vault-note-after-tool-install`.
+8. **Git** — commit `_core-scripts` **and** hub/sibling mirrors when Jon asks (two repos minimum for tool sessions).
 
 Closeout: **`review session done`** → [Review-Session-Done.md](../prompts/Review-Session-Done.md).
 
@@ -75,7 +76,7 @@ Closeout: **`review session done`** → [Review-Session-Done.md](../prompts/Revi
 **`update docs`** from any profile:
 
 1. Fix **shared canonical** docs if TOOLS-* or universal docs drifted.
-2. Run **`npm run docs:sync`** (pulls shared → `.cursor/docs` mirror).
+2. Run **`npm run sync:docs -- -Write`** (pulls shared → `.cursor/docs` mirror). Then **`npm run docs:sync`** (alignment audit + encoding).
 3. Fix **profile-local** only items (`TRUTH.md`, `ReCall.md`, version in `package.json`).
 4. If new scripts/skills/rules were added → **`npm run fleet:sync`** from JonBeatz hub.
 5. Phase 6 backport check → [BACKPORT-CANDIDATES.md](./BACKPORT-CANDIDATES.md).
@@ -127,6 +128,8 @@ When installing tools that pull **heavy LLM weights or files ≥2GB**, use **`H:
 5. `npm run sync:docs -- -Write` → `fleet:sync` if rules/skills changed.
 6. Commit `_core-scripts` + hub mirror when Jon asks.
 
+**Review UI (Jon 2026-08-27):** Composer shows `AskQuestion` above the chat. Agents must **not** call AskQuestion in the same turn as grade blocks. Scoreboard first; install gate next turn. See Review-Tool.md Step 4.
+
 ---
 
 ## Related
@@ -136,4 +139,4 @@ When installing tools that pull **heavy LLM weights or files ≥2GB**, use **`H:
 - [Review-Tool.md](../prompts/Review-Tool.md) — single / batch / design review  
 - `.cursor/rules/tools-watchlist.mdc` — agent always-on policy  
 
-**Last updated:** 2026-07-13 (v1.31.4 — fleet:merge-npm + sibling npm alias propagate; cua-overlay status checks)
+**Last updated:** 2026-08-27 (review grades this turn; AskQuestion next turn only)

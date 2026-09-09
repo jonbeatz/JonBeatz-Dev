@@ -43,14 +43,20 @@ When user says **End Project**, **End Session**, **Session Closeout**, or **Done
 - Run **`npm run session:stop`** (add **`-- -StopDeepSeek`** when operator confirms stop)
 - See `end-project-ritual.mdc`
 
+When user says **End Project full**, **End Session full**, or **Full end**:
+
+- Same End Project ritual **without AskQuestion** — auto commit+push (if dirty), stop `:3000` if up, `session:stop -- -StopDeepSeek`
+- See `end-project-ritual.mdc` → Shortcut: End Project full
+
 ## Update Docs
 
 When user says **update docs** or **update docs and mem0**:
 
 - Execute [`.cursor/prompts/Update-Docs.md`](../prompts/Update-Docs.md)
+- **Session harvest (Phase 1b):** fold anything worth keeping from this session into the project playbook / decision log (e.g. `BOOK-PRODUCTION-SYSTEM.md` on book projects) — don’t only sync fleet mirrors
 - Edit **shared canonical** docs first when TOOLS-* or universal docs changed (`_core-scripts/shared-profile-content/docs/`)
 - Run **`npm run docs:sync`** (mirrors shared → `.cursor/docs`)
-- Run **`npm run fleet:sync`** from hub when skills/scripts/rules changed this session
+- Run **`npm run fleet:sync`** from hub when skills/scripts/rules/prompts changed this session
 - Run **`npm run version:sync`** when version changed
 - Align version across `TRUTH.md`, `package.json`, `MASTER-COMMANDS.md`, `.cursor/docs/CHANGELOG.md`
 
@@ -81,9 +87,10 @@ When user says **backup profile** or **backup**:
 | Trigger | Action |
 |---------|--------|
 | **review tool** / one repo URL | [Review-Tool.md](../prompts/Review-Tool.md) single mode |
-| **review batch** / multiple URLs | Review-Tool.md batch mode — all grades first, one install AskQuestion |
+| **review batch** / multiple URLs | Review-Tool.md batch — grades + scoreboard this turn; AskQuestion next turn only |
 | **review design** / **grade this site** | Review-Tool.md design grade → DESIGN-REFERENCES + optional showcase queue |
 | Design URL only (no grade keyword) | DESIGN-REFERENCES + HERMES-SHOWCASE-SPEC add queue (bookmark) |
+| Prompt library / template gallery | DESIGN-REFERENCES even if an MCP exists; grade generator separately if Jon wants install |
 | **re-review** / **refresh grade** | Re-grade per TOOLS-WATCHLIST policy |
 | **review session done** | [Review-Session-Done.md](../prompts/Review-Session-Done.md) |
 

@@ -1,0 +1,43 @@
+---
+description: Cursor command-control + Hermes PM messaging/filesystem habits
+alwaysApply: true
+---
+
+# Cursor ↔ Hermes command & control
+
+Full playbook: `.cursor/docs/CURSOR-HERMES-COMMAND-CONTROL.md` · bridge: `.cursor/docs/HERMES-MCP-BRIDGE.md`
+
+## Roles
+
+- **Cursor** = command & control / builder (code, config, PC via desktop-commander + vault).
+- **Hermes Desktop + Telegram** = PM / overseer (research, live checks, memory hygiene).
+- **Jon** = operator.
+
+## After meaningful ship (default — do not ask)
+
+When Cursor finishes a **meaningful** milestone (build green, deploy, rails/config lock, multi-file feature, ritual upgrade):
+
+1. **At desk (default):** vault bridge **For Hermes** one-liner + give Jon a **Desktop paste** if Hermes must act. Do **not** Telegram-ping unless Jon asked or he is away.
+2. **Away / phone:** Telegram ping (W1) via `messages_send` to Jon’s DM — 1–3 lines, no secrets.
+3. **PM audit (W6)** when rails changed — vault bridge verify ask (Desktop paste if urgent at desk).
+4. Skip pings for trivial typos / single-line doc fluff.
+
+**Lane preference (Jon 2026-08-04):** Telegram = away-from-computer. At main PC → vault bridge + Hermes Desktop paste.
+
+## Operator phrases
+
+| Jon says | Do |
+|----------|-----|
+| **ping Telegram** / **notify me** | `messages_send` status |
+| **ask Hermes** / **PM check** | Vault For Hermes + optional Telegram |
+| **wait for my reply** | `events_wait` / poll + `messages_read` |
+| **pull from Telegram** | `messages_read` (+ `attachments_fetch`) |
+| **approve Hermes** | `permissions_list_open` → respond (confirm before `allow-always`) |
+
+## Hermes client MCPs (jonbeatz)
+
+- **hermes-fs** — read-only eyes on `D:\Hermes\projects|apps|assets` + `H:\Vader_Vault`
+- **n8n** — read-mostly workflow inspect (needs API key in `%USERPROFILE%\.config\n8n-mcp\env`)
+- **indesign-uxp** — book layout (TNIMS)
+
+Do **not** dump Cursor’s full MCP set into Hermes.

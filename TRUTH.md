@@ -14,13 +14,15 @@
 
 ## Boundaries (hard rules)
 
-- **Included here:** OmniVoice (JARVIS, ritual-only) + project MCPs (21st-dev, markdownify,
+- **Included here:** Edge Liam ritual voice (OmniVoice optional restore) + project MCPs (21st-dev, markdownify,
   browserbase, pencil, composio).
 - **Stay in the personal profile:** Telegram, DeepSeek/LiteLLM, ComfyUI, Google Workspace,
   image-gen.
 - **Gold `jon-beatz.com` stays in the personal profile.** This repo ships only the red site.
-- **Mem0 scope = `jonbeatz_dev`** (`qdrant_jonbeatz_dev`). Never `jonbeatz_personal`,
-  `kristina_irwin`, or any MSC store.
+- **Mem0 scope = `jonbeatz_dev`** / `jonbeatz_dev_memories` / `qdrant_jonbeatz_dev` (underscores).
+  Hermes profile slug stays `jonbeatz-dev` (hyphen). Never `jonbeatz_personal`,
+  `jonbeatz-dev_memories`, `kristina_irwin`, or any MSC store.
+- **Voice:** **Edge Liam** primary; OmniVoice optional restore — see `.cursor/docs/VOICE-WORKFLOW.md`.
 - **Secrets:** `.cursor/mcp.json` and `.env.local` are gitignored (repo is public). Commit
   only `*.example`.
 

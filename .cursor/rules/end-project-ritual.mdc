@@ -1,5 +1,5 @@
 ---
-description: End Project / End Session — day-end closeout with clickable AskQuestion gates (never Reply 1/2)
+description: End Project / End Session — day-end closeout with clickable AskQuestion gates (never Reply 1/2); End Project full skips gates
 alwaysApply: true
 ---
 
@@ -9,7 +9,16 @@ Treat as **End Project** when the operator says **End Project**, **End Session**
 
 **Canonical procedure:** [`.cursor/prompts/End-Project.md`](../prompts/End-Project.md)
 
-## Hard defaults
+## Shortcut: End Project full
+
+When Jon says **End Project full**, **End Session full**, or **Full end**:
+
+1. Update ReCall + project-log; Mem0 + vault when substantive.
+2. **Skip AskQuestion** — auto **commit + push** if meaningful dirty tree (never secrets); **stop `:3000`** if listening; **`npm run session:stop -- -StopDeepSeek`**.
+3. `draven:speak` once, then stop (included in session:stop path).
+4. Do **not** stop Telegram gateway or LM Studio unless asked separately.
+
+## Hard defaults (plain End Project)
 
 1. Update ReCall + project-log; Mem0 + vault when substantive.
 2. **Git / :3000 / StopDeepSeek gates MUST use the Cursor `AskQuestion` tool** (clickable buttons in the Agent window).
@@ -22,10 +31,11 @@ Treat as **End Project** when the operator says **End Project**, **End Session**
 
 | When | Call AskQuestion? |
 |------|-------------------|
+| **End Project full** | **No** — auto commit+push / stop :3000 / StopDeepSeek |
 | Meaningful uncommitted changes | Yes — commit/push / commit only / skip / manual |
 | Git clean | No — note and continue |
 | Port 3000 listening | Yes — stop / leave |
 | Port 3000 free | No — skip |
-| Before `session:stop` | **Always yes** — stop LiteLLM+ngrok / leave DeepSeek |
+| Before `session:stop` | **Always yes** (unless **full**) — stop LiteLLM+ngrok / leave DeepSeek |
 
 See also [interactive-workflows.mdc](./interactive-workflows.mdc).

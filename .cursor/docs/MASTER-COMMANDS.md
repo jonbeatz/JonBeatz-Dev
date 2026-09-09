@@ -27,7 +27,8 @@
 | `npm run boot:setup` | Refresh Master-Startup + DeepSeek + Telegram shortcuts; remove duplicate `Hermes_Gateway_*`, Profile Jedi Tray from Startup | After boot script changes |
 | `npm run boot:doctor` | Audit shortcuts, single Startup entry, ports, LM Studio tuning | Troubleshoot boot |
 | `npm run n8n:watchdog:hidden` | Re-register hidden n8n health task (`wscript` + `pythonw` every 15 min) | After n8n watchdog script change |
-| `npm run watchdogs:hidden` | Re-register Profile / Memory / Vault Sync / Mem0 backup / Mnemosyne sleep hidden tasks | After those scripts change; **do not resume** matching Hermes cron jobs |
+| `npm run watchdogs:hidden` | Re-register Profile / Memory / Vault Sync / Mem0 backup / Mnemosyne sleep / **Vault Git Backup** hidden tasks | After those scripts change; **do not resume** matching Hermes cron jobs |
+| `npm run vault:backup` | Commit + push Vader Vault now if dirty (`vault-git-backup.ps1`; secret hook gates) | Manual run of the daily 10:30 `JonBeatz_Vault_Git_Backup` task; log `logs\vault-git-backup.log` |
 | Other profiles | `register-hidden-hermes-script-task.ps1` (shared scripts) | Hide one Hermes Python/PowerShell job on Windows. `fleet:sync` copies `hermes-*-hidden.vbs` into `scripts/` if missing. Pause the matching Hermes cron. |
 
 ---

@@ -1,8 +1,8 @@
-# Draven Voice Workflow — OmniVoice + Edge Ryan
+# Draven Voice Workflow — Edge Liam + OmniVoice (optional)
 
-**Last updated:** 2026-07-12  
+**Last updated:** 2026-08-08  
 **Operator:** Jon Beatz  
-**Status:** **Ritual-only** — OmniVoice primary, Ryan backup, no auto-read replies
+**Status:** **Ritual-only** — Edge Liam primary (matches Hermes); OmniVoice installed + dialed-in for restore; **Kokoro-82M on deck** (`npm run kokoro:test`, not wired to Draven); NeuTTS parked for fun clone tests
 
 ---
 
@@ -18,29 +18,21 @@
 | **No** | Ordinary chat replies, summaries, `mem0:add`, `mem0:search` recall |
 | **No** | Hermes Desktop / Telegram auto-TTS (`auto_tts: false`) |
 
-**One primary voice:** OmniVoice whenever speech is allowed. Edge Ryan **only** if Omni fails.
+**One primary voice:** Edge `en-CA-LiamNeural` (same as Hermes Desktop). OmniVoice only if Edge fails, or when Jon restores Omni as primary / uses `-OmniOnly`.
 
 ---
 
-## OmniVoice vs Edge Ryan
+## Edge Liam vs OmniVoice
 
-| | **OmniVoice** (primary) | **Edge Ryan** (backup) |
-|--|-------------------------|-------------------------|
-| Quality | Lifelike OmniVoice (accent via instruct preset) | Robotic but clear |
-| Speed | **Warm ~6-7s short / ~33-43s long** (CPU) | ~1–2s |
-| RAM | **~2–4 GB** while daemon warm | **~0** (cloud) |
-| GPU | None (CPU only) | None |
-| Boot | **Not** on PC login | Always available |
-| Best for | Rituals + when Jon asks to speak | Fallback only |
+| | **Edge Liam** (primary) | **OmniVoice** (optional / fallback) |
+|--|-------------------------|-------------------------------------|
+| Voice | `en-CA-LiamNeural` | British male instruct (dialed-in) |
+| Speed | **~1–2s** short lines | Cold ~44s; warm short ~6–7s; long ~33–43s |
+| RAM | **~0** (cloud) | **~2–4 GB** while daemon warm |
+| GPU | None | None (CPU only) |
+| Best for | Start/End rituals + quick speak | Premium character reads |
 
-**Speed note (verified 2026-07-09):** Cold first speak of a session ~44s (daemon
-lazy-start + model load). Warm short phrases ~6-7s. Warm long phrases (≥70 chars)
-~33-43s — the floor is OmniVoice CPU synthesis (~2.5× realtime; a 10s spoken line
-costs ~25s to generate), not the wrapper. Wrapper overhead is ~9s (PowerShell
-launch + `.env.local` walk) on top of generation. Lowering `DRAVEN_OMNI_STEPS_LONG`
-below 24 does **not** speed things up meaningfully — generation dominates.
-
-**Not optimal** to run OmniVoice daemon 24/7 — lazy start on first `draven:speak`, stop on **End Project** (`session:stop`).
+**Why we switched (2026-08-03):** Rituals are two short lines. OmniVoice’s load + RAM cost was disproportionate. Liam matches Hermes and stays fast.
 
 ---
 
@@ -48,29 +40,33 @@ below 24 does **not** speed things up meaningfully — generation dominates.
 
 | Command | Purpose |
 |---------|---------|
-| `npm run draven:speak -- "text"` | OmniVoice (Ryan if Omni fails) |
+| `npm run draven:speak -- "text"` | Edge Liam (Omni fallback if Edge fails) |
+| `npm run draven:speak -- -OmniOnly "text"` | Force OmniVoice once (keeps current Omni knobs) |
 | `npm run draven:voice-test` | Short test |
-| `npm run draven:omni-daemon` | Optional pre-warm before Start Project |
-| `npm run draven:omni-daemon -- -Stop` | Free RAM (auto on `session:stop`) |
+| `npm run draven:omni-daemon` | Pre-warm Omni (only needed when Omni is primary) |
+| `npm run draven:omni-daemon -- -Stop` | Free Omni RAM (also on `session:stop`) |
+| `npm run kokoro:status` | On-deck Kokoro venv check (not Draven) |
+| `npm run kokoro:test` | Write `D:\Hermes\apps\kokoro\output\smoke-bm_george.wav` |
 
 `jarvis:*` aliases deprecated — use `draven:*` equivalents.
 
 ---
 
-## `.env.local` policy keys
+## `.env.local` policy keys (current — Edge primary)
 
 ```env
-DRAVEN_VOICE=omnivoice
-DRAVEN_VOICE_FALLBACK=edge
+DRAVEN_VOICE=edge
+DRAVEN_VOICE_FALLBACK=omnivoice
 DRAVEN_VOICE_POLICY=ritual
 DRAVEN_VOICE_ERRORS=1
+DRAVEN_EDGE_VOICE=en-CA-LiamNeural
 DRAVEN_OMNI_STOP_ON_END=1
-DRAVEN_OMNI_INSTRUCT=male, low pitch, american accent
-DRAVEN_OMNI_STEPS=24
+# --- Omni knobs preserved for restore (do not delete) ---
+DRAVEN_OMNI_INSTRUCT=male, low pitch, british accent
+DRAVEN_OMNI_STEPS=16
 DRAVEN_OMNI_STEPS_MEDIUM=24
 DRAVEN_OMNI_STEPS_LONG=32
 DRAVEN_OMNI_GUIDANCE=1.5
-DRAVEN_OMNI_SPEED=0.92
 DRAVEN_OMNI_PORT=18776
 DRAVEN_OMNI_CHUNK_LEN=70
 DRAVEN_OMNI_CHUNK_GAP=0.25
@@ -80,31 +76,56 @@ OMNIVOICE_PYTHON=D:\Hermes\apps\OmniVoice\.venv\Scripts\python.exe
 
 | Key | Meaning |
 |-----|---------|
+| `DRAVEN_VOICE=edge` | Primary TTS engine |
+| `DRAVEN_EDGE_VOICE` | Edge Neural voice id (Liam = Hermes) |
+| `DRAVEN_VOICE_FALLBACK=omnivoice` | If Edge fails, try Omni |
 | `DRAVEN_VOICE_POLICY=ritual` | Speak only rituals + explicit `draven:speak` (+ gated errors) |
-| `DRAVEN_VOICE_ERRORS=1` | Mem0 critical errors may speak (OmniVoice) |
-| `DRAVEN_OMNI_STOP_ON_END=1` | `session:stop` kills Omni daemon |
-| `DRAVEN_OMNI_CHUNK_LEN=70` | Auto-split longer text before synthesis |
-| `DRAVEN_OMNI_CHUNK_GAP=0.25` | Silence between stitched chunks (seconds) |
-| `DRAVEN_OMNI_MIN_ZCR=0.02` | Reject muffled rumble generations |
-| `DRAVEN_OMNI_SPEED=1.0` | Speaking pace (`<1.0` slower, `>1.0` faster) — not instruct text |
+| `DRAVEN_OMNI_*` | **Leave set** even when Edge is primary — restore snapshot |
 
-Set `DRAVEN_VOICE_ERRORS=0` to silence error speaks too.
+---
+
+## Restore OmniVoice (premium primary again)
+
+Do **not** uninstall OmniVoice. To make it primary again:
+
+1. In `D:\Hermes\projects\JonBeatz\.env.local` set:
+   ```env
+   DRAVEN_VOICE=omnivoice
+   DRAVEN_VOICE_FALLBACK=edge
+   ```
+   Leave all `DRAVEN_OMNI_*` and `OMNIVOICE_PYTHON` as they are (already dialed-in).
+2. Optional: set `active_profile` in `_core-scripts/voice-engine/voice-profiles.json` to `draven-default` (British) or `draven-natural-american`.
+3. Optional pre-warm: `npm run draven:omni-daemon`
+4. Test: `npm run draven:speak -- "OmniVoice restore test"`
+5. One-shot without env flip: `npm run draven:speak -- -OmniOnly "text"`
+
+**Locked Omni snapshot (JonBeatz, 2026-08-03):**
+
+| Knob | Value |
+|------|-------|
+| Instruct | `male, low pitch, british accent` |
+| Steps | 16 / medium 24 / long 32 |
+| Guidance | 1.5 |
+| Chunk | len 70 · gap 0.25 · min ZCR 0.02 |
+| Python | `D:\Hermes\apps\OmniVoice\.venv\Scripts\python.exe` |
+| Profile alias | `draven-default` / `draven-natural-british` in `voice-profiles.json` |
+
+American alternate (not active): `draven-natural-american` — instruct american, steps 24, speed 0.92.
 
 ---
 
 ## Voice presets (`voice-profiles.json`)
 
-Profiles live at `D:\Hermes\projects\_core-scripts\voice-engine\voice-profiles.json`. Copy `env_vars` into a project's `.env.local`, then restart the OmniVoice daemon.
+Profiles: `D:\Hermes\projects\_core-scripts\voice-engine\voice-profiles.json`
 
-| Preset | Accent | Instruct | Notes |
-|--------|--------|----------|-------|
-| `draven-natural-american` | American | `male, low pitch, american accent` | **CTFU.tv active default** (2026-07-12) |
-| `draven-default` / `draven-natural-british` | British | `male, low pitch, british accent` | Saved British preset — same tuning (steps 24, g1.5, speed 1.0) |
-| `edge-fallback` | British (cloud) | — | Edge `en-GB-RyanNeural` — backup only if OmniVoice fails |
+| Preset | Engine | Notes |
+|--------|--------|-------|
+| `edge-liam-primary` | Edge Liam | **Active default** (2026-08-03) |
+| `draven-default` | OmniVoice British | Restore / premium |
+| `draven-natural-american` | OmniVoice American | Alternate restore |
+| `edge-fallback` | Edge Liam | Legacy row; same engine as primary |
 
-**Instruct vocabulary (OmniVoice):** fixed tokens only — e.g. `male`, `low pitch`, `very low pitch`, `british accent`, `american accent`. Free text (e.g. `calm pace`, `deep low pitch`) causes daemon **500** and silent Edge fallback.
-
-**Tuning notes (2026-07-12):** `very low pitch` + `speed 0.9` + `guidance 2.0` sounded robotic; locked natural profile uses `low pitch`, `guidance 1.5`, `steps 24`, `speed 1.0`.
+**Instruct vocabulary (OmniVoice):** fixed tokens only — e.g. `male`, `low pitch`, `british accent`, `american accent`. Free text causes daemon **500** and fallback.
 
 ---
 
@@ -112,16 +133,15 @@ Profiles live at `D:\Hermes\projects\_core-scripts\voice-engine\voice-profiles.j
 
 ```
 Start Project
-  └── npm run draven:speak -- "Command Center online Jon. Draven standing by. The Matrix is ready, lets begin."  (OmniVoice)
-  └── optional: npm run draven:omni-daemon  (pre-warm ~15s)
+  └── npm run draven:speak -- "…"  (Edge Liam ~1–2s)
 
 Work in Cursor
   └── Agent text only — NO auto voice on replies
   └── Jon: "speak this: …" → npm run draven:speak -- "…"
 
 End Project
-  └── npm run draven:speak -- "Great work, Jon. The Matrix holds our progress. Until next time."  (optional short line)
-  └── npm run session:stop  → stops OmniVoice daemon, frees RAM
+  └── npm run draven:speak -- "…"  (Edge Liam)
+  └── npm run session:stop  → stops Omni daemon if it was running
 ```
 
 ---
@@ -132,8 +152,8 @@ End Project
 Allowed speak request
     └── draven-voice-gate.ps1 (policy check)
           └── draven-voice.ps1
-                ├── OmniVoice daemon :18776
-                └── fallback Edge Ryan (SoundPlayer for both)
+                ├── Edge Liam (primary) — DRAVEN_EDGE_VOICE
+                └── fallback OmniVoice daemon :18776 (if Edge fails)
 ```
 
 **Mem0** (`mem0-chat.ps1`): text output only on success; voice **only** on critical errors via gate.
@@ -144,25 +164,16 @@ Allowed speak request
 
 ### Invalid instruct → silent Edge fallback (2026-07-12)
 - **Cause:** OmniVoice `instruct` is a fixed vocabulary; free-text phrases error at synthesis.
-- **Symptom:** Daemon returns 500; `draven-voice.ps1` falls back to Edge Ryan without obvious warning.
-- **Fix:** Use only valid tokens (see presets table above). Check daemon health if voice suddenly sounds like Ryan.
+- **Fix:** Use only valid tokens (see presets). Relevant when Omni is primary or fallback.
 
 ### Muffled feedback on long phrases (CPU OmniVoice)
-- **Cause:** Text over ~70 chars synthesizes as low-frequency rumble on CPU — passes amplitude checks (`std`/`peak`) but zero-crossing rate collapses (~0.004 vs healthy ~0.08). Sounds like muffled feedback/scratch.
-- **Fix (2026-07-09):** `omnivoice_engine.py` auto-splits long text on sentence boundaries (`DRAVEN_OMNI_CHUNK_LEN=70`), synthesizes each chunk, stitches with 0.25s gap. Rejects muffled single passes via `DRAVEN_OMNI_MIN_ZCR=0.02`.
-- **Edge fallback:** `draven-voice.ps1` plays Edge Ryan MP3 via `ffplay` (SoundPlayer only accepts WAV).
-
-### Muffled scratches (long phrases — playback era)
-- **Cause:** Hermes sounddevice playback + low CPU steps on long text.
-- **Fix:** Windows `SoundPlayer`; adaptive steps 16/24/32; PCM16 normalize.
+- **Fix (2026-07-09):** sentence chunking via `DRAVEN_OMNI_CHUNK_LEN=70` + `DRAVEN_OMNI_MIN_ZCR=0.02`.
 
 ### Two voices confusing
-- **Cause:** Mem0 used Edge Ryan while rituals used OmniVoice.
-- **Fix:** Removed Mem0 auto-speak; OmniVoice for all allowed speaks; Ryan fallback only.
+- **Fix:** Rituals + Hermes now share **Liam**. Omni is optional premium / fallback only.
 
 ### RAM always on
-- **Cause:** Daemon left running after tests.
-- **Fix:** `DRAVEN_OMNI_STOP_ON_END=1` in `session:stop`.
+- **Fix:** With Edge primary, Omni daemon should stay off. `DRAVEN_OMNI_STOP_ON_END=1` still kills it on `session:stop` if it was started.
 
 ---
 
@@ -170,18 +181,17 @@ Allowed speak request
 
 | Symptom | Action |
 |---------|--------|
-| Scratchy / empty | `draven:omni-daemon -- -Stop` then restart; retry speak |
-| Muffled feedback on long lines | Fixed 2026-07-09 via sentence chunking — restart daemon if stale; do **not** use `-EdgeOnly` unless Omni is down |
-| Voice when not wanted | Check `DRAVEN_VOICE_POLICY=ritual`; Mem0 no longer speaks on search/add |
-| Slow first speak (~44s) | Pre-warm `draven:omni-daemon` at Start Project |
-| Long phrase ~33-43s | **Expected** — OmniVoice CPU is ~2.5× realtime; generation dominates, not the wrapper. Lowering `STEPS_LONG` won't help. |
+| Edge fail / no audio | Check network; retry; or `-OmniOnly` / restore Omni primary |
+| Scratchy Omni | `draven:omni-daemon -- -Stop` then retry |
+| Voice when not wanted | Check `DRAVEN_VOICE_POLICY=ritual` |
+| Slow speak (~6–40s) | You are on Omni — expected; switch back to `DRAVEN_VOICE=edge` for rituals |
 | Free RAM | `session:stop` or `draven:omni-daemon -- -Stop` |
 
 ---
 
 ## Voice dictation (inbound STT — on deck)
 
-**Not installed yet** (Jon 2026-07-04). Separate from Draven **speak-out** (OmniVoice).
+**Not installed yet** (Jon 2026-07-04). Separate from Draven **speak-out**.
 
 | Tool | Verdict | Notes |
 |------|---------|-------|
@@ -192,8 +202,44 @@ Details: [TOOLS-WATCHLIST.md](./TOOLS-WATCHLIST.md) · [TOOLS-REFERENCE.md](./TO
 
 ---
 
+## NeuTTS (parked — keep both stacks)
+
+**Policy (Jon 2026-08-08):** Keep both paths. Fun later for Jon / Maria voice-clone experiments. **Not** wired into Draven rituals (still Edge → Omni). Do **not** delete during vault cleanups.
+
+| Path | What’s there | Size (approx) |
+|------|--------------|---------------|
+| `H:\AI_Models\Hermes-NeuTTS` | `pytorch_model.bin` + `my_voice\` (Jon long/short + Maria wavs + `speak_clone.bat`) | ~1.1 GB |
+| `H:\LLM_VAULT\jonbeatz\neutts-air-Q4_0` | LM Studio GGUF `neutts-air-Q4_0.gguf` | ~0.5 GB |
+
+| Do | Don’t |
+|----|-------|
+| Leave weights + ref wavs in place | Treat as Draven primary / replace Liam |
+| Use for manual clone smoke when curious | Merge into OmniVoice or delete “duplicate” NeuTTS |
+| See TOOLS-WATCHLIST **WATCH** grade | Auto-install / wire into `draven:speak` without Jon asking |
+
+When ready to test: load the LMS GGUF **or** run the Hermes-NeuTTS scrap against `my_voice\` refs — separate from Edge/Omni.
+
+---
+
+## Kokoro-82M (on deck — not wired)
+
+**Policy (Jon 2026-09-03):** Downloaded and smokes. **Not** a `draven:speak` engine. Turn on later with the npm aliases.
+
+| Item | Path / command |
+|------|----------------|
+| App + CPU venv | `D:\Hermes\apps\kokoro` |
+| Weights cache | `%USERPROFILE%\.cache\huggingface\hub\models--hexgrad--Kokoro-82M` |
+| Smoke wav | `D:\Hermes\apps\kokoro\output\smoke-bm_george.wav` |
+| Status | `npm run kokoro:status` |
+| Generate test wav | `npm run kokoro:test` |
+
+Do **not** set `DRAVEN_VOICE=kokoro`. Do **not** use kokoroai.org.
+
+---
+
 ## Related
 
 - `.cursor/rules/voice-policy.mdc` — agent rules
 - `TRUTH.md` — persona law
 - `.cursor/prompts/Start-Project.md` / `End-Project.md`
+- `_core-scripts/voice-engine/voice-profiles.json` — presets + restore profiles

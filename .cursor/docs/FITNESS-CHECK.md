@@ -45,6 +45,7 @@ See `SKILL-INDEX.md` for the full catalog — design, 3D, git, deploy, automatio
 |-----|---------|
 | `MEM0-LMSTUDIO.md` | Memory + local LLM setup |
 | `IMAGE-WORKFLOW.md` | HF cloud + ComfyUI image pipeline |
+| `LOCAL-COMFY-2512-LIGHTNING.md` | **Free local stills** — Qwen-2512 Lightning from any profile |
 | `VOICE-WORKFLOW.md` | Draven TTS setup and policy |
 | `TELEGRAM-WORKFLOW.md` | iPhone two-way chat setup |
 | `MASTER-COMMANDS.md` | All npm commands reference |

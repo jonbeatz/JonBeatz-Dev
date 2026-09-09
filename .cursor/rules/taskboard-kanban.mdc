@@ -37,13 +37,12 @@ Resolve from `_core-scripts/profile-switcher/profiles.json` (`boardId` field) or
 
 ## UI (human)
 
-- Manager: `http://localhost:3001/?board={boardId}`
-- Custom kanban UX: `http://localhost:3005`
+- **Shared SoT:** `http://localhost:3001/?board={boardId}` (Jon’s TaskBoardAI)
 - Start stack from JonBeatz: `npm run kanban:start`
+- **Do not** treat `http://localhost:3005` (Hermes Workspace SQLite) as shared todos — optional local UX only
 
 ## vs docs
 
 - **ReCall.md** — session handoff, not a substitute for kanban
 - Product **BACKLOG** docs — strategic queue; copy to kanban only when Jon wants active tracking
-
-Full reference: `.cursor/docs/KANBAN-WORKFLOW.md`
+- Full reference: `.cursor/docs/KANBAN-WORKFLOW.md`
